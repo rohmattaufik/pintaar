@@ -1,0 +1,306 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Course;
+use Illuminate\Support\Facades\DB;
+use App\KomentarCourse;
+use App\Topik;
+use App\Tutor;
+use App\PertanyaanTopik;
+use App\ReviewCourse;
+use App\RatingCourse;
+use App\LogUserTontonTopik;
+use Illuminate\Support\Facades\Input;
+use Auth;
+use Carbon\Carbon;
+
+class CourseController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+
+      $list_courses_with_users = DB::table('courses')
+            ->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') , 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
+            ->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
+            ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
+            ->leftJoin('rating_courses', 'rating_courses.id_course', '=', 'courses.id')
+            ->groupBy('courses.id', 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
+            ->get();
+
+
+        return view('layouts.course.index', ["list_courses_with_users"=>$list_courses_with_users]);
+   }
+
+  public function detail($id)
+  {
+		$course = DB::table('courses')
+            ->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
+            ->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
+            ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
+            ->where('courses.id', $id)
+            ->get()->first();
+
+    $rating = DB::table('rating_courses')
+            ->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
+            ->where('rating_courses.id_course', $id)
+              ->get()->first();
+
+    $list_review = DB::table('review_courses')
+            ->leftJoin('users', 'users.id', '=', 'review_courses.id_user')
+            ->where('review_courses.id_course', $id)
+            ->get();
+
+     if( Auth::user() ){
+
+
+       $status_pembayaran = DB::table('pembelian_courses')
+                       ->select('status_pembayaran', 'waktu_valid_pembelian')
+                       ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
+                       ->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
+                       ->where('cart_course.course_id', $id)
+                       ->where('cart.user_id', Auth::user()->id)
+                       ->get()->first();
+
+        $status_pembayaran = self::check_and_set_valid_date_course_oder($status_pembayaran);
+
+
+        if(Auth::user()-> id == $course-> id_user_tutor){
+                      $status_pembayaran = new \stdClass();
+                      $status_pembayaran->status_pembayaran = 3;
+                      $status_pembayaran->waktu_valid_pembelian = "-";
+                      $status_pembayaran->waktu_disetujui = "-";
+        }
+
+        $status_pernah_review = DB::table('review_courses')
+                                ->select('review')
+                                ->where('review_courses.id_user', Auth::user()->id)
+                                ->where('review_courses.id_course', $id)
+                                ->get()->first();
+
+
+        $list_topik = DB::table('topiks')
+                          ->select('topiks.id', 'topiks.penjelasan', 'topiks.judul_topik')
+                          ->leftJoin('log_user_tonton_topik', 'log_user_tonton_topik.id_topik', '=', 'topiks.id')
+                          ->where('topiks.id_course', $id)
+                          ->orderBy('topiks.created_at','ASC')
+                          ->get();
+
+
+        $list_topik = Topik::where('id_course', $id)->get();
+
+        $list_topik = self::check_and_process_topik_if_user_has_been_watch($list_topik, Auth::user()->id);
+
+    }
+
+    else{
+
+      $status_pembayaran = null;
+
+      $status_pernah_review = null;
+
+      $list_topik = Topik::where('id_course', $id);
+
+    }
+
+      return view('layouts.course.detail',  ["status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ] );
+  }
+	public function course_review_post(Request $request, $id)
+	{
+
+			 if( Auth::user() ){
+
+
+					$review = new ReviewCourse;
+					$review->id_user = Auth::user()->id;
+					$review->id_course = $id;
+					$review->review = Input::get('body_review');
+					$review->save();
+
+          $jumlah_rating;
+          if( Input::get('rating') == null) $jumlah_rating = 5 ;
+          else $jumlah_rating = Input::get('rating');
+
+          $rating = new RatingCourse;
+          $rating->id_user = Auth::user()->id;
+					$rating->id_course = $id;
+					$rating->jumlah_rating = $jumlah_rating;
+          $rating->save();
+
+
+					return redirect()->route('course', ['id' => $id]);
+			}
+			else {
+				return redirect()->route('login');
+
+			}
+    }
+
+    /**
+     * TUTOR PAGE
+     * Authentication Role Tutor
+     */
+
+    public function get_course()
+    {
+        # get course by tutor login
+        $tutor      = Tutor::whereIdUser(Auth::user()->id)->first();
+        $courses    = Course::with('topiks')->whereIdTutor($tutor->id)->get();
+        return view('layouts.course.tutor.index')->with('courses', $courses);
+    }
+
+    public function create()
+    {
+        $course = null;
+        $tutors = Tutor::with('users')->get();
+        return view('layouts.course.tutor.form')->with('course', $course)->with('tutors', $tutors);
+    }
+
+    protected function update($id)
+    {
+        $course = Course::whereId($id)->first();
+        $tutors = Tutor::with('users')->get();
+        return view('layouts.course.tutor.form')->with('course', $course)->with('tutors', $tutors);
+    }
+
+    public function submit(Request $request)
+    {
+
+        $tutor = Tutor::whereIdUser(Auth::user()->id)->first();
+        if($tutor == null)
+        {
+            return "You not have permission to access this page";
+        }
+        $fotoCourse     = $request->file('foto');
+        $urlFoto       = "";
+        if($fotoCourse != null){
+            $destinationPath    = 'images/gambar_course';
+            $fotoName           = $fotoCourse->getClientOriginalName();
+            $movea              = $fotoCourse->move($destinationPath, $fotoName);
+            $urlFoto            = "{$fotoName}";
+        }
+        $video     = $request->file('video');
+        $url       = "";
+        if($video != null){
+            $destinationPath    = 'video/video_course';
+            $name               = $video->getClientOriginalName();
+            $move              = $video->move($destinationPath, $name);
+            $url                = "{$name}";
+        }
+        $request['foto'] = $urlFoto;
+        $request['video'] = $url;
+        $course;
+        if($request->id == null)
+        {
+            $request['id_tutor'] = $tutor->id;
+            $request['foto']     = $urlFoto;
+            $request['video']    = $url;
+            $course =Course::create([
+                "nama_course"    => $request->nama_course,
+                "harga"         => $request->harga,
+                "id_tutor"      => $tutor->id,
+                'foto'          => $urlFoto,
+                'video'         => $url,
+                'deskripsi'     => $request->deskripsi
+            ]);
+        } else {
+            if($urlFoto != "" and $url != "")
+            {
+                $course = Course::whereId($request->id)->update([
+                    "nama_course"    => $request->nama_course,
+                    "harga"         => $request->harga,
+                    "id_tutor"      => $tutor->id,
+                    'foto'          => $urlFoto,
+                    'video'         => $url,
+                    'deskripsi'     => $request->deskripsi
+                ]);
+            } else {
+                if($urlFoto != "")
+                {
+                    $course = Course::whereId($request->id)->update([
+                        "nama_course"    => $request->nama_course,
+                        "harga"         => $request->harga,
+                        "id_tutor"      => $tutor->id,
+                        'foto'          => $urlFoto,
+                        'deskripsi'     => $request->deskripsi
+                    ]);
+                } else if($url != "")
+                {
+                    $course = Course::whereId($request->id)->update([
+                        "nama_course"    => $request->nama_course,
+                        "harga"         => $request->harga,
+                        "id_tutor"      => $tutor->id,
+                        'video'         => $url,
+                        'deskripsi'     => $request->deskripsi
+                    ]);
+                } else {
+                    $course =Course::whereId($request->id)->update([
+                        "nama_course"    => $request->nama_course,
+                        "harga"         => $request->harga,
+                        "id_tutor"      => $tutor->id,
+                        'deskripsi'     => $request->deskripsi
+                    ]);
+                }
+            }
+
+        }
+        return redirect()->route('course-detail', $request->id != null ? $request->id : $course->id);
+    }
+
+    public function delete($id)
+    {
+        Course::whereId($id)->delete();
+        return redirect()->back();
+    }
+
+    public function get_course_detail( $id )
+    {
+        $course = Course::whereId($id)->with('topiks')->first();
+        foreach( $course['topiks'] as $topik)
+        {
+            $topik['pertanyaan'] = PertanyaanTopik::whereIdTopik($topik->id)->get();
+        }
+        return view('layouts.course.tutor.detail')->with('course', $course);
+    }
+
+    public function check_and_set_valid_date_course_oder($status_pembayaran){
+
+      #dd($status_pembayaran);
+      if( $status_pembayaran != null  && $status_pembayaran -> status_pembayaran  == 3){
+        $waktu_valid_pembelian_carbon = Carbon::createFromFormat('Y-m-d', $status_pembayaran-> waktu_valid_pembelian);
+        $status_pembayaran -> waktu_valid_pembelian =   $waktu_valid_pembelian_carbon->format('d-m-Y');
+        $status_pembayaran -> waktu_disetujui = $waktu_valid_pembelian_carbon ->subMonths(1)->format('d-m-Y');
+      }
+      return $status_pembayaran;
+
+    }
+
+    public function check_and_process_topik_if_user_has_been_watch($list_topik, $user_id){
+      $list_topik->each(function ($topik) use ($user_id){
+          $id_log_user = LogUserTontonTopik::where('id_topik', $topik->id)
+                                        ->where('id_user',$user_id )
+                                        ->first();
+
+          if($id_log_user != null ){
+            $topik-> is_already_watch = true;
+
+          }
+      });
+
+      return $list_topik;
+    }
+
+}
