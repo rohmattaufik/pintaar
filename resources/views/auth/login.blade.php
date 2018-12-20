@@ -1,47 +1,68 @@
 @extends('auth.app')
 
+@section('title')
+    <title>Pintaar - Log In</title>
+@endsection
+
 @section('content')
 
-<form id="sign_in" role="form" method="POST" action="{{ route('login') }}">
+<form role="form" method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
-    <div class="msg">Sign in to start your session</div>
-    <div class="input-group">
-        <span class="input-group-addon">
-        <i class="material-icons">person</i>
-        </span>
-        <div class="form-line {{ $errors->has('email') ? ' error' : '' }}">
-            <input type="text" class="form-control" name="email" value="{{old('email')}}" placeholder="email" required autofocus>
-        </div>
-        @if ($errors->has('email'))
-        <label id="name-error" class="error" for="email">{{ $errors->first('email') }}</label>
-        @endif
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon">
-        <i class="material-icons">lock</i>
-        </span>
-        <div class="form-line {{ $errors->has('password') ? ' error' : '' }}">
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
-        </div>
-        @if ($errors->has('password'))
-        <label id="name-error" class="error" for="name">{{ $errors->first('password') }}</label>
-        @endif
-    </div>
-    <div class="row">
-        <div class="col-xs-8 p-t-5">
-            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} class="filled-in chk-col-pink">
-            <label for="rememberme">Remember Me</label>
-        </div>
-        <div class="col-xs-4">
-            <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Log In</h2>
         </div>
     </div>
-    <div class="row m-t-15 m-b--20">
-        <div class="col-xs-6">
-            <a href="{{route('register')}}">Register Now!</a>
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+            @if ($errors->has('email'))
+                <span class="error">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
         </div>
-        <div class="col-xs-6 align-right">
-            <a href="{{ route('password.request') }}">Forgot Your Password?</a>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <input id="password" type="password" class="form-control {{ $errors->has('password') ? ' error' : '' }}" name="password" placeholder="Password" required>
+
+            @if ($errors->has('password'))
+                <span class="error">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+        </div>    
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <button type="submit" class="btn btn-primary btn-block">
+                Login
+            </button>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <label><a href="{{ route('password.request') }}">Lupa password?</a> Atau belum punya akun?</label>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <a href="{{route('register')}}" class="btn btn-danger btn-block">Daftar Disini</a>
         </div>
     </div>
 </form>
