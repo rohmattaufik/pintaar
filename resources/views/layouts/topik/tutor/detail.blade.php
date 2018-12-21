@@ -44,9 +44,7 @@
 <div class="col-xs-12">
   <div class="box">
     <div class="box-header">
-        @if(count($topik['pertanyaanTopiks']) == 0)
         <a href="{{ route('pertanyaan-topik-create', $topik->id)}}" class="btn btn-success pull-left">Add Pertanyaan Topik</a>
-        @endif
       <h3 class="box-title">Pertanyaan Topik</h3>
       
       <div class="box-tools">

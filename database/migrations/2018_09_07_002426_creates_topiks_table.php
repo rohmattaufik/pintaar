@@ -19,6 +19,7 @@ class CreatesTopiksTable extends Migration
           $table->string('video');
           $table->string('judul_topik');
           $table->longText('penjelasan');
+          $table->integer('parent_id')->nullable();
           $table->timestamps();
       });
 
