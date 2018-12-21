@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Auth;
 use App\LogUserTontonTopik;
 use App\ReplyKomentarTopik;
-
+use App\FileTopik;
 use App\PertanyaanTopik;
 
 class TopikController extends Controller
@@ -40,69 +40,69 @@ class TopikController extends Controller
     public function detail(Request $request, $id)
     {
 
-      $topik= DB::table('topiks')
-            ->where('topiks.id', '=', $id)
-            ->get()->first();
+        $topik= DB::table('topiks')
+                ->where('topiks.id', '=', $id)
+                ->get()->first();
 
-      $question= DB::table('pertanyaan_topiks')
-                  ->where('pertanyaan_topiks.id_topik', '=', $id)
-                  ->get()->first();
+        $questions= DB::table('pertanyaan_topiks')
+                    ->where('pertanyaan_topiks.id_topik', '=', $id)
+                    ->get();
 
-      $id_course = $topik -> id_course;
+        $id_course = $topik -> id_course;
 
-      $id_user_tutor= DB::table('courses')
-                          ->select('users.id as id_user_tutor' )
-                          ->leftJoin('tutors', 'tutors.id', '=',  'courses.id_tutor')
-                          ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
-                          ->where('courses.id', '=', $id_course)
-                          ->get()->first()->id_user_tutor;
-
-
-
-    $list_id_topik =DB::table('topiks')
-          ->select('id', 'judul_topik')
-          ->where('topiks.id_course', '=', $id_course)
-          ->orderBy('topiks.created_at','ASC')
-          ->get();
+        $id_user_tutor= DB::table('courses')
+                            ->select('users.id as id_user_tutor' )
+                            ->leftJoin('tutors', 'tutors.id', '=',  'courses.id_tutor')
+                            ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
+                            ->where('courses.id', '=', $id_course)
+                            ->get()->first()->id_user_tutor;
 
 
-    #topik pertama selalu  digratiskan
-    if($list_id_topik-> first()-> id != $id){
 
-      $status_pembayaran = DB::table('pembelian_courses')
-                          ->select('status_pembayaran')
-                          ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
-                          ->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
-                          ->where('cart_course.course_id', $id_course)
-                          ->where('cart.user_id', Auth::user()->id)
-                          ->get()->first();
-      #jika yang membuka adalah tutor pembuat kelas tersebut
-      if(Auth::user()-> id == $id_user_tutor){
+        $list_id_topik =DB::table('topiks')
+            ->select('id', 'judul_topik')
+            ->where('topiks.id_course', '=', $id_course)
+            ->orderBy('topiks.created_at','ASC')
+            ->get();
 
-        $status_pembayaran = new \stdClass();
-        $status_pembayaran->status_pembayaran = 3;
-      }
 
-      ##cek pembayaran sudah lunas apa belum
-      if($status_pembayaran == null || $status_pembayaran -> status_pembayaran != 3 ){
-          return redirect()->route('course', ['id' => $id_course]);
-      }
-    }
+        #topik pertama selalu  digratiskan
+        if($list_id_topik-> first()-> id != $id){
 
-    self::save_log_user_tonton_topik($id);
+        $status_pembayaran = DB::table('pembelian_courses')
+                            ->select('status_pembayaran')
+                            ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
+                            ->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
+                            ->where('cart_course.course_id', $id_course)
+                            ->where('cart.user_id', Auth::user()->id)
+                            ->get()->first();
+        #jika yang membuka adalah tutor pembuat kelas tersebut
+        if(Auth::user()-> id == $id_user_tutor){
 
-    $topik_before ;
-    $topik_after;
-    $index = 0 ;
-    foreach ($list_id_topik as $id_topik) {
-
-        if($id_topik->id == $topik->id) {
-          $topik_before =$list_id_topik ->get($index - 1);
-          $topik_after = $list_id_topik ->get($index + 1);
-          break;
+            $status_pembayaran = new \stdClass();
+            $status_pembayaran->status_pembayaran = 3;
         }
-        $index++;
-    }
+
+        ##cek pembayaran sudah lunas apa belum
+        if($status_pembayaran == null || $status_pembayaran -> status_pembayaran != 3 ){
+            return redirect()->route('course', ['id' => $id_course]);
+        }
+        }
+
+        self::save_log_user_tonton_topik($id);
+
+        $topik_before ;
+        $topik_after;
+        $index = 0 ;
+        foreach ($list_id_topik as $id_topik) {
+
+            if($id_topik->id == $topik->id) {
+            $topik_before =$list_id_topik ->get($index - 1);
+            $topik_after = $list_id_topik ->get($index + 1);
+            break;
+            }
+            $index++;
+        }
 
 
 		$comments_and_user = DB::table('komentar_topiks')
@@ -116,7 +116,7 @@ class TopikController extends Controller
                               ->orderBy('created_at', 'desc')
                               ->get();
         //dd($comments_and_user);
-        return view('layouts.topik.detail', ["topik_after" => $topik_after, "topik_before" => $topik_before,"question" => $question,"topik" => $topik, "comments_and_user" => $comments_and_user ]);
+        return view('layouts.topik.detail', ["topik_after" => $topik_after, "topik_before" => $topik_before,"questions" => $questions,"topik" => $topik, "comments_and_user" => $comments_and_user ]);
     }
 
     public function save_log_user_tonton_topik($id_topik){
@@ -190,7 +190,7 @@ class TopikController extends Controller
 
     }
 
-    // ADMIN PAGE
+    // TUTOR PAGE
 
     public function create($idCourse)
     {
@@ -202,14 +202,15 @@ class TopikController extends Controller
     protected function update($id)
     {
         $topik = Topik::whereId($id)->first();
+        $file_topik = FileTopik::whereIdTopik($id)->get();
         $course = Course::whereId($topik->id_course)->first();
 
-        return view('layouts.topik.tutor.form')->with('course', $course)->with('topik', $topik);
+        return view('layouts.topik.tutor.form')->with('course', $course)->with('topik', $topik)->with('attachments', $file_topik);
     }
 
     public function submit(Request $request)
     {
-
+        # get video
         $videoTopik   = $request->file('video');
         $urlVideo       = "";
         if($videoTopik != null){
@@ -217,6 +218,16 @@ class TopikController extends Controller
             $videoName          = $videoTopik->getClientOriginalName();
             $movea              = $videoTopik->move($destinationPath, $videoName);
             $urlVideo            = "{$videoName}";
+        }
+        # get attachments
+        $attachment   = $request->file('file_topik');
+        $urlAttachment       = "";
+        $att_name ="";
+        if($attachment != null){
+            $destinationPath    = 'attachments';
+            $att_name           = $attachment->getClientOriginalName();
+            $move               = $attachment->move($destinationPath, $att_name);
+            $urlAttachment      = "{$att_name}";
         }
         $request['video'] = $urlVideo;
         $id_topik = "";
@@ -229,6 +240,15 @@ class TopikController extends Controller
                 'video'        => $urlVideo
             ]);
             $id_topik = $topik->id;
+            if ($attachment != null)
+            {
+                FileTopik::create([
+                    "id_topik"     => $id_topik,
+                    "file_name"    => $att_name,
+                    "url"          => $urlAttachment,
+                    'is_active'    => 1
+                ]);
+            }
         } else {
             $id_topik = $request->id;
             if($urlVideo != "")
@@ -246,7 +266,15 @@ class TopikController extends Controller
                     "penjelasan"   => $request->penjelasan
                 ]);
             }
-
+            if ($attachment != null)
+            {
+                FileTopik::create([
+                    "id_topik"     => $id_topik,
+                    "file_name"    => $att_name,
+                    "url"          => $urlAttachment,
+                    'is_active'    => 1
+                ]);
+            }
         }
         return redirect()->route('topik-detail', $id_topik);
     }

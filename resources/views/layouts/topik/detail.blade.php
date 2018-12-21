@@ -5,32 +5,6 @@
 @endsection
 
 @section('content')
-<script>
-   function check_jawaban() {
-
-     jawaban_user = document.querySelector('input[name="opsi"]:checked').value;
-     var jawaban_benar = {!!  $question-> jawaban !!};
-
-     if(jawaban_benar == jawaban_user ) {
-       document.getElementById("salah").style.display = "none";
-       document.getElementById("benar").style.display = "inline";
-       document.getElementById("jawaban_salah").style.display = "none";
-       document.getElementById("jawaban_benar").style.display = "inline";
-     }
-     else{
-       document.getElementById("benar").style.display = "none";
-       document.getElementById("salah").style.display = "inline";
-       document.getElementById("jawaban_benar").style.display = "none";
-       document.getElementById("jawaban_salah").style.display = "inline";
-     }
-   }
-   function reply_comment (id) {
-
-     var form_id_comment = "reply_comment_"+id;
-
-     document.getElementById(form_id_comment).style.display = "inline";
-   }
-</script>
 <section class="section-padding">
   <div class="container">
     <div class="row">
@@ -97,7 +71,7 @@
 
         <!-- PERTANYAAN -->
 
-        
+        @foreach ($questions as $question)
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3>Pertanyaan {{ $question-> judul_pertanyaan }}</h3>
@@ -112,7 +86,7 @@
               
                 <div class="demo-radio-button">
                   <div>
-                     <input name="opsi" type="radio" id="radio_1" value=1 />
+                    <input name="opsi" type="radio" id="radio_1" value=1 />
                      <label for="radio_1">{{ $question->opsi_1 }}</label>
                   </div>
                   <div>
@@ -154,6 +128,7 @@
                 </div>
               </div>    
             </div>
+          @endforeach
           
             <!-- PEMBAHASAN -->
 
@@ -253,4 +228,33 @@
     </div>
   </div>
 </section>
+<script>
+  
+    function check_jawaban() {
+  
+      jawaban_user = document.querySelector('input[name="opsi"]:checked').value;
+  
+        jQuery.each({{!! $questions !!}}, function(){
+          console.log(this);
+        })
+      if(jawaban_benar == jawaban_user ) {
+        document.getElementById("salah").style.display = "none";
+        document.getElementById("benar").style.display = "inline";
+        document.getElementById("jawaban_salah").style.display = "none";
+        document.getElementById("jawaban_benar").style.display = "inline";
+      }
+      else{
+        document.getElementById("benar").style.display = "none";
+        document.getElementById("salah").style.display = "inline";
+        document.getElementById("jawaban_benar").style.display = "none";
+        document.getElementById("jawaban_salah").style.display = "inline";
+      }
+    }
+     function reply_comment (id) {
+  
+       var form_id_comment = "reply_comment_"+id;
+  
+       document.getElementById(form_id_comment).style.display = "inline";
+     }
+  </script>
 @endsection

@@ -9,7 +9,7 @@ class Topik extends Model
 
   protected $table = 'topiks';
 
-  protected $fillable = ['id_course', 'video', 'judul_topik', 'penjelasan'];
+  protected $fillable = ['id_course', 'video', 'judul_topik', 'penjelasan', 'parent_id'];
 
   public function pertanyaanTopiks()
   {

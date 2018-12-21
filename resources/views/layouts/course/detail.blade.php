@@ -39,19 +39,26 @@
                       <h3>Disini, kamu akan belajar: </h3>
 
 						@foreach($list_topik as $topik)
-
-
                             <div class="panel">
                                 @if(empty($topik -> is_already_watch))
-                                <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($loop->index)}}">
+                                <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($topik['id'])}}">
                                     <a> {{$topik -> judul_topik}} @if(($loop->index)  == 0)  (Gratis) @endif</a>
-
                                 </h4>
-
-                                <div id="collapse{{($loop->index)}}" class="panel-collapse collapse">
-                                    <p>{{$topik -> penjelasan }}</p>
-
-                                      <a href = "{{route(('topik'), $topik->id)}}" > Detail > </a>
+                                <div id="collapse{{($topik['id'])}}" class="panel-collapse collapse">
+                    @if (count($topik['childs']) > 0)
+                        @foreach ($topik['childs'] as $subtopik)
+                                  <div class="panel">
+                                      <h4 class="panel-title" data-toggle="collapse" data-parent="#collapse{{($topik->id)}}" href="'#collapse{{($subtopik['id'])}}">
+                                          <a> {{$subtopik->judul_topik}} @if(($loop->index)  == 0)  (Gratis) @endif</a>
+                                      </h4>
+    
+                                      <div id="collapse{{($subtopik['id'])}}" class="panel-collapse collapse">
+                                          <p>{{$subtopik->penjelasan }}</p>
+                                          <a href = "{{route(('topik'), $subtopik->id)}}" > Detail > </a>
+                                      </div>
+                                  </div>
+                        @endforeach
+                    @endif
                                 </div>
                                 @else
                                 <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($loop->index)}}">
@@ -67,7 +74,6 @@
                                 </div>
                                 @endif
                             </div>
-
           @endforeach
 
                     </div>

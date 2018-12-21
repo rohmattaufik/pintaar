@@ -40,6 +40,17 @@
                   <label for="deskripsi">Deskripsi</label><br>
                   <textarea name="penjelasan" class="form-control">{{ $topik != null ? $topik->penjelasan : null}} </textarea>
                 </div>
+                <div class="form-group">
+                  <label for="video">Attachments</label>
+                  <input type="file" id="file_topik" name="file_topik">                
+                </div>
+                @if($attachments != null )
+                  <ul style="text-align:left;">
+                    @foreach ($attachments as $attachment)
+                    <li><a href="{{URL::asset('attachments/'.$attachment['url'])}}" target="_blank">{{$attachment['file_name']}}</a></li>
+                    @endforeach
+                  </ul>
+                @endif 
                 
               </div>
               <!-- /.box-body -->
