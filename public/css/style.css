@@ -131,7 +131,7 @@ input:-webkit-autofill:focus {
 }
 
 .section-padding {
-    padding: 120px 0;
+    padding: 30px 0;
 }
 
 .social-menu {
@@ -220,18 +220,16 @@ input:-webkit-autofill:focus {
 **/
 
 .page-title {
-    margin-bottom: 60px;
+    margin-bottom: 10px;
 }
 
 .page-title h2 {
-    text-transform: uppercase;
     position: relative;
-    margin-bottom: 20px;
+    padding-top: 10px;
     padding-bottom: 20px;
 }
 
 .page-title h2:after {
-    content: "\e675";
     font-family: 'themify';
     position: absolute;
     left: 50%;
@@ -293,7 +291,7 @@ input:-webkit-autofill:focus {
 **/
 
 .mainmenu-area {
-    position: fixed;
+    position: relative;
     left: 0;
     top: 0;
     width: 100%;
@@ -309,7 +307,6 @@ input:-webkit-autofill:focus {
 }
 
 .mainmenu-area .logo {
-    text-transform: uppercase;
     letter-spacing: 2px;
     height: inherit;
     margin-top: 8px;
@@ -614,7 +611,7 @@ input:-webkit-autofill:focus {
 .testimonial .testimonial-photo {
     margin-bottom: 20px;
     display: inline-block;
-    margin-right: 30px;
+    
     border-radius: 50%;
     -webkit-box-shadow: 5px 10px 30px -10px rgba(255, 255, 255, 0.5);
     box-shadow: 5px 10px 30px -10px rgba(255, 255, 255, 0.5);
@@ -786,7 +783,7 @@ input:-webkit-autofill:focus {
 ***/
 
 .footer-area {
-    padding-top: 120px;
+    padding-top: 50px;
     z-index: 1;
 }
 
@@ -796,7 +793,7 @@ input:-webkit-autofill:focus {
 }
 
 .footer-top {
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 }
 
 .side-icon-box {
@@ -822,7 +819,7 @@ input:-webkit-autofill:focus {
 }
 
 .footer-middle {
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 .footer-bottom {

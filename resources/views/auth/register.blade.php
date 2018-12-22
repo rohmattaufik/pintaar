@@ -10,7 +10,7 @@
     
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
-            <h2>Daftar</h2>
+            <h2>Daftar Akun Baru</h2>
         </div>
     </div>
     <div class="form-group row">
@@ -26,7 +26,7 @@
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
-            <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+            <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
             @if ($errors->has('email'))
                 <span class="error">
                     <strong>{{ $errors->first('email') }}</strong>
@@ -37,7 +37,7 @@
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
-            <input id="password" type="password" class="form-control {{ $errors->has('password') ? ' error' : '' }}" name="password" placeholder="Password" required>
+            <input type="password" class="form-control {{ $errors->has('password') ? ' error' : '' }}" name="password" placeholder="Password" required>
 
             @if ($errors->has('password'))
                 <span class="error">
@@ -49,7 +49,7 @@
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
-            <input id="password" type="password" class="form-control {{ $errors->has('password') ? ' error' : '' }}" name="password_confirmation" placeholder="Ulangi Password" required>
+            <input type="password" class="form-control" name="password_confirmation" placeholder="Ulangi Password" required>
         </div>    
     </div>
 

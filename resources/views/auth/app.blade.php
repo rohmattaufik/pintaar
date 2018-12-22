@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="row text-center">
-                    <a href="#"><h1>Pintaar</h1></a>
+                    <a href="{{ route('home') }}"><h1>Pintaar</h1></a>
                     <p>Start your traveling to the ocean of knowledge</p>
                 
                 </div>

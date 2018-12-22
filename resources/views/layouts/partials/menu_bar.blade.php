@@ -10,20 +10,20 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="{{ route('home') }}" class="navbar-brand logo">
-                    <h2>iCourse</h2>
+                    <h2>Pintaar</h2>
                 </a>
             </div>
             <!--Logo/-->
             <nav class="collapse navbar-collapse" id="primary-menu">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('home') }}">Beranda</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     
                         
                     @if (Auth::guest())
-                            <li><a href="{{ route('courses') }}">Kelas SBMPTN</a></li>
+                            <li><a href="{{ route('courses') }}">Semua Kelas</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('register') }}">Daftar</a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                         </ul>
                     @elseif (Auth::user()->id_role == 2)
@@ -82,7 +82,7 @@
                         </ul>
 
                     @else
-                            <li><a href="{{ route('courses') }}">Kelas SBMPTN</a></li>
+                            <li><a href="{{ route('courses') }}">Semua Kelas</a></li>
                             <li><a href="{{ route('kelas_saya') }}">Kelas Saya</a></li>
                             <li><a href="{{ route('cart') }}">Keranjang</a></li>
                         </ul>
