@@ -40,7 +40,7 @@
             </div>
             <div class="body">
                <div class="embed-responsive embed-responsive-16by9">
-                  <video class="embed-responsive-item" src= "{{ URL::asset('video/video_topik/'.$topik->video ) }}" controls  allowfullscreen></video>
+                  <video class="embed-responsive-item" src= "{{ URL::asset('video/video_topik/'.$topik->video ) }}" controls  allowfullscreen ></video>
                </div>
                <br><br><br>
                <h2>{{ $topik->judul_topik }}</h2>
@@ -67,6 +67,17 @@
             </div>
           </div>
         @endif
+
+        <!-- PEMBAHASAN -->
+
+        <h2>Pembahasan</h2>
+          
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src= "{{ URL::asset('video/video_topik/'.$topik->video ) }}" ?> allowfullscreen></iframe>
+        </div>
+        <br/>
+        <h3>{{ $topik->judul_topik }}</h3>
+        <p class="m-t-10 m-b-30">{{ $topik->penjelasan }}</p>
         
 
         <!-- PERTANYAAN -->
@@ -86,60 +97,51 @@
               
                 <div class="demo-radio-button">
                   <div>
-                    <input name="opsi" type="radio" id="radio_1" value=1 />
+                  <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_1" value=1 />
                      <label for="radio_1">{{ $question->opsi_1 }}</label>
                   </div>
                   <div>
-                     <input name="opsi" type="radio" id="radio_2" value=2 />
+                  <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_2" value=2 />
                      <label for="radio_2">{{ $question->opsi_2 }}</label>
                   </div>
                   <div>
-                     <input name="opsi" type="radio" id="radio_3" value=3 />
+                     <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_3" value=3 />
                      <label for="radio_3">{{ $question->opsi_3 }}</label>
                   </div>
                   <div>
-                     <input name="opsi" type="radio" id="radio_4" value=4 />
+                     <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_4" value=4 />
                      <label for="radio_4">{{ $question->opsi_4 }}</label>
                   </div>
                 </div>
               
                 <br/>
-                <button onclick="check_jawaban()" type="button"  class="btn btn-primary">Jawab</button>
+                <button onclick="check_jawaban({{$question->id}})" type="button" data-id="1"  class="btn btn-primary">Jawab</button>
                           
                 <div class="row">
                    <div class="col-md-8 col-md-offset-2 text-center">
-                      <i id="salah" class="far fa-times-circle" style="display:none; font-size:60px; color:red;"></i>
+                    <i id="salah-{{$question->id}}" class="far fa-times-circle" style="display:none; font-size:60px; color:red;"></i>
                    </div>
                 </div>
                 <div class="row">
                    <div class="col-md-8 col-md-offset-2 text-center">
-                      <p id="jawaban_salah" style="display:none;">Jawaban anda salah, silahkan cek pembahasan di bawah! </p>
+                      <p id="jawaban_salah-{{$question->id}}" style="display:none;">Jawaban anda salah, silahkan cek pembahasan di bawah! </p>
                    </div>
           		  </div>
                 <div class="row">
                    <div class="col-md-8 col-md-offset-2 text-center">
-                      <i id="benar" class="far fa-check-circle" style="display:none; font-size:60px; color:green;"></i>
+                      <i id="benar-{{$question->id}}" class="far fa-check-circle" style="display:none; font-size:60px; color:green;"></i>
                    </div>
                 </div>
                 <div class="row">
                    <div class="col-md-8 col-md-offset-2 text-center">
-                      <p id="jawaban_benar" style=" display:none;">Jawaban anda benar!</p>
+                      <p id="jawaban_benar-{{$question->id}}" style=" display:none;">Jawaban anda benar!</p>
                    </div>
                 </div>
               </div>    
             </div>
           @endforeach
           
-            <!-- PEMBAHASAN -->
-
-            <h2>Pembahasan</h2>
-          
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src= "{{ URL::asset('video/video_topik/'.$topik->video ) }}" ?> allowfullscreen></iframe>
-            </div>
-            <br/>
-            <h3>{{ $topik->judul_topik }}</h3>
-            <p class="m-t-10 m-b-30">{{ $topik->penjelasan }}</p>
+            
           
           
             <!-- KOMENTAR -->
@@ -230,24 +232,23 @@
 </section>
 <script>
   
-    function check_jawaban() {
+    function check_jawaban(id) {
   
-      jawaban_user = document.querySelector('input[name="opsi"]:checked').value;
-  
-        jQuery.each({{!! $questions !!}}, function(){
-          console.log(this);
-        })
+      var field = document.querySelector('input[name="opsi-'+id+'"]:checked');
+      var jawaban_user = field.value;
+      var jawaban_benar = $(field).data('id');
+
       if(jawaban_benar == jawaban_user ) {
-        document.getElementById("salah").style.display = "none";
-        document.getElementById("benar").style.display = "inline";
-        document.getElementById("jawaban_salah").style.display = "none";
-        document.getElementById("jawaban_benar").style.display = "inline";
+        document.getElementById("salah-"+id).style.display = "none";
+        document.getElementById("benar-"+id).style.display = "inline";
+        document.getElementById("jawaban_salah-"+id).style.display = "none";
+        document.getElementById("jawaban_benar-"+id).style.display = "inline";
       }
       else{
-        document.getElementById("benar").style.display = "none";
-        document.getElementById("salah").style.display = "inline";
-        document.getElementById("jawaban_benar").style.display = "none";
-        document.getElementById("jawaban_salah").style.display = "inline";
+        document.getElementById("benar-"+id).style.display = "none";
+        document.getElementById("salah-"+id).style.display = "inline";
+        document.getElementById("jawaban_benar-"+id).style.display = "none";
+        document.getElementById("jawaban_salah-"+id).style.display = "inline";
       }
     }
      function reply_comment (id) {
