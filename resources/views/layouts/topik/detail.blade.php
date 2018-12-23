@@ -78,6 +78,22 @@
         <br/>
         <h3>{{ $topik->judul_topik }}</h3>
         <p class="m-t-10 m-b-30">{{ $topik->penjelasan }}</p>
+
+
+        <!-- FILE ATTACHMENTS -->
+
+        <h3>Attachments :</h3>
+        <div>
+          <ul>
+          @if (count($file_topik) > 0)
+            @foreach ($file_topik as $file)
+          <li><a href="{{URL::asset('attachments/'.$file->url)}}" target="_blank">{{$file->file_name}}</a></li>
+            @endforeach
+          @else
+            <li>No Attachments</li>
+          @endif
+        </ul>
+        </div>
         
 
         <!-- PERTANYAAN -->
