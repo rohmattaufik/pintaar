@@ -1,59 +1,69 @@
 @extends('auth.app')
 
+@section('title')
+    <title>Pintaar - Daftar</title>
+@endsection
+
 @section('content')
-<form id="sign_in" role="form" method="POST" action="{{ route('register') }}">
+<form role="form" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
-    <div class="msg">Register</div>
-    <div class="input-group">
-        <span class="input-group-addon">
-            <i class="material-icons">person</i>
-        </span>
-        <div class="form-line {{ $errors->has('name') ? ' error' : '' }}">
-            <input type="text" class="form-control" name="name" value="{{old('name')}}" placeholder="Username" required autofocus>
-        </div>
-        @if ($errors->has('email'))
-            <label id="name-error" class="error" for="name">{{ $errors->first('name') }}</label>
-        @endif
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon">
-        <i class="material-icons">email</i>
-        </span>
-        <div class="form-line {{ $errors->has('email') ? ' error' : '' }}">
-            <input type="text" class="form-control" name="email" value="{{old('email')}}" placeholder="Email Address" required autofocus>
-        </div>
-        @if ($errors->has('email'))
-            <label id="email-error" class="error" for="email">{{ $errors->first('email') }}</label>
-        @endif
-    </div>
     
-    <div class="input-group">
-        <span class="input-group-addon">
-        <i class="material-icons">lock</i>
-        </span>
-        <div class="form-line {{ $errors->has('password') ? ' error' : '' }}">
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
-        </div>
-        @if ($errors->has('password'))
-            <label id="password-error" class="error" for="name">{{ $errors->first('password') }}</label>
-        @endif
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon">
-        <i class="material-icons">lock</i>
-        </span>
-        <div class="form-line">
-            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required>
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Daftar Akun Baru</h2>
         </div>
     </div>
-    
-    <div class="row">
-        <div class="col-xs-12">
-            <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">Register</button>
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required autofocus>
+            @if ($errors->has('name'))
+                <span class="error">
+                    <strong>{{ $errors->first('name') }}</strong>
+                </span>
+            @endif
         </div>
     </div>
-    <div class="m-t-25 m-b--5 align-center">
-        <a href="{{route('login')}}">You already have a membership?</a>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
+            @if ($errors->has('email'))
+                <span class="error">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
+        </div>
     </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <input type="password" class="form-control {{ $errors->has('password') ? ' error' : '' }}" name="password" placeholder="Password" required>
+
+            @if ($errors->has('password'))
+                <span class="error">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+        </div>    
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <input type="password" class="form-control" name="password_confirmation" placeholder="Ulangi Password" required>
+        </div>    
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <label>Sudah punya akun? <a href="{{ route('login') }}">Log in disini</a></label>
+        </div>
+    </div>
+
 </form>
 @endsection

@@ -6,24 +6,30 @@
         {{ session('status') }}
     </div>
 @endif
-<form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
+<form role="form" method="POST" action="{{ route('password.email') }}">
     {{ csrf_field() }}
-    <div class="msg">Forgot Password</div>
-    <div class="input-group{{ $errors->has('email') ? ' has-error' : '' }}">
-        <span class="input-group-addon">
-            <i class="material-icons">email</i>
-        </span>
-        <div class="form-line {{ $errors->has('name') ? ' error' : '' }}">
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Enter Email Address" required>
-        </div>    
-        @if ($errors->has('email'))
-            <label id="email-error" class="error" for="email">{{ $errors->first('email') }}</label>
-        @endif
-    </div>
-     <div class="row">
-        <div class="col-xs-12">
-            <button class="btn btn-block btn-lg bg-red waves-effect" type="submit">Reset Password</button>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2>Lupa Password</h2>
         </div>
     </div>
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <input id="email" type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+            @if ($errors->has('email'))
+                <span class="error">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+            @endif
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2">
+            <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+        </div>
+    </div>
+    
 </form>
 @endsection

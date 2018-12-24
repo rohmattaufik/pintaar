@@ -5,8 +5,7 @@
 
   @include('layouts.partials.menu_bar')
 
-  <section class="content">
-      @yield('content')
-  </section>
-
+  
+  @yield('content')
+  
   @include('layouts.partials.footer')
