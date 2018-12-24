@@ -43,6 +43,8 @@ class TopikController extends Controller
         $topik= DB::table('topiks')
                 ->where('topiks.id', '=', $id)
                 ->get()->first();
+        
+        $file_topik = FileTopik::whereIdTopik($id)->get();
 
         $questions= DB::table('pertanyaan_topiks')
                     ->where('pertanyaan_topiks.id_topik', '=', $id)
@@ -56,7 +58,6 @@ class TopikController extends Controller
                             ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
                             ->where('courses.id', '=', $id_course)
                             ->get()->first()->id_user_tutor;
-
 
 
         $list_id_topik =DB::table('topiks')
@@ -116,7 +117,7 @@ class TopikController extends Controller
                               ->orderBy('created_at', 'desc')
                               ->get();
         //dd($comments_and_user);
-        return view('layouts.topik.detail', ["topik_after" => $topik_after, "topik_before" => $topik_before,"questions" => $questions,"topik" => $topik, "comments_and_user" => $comments_and_user ]);
+        return view('layouts.topik.detail', ["topik_after" => $topik_after, "topik_before" => $topik_before,"questions" => $questions,"topik" => $topik, "comments_and_user" => $comments_and_user, "file_topik" => $file_topik ]);
     }
 
     public function save_log_user_tonton_topik($id_topik){
