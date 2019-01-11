@@ -17,7 +17,7 @@
 	                                <input type="email" id="form-email" name="form-email" class="form-control" placeholder="Email" required="required">
 	                            </div>
 	                            <input type="text" id="form-subject" name="form-subject" class="form-control" placeholder="Kelas yang kamu inginkan">
-	                            <button type="sibmit" class="button">Submit</button>
+	                            <button type="submit" class="btn btn-danger">Simpan</button>
 	                        </form>
 	                    </div>
 	                </div>
@@ -36,7 +36,8 @@
 	                        </ul>
 	                    </div>
 	                    <div class="col-xs-12 col-sm-6">
-	                        <p>“The expert at anything was once a beginner.” -Helen Hayes</p>
+	                    	<h4>Ingin membuat kelas di platform Pintaar?</h4>
+	                    	<a href="#" class="btn btn-danger">Daftar Disini</a>
 	                    </div>
 	                </div>
 	            </div>

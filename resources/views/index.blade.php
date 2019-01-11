@@ -34,6 +34,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <p><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS</strong>. Ayo segera daftar dan belajar di Pintaar!</p>
+                    </div>
                     <div class="page-title">
                         <h2>Kelas Pemrograman Website</h2>
                     </div>
