@@ -18,6 +18,8 @@ Route::get('/home', function(){
 
 Route::get('/',['as'=>'home','uses'=>'ArtifactController@index']);
 
+Route::get('/home',['as'=>'home','uses'=>'ArtifactController@index']);
+
 Route::get('test-email','MailController@test_email');
 
 //ALL USER WITHOUT REGISTRATION
@@ -65,6 +67,9 @@ Route::group(['middleware'=>'auth'],function(){
 
 				Route::get('detail/{id}', 'CourseController@get_course_detail')->name('course-detail');
 			});
+			
+			Route::get('subscribe-course/{id}', 'CourseController@subscribe_course')->name('subscribe-course');
+			
 
 			// TOPIK
 			Route::prefix('topik')->group(function () {

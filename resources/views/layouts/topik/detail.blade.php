@@ -38,6 +38,14 @@
                    <p>Topik Sebelumnya</p>
                </a>
             </div>
+			<div class="col-md-6 text-right">
+              <span class="pull-right">
+               <a href ="{{route(('subscribe-course'), $topik -> id)}}">
+                   <i class="fas fa-angle-double-right" style="font-size:50px; color:#138fc2;" ></i>
+                   <p>Topik Selanjutnya</p>
+               </a>
+               <span>
+            </div>
             <div class="body">
                <div class="embed-responsive embed-responsive-16by9">
                   <video class="embed-responsive-item" src= "{{ URL::asset('video/video_topik/'.$topik->video ) }}" controls  allowfullscreen ></video>

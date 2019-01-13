@@ -6,8 +6,17 @@
 
 @section('content')
     <section class="section-padding">
-        <div class="container" >
-            <div class="row">
+        
+			 
+		<div class="container" >
+            
+			
+			<div class="alert alert-danger alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong>. Ayo segera daftar dan belajar di Pintaar!</h4>
+             </div>
+
+			<div class="row">
                 <div class="col-xs-12 col-md-7">
                     
                         <h1>{{ $course->nama_course }}</h1>
@@ -23,7 +32,7 @@
                 </div>
                 <div class="col-xs-12 col-md-5">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <video class="embed-responsive-item"  src= "{{ URL::asset('video/video_course/'.$course->video ) }}" controls allowfullscreen></video>
+                        <img class="embed-responsive-item"  src= "{{ URL::asset('video/video_course/'.$course->video ) }}"></img>
                     </div>
                 </div>      
                 

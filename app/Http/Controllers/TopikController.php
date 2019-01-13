@@ -174,7 +174,7 @@ class TopikController extends Controller
   			$reply_komentar_topik->komentar =$request->body_comment_reply ;
   			$reply_komentar_topik->save();
 
-        //dd($commentUser);
+
         return redirect(route('topik', ['id' => $id]) . '#comment'.$comment1->id);
 
       }

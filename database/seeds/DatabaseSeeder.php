@@ -19,6 +19,17 @@ class DatabaseSeeder extends Seeder
                'harga' => 10000,
                'id_tutor' => 1,
                'foto' => 'fisika_energi.jpeg',
+			   'kategori' => 1, 
+               'video' => 'fisika_energi.mp4'
+           ]);
+		   
+		   DB::table('courses')->insert([
+               'nama_course' => "Fisika Energi",
+               'deskripsi' => "Course ini berisi pelajaran Fisika Energi yang mudah dipahami",
+               'harga' => 10000,
+               'id_tutor' => 1,
+               'foto' => 'fisika_energi.jpeg',
+			   'kategori' => 2, 
                'video' => 'fisika_energi.mp4'
            ]);
 

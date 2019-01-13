@@ -184,6 +184,20 @@ class CourseController extends Controller
         $tutors = Tutor::with('users')->get();
         return view('layouts.course.tutor.form')->with('course', $course)->with('tutors', $tutors);
     }
+	
+	public function subscribe_course($id_topik)
+	{
+		 $topik= DB::table('topiks')
+                ->where('topiks.id', '=', $id_topik)
+                ->get()->first();
+		 $id_course = $topik -> id_course;
+		 
+		 $course = DB::table('courses')
+                ->where('courses.id', '=', $id_course)
+                ->get()->first();
+		 
+		 return view('layouts.course.subscribe', ["course"=>$course]);
+	}
 
     protected function update($id)
     {

@@ -10,10 +10,11 @@
         <div class="container">
             <div class="row v-center">
                 <div class="col-xs-12 col-md-7 header-text">
-                    <h2>Belajarlah!</h2>
-                    <p>"Success is no accident. It is hard work, perseverance, learning, studying, sacrifice and most of all, love of what you are doing or learning to do."</p>
-                    <p>- Pelé</p>
-                    <a href="#" class="button white">Watch video</a>
+                    <h2>Ketika kamu berhenti belajar, saat itu kamu akan mati</h2> 
+					<p>-Albert Einstein</p>
+					<hr>
+                    <p>Pintaar merupakan sebuah platform kelas online yang dapat membantu masyarakat Indonesia memperoleh Ilmu dengan mudah. Saat ini, masih tersedia kelas pemrograman dan memasak</p>
+                    
                 </div>
                 <div class="hidden-xs hidden-sm col-md-5 text-right">
                 <!--<div class="screen-box screen-slider">
@@ -36,7 +37,7 @@
                 <div class="col-xs-12">
                     <div class="alert alert-danger alert-dismissible" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <p><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS</strong>. Ayo segera daftar dan belajar di Pintaar!</p>
+                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong>. Ayo segera daftar dan belajar di Pintaar!</h4>
                     </div>
                     <div class="page-title">
                         <h2>Kelas Pemrograman Website</h2>
@@ -44,53 +45,31 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
+                @foreach($list_courses_code as $list_course_code)
+            
+                  
+                    <div class="col-xs-12 col-md-3">
+                      <a href="{{route(('course'), $list_course_code->id)}}">
+                         <div class="thumbnail">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="">
+                             <div class="caption">
+                                <h4>{{$list_course_code->nama_course}}</h4>
+                                <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
+                                <p class="starability-result" data-rating="{{ round($list_course_code->rating) }}"></p>
+                                
+                                <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
+                             </div>
+                         </div>
+                       </a>
+                    </div>
+             
+              @endforeach
             </div>
         </div>
     </section>
+	
+	
+          
 
     <section class="section-padding" id="blog-page">
         <div class="container">
@@ -102,51 +81,28 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
-                <div class="col-xs-12 col-sm-3">                     
-                    <div class="thumbnail">
-                        <img src="{{ URL::asset('images/small1.jpg') }}" alt="">
-                        <div class="caption">
-                            <h4>Fisika Asyik</h4>
-                            <p><span class="ti-user"></span> Luqman</p>
-                            <p class="starability-result" data-rating="0"></p>
-                            <h4 class="text-right">Rp 100.000</h4>
-                        </div>
-                    </div>                      
-                </div>
-         
+                
+         <div class="row">
+                @foreach($list_courses_cook as $list_course_code)
+            
+                  
+                    <div class="col-xs-12 col-md-3">
+                      <a href="{{route(('course'), $list_course_code->id)}}">
+                         <div class="thumbnail">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="">
+                             <div class="caption">
+                                <h4>{{$list_course_code->nama_course}}</h4>
+                                <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
+                                <p class="starability-result" data-rating="{{ round($list_course_code->rating) }}"></p>
+                                
+                                <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
+                             </div>
+                         </div>
+                       </a>
+                    </div>
+             
+              @endforeach
+            
             </div>
         </div>
     </section>
@@ -168,7 +124,7 @@
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/user4-128x128.jpg') }}" alt="">
                             </div>
-                            <h3>AR Rahman</h3>
+                            <h3>Afiq Rasyid Muhammad</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel vero dolore officiis, velit id libero illum harum hic magni, quae repellendus adipisci possimus saepe nostrum doloribus repudiandae asperiores commodi voluptate.</p>
                         </div>
                         <div class="testimonial">

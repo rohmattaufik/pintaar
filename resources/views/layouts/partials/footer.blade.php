@@ -10,15 +10,8 @@
 	                    </div>
 	                </div>
 	                <div class="row">
-	                    <div class="col-xs-12 col-md-8 col-md-offset-2">
-	                        <form action="process.php" id="contact-form" method="post" class="contact-form">
-	                            <div class="form-double">
-	                                <input type="text" id="form-name" name="form-name" placeholder="Nama" class="form-control" required="required">
-	                                <input type="email" id="form-email" name="form-email" class="form-control" placeholder="Email" required="required">
-	                            </div>
-	                            <input type="text" id="form-subject" name="form-subject" class="form-control" placeholder="Kelas yang kamu inginkan">
-	                            <button type="submit" class="btn btn-danger">Simpan</button>
-	                        </form>
+	                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+	                            <a href="https://goo.gl/forms/bPsNZz3LtgcjKsuG3" ><button type="submit" class="btn btn-danger">Masukkan Keinginan Anda Disini!</button></a>
 	                    </div>
 	                </div>
 	            </div>
@@ -57,8 +50,8 @@
 	</body>
 
 	<!--Vendor-JS-->
-	<script src="{{ URL::asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
-	<script src="{{ URL::asset('js/vendor/bootstrap.min.js') }}"></script>
+	<script src="{{ URL::asset('js/vendor_js/jquery-1.12.4.min.js') }}"></script>
+<script src="{{ URL::asset('js/vendor_js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 	<!--Plugin-JS-->

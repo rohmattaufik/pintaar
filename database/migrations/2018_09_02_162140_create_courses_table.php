@@ -21,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->longText('deskripsi');
             $table->integer('id_tutor');
             $table->string('video');
+			$table->integer('kategori');
             $table->timestamps();
         });
     }

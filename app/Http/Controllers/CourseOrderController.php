@@ -103,7 +103,7 @@ class CourseOrderController extends MailController
     public function store(Request $request)
     {
         // buat order baru
-        $status_pembayaran = 1;
+        $status_pembayaran = 3;
         $courseOrder = CourseOrder::create([
           'id_user' => Auth::user()->id,
           'cart_id' => $request['cart_id'],
@@ -134,14 +134,17 @@ class CourseOrderController extends MailController
 
         $user_yang_membeli = User::find(Auth::user()->id);
 
-        $message = self::get_message_for_email($request['cart_id'], $noOrder);
+        //$message = self::get_message_for_email($request['cart_id'], $noOrder);
 
-        self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
+        //self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
 
 
 
-        return redirect()->route('course-order.show', $noOrder);
-    }
+        //return redirect()->route('course-order.show', $noOrder);
+ 
+		return redirect()->route('kelas_saya');
+  
+	}
     public function get_message_for_email($cart_id, $noOrder){
 
               $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
@@ -207,8 +210,9 @@ class CourseOrderController extends MailController
         $cart = Cart::where('id', $request['cart_id'])->get()->pop();
 
         // kode unik untuk ditambah ke total harga pembelian
-        $rand = rand(0,999);
-
+        //$rand = rand(0,999);
+	
+		$rand = 0;
 
         return view('layouts/course-order/checkout', ['cart' => $cart, 'rand' => $rand]);
     }

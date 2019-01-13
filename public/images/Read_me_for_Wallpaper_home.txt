@@ -1,0 +1,1 @@
+If want to change the upper wallpaper header home use name parallax-2.jpg, kalau footer parallax-7.jpg
