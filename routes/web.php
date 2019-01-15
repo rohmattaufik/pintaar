@@ -22,6 +22,9 @@ Route::get('/home',['as'=>'home','uses'=>'ArtifactController@index']);
 
 Route::get('test-email','MailController@test_email');
 
+//Daftar kelas
+Route::get('/daftar-pengajar', ['as'=>'daftar_pengajar','uses'=>'UserController@daftar_pengajar']);
+
 //ALL USER WITHOUT REGISTRATION
 Route::prefix('course')->group(function () {
 	Route::get('{id}',['as'=>'course','uses'=>'CourseController@detail']);
@@ -140,7 +143,6 @@ Route::group(['middleware'=>'auth'],function(){
 
 	//Kelas Saya
 	Route::get('/kelas-saya', ['as'=>'kelas_saya','uses'=>'UserController@kelas_saya']);
-
 
 
 
