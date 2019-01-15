@@ -134,4 +134,8 @@ class UserController
         $notification->delete();
         return redirect(route('topik', ['id' => $id]) . '#comment'.$notification->id_destination);
     }
+	
+	public function daftar_pengajar(){
+				return view('layouts.tutor.daftar-pengajar');
+	}
 }

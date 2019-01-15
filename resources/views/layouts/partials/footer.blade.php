@@ -30,7 +30,7 @@
 	                    </div>
 	                    <div class="col-xs-12 col-sm-6">
 	                    	<h4>Ingin membuat kelas di platform Pintaar?</h4>
-	                    	<a href="#" class="btn btn-danger">Daftar Disini</a>
+	                    	<a href="https://goo.gl/forms/1gj7XCBjVWWYXGSA2" class="btn btn-danger">Daftar Disini</a>
 	                    </div>
 	                </div>
 	            </div>
