@@ -16,7 +16,7 @@ class CreatesTopiksTable extends Migration
       Schema::create('topiks', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('id_course');
-          $table->string('video');
+          $table->longText('video');
           $table->string('judul_topik');
           $table->longText('penjelasan')->nullable();
           $table->integer('parent_id')->nullable();

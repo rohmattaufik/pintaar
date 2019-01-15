@@ -8,30 +8,19 @@
 <section class="section-padding">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-md-8 col-md-offset-2">
-        
-        <h2>Selamat Kamu Telah Menyelesaikan Kelas {{ $course->nama_course }}! </h2>  
-        <br> </br>
-		<h4>Apakah kamu ingin belajar lebih jauh tentang ilmu ini? </h4> 
-		<h4>Tenang jika banyak permintaan terhadap kelas ini, kami akan buka versi lanjutan dari kelas ini segera!</h4>
-		<br> </br>
-		<h4>Tinggal isi form dibawah ini jika kamu berminat!</h4> 
-		<h4>Dan jadilah orang pertama yang akan kami beritahu bila kelasnya telah dibuka!</h4	>
-		<br> </br>
-		<div class="row">
-	           <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-	                 <a href="https://goo.gl/forms/bPsNZz3LtgcjKsuG3" ><button type="submit" class="btn btn-success">Saya tertarik untuk belajar lebih jauh!</button></a>
-	           </div>
-	     </div>
-		 <br> </br>
-		 <div class="row">
-	           <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-	                <a href="https://goo.gl/forms/r4jmiirHYNOudWrt1" ><button type="submit" class="btn btn-danger">Saya tertarik untuk belajar hal lain!</button></a>
-	           </div>
-	     </div>
-		<br> </br>
+      <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+        <div style="color:#138fc2;"><i class="fas fa-award fa-7x"></i></div>
+        <h2>Selamat! Kamu telah menyelesaikan kelas {{ $course->nama_course }}!</h2>  
+		<h4>Apakah kamu ingin belajar lebih jauh tentang ilmu ini?</h4>
+		<a href="https://goo.gl/forms/r4jmiirHYNOudWrt1" class="btn btn-primary">Ya, saya tertarik</a> 
+		<br/>
+		<br/>
+		<h4>Atau kamu masih ingin belajar kelas lainnya di Pintaar? Klik tombol dibawah.</h4>
+		<a href="{{ route('courses') }}" class="btn btn-primary">Belajar Lagi</a> 
+	    
+	           
 	  </div>
     </div>
   </div>
-
+</section>
 @endsection
