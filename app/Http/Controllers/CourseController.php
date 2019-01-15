@@ -64,8 +64,7 @@ class CourseController extends Controller
             ->where('review_courses.id_course', $id)
             ->get();
 
-        if( Auth::user() ){
-
+        if (Auth::user()){
 
             $status_pembayaran = DB::table('pembelian_courses')
                         ->select('status_pembayaran', 'waktu_valid_pembelian')
@@ -75,7 +74,7 @@ class CourseController extends Controller
                         ->where('cart.user_id', Auth::user()->id)
                         ->get()->first();
 
-            $status_pembayaran = self::check_and_set_valid_date_course_oder($status_pembayaran);
+            // $status_pembayaran = self::check_and_set_valid_date_course_oder($status_pembayaran);
 
 
             if(Auth::user()-> id == $course-> id_user_tutor){
@@ -102,8 +101,6 @@ class CourseController extends Controller
 
             $list_topik = Topik::where('id_course', $id)->get();
 
-            $list_topik = self::check_and_process_topik_if_user_has_been_watch($list_topik, Auth::user()->id);
-
             # mapping topik by parent
             $list_topik_parents = array();
             $list_topik_childs  = array();
@@ -123,17 +120,34 @@ class CourseController extends Controller
         }
         else
         {
-
             $status_pembayaran = null;
 
             $status_pernah_review = null;
 
-            $list_topik = Topik::where('id_course', $id);
+            $list_topik = Topik::where('id_course', $id)->get();
+
+            # mapping topik by parent
+            $list_topik_parents = array();
+            $list_topik_childs  = array();
+            $list_topik_by_id_parent = array();
+            foreach ($list_topik as $idx => $topik)
+            {
+                if ($topik['parent_id'] == null)
+                    $list_topik_parents[] = $topik;
+                else
+                    $list_topik_childs[]  = $topik;
+            }   
+            foreach ($list_topik_childs as $idx => $list_topik_child)
+                $list_topik_by_id_parent[$list_topik_child['parent_id']][] = $list_topik_child;
+            foreach ($list_topik_parents as $idx => $list_topik_parent)
+                $list_topik_parents[$idx]['childs'] = !empty($list_topik_by_id_parent[$list_topik_parent['id']]) ? $list_topik_by_id_parent[$list_topik_parent['id']] : array();
+            $list_topik = $list_topik_parents;
 
         }
 
-      return view('layouts.course.detail',  ["status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ] );
-  }
+      return view('layouts.course.detail',  ["status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
+    }
+
 	public function course_review_post(Request $request, $id)
 	{
 
@@ -182,7 +196,7 @@ class CourseController extends Controller
     {
         $course = null;
         $tutors = Tutor::with('users')->get();
-        return view('layouts.course.tutor.form')->with('course', $course)->with('tutors', $tutors);
+        return view('layouts.course.tutor.create-course')->with('course', $course)->with('tutors', $tutors);
     }
 	
 	public function subscribe_course($id_topik)
@@ -203,7 +217,7 @@ class CourseController extends Controller
     {
         $course = Course::whereId($id)->first();
         $tutors = Tutor::with('users')->get();
-        return view('layouts.course.tutor.form')->with('course', $course)->with('tutors', $tutors);
+        return view('layouts.course.tutor.create-course')->with('course', $course)->with('tutors', $tutors);
     }
 
     public function submit(Request $request)
@@ -219,9 +233,10 @@ class CourseController extends Controller
         if($fotoCourse != null){
             $destinationPath    = 'images/gambar_course';
             $fotoName           = $fotoCourse->getClientOriginalName();
-            $movea              = $fotoCourse->move($destinationPath, $fotoName);
+            $move               = $fotoCourse->move($destinationPath, $fotoName);
             $urlFoto            = "{$fotoName}";
         }
+
         $video     = $request->file('video');
         $url       = "";
         if($video != null){
@@ -244,7 +259,8 @@ class CourseController extends Controller
                 "id_tutor"      => $tutor->id,
                 'foto'          => $urlFoto,
                 'video'         => $url,
-                'deskripsi'     => $request->deskripsi
+                'deskripsi'     => $request->deskripsi,
+                'kategori'         => 1
             ]);
         } else {
             if($urlFoto != "" and $url != "")
@@ -255,7 +271,8 @@ class CourseController extends Controller
                     "id_tutor"      => $tutor->id,
                     'foto'          => $urlFoto,
                     'video'         => $url,
-                    'deskripsi'     => $request->deskripsi
+                    'deskripsi'     => $request->deskripsi,
+                    'kategori'         => 1
                 ]);
             } else {
                 if($urlFoto != "")
@@ -265,7 +282,8 @@ class CourseController extends Controller
                         "harga"         => $request->harga,
                         "id_tutor"      => $tutor->id,
                         'foto'          => $urlFoto,
-                        'deskripsi'     => $request->deskripsi
+                        'deskripsi'     => $request->deskripsi,
+                        'kategori'         => 1
                     ]);
                 } else if($url != "")
                 {
@@ -274,14 +292,16 @@ class CourseController extends Controller
                         "harga"         => $request->harga,
                         "id_tutor"      => $tutor->id,
                         'video'         => $url,
-                        'deskripsi'     => $request->deskripsi
+                        'deskripsi'     => $request->deskripsi,
+                        'kategori'         => 1
                     ]);
                 } else {
                     $course =Course::whereId($request->id)->update([
                         "nama_course"    => $request->nama_course,
                         "harga"         => $request->harga,
                         "id_tutor"      => $tutor->id,
-                        'deskripsi'     => $request->deskripsi
+                        'deskripsi'     => $request->deskripsi,
+                        'kategori'         => 1
                     ]);
                 }
             }
@@ -303,18 +323,18 @@ class CourseController extends Controller
         {
             $topik['pertanyaan'] = PertanyaanTopik::whereIdTopik($topik->id)->get();
         }
-        return view('layouts.course.tutor.detail')->with('course', $course);
+        return view('layouts.course.tutor.course-detail')->with('course', $course);
     }
 
     public function check_and_set_valid_date_course_oder($status_pembayaran){
 
       #dd($status_pembayaran);
-      if( $status_pembayaran != null  && $status_pembayaran -> status_pembayaran  == 3){
-        $waktu_valid_pembelian_carbon = Carbon::createFromFormat('Y-m-d', $status_pembayaran-> waktu_valid_pembelian);
-        $status_pembayaran -> waktu_valid_pembelian =   $waktu_valid_pembelian_carbon->format('d-m-Y');
-        $status_pembayaran -> waktu_disetujui = $waktu_valid_pembelian_carbon ->subMonths(1)->format('d-m-Y');
-      }
-      return $status_pembayaran;
+      // if( $status_pembayaran != null  && $status_pembayaran -> status_pembayaran  == 3){
+      //   $waktu_valid_pembelian_carbon = Carbon::createFromFormat('Y-m-d', $status_pembayaran-> waktu_valid_pembelian);
+      //   $status_pembayaran -> waktu_valid_pembelian =   $waktu_valid_pembelian_carbon->format('d-m-Y');
+      //   $status_pembayaran -> waktu_disetujui = $waktu_valid_pembelian_carbon ->subMonths(1)->format('d-m-Y');
+      // }
+      // return $status_pembayaran;
 
     }
 

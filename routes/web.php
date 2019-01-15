@@ -73,7 +73,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 			// TOPIK
 			Route::prefix('topik')->group(function () {
-				Route::get('crate/{id}', 'TopikController@create')->name('topik-create');
+				Route::get('create/{idCourse}', 'TopikController@create')->name('topik-create');
 
 				Route::get('update/{id}', 'TopikController@update')->name('topik-update');
 
@@ -122,9 +122,16 @@ Route::group(['middleware'=>'auth'],function(){
 	// Pembelian Course
 	Route::resource('course-order', 'CourseOrderController');
 
+	Route::get('/buy/{course_id}/free',['as'=>'buy-free-course','uses'=>'CourseOrderController@buyFreeCourse']);
+
+	Route::get('/buy/success/',['as'=>'purchase-success','uses'=>'CourseOrderController@purchaseSuccess']);
+
 	Route::get('/buy/{course_id}',['as'=>'buy-course','uses'=>'CourseOrderController@addToCart']);
+	
 	Route::post('/remove-from-cart',['as'=>'remove-from-cart','uses'=>'CourseOrderController@removeFromCart']);
+	
 	Route::get('/cart',['as'=>'cart','uses'=>'CourseOrderController@showCart']);
+	
 	Route::post('/checkout',['as'=>'checkout','uses'=>'CourseOrderController@checkout']);
 
 	// Upload bukti pembayaran

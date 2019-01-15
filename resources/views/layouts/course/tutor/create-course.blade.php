@@ -1,37 +1,31 @@
 @extends('template')
 
 @section('title')
-  <title>Manage Course</title>
-  <link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
-  <link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+  <title>Pintaar</title>
 @endsection
 
 @section('content')
-<section class="content">
+<section class="section-padding">
       <div class="row">
         <!-- left column -->
         <div class="col-md-6 col-md-offset-3">
-          <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Create New Course</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
+            
+            <h2 class="box-title">Buat Kelas Baru</h2>
+            
             <form role="form" method="post" action="{{ route('course-submit') }}" enctype="multipart/form-data">
               <input type="hidden" name="id" value="{{ $course != null ? $course->id : null}}">
               {{ csrf_field()}}
-              <div class="box-body">
+              
                 <div class="form-group">
-                  <label for="name">Nama Course</label>
-                  <input type="text" class="form-control" name="nama_course" id="name" value="{{ $course != null ? $course->nama_course : null }}" placeholder="Enter Course Name">
+                  <label for="name">Nama Kelas</label>
+                  <input type="text" class="form-control" name="nama_course" id="name" value="{{ $course != null ? $course->nama_course : null }}" placeholder="">
                 </div>
                 <div class="form-group">
                   <label for="harga">Harga</label>
-                  <input type="number" class="form-control" name="harga" id="harga" value="{{ $course != null ? $course->harga : null }}" placeholder="Input Harga">
+                  <input type="number" class="form-control" name="harga" id="harga" value="{{ $course != null ? $course->harga : null }}" placeholder="">
                 </div>
                 <div class="form-group">
-                  <label for="foto">File Foto</label>
+                  <label for="foto">Gambar Kelas</label>
                   <input type="file" id="foto" name="foto">                
                 </div>
                 @if($course != null and $course->foto != null and $course->foto != "")
@@ -40,7 +34,7 @@
                   <img id="preview_image" class="hidden" width="128" height="128"></img>
                 @endif
                 <div class="form-group">
-                  <label for="video">File Video</label>
+                  <label for="video">Video Perkenalan Kelas</label>
                   <input type="file" id="video" name="video">                
                 </div>
                 @if($course != null and $course->video != null and $course->video != "")
@@ -50,38 +44,18 @@
                 @endif
                 <div class="form-group">
                   <label for="deskripsi">Deskripsi</label><br>
-                  <textarea class="form-control" rows="3" name="deskripsi">{{ $course != null ? $course->deskripsi : null}} </textarea>
+                  <textarea class="form-control" rows="5" name="deskripsi">{{ $course != null ? $course->deskripsi : null}} </textarea>
                 </div>
-                <!-- select -->
-                <!-- <div class="form-group">
-                  <label>Tutor</label>
-                  <select class="form-control" name="id_tutor">
-                    @foreach($tutors as $key => $tutor)
-                    @if($course != null and $tutor->id == $course->id_tutor)
-                    <option value="{{$tutor->id}}" selected="true">{{ $tutor['users']['nama']}}</option>
-                    @else
-                    <option value="{{$tutor->id}}">{{ $tutor['users']['nama']}}</option>
-                    @endif
-                    @endforeach
-                  </select>
-                </div> -->
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+                
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Buat Kelas</button>
+                </div>
             </form>
+         
           </div>
-          <!-- /.box -->
-</div>
-</div>
-
-          
+      </div>     
  </sction>
 
-<script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -122,4 +96,6 @@ $("#video").change(function() {
   readURLVideo(this);
 });
 </script>
+
+
 @endsection

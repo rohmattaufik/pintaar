@@ -30,11 +30,7 @@ class TopikController extends Controller
      */
     public function index()
     {
-        $courses = DB::table('topiks')->get();
-
-        return $courses;
-
-        return view('layouts.topiks.index');
+       
     }
 
     public function detail(Request $request, $id)
@@ -197,7 +193,7 @@ class TopikController extends Controller
     {
         $course = Course::whereId($idCourse)->first();
         $topik = null;
-        return view('layouts.topik.tutor.form')->with('course', $course)->with('topik', $topik);
+        return view('layouts.topik.tutor.create-topik')->with('course', $course)->with('topik', $topik);
     }
 
     protected function update($id)
@@ -206,7 +202,7 @@ class TopikController extends Controller
         $file_topik = FileTopik::whereIdTopik($id)->get();
         $course = Course::whereId($topik->id_course)->first();
 
-        return view('layouts.topik.tutor.form')->with('course', $course)->with('topik', $topik)->with('attachments', $file_topik);
+        return view('layouts.topik.tutor.create-topik')->with('course', $course)->with('topik', $topik)->with('attachments', $file_topik);
     }
 
     public function submit(Request $request)
@@ -280,10 +276,11 @@ class TopikController extends Controller
         return redirect()->route('topik-detail', $id_topik);
     }
 
-    public function get_topik_detail( $id )
+    public function get_topik_detail($id)
     {
         $topik = Topik::whereId($id)->with('pertanyaanTopiks')->first();
-        return view('layouts.topik.tutor.detail')->with('topik', $topik);
+        $course = Course::whereId($topik->id_course)->first();
+        return view('layouts.topik.tutor.detail', ['topik'=>$topik, 'course'=>$course]);
     }
 
 

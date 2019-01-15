@@ -10,10 +10,10 @@
         <div class="container">
             <div class="row v-center">
                 <div class="col-xs-12 col-md-7 header-text">
-                    <h2>Ketika kamu berhenti belajar, saat itu kamu akan mati</h2> 
+                    <h2>Ketika kamu berhenti belajar, saat itu kamu akan mati.</h2> 
 					<p>-Albert Einstein</p>
 					<hr>
-                    <p>Pintaar merupakan sebuah platform kelas online yang dapat membantu masyarakat Indonesia memperoleh Ilmu dengan mudah. Saat ini, masih tersedia kelas pemrograman dan memasak</p>
+                    <p>Pintaar merupakan sebuah platform kelas online yang ingin membantu masyarakat Indonesia memperoleh Ilmu dengan mudah. Saat ini, Pintaar masih menyediakan 2 katogori kelas, yaitu kelas pemrograman dan memasak.</p>
                     
                 </div>
                 <div class="hidden-xs hidden-sm col-md-5 text-right">
@@ -37,7 +37,7 @@
                 <div class="col-xs-12">
                     <div class="alert alert-danger alert-dismissible" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong>. Ayo segera daftar dan belajar di Pintaar!</h4>
+                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
                     </div>
                     <div class="page-title">
                         <h2>Kelas Pemrograman Website</h2>
@@ -56,8 +56,12 @@
                                 <h4>{{$list_course_code->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_course_code->rating) }}"></p>
+                                @if($list_course_code->harga == 0)
+                                  <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
+                                @else
+                                  <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @endif
                                 
-                                <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
                              </div>
                          </div>
                        </a>
@@ -80,9 +84,8 @@
                     </div>
                 </div>
             </div>
+               
             <div class="row">
-                
-         <div class="row">
                 @foreach($list_courses_cook as $list_course_code)
             
                   
@@ -94,8 +97,12 @@
                                 <h4>{{$list_course_code->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_course_code->rating) }}"></p>
+                                @if($list_course_code->harga == 0)
+                                  <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
+                                @else
+                                  <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @endif
                                 
-                                <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
                              </div>
                          </div>
                        </a>

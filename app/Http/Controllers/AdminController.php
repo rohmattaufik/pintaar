@@ -109,9 +109,9 @@ class AdminController extends MailController
 
         $user_yang_membeli = User::find($pembelian_course->id_user);
 
-        $message = self::get_message_for_email($pembelian_course);
+        // $message = self::get_message_for_email($pembelian_course);
 
-        self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
+        // self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
 
 
          return redirect()->route('approve_payment_detail', ['id' => $id_pembelian]);

@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-  <title>Kelas</title>
+  <title>Pintaar - Kelas</title>
 @endsection
 
 @section('content')
@@ -21,8 +21,11 @@
                                 <h4>{{$list_course_with_user->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_course_with_user->rating) }}"></p>
-                                
-                                <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @if($list_course_with_user->harga == 0)
+                                  <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
+                                @else
+                                  <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @endif
                              </div>
                          </div>
                        </a>
@@ -37,8 +40,12 @@
                                 <h4>{{$list_course_with_user->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_course_with_user->rating) }}"></p>
-                                
-                                <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @if($list_course_with_user->harga == 0)
+                                  <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
+                                @else
+                                  <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @endif
+          
                              </div>
                          </div>
                        </a>
@@ -55,7 +62,11 @@
                                 <p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_course_with_user->rating) }}"></p>
                                 
-                                <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @if($list_course_with_user->harga == 0)
+                                  <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
+                                @else
+                                  <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                @endif
                              </div>
                          </div>
                        </a>

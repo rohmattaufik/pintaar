@@ -1,31 +1,25 @@
 @extends('template')
 
 @section('title')
-  <title>Manage Topik</title>
-  <link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
-  <link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+  <title>Pintaar</title>
 @endsection
 
 @section('content')
-<section class="content">
+<section class="section-padding">
       <div class="row">
         <!-- left column -->
         <div class="col-md-6 col-md-offset-3">
-          <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Create New Topik</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
+            
+            <h2>Tambah Topik</h2>
+            
+            
             <form role="form" method="post" action="{{ route('topik-submit') }}" enctype="multipart/form-data">
               <input type="hidden" name="id" value="{{ $topik != null ? $topik->id : null}}">
               <input type="hidden" name="id_course" value="{{ $course->id }}">
               {{ csrf_field()}}
-              <div class="box-body">
                 <div class="form-group">
                   <label for="name">Judul Topik</label>
-                  <input type="text" class="form-control" name="judul_topik" id="name" value="{{ $topik != null ? $topik->judul_topik : null }}" placeholder="Enter Topic Title">
+                  <input type="text" class="form-control" name="judul_topik" id="name" value="{{ $topik != null ? $topik->judul_topik : null }}">
                 </div>
                 <div class="form-group">
                   <label for="video">File Video</label>
@@ -38,37 +32,22 @@
                 @endif
                 <div class="form-group">
                   <label for="deskripsi">Deskripsi</label><br>
-                  <textarea name="penjelasan" class="form-control">{{ $topik != null ? $topik->penjelasan : null}} </textarea>
+                  <textarea name="penjelasan" rows="10" class="form-control">{{ $topik != null ? $topik->penjelasan : null}} </textarea>
                 </div>
                 <div class="form-group">
-                  <label for="video">Attachments</label>
+                  <label for="video">Lampiran</label>
                   <input type="file" id="file_topik" name="file_topik">                
                 </div>
-                @if($attachments != null )
-                  <ul style="text-align:left;">
-                    @foreach ($attachments as $attachment)
-                    <li><a href="{{URL::asset('attachments/'.$attachment['url'])}}" target="_blank">{{$attachment['file_name']}}</a></li>
-                    @endforeach
-                  </ul>
-                @endif 
-                
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                             
+            
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Simpan</button>
               </div>
             </form>
-          </div>
-          <!-- /.box -->
+         
 </div>
-</div>
-
-          
- </sction>
-
-<script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>
+</div>      
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>

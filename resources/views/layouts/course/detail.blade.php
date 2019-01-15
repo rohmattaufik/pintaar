@@ -9,30 +9,41 @@
         
 			 
 		<div class="container" >
-            
-			
-			<div class="alert alert-danger alert-dismissible" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong>. Ayo segera daftar dan belajar di Pintaar!</h4>
-             </div>
+      @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
+        <div class="row">
+          <div class="col-xs-12">	
+  			    <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
+            </div>
+          </div>
+        </div>
+      @endif
 
 			<div class="row">
                 <div class="col-xs-12 col-md-7">
                     
                         <h1>{{ $course->nama_course }}</h1>
                         <p class="starability-result" data-rating="0"></p>
-                        <h4>{{$course->deskripsi }}</h4>
+                        <h4>{{ $course->deskripsi }}</h4>
                         
                         <p>Dibuat oleh <a href="{{ route('tutor.show', $course->id_tutor) }}">  {{ $course -> nama }} </a><p>
-                        @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3 )
-                          <h2>Rp. {{ number_format($course->harga, 0, ',', '.') }}</h2>
-                          <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
+                        @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
+                          @if($course->harga == 0)
+                            <h3><span class="label label-warning">Gratis</span></h3>
+                          @else
+                            <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                          @endif  
+                          
+                          <a href="{{ route('buy-free-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
                         @endif
+                        <br>
+                        <br>
                     
                 </div>
                 <div class="col-xs-12 col-md-5">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <img class="embed-responsive-item"  src= "{{ URL::asset('video/video_course/'.$course->video ) }}"></img>
+                        <img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
                     </div>
                 </div>      
                 
@@ -44,40 +55,22 @@
                       <h2>Silabus</h2>
 
 						          @foreach($list_topik as $topik)
-                            <div class="panel">
-                                @if(empty($topik -> is_already_watch))
-                                  <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($topik['id'])}}">
-                                      <a> {{ $topik -> judul_topik }}</a>
-                                  </h4>
+                            <div class="panel">       
+                                <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($topik['id'])}}">
+                                    <a href="#"> {{ $topik -> judul_topik }}</a>
+                                </h4>
 
-                                  <div id="collapse{{($topik['id'])}}" class="panel-collapse collapse">
-                                    @if (count($topik['childs']) > 0)
-                                        @foreach ($topik['childs'] as $subtopik)
-                                            <div class="panel">
-                                                <h4 class="panel-title" data-toggle="collapse" data-parent="#collapse{{($topik->id)}}" href="'#collapse{{($subtopik['id'])}}">
-                                                    <a> {{$subtopik->judul_topik}}</a>
-                                                </h4>
-              
-                                                <div id="collapse{{($subtopik['id'])}}" class="panel-collapse collapse">
-                                                    <p>{{$subtopik->penjelasan }}</p>
-                                                    <a href = "{{route(('topik'), $subtopik->id)}}" > Detail > </a>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                  </div>
-                                @else
-                                  <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($loop->index)}}">
-                                      <a> {{ $topik -> judul_topik }}
-                                        <i class="fas fa-check" style=" margin-left:10px;font-size:30px;color:green;"></i>
-                                      </a>
-                                  </h4>
-
-                                  <div id="collapse{{($loop->index)}}" class="panel-collapse collapse">
-                                      <p>{{$topik -> penjelasan }}</p>
-                                      <a href = "{{route(('topik'), $topik->id)}}" > Detail > </a>
-                                  </div>
-                                @endif
+                                <div id="collapse{{($topik['id'])}}" class="panel-collapse collapse">
+                                  @if (count($topik['childs']) > 0)
+                                      @foreach ($topik['childs'] as $subtopik)
+                                          <div class="panel">
+                                              <h4 class="panel-title">
+                                                <a href="{{ route('topik', $subtopik->id) }}">{{ $subtopik->judul_topik }}</a>
+                                              </h4>
+                                          </div>
+                                      @endforeach
+                                  @endif
+                                </div>
                             </div>
                       @endforeach
 
@@ -133,14 +126,25 @@
 
 
                <div class = "row">
-                  <div class="col-xs-12 col-sm-12 col-md-12">
-                       <h2>Reviews</h2>
-                       
-                        @foreach($list_review as $review)
-                          <p>	{{$review -> review }}
-                          <p><strong>- Oleh {{ $review -> nama }}, Pada tanggal {{ $review -> created_at }}</strong></p>
-                          </p>
-                          <hr>
+                  <div class="col-xs-12 col-sm-12 col-md-7">
+                      <br>
+                      <h2>Reviews</h2>
+                      <br>
+
+                       @foreach($list_review as $review)
+                          <div class="row">
+                            <div class="col-sm-1">
+                              <img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user4-128x128.jpg')}}" alt="User profile picture">
+                            </div>
+                            <div class="col-sm-9">
+                              <p><strong>{{ $review->nama }}</strong></p>
+                              <p>{{ $review -> review }}</p> 
+
+                            </div>
+                            <div class="col-sm-2 text-right">
+                              <p>{{ $review->created_at }}</p>
+                            </div>
+                          </div>
                         @endforeach
                   </div>
                </div>

@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-<title>Bab {{$topik -> judul_topik}} </title>
+<title>Pintaar - {{$topik -> judul_topik}} </title>
 @endsection
 
 @section('content')
@@ -9,110 +9,51 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-md-8 col-md-offset-2">
-        
-        <h2>Selamat Belajar Bab {{ $topik->judul_topik }}! </h2>  
-        
-        
-        <!-- NAVIGASI TOPIK -->
+        <h2>{{ $topik->judul_topik }}</h2>  
+      </div>
+    </div>
 
-        @if (empty($topik_after-> id) && empty($topik_before-> id))
-        
-        @elseif (empty($topik_before-> id))
-          <div class="row">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6 text-right">
-              <span class="pull-right">
-               <a href ="{{route(('topik'), $topik_after -> id)}}">
-                   <i class="fas fa-angle-double-right" style="font-size:50px; color:#138fc2;" ></i>
-                   <p>Topik Selanjutnya</p>
-               </a>
-             </span>
-            </div>     
-          </div>
-        @elseif (empty($topik_after->id))
-          <div class="row">
-            <div class="col-md-6">
-               <a href ="{{route(('topik'), $topik_before->id)}}">
-                   <i class="fas fa-angle-double-left" style="font-size:50px; color:#138fc2;" ></i>
-                   <p>Topik Sebelumnya</p>
-               </a>
-            </div>
-			<div class="col-md-6 text-right">
-              <span class="pull-right">
-               <a href ="{{route(('subscribe-course'), $topik -> id)}}">
-                   <i class="fas fa-angle-double-right" style="font-size:50px; color:#138fc2;" ></i>
-                   <p>Topik Selanjutnya</p>
-               </a>
-               <span>
-            </div>
-            <div class="body">
-               <div class="embed-responsive embed-responsive-16by9">
-                  <video class="embed-responsive-item" src= "{{ URL::asset('video/video_topik/'.$topik->video ) }}" controls  allowfullscreen ></video>
-               </div>
-               <br><br><br>
-               <h2>{{ $topik->judul_topik }}</h2>
-               <br>
-               <p class="m-t-10 m-b-30">{{ $topik->penjelasan }}</p>
-               <br><br>
-          </div>
-        @else
-          <div class="row">
-            <div class="col-md-6">
-               <a href ="{{route(('topik'), $topik_before->id)}}">
-                   <i class="fas fa-angle-double-left" style="font-size:50px; color:#138fc2;" ></i>
-                   <p>Topik Sebelumnya</p>
-               </a>
-            </div>
-
-            <div class="col-md-6 text-right">
-              <span class="pull-right">
-               <a href ="{{route(('topik'), $topik_after -> id)}}">
-                   <i class="fas fa-angle-double-right" style="font-size:50px; color:#138fc2;" ></i>
-                   <p>Topik Selanjutnya</p>
-               </a>
-               <span>
-            </div>
-          </div>
-        @endif
-
-        <!-- PEMBAHASAN -->
-
-        <h2>Pembahasan</h2>
-          
+    <!-- Video Penjelasan -->
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
         <div class="embed-responsive embed-responsive-16by9">
           <iframe class="embed-responsive-item" src= "{{ URL::asset('video/video_topik/'.$topik->video ) }}" ?> allowfullscreen></iframe>
         </div>
-        <br/>
-        <h3>{{ $topik->judul_topik }}</h3>
-        <p class="m-t-10 m-b-30">{{ $topik->penjelasan }}</p>
+      </div>
+    </div>
+    <br>
 
+    <!-- Deskripsi Topik -->
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <p>{{ $topik->penjelasan }}</p>
+      </div>
+    </div>
 
-        <!-- FILE ATTACHMENTS -->
+    <!-- FILE ATTACHMENTS -->
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        @if (count($file_topik) > 0)
+            <h3>Lampiran</h3>
+            <ul>
+              @foreach ($file_topik as $file)
+                <li><a href="{{URL::asset('attachments/'.$file->url)}}" target="_blank">{{$file->file_name}}</a></li>
+              @endforeach
+            </ul>
+        @endif
+      </div>
+    </div>
 
-        <h3>Attachments :</h3>
-        <div>
-          <ul>
-          @if (count($file_topik) > 0)
-            @foreach ($file_topik as $file)
-          <li><a href="{{URL::asset('attachments/'.$file->url)}}" target="_blank">{{$file->file_name}}</a></li>
-            @endforeach
-          @else
-            <li>No Attachments</li>
-          @endif
-        </ul>
-        </div>
+    <!-- PERTANYAAN -->
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
         
-
-        <!-- PERTANYAAN -->
-
         @foreach ($questions as $question)
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3>Pertanyaan {{ $question-> judul_pertanyaan }}</h3>
+              <h3>Kuis</h3>
             </div>
-            <div class="panel-body">
-              
+            <div class="panel-body">           
                 <p>{{ $question->pertanyaan }}</p>
 
                 @if (!empty($question-> gambar))
@@ -150,7 +91,7 @@
                    <div class="col-md-8 col-md-offset-2 text-center">
                       <p id="jawaban_salah-{{$question->id}}" style="display:none;">Jawaban anda salah, silahkan cek pembahasan di bawah! </p>
                    </div>
-          		  </div>
+                </div>
                 <div class="row">
                    <div class="col-md-8 col-md-offset-2 text-center">
                       <i id="benar-{{$question->id}}" class="far fa-check-circle" style="display:none; font-size:60px; color:green;"></i>
@@ -164,13 +105,72 @@
               </div>    
             </div>
           @endforeach
-          
-            
-          
-          
-            <!-- KOMENTAR -->
 
-            <meta name="csrf-token" content="{{ csrf_token() }}">
+      </div>
+    </div>
+
+    <!-- NAVIGASI TOPIK -->
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        @if (empty($topik_after-> id) && empty($topik_before-> id))
+        
+        @elseif (empty($topik_before->id))
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+            </div>
+            <div class="col-xs-6 col-md-6 text-right">
+              <span class="pull-right">
+               <a href ="{{route(('topik'), $topik_after -> id)}}">
+                   <i class="fas fa-angle-double-right" style="font-size:50px; color:#138fc2;" ></i>
+                   <p>Topik Selanjutnya</p>
+               </a>
+              </span>
+            </div>     
+          </div>
+        @elseif (empty($topik_after->id))
+          <div class="row">
+            <div class=" col-xs-6 col-md-6">
+               <a href ="{{route(('topik'), $topik_before->id)}}">
+                   <i class="fas fa-angle-double-left" style="font-size:50px; color:#138fc2;"></i>
+                   <p>Topik Sebelumnya</p>
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-6 text-right">
+              <span class="pull-right">
+               <a href ="{{route(('subscribe-course'), $topik -> id)}}">
+                   <i class="fas fa-angle-double-right" style="font-size:50px; color:#138fc2;" ></i>
+                   <p>Topik Selanjutnya</p>
+               </a>
+               </span>
+            </div>
+        @else
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+               <a href ="{{route(('topik'), $topik_before->id)}}">
+                   <i class="fas fa-angle-double-left" style="font-size:50px; color:#138fc2;" ></i>
+                   <p>Topik Sebelumnya</p>
+               </a>
+            </div>
+
+            <div class="col-xs-6 col-md-6 text-right">
+              <span class="pull-right">
+               <a href ="{{route(('topik'), $topik_after -> id)}}">
+                   <i class="fas fa-angle-double-right" style="font-size:50px; color:#138fc2;" ></i>
+                   <p>Topik Selanjutnya</p>
+               </a>
+               <span>
+            </div>
+          </div>
+        @endif
+
+      </div>
+    </div>
+
+    <!-- KOMENTAR -->
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+         <meta name="csrf-token" content="{{ csrf_token() }}">
 
             <h2 id="commentTitle">Komentar</h2>
             <!-- FORM ISI KOMENTAR -->       
@@ -249,13 +249,13 @@
                              
               <hr/>
           @endforeach
-
       </div>
     </div>
+        
   </div>
 </section>
+
 <script>
-  
     function check_jawaban(id) {
   
       var field = document.querySelector('input[name="opsi-'+id+'"]:checked');

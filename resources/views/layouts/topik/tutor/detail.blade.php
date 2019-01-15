@@ -1,22 +1,23 @@
 @extends('template')
 
 @section('title')
-  <title>Topik Detail</title>
+  <title>Pintaar</title>
   <link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
   <link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-<section class="content">
-<div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Topik {{ $topik->judul_topik}}</h3>
-        </div>
-        <div class="box-body col-md-6 col-md-offset-3">
+<section class="section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+          <a href="{{ route('topik-create', $course->id) }}" class="btn btn-success">Tambah Topik</a>
+          <br>
+          <br>
           <table class="table table-bordered">
             <thead>
             <tr>
-              <td>Topik Name</td>
+              <td>Nama Topik</td>
               <td>{{ $topik->judul_topik}}</td>
             </tr>
             </thead>
@@ -38,14 +39,16 @@
             </tbody>
           </table>
         </div>
-        <div class="box-footer"></div>
+        
   </div>
+
+
 <div class="row">
 <div class="col-xs-12">
   <div class="box">
     <div class="box-header">
-        <a href="{{ route('pertanyaan-topik-create', $topik->id)}}" class="btn btn-success pull-left">Add Pertanyaan Topik</a>
-      <h3 class="box-title">Pertanyaan Topik</h3>
+        <a href="{{ route('pertanyaan-topik-create', $topik->id)}}" class="btn btn-success pull-left">Tambah Pertanyaan</a>
+      <h3 class="box-title">Kuis</h3>
       
       <div class="box-tools">
         <div class="input-group input-group-sm" style="width: 150px;">
@@ -62,7 +65,7 @@
     <div class="box-body table-responsive no-padding">
       <table class="table table-hover">
         <tr>
-          <th>Id</th>
+          <th>Nomor</th>
           <th>Judul Pertanyaan</th>
           <th>Pertanyaan</th>
           <th>Gambar</th>
@@ -106,8 +109,8 @@
   <!-- /.box -->
 </div>
 </div>
-          
- </sction>
+  </div>       
+</section>
 
 <script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>

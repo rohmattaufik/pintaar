@@ -5,13 +5,13 @@
 	                <div class="row">
 	                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
 	                        <div class="page-title">
-	                            <h2>Beritahu kami apa yang ingin kamu pelajari</h2>
+	                            <h2>Kelas apa yang ingin kamu pelajari?</h2>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="row">
 	                    <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
-	                            <a href="https://goo.gl/forms/bPsNZz3LtgcjKsuG3" ><button type="submit" class="btn btn-danger">Masukkan Keinginan Anda Disini!</button></a>
+	                        <a href="https://goo.gl/forms/vp45FbvQRUgHbnTi1" target="_blank" class="btn btn-danger">Beritahu Kami Disini</a>
 	                    </div>
 	                </div>
 	            </div>

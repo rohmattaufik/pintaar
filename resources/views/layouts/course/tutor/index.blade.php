@@ -7,13 +7,14 @@
 @endsection
 
 @section('content')
-<section class="content">
+<section class="section-padding">
+<div class="container">
 <div class="row">
 <div class="col-xs-12">
   <div class="box">
     <div class="box-header">
-        <a href="{{ route('course-create')}}" class="btn btn-success pull-left">Create</a>
-      <h3 class="box-title">Daftar Courses</h3>
+        <a href="{{ route('course-create')}}" class="btn btn-success pull-left">Tambah Kelas</a>
+      <h3 class="box-title">Daftar Kelas</h3>
 
       <div class="box-tools">
         <div class="input-group input-group-sm" style="width: 150px;">
@@ -28,13 +29,13 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
-      <table class="table table-hover">
+      <table class="table table-hover text-left">
         <tr>
-          <th>Id</th>
+          <th>Nomor</th>
           <th>Course Name</th>
           <th>Harga</th>
           <th>Foto</th>
-          <th width="30%">Action</th>
+          <th>Aksi</th>
         </tr>
         @foreach($courses as $key => $course)
         <tr>
@@ -43,9 +44,9 @@
           <td>Rp. {{ $course->harga}}</td>
           <td><img style="width:200px; height:200px;" src='{{URL::asset("images/gambar_course/".$course->foto)}}'></td>
           <td>
+            <a href="{{ route('course-detail',$course->id)}}" class="btn btn-primary">Detail</a>
             <a href="{{ route('course-update', $course->id) }}" class="btn btn-info">Update</a>
             <a href="{{ route('course-delete',$course->id)}}" class="btn btn-danger">Delete</a>
-            <a href="{{ route('course-detail',$course->id)}}" class="btn btn-primary">Detail</a>
             <a href="{{ route('course',$course->id)}}" class="btn btn-default">Preview</a>
           </td>
         </tr>
@@ -57,8 +58,8 @@
   <!-- /.box -->
 </div>
 </div>
-
- </sction>
+</div>
+</section>
 
 <script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>

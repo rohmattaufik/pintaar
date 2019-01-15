@@ -14,27 +14,26 @@ class DatabaseSeeder extends Seeder
     {
 
         DB::table('courses')->insert([
-               'nama_course' => "Fisika Energi",
-               'deskripsi' => "Course ini berisi pelajaran Fisika Energi yang mudah dipahami",
-               'harga' => 10000,
-               'id_tutor' => 1,
-               'foto' => 'fisika_energi.jpeg',
-			   'kategori' => 1, 
-               'video' => 'fisika_energi.mp4'
-           ]);
+           'nama_course' => "Belajar HTML dari NOL",
+           'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
+           'harga' => 0,
+           'id_tutor' => 1,
+           'foto' => 'html-nol.jpg',
+           'kategori' => 1, 
+           'video' => 'fisika_energi.mp4'
+        ]);
 		   
-		   DB::table('courses')->insert([
-               'nama_course' => "Fisika Energi",
-               'deskripsi' => "Course ini berisi pelajaran Fisika Energi yang mudah dipahami",
-               'harga' => 10000,
-               'id_tutor' => 1,
-               'foto' => 'fisika_energi.jpeg',
-			   'kategori' => 2, 
-               'video' => 'fisika_energi.mp4'
-           ]);
+		   
 
-      DB::table('tutors')->insert([
-                  'id_user' => '20',
+      
+
+
+
+
+
+
+        DB::table('tutors')->insert([
+                  'id_user' => '1',
                   'mata_pelajaran' => '',
                   'video_profil' => '',
                   'lama_mengajar' => '',
@@ -43,9 +42,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-                    'id' => '20',
+                    'id' => '1',
                     'nama' => 'Toni Budiman',
-                    'email' => '',
+                    'email' => 'toni@toni.id',
                     'alamat' => '',
                     'foto' => '',
                     'id_role' => '2',
@@ -55,7 +54,7 @@ class DatabaseSeeder extends Seeder
 
           DB::table('users')->insert([
                       'nama' => 'admin',
-                      'email' => 'admin@icourse.co.id',
+                      'email' => 'admin@admin.id',
                       'alamat' => '',
                       'foto' => '',
                       'id_role' => '3',
@@ -88,6 +87,7 @@ class DatabaseSeeder extends Seeder
                     'judul_topik' => 'Energi Kalor',
                     'penjelasan' => 'Energi Kalor merupakan topik yang sangat sering keluar di sbmptn',
                     'id_course' => 1,
+                    'parent_id' => 1,
                     'video' => 'fisika_energi.mp4',
                     'created_at'=> '2017-11-10'
 
@@ -109,6 +109,7 @@ class DatabaseSeeder extends Seeder
                        'judul_topik' => 'Energi Listrik',
                        'penjelasan' => 'Energi Listrik merupakan topik yang sangat sering keluar di sbmptn',
                        'id_course' => 1,
+                       'parent_id' => 1,
                        'video' => 'fisika_energi.mp4',
                        'created_at'=> '2017-12-10'
                    ]);

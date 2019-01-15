@@ -9,9 +9,7 @@ class Course extends Model
 {
     protected $table = 'courses';
 
-	public $timestamps = false;
-
-	protected $fillable = ['nama_course', 'harga', 'foto', 'deskripsi', 'id_tutor', 'video'];
+	protected $fillable = ['nama_course', 'harga', 'foto', 'deskripsi', 'id_tutor', 'video', 'kategori'];
 	
 	public function topiks()
 	{

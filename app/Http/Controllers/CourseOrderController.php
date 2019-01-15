@@ -94,6 +94,38 @@ class CourseOrderController extends MailController
 
     }
 
+    public function buyFreeCourse($course_id)
+    {
+      $course = Course::where('id', $course_id)->get()->pop();
+
+      $newCart = Cart::create([
+              'user_id' => Auth::user()->id,
+              'total_price' => $course->harga,
+              'is_active' => 1,
+      ]);
+
+      $cartCourse = CartCourse::create([
+        'cart_id' => $newCart->id,
+        'course_id' => $course_id,
+      ]);
+
+      $status_pembayaran = 3;
+      $courseOrder = CourseOrder::create([
+          'id_user' => Auth::user()->id,
+          'cart_id' => $newCart->id,
+          'status_pembayaran' => $status_pembayaran,
+          'metode_pembayaran' => 0,
+      ]);
+
+      return redirect()->route('purchase-success');
+
+    }
+
+    public function purchaseSuccess()
+    {
+        return view('layouts/course-order/purchase-success');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -132,7 +164,7 @@ class CourseOrderController extends MailController
           $courseOrder->update(['no_order' => $noOrder]);
         }
 
-        $user_yang_membeli = User::find(Auth::user()->id);
+        //$user_yang_membeli = User::find(Auth::user()->id);
 
         //$message = self::get_message_for_email($request['cart_id'], $noOrder);
 
@@ -142,9 +174,9 @@ class CourseOrderController extends MailController
 
         //return redirect()->route('course-order.show', $noOrder);
  
-		return redirect()->route('kelas_saya');
-  
-	}
+        return redirect()->route('kelas_saya');
+	  }
+
     public function get_message_for_email($cart_id, $noOrder){
 
               $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
@@ -211,9 +243,7 @@ class CourseOrderController extends MailController
 
         // kode unik untuk ditambah ke total harga pembelian
         //$rand = rand(0,999);
-	
-		$rand = 0;
-
+		    $rand = 0;
         return view('layouts/course-order/checkout', ['cart' => $cart, 'rand' => $rand]);
     }
 
