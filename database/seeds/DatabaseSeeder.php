@@ -48,7 +48,7 @@ class DatabaseSeeder extends Seeder
                     'alamat' => '',
                     'foto' => '',
                     'id_role' => '2',
-                    'password' => '',
+                    'password' => bcrypt(123456),
                     'remember_token' => ''
           ]);
 
@@ -104,27 +104,6 @@ class DatabaseSeeder extends Seeder
                    'opsi_3' => "Energi Listrik",
                    'opsi_4' =>  "Energi Kalor"
                 ]);
-
-                DB::table('topiks')->insert([
-                       'judul_topik' => 'Energi Listrik',
-                       'penjelasan' => 'Energi Listrik merupakan topik yang sangat sering keluar di sbmptn',
-                       'id_course' => 1,
-                       'parent_id' => 1,
-                       'video' => 'fisika_energi.mp4',
-                       'created_at'=> '2017-12-10'
-                   ]);
-
-
-                 DB::table('pertanyaan_topiks')->insert([
-                      'id_topik' => 1,
-                      'pertanyaan' => 'Energi panas disebut juga ...?',
-                      'judul_pertanyaan' => 'Soal SBMPTN Tahun 2018',
-                      'jawaban' => "4",
-                      'opsi_1' => "Energi Cahaya",
-                      'opsi_2' => "Energi Kinetik",
-                      'opsi_3' => "Energi Listrik",
-                      'opsi_4' =>  "Energi Kalor"
-                   ]);
 
 
 

@@ -5,10 +5,9 @@
 @endsection
 
 @section('content')
-    <section class="section-padding">
-        
-			 
-		<div class="container" >
+  <section class="section-padding">		 
+		<div class="container">
+
       @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
         <div class="row">
           <div class="col-xs-12">	
@@ -20,63 +19,63 @@
         </div>
       @endif
 
-			<div class="row">
-                <div class="col-xs-12 col-md-7">
+      <div class="row">
+          <div class="col-xs-12 col-md-7">
+                  <h1>{{ $course->nama_course }}</h1>
+                  <p class="starability-result" data-rating="0"></p>
+                  <p>{{ $course->deskripsi }}</p>
+                  
+                  <p><strong>Dibuat oleh <a href="{{ route('tutor.show', $course->id_tutor) }}">  {{ $course -> nama }} </a></strong><p>
+                  @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
+                    @if($course->harga == 0)
+                      <h3><span class="label label-warning">Gratis</span></h3>
+                    @else
+                      <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                    @endif  
                     
-                        <h1>{{ $course->nama_course }}</h1>
-                        <p class="starability-result" data-rating="0"></p>
-                        <h4>{{ $course->deskripsi }}</h4>
-                        
-                        <p>Dibuat oleh <a href="{{ route('tutor.show', $course->id_tutor) }}">  {{ $course -> nama }} </a><p>
-                        @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
-                          @if($course->harga == 0)
-                            <h3><span class="label label-warning">Gratis</span></h3>
-                          @else
-                            <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-                          @endif  
-                          
-                          <a href="{{ route('buy-free-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
-                        @endif
-                        <br>
-                        <br>
-                    
-                </div>
-                <div class="col-xs-12 col-md-5">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
-                    </div>
-                </div>      
+                    <a href="{{ route('buy-free-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
+                    <br>
+                    <br>
+                  @endif
+          </div>
+          <div class="col-xs-12 col-md-5">
+              <div class="embed-responsive embed-responsive-16by9">
+                  <img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
+              </div>
+          </div>
                 
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-7">
-                    <div class="panel-group" id="accordion">
-                      <h2>Silabus</h2>
+      </div>
+      <hr/>
+            
+            
+      <div class="row">
+          <div class="col-xs-12 col-md-7">
+              <h2>Silabus</h2>
+              <div class="panel-group" id="accordion">
+               
+			          @foreach($list_topik as $topik)
+                      <div class="panel">       
+                          <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($topik['id'])}}">
+                              <a href="#"> {{ $topik -> judul_topik }}</a>
+                          </h4>
 
-						          @foreach($list_topik as $topik)
-                            <div class="panel">       
-                                <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($topik['id'])}}">
-                                    <a href="#"> {{ $topik -> judul_topik }}</a>
-                                </h4>
+                          <div id="collapse{{($topik['id'])}}" class="panel-collapse collapse">
+                            @if (count($topik['childs']) > 0)
+                                @foreach ($topik['childs'] as $subtopik)
+                                    <div class="panel">
+                                        <h4 class="panel-title">
+                                          <a href="{{ route('topik', $subtopik->id) }}">{{ $subtopik->judul_topik }}</a>
+                                        </h4>
+                                    </div>
+                                @endforeach
+                            @endif
+                          </div>
+                      </div>
+                @endforeach
 
-                                <div id="collapse{{($topik['id'])}}" class="panel-collapse collapse">
-                                  @if (count($topik['childs']) > 0)
-                                      @foreach ($topik['childs'] as $subtopik)
-                                          <div class="panel">
-                                              <h4 class="panel-title">
-                                                <a href="{{ route('topik', $subtopik->id) }}">{{ $subtopik->judul_topik }}</a>
-                                              </h4>
-                                          </div>
-                                      @endforeach
-                                  @endif
-                                </div>
-                            </div>
-                      @endforeach
-
-                    </div>
-                </div>
-            </div>
+              </div>
+          </div>
+      </div>
 
 
             
@@ -125,29 +124,29 @@
 
 
 
-               <div class = "row">
-                  <div class="col-xs-12 col-sm-12 col-md-7">
-                      <br>
-                      <h2>Reviews</h2>
-                      <br>
+           <div class="row">
+              <div class="col-xs-12 col-md-7">
+                  <br>
+                  <h2>Reviews</h2>
+                  <br>
 
-                       @foreach($list_review as $review)
-                          <div class="row">
-                            <div class="col-sm-1">
-                              <img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user4-128x128.jpg')}}" alt="User profile picture">
-                            </div>
-                            <div class="col-sm-9">
-                              <p><strong>{{ $review->nama }}</strong></p>
-                              <p>{{ $review -> review }}</p> 
+                   @foreach($list_review as $review)
+                      <div class="row">
+                        <div class="col-sm-1">
+                          <img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user4-128x128.jpg')}}" alt="User profile picture">
+                        </div>
+                        <div class="col-sm-9">
+                          <p><strong>{{ $review->nama }}</strong></p>
+                          <p>{{ $review -> review }}</p> 
 
-                            </div>
-                            <div class="col-sm-2 text-right">
-                              <p>{{ $review->created_at }}</p>
-                            </div>
-                          </div>
-                        @endforeach
-                  </div>
-               </div>
+                        </div>
+                        <div class="col-sm-2 text-right">
+                          <p>{{ $review->created_at }}</p>
+                        </div>
+                      </div>
+                    @endforeach
+              </div>
+           </div>
 
 
 

@@ -1,31 +1,27 @@
 @extends('template')
 
 @section('title')
-  <title>Manage Pertanyaan Topik</title>
-  <link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
-  <link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+  <title>Pintaar</title>
 @endsection
 
 @section('content')
-<section class="content">
+<section class="section-padding">
       <div class="row">
-        <!-- left column -->
+        
         <div class="col-md-6 col-md-offset-3">
-          <!-- general form elements -->
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Create New Pertanyaan Topik</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
+          
+          
+          
+            <h3 class="box-title">Tambah Pertanyaan Kuis</h3>
+          
             <form role="form" method="post" action="{{ route('pertanyaan-topik-submit') }}" enctype="multipart/form-data">
               <input type="hidden" name="id" value="{{ $pertanyaanTopik != null ? $pertanyaanTopik->id : null}}">
               <input type="hidden" name="id_topik" value="{{ $topik->id }}">
               {{ csrf_field()}}
-              <div class="box-body">
+              
                 <div class="form-group">
-                  <label for="name">Judul Pertanyaan</label>
-                  <input type="text" class="form-control" name="judul_pertanyaan" id="name" value="{{ $pertanyaanTopik != null ? $pertanyaanTopik->judul_pertanyaan : null }}" placeholder="Enter Topic Question Title">
+                  <label for="name">Nomor Pertanyaan</label>
+                  <input type="text" class="form-control" name="judul_pertanyaan" id="name" value="{{ $pertanyaanTopik != null ? $pertanyaanTopik->judul_pertanyaan : null }}" placeholder="Tuliskan nomor pertanyaan, cth. Kuis 1, Kuis 2, dst.">
                 </div>
                 <div class="form-group">
                   <label for="deskripsi">Pertanyaan</label><br>
@@ -56,7 +52,7 @@
                   <label for="opsi_4">Opsi 4</label>
                   <input type="text" class="form-control" name="opsi_4" id="opsi_4" value="{{ $pertanyaanTopik != null ? $pertanyaanTopik->opsi_4 : null }}" placeholder="Enter Option 4">
                 </div>
-                <!-- select -->
+               
                 <div class="form-group">
                   <label>Jawaban</label>
                   <select class="form-control" name="jawaban">
@@ -66,23 +62,18 @@
                     <option value="4" {{$pertanyaanTopik != null && $pertanyaanTopik['jawaban'] == 4? "selected='true'" : ""}}>Opsi 4</option>
                   </select>
                 </div>
-              </div>
-              <!-- /.box-body -->
+              
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
+              
+                <button type="submit" class="btn btn-primary">Simpan</button>
+              
             </form>
           </div>
-          <!-- /.box -->
-</div>
+          
 </div>
 
           
- </sction>
-
-<script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>

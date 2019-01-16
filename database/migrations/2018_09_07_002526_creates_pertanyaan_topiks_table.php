@@ -19,10 +19,10 @@ class CreatesPertanyaanTopiksTable extends Migration
           $table->string('pertanyaan');
           $table->string('judul_pertanyaan');
           $table->integer('jawaban');
-          $table->string('opsi_1');
-          $table->string('opsi_2');
-          $table->string('opsi_3');
-          $table->string('opsi_4');
+          $table->string('opsi_1')->nullable();
+          $table->string('opsi_2')->nullable();
+          $table->string('opsi_3')->nullable();
+          $table->string('opsi_4')->nullable();
           $table->string('gambar')->nullable();
           $table->timestamps();
       });

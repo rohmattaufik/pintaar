@@ -54,7 +54,7 @@
         <br/>
         @foreach ($questions as $key => $question)
           <div class="panel panel-primary">
-            <div class="panel-heading"><strong>Kuis {{ ++$key }}</strong></div>
+            <div class="panel-heading"><strong>{{ $question->judul_pertanyaan }}</strong></div>
             <div class="panel-body">           
                 <p>{{ $question->pertanyaan }}</p>
 
@@ -62,25 +62,43 @@
                   <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('images/gambar_pertanyaan/'.$question->gambar) }}">
                 @endif
               
-                <div class="demo-radio-button">
-                  <div>
-                    <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_1" value=1 />
-                    <label for="radio_1">{{ $question->opsi_1 }}</label>
-                  </div>
-                  <div>
-                    <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_2" value=2 />
-                    <label for="radio_2">{{ $question->opsi_2 }}</label>
-                  </div>
-                  <div>
-                     <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_3" value=3 />
-                     <label for="radio_3">{{ $question->opsi_3 }}</label>
-                  </div>
-                  <div>
-                     <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_4" value=4 />
-                     <label for="radio_4">{{ $question->opsi_4 }}</label>
-                  </div>
-                </div>
-              
+                <form>
+                  @if (!empty($question->opsi_1))
+                    <div class="radio">
+                      <label for="radio_1">
+                        <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_1" value=1 />
+                        {{ $question->opsi_1 }}
+                    </label>
+                    </div>
+                  @endif
+
+                  @if (!empty($question->opsi_2))
+                    <div class="radio">
+                      <label for="radio_2">
+                        <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_2" value=2 />
+                        {{ $question->opsi_2 }}
+                      </label>
+                    </div>
+                  @endif
+
+                  @if (!empty($question->opsi_3))
+                    <div class="radio">
+                        <label for="radio_3">
+                          <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_3" value=3 />
+                          {{ $question->opsi_3 }}
+                        </label>
+                    </div>
+                  @endif
+
+                  @if (!empty($question->opsi_4))
+                    <div class="radio">
+                       <label for="radio_4">
+                          <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_4" value=4 />
+                          {{ $question->opsi_4 }}
+                        </label>
+                    </div>
+                  @endif
+                </form>
                 
                 <button onclick="check_jawaban({{$question->id}})" type="button" data-id="1"  class="btn btn-primary">Jawab</button>
                           
