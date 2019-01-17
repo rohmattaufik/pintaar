@@ -13,20 +13,10 @@ use App\PertanyaanTopik;
 
 class PertanyaanTopikController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-   
-    
-    // ADMIN PAGE
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
 
     public function create($idTopik)
     {

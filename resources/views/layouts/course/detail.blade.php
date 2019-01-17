@@ -50,7 +50,7 @@
             
       <div class="row">
           <div class="col-xs-12 col-md-7">
-              <h2>Silabus</h2>
+              <h2>Konten Kelas</h2>
               <div class="panel-group" id="accordion">
                
 			          @foreach($list_topik as $topik)
