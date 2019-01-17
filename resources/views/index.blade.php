@@ -75,7 +75,7 @@
 	
           
 
-    <section class="section-padding" id="blog-page">
+  <!--   <section class="section-padding" id="blog-page">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -113,7 +113,7 @@
             </div>
         </div>
     </section>
-
+ -->
    
     <section class="testimonial-area section-padding gray-bg overlay">
         <div class="container">
@@ -129,17 +129,17 @@
                     <div class="testimonials">
                         <div class="testimonial">
                             <div class="testimonial-photo">
-                                <img src="{{ URL::asset('images/user4-128x128.jpg') }}" alt="">
+                                <img src="{{ URL::asset('images/user-default.png') }}" alt="">
                             </div>
                             <h3>Afiq Rasyid Muhammad</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel vero dolore officiis, velit id libero illum harum hic magni, quae repellendus adipisci possimus saepe nostrum doloribus repudiandae asperiores commodi voluptate.</p>
+                            <p>Platform ini sangat bagus. Saya bisa belajar dengan mudah.</p>
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
-                                <img src="{{ URL::asset('images/avatar-small-2.png') }}" alt="">
+                                <img src="{{ URL::asset('images/user-128x128.jpg') }}" alt="">
                             </div>
-                            <h3>AR Rahin</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel vero dolore officiis, velit id libero illum harum hic magni, quae repellendus adipisci possimus saepe nostrum doloribus repudiandae asperiores commodi voluptate.</p>
+                            <h3>Luqman Hakim</h3>
+                            <p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
                         </div>
                                  
                     </div>

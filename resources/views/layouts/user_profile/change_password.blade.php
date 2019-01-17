@@ -1,11 +1,11 @@
 @extends('template')
 
 @section('title')
-  <title>Change Password</title>
+  <title>Pintaar - Ubah Password</title>
 @endsection
 
 @section('extra-style')
-	<link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
+
 @endsection
 
 @section('content')
@@ -13,16 +13,15 @@
     <!-- Main content -->
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <h1 class="box-title">Ubah Password</h1>
-                    </div>
-                    <div class="box-body">
+            <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+                
+                    
+                        <h1>Ubah Password</h1>
+                        <br>
                       	<form id="form" class="form-horizontal" method="post" action="{{ route('change-password-submit') }}">
             
                             <div class="form-group">
-                                <label for="inputName" class="col-sm-4 control-label">Password</label>
+                                <label for="inputName" class="col-sm-4 control-label">Password Baru</label>
                                 <div class="col-sm-8">
                                 	<div class="form-line">
 	                                    <input type="password" name="password" class="form-control" required="true">
@@ -30,7 +29,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail" class="col-sm-4 control-label">Konfirmasi Password</label>
+                                <label for="inputEmail" class="col-sm-4 control-label">Ulangi Password Baru</label>
                                 <div class="col-sm-8">
                                 	<div class="form-line">
 	                                    <input type="password" class="form-control" name="password_confirm" required="true">
@@ -41,18 +40,15 @@
                             {{ csrf_field() }}
 
                             <div class="form-group">
-                                <div class="col-sm-4 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-danger">Simpan</button>
+                                <div class="col-sm-4 col-sm-offset-4 text-left">
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </div>
                     	</form>
-                    </div>
-                </div>          
+                        
 	        </div>
 	    </div>
     </div>
-    <!-- /.col -->
-<!-- /.content-wrapper -->
 </section>    
 @endsection
 

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<section class="gray-bg section-padding content" style="background-color: light-blue; word-wrap: break-word;"  >
+<section class="section-padding">
     <!-- Main content -->
     <div class="container">
         <div class="row">
@@ -16,17 +16,12 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="{{ $user->foto ? URL::asset($user->foto) : URL::asset('images/user4-128x128.jpg')}}" alt="User profile picture">
-
+                        <img class="profile-user-img img-responsive img-circle" src="{{ $user->foto ? URL::asset($user->foto) : URL::asset('images/user-default.png')}}" alt="User profile picture">
                         <h3 class="profile-username text-center">{{ $user->nama }}</h3>
-
-                        <p class="text-muted text-center">Siswa {{ $user['murid']->asal_sekolah }}</p>
-
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <b>Jumlah Transaksi</b> <a class="pull-right">{{ count($user['transaksi'])}}</a>
-                            </li>
-                        </ul>
+                        <p>Murid</p>
+                        <p class="text-muted">
+                            {{ $user->email !="" ? $user->email : "alamat email" }}
+                        </p>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -39,10 +34,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <strong><i class="fa fa-book margin-r-5"></i> Pendidikan</strong>
+                        <strong><i class="fa fa-book margin-r-5"></i>Pendidikan</strong>
 
                         <p class="text-muted">
-                            {{ $user['murid']->asal_sekolah !="" ? $user['murid']->asal_sekolah : "belum diatur" }}
+                            {{ $user['murid']->asal_sekolah !="" ? $user['murid']->asal_sekolah : "-" }}
                         </p>
 
                         <hr>
@@ -50,7 +45,7 @@
                         <strong><i class="fa fa-map-marker margin-r-5"></i> Alamat</strong>
 
                         <p class="text-muted">
-                            {{ $user->alamat !="" ? $user->alamat : "belum diatur" }}
+                            {{ $user->alamat !="" ? $user->alamat : "-" }}
                         </p>
                     </div>
                     <!-- /.box-body -->
@@ -74,7 +69,7 @@
                                     <h1 class="box-title">Daftar Transaksi</h1>
                                 </div>
 
-                                <div class="box-body table-responsive no-padding">
+                                <div class="box-body table-responsive no-padding text-left">
 
                                     <table id="table_employee" class="table display responsive no-wrap" width="100%">
                                         <thead>
@@ -91,7 +86,7 @@
                                             <tr>
                                                 <td>{{ ++$key }}</td>
                                                 <td>{{ $transaksi ->  nama_course}}</td>
-                                                <td>Rp. {{ $transaksi -> harga }}</td>
+                                                <td>Rp {{ $transaksi -> harga }}</td>
                                                 <td>{{ $transaksi -> status_pembayaran}}</td>
                                                 @if($transaksi->bukti_pembayaran != null)
                                                     <td><a href="{{ URL::asset($transaksi->bukti_pembayaran) }}">Lihat</a></td>
@@ -110,7 +105,7 @@
                         <!-- UPDATE INFORMATION TAB -->
                         <div class="tab-pane" id="settings">
                             <div class="col-sm-10 col-sm-offset-2" style="margin-bottom:10px;">
-                                <img id="preview" style="width:128px;height:128px;" src="{{ $user->foto ? URL::asset($user->foto) : URL::asset('images/user4-128x128.jpg')}}" alt="your image" />
+                                <img id="preview" style="width:128px;height:128px;" src="{{ $user->foto ? URL::asset($user->foto) : URL::asset('images/user-default.png')}}" alt="your image" />
                             </div>
 
                             <form class="form-horizontal" method="post" action="{{ route('user-update') }}" enctype="multipart/form-data">
@@ -137,7 +132,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputSekolah" class="col-sm-2 control-label">Asal Sekolah</label>
+                                <label for="inputSekolah" class="col-sm-2 control-label">Pendidikan Terakhir</label>
 
                                 <div class="col-sm-10">
                                     <input type="text" name="asal_sekolah" class="form-control" id="inputSekolah" value="{{ $user['murid']->asal_sekolah}}">
@@ -157,7 +152,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </div>
                         </form>
