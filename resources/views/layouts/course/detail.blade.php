@@ -36,6 +36,10 @@
                     <a href="{{ route('buy-free-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
                     <br>
                     <br>
+                  @else
+                    <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar</a>
+                    <br>
+                    <br>
                   @endif
           </div>
           <div class="col-xs-12 col-md-5">
