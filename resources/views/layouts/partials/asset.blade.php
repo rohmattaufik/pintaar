@@ -1,4 +1,15 @@
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132732435-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-132732435-1');
+    </script>
+    <!--  -->
+
     <meta charset="utf-8">
     <meta name="author" content="John Doe">
     <meta name="description" content="">
@@ -25,8 +36,5 @@
     <link rel="stylesheet" href="{{ URL::asset('css/starability-all.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('css/notification.css') }}">
     @yield('extra-style')
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+   
 </head>
