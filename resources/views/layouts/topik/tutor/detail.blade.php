@@ -24,7 +24,7 @@
             <tbody>
             <tr>
               <td>Penjelasan</td>
-              <td>{{ $topik->penjelasan}}</td>
+              <td>{!! html_entity_decode($topik->penjelasan) !!}</td>
             </tr>
             <tr>
               <td>Video</td>

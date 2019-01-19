@@ -4,15 +4,19 @@
   <title>Pintaar</title>
 @endsection
 
+@section('extra-style')
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+@endsection
+
 @section('content')
 <section class="section-padding">
       <div class="row">
         <!-- left column -->
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
             
             <h2 class="box-title">Buat Kelas Baru</h2>
             
-            <form role="form" method="post" action="{{ route('course-submit') }}" enctype="multipart/form-data">
+            <form id="form-add-course" role="form" method="post" action="{{ route('course-submit') }}" enctype="multipart/form-data">
               <input type="hidden" name="id" value="{{ $course != null ? $course->id : null}}">
               {{ csrf_field()}}
               
@@ -43,21 +47,32 @@
                   <video id="preview_video" controls class="hidden" width="300" height="200"></video>
                 @endif
                 <div class="form-group">
-                  <label for="deskripsi">Deskripsi</label><br>
-                  <textarea class="form-control" rows="5" name="deskripsi">{{ $course != null ? $course->deskripsi : null}} </textarea>
+                  <label for="deskripsi">Deskripsi</label>
+                  <textarea id="deskripsi-editor" class="form-control" rows="5" name="deskripsi">{{ $course != null ? $course->deskripsi : null}}</textarea>
                 </div>
                 
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Buat Kelas</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
          
           </div>
       </div>     
  </sction>
+@endsection
 
 
+@section('extra-script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
+
+<script>
+  // $(document).ready(function() {
+      $('#deskripsi-editor').summernote({
+          height: 300
+      });
+  // });
+</script>
 
 <script>
 function readURL(input) {

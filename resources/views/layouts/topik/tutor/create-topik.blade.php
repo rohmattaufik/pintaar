@@ -4,6 +4,10 @@
   <title>Pintaar</title>
 @endsection
 
+@section('extra-style')
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
+@endsection
+
 @section('content')
 <section class="section-padding">
       <div class="row">
@@ -32,7 +36,7 @@
                 @endif
                 <div class="form-group">
                   <label for="deskripsi">Deskripsi</label><br>
-                  <textarea name="penjelasan" rows="10" class="form-control">{{ $topik != null ? $topik->penjelasan : null}} </textarea>
+                  <textarea id="deskripsi-editor" name="penjelasan" rows="10" class="form-control">{{ $topik != null ? $topik->penjelasan : null}} </textarea>
                 </div>
                 <div class="form-group">
                   <label for="video">Lampiran</label>
@@ -45,11 +49,23 @@
               </div>
             </form>
          
-</div>
-</div>      
+    </div>
+  </div>      
 </section>
+@endsection
 
+
+@section('extra-script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
+
+<script>
+    $('#deskripsi-editor').summernote({
+        height: 300
+    });  
+</script>
+
+
 <script>
 function readURLVideo(input) {
 

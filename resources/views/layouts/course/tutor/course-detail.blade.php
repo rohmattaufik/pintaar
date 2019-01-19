@@ -26,7 +26,7 @@
             </tr>
             <tr>
               <td>Deskripsi</td>
-              <td>{{ $course->deskripsi}}</td>
+              <td>{!! html_entity_decode($course->deskripsi) !!}</td>
             </tr>
             <tr>
               <td>Video</td>
