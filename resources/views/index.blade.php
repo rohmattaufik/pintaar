@@ -75,7 +75,7 @@
 	
           
 
-  <!--   <section class="section-padding" id="blog-page">
+  <section class="section-padding" id="blog-page">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -86,21 +86,21 @@
             </div>
                
             <div class="row">
-                @foreach($list_courses_cook as $list_course_code)
+                @foreach($list_courses_cook as $list_course_cook)
             
                   
                     <div class="col-xs-12 col-md-3">
-                      <a href="{{route(('course'), $list_course_code->id)}}">
+                      <a href="{{route(('course'), $list_course_cook->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_cook->foto ) }}" alt="">
                              <div class="caption">
-                                <h4>{{$list_course_code->nama_course}}</h4>
-                                <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
-                                <p class="starability-result" data-rating="{{ round($list_course_code->rating) }}"></p>
-                                @if($list_course_code->harga == 0)
+                                <h4>{{$list_course_cook->nama_course}}</h4>
+                                <p><span class="ti-user"></span> {{$list_course_cook->nama}}</p>
+                                <p class="starability-result" data-rating="{{ round($list_course_cook->rating) }}"></p>
+                                @if($list_course_cook->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right">Rp {{ number_format($list_course_cook->harga, 0, ',', '.') }}</h4>
                                 @endif
                                 
                              </div>
@@ -113,7 +113,7 @@
             </div>
         </div>
     </section>
- -->
+
    
     <section class="testimonial-area section-padding gray-bg overlay">
         <div class="container">
@@ -143,7 +143,7 @@
                             <h3>Luqman Hakim</h3>
 							<p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
 							<p>--</p>
-							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer Indonesia</p>
+							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
 								
 						</div>
                                  
