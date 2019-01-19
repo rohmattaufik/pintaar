@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                   <label for="harga">Harga</label>
-                  <input type="number" class="form-control" name="harga" id="harga" value="{{ $course != null ? $course->harga : null }}" placeholder="">
+                  <input type="number" class="form-control" name="harga" id="harga" value="{{ $course != null ? $course->harga : null }}" placeholder="Isi 0 untuk kelas gratis">
                 </div>
                 <div class="form-group">
                   <label for="foto">Gambar Kelas</label>
@@ -67,11 +67,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 
 <script>
-  // $(document).ready(function() {
-      $('#deskripsi-editor').summernote({
-          height: 300
-      });
-  // });
+    $('#deskripsi-editor').summernote({
+        height: 300
+    });  
 </script>
 
 <script>
