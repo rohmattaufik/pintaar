@@ -23,8 +23,8 @@
           <div class="col-xs-12 col-md-7">
                   <h1>{{ $course->nama_course }}</h1>
                   <p class="starability-result" data-rating="0"></p>
-                  <p>{{ $course->deskripsi }}</p>
-                  
+                  {!! html_entity_decode($course->deskripsi) !!}
+                                    
                   <p><strong>Dibuat oleh <a href="{{ route('tutor.show', $course->id_tutor) }}">  {{ $course -> nama }} </a></strong><p>
                   @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
                     @if($course->harga == 0)
