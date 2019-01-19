@@ -21,11 +21,9 @@
 	                <div class="row">
 	                    <div class="col-xs-12 col-sm-6 pull-right">
 	                        <ul class="social-menu text-right x-left">
-	                            <li><a href="#"><i class="ti-facebook"></i></a></li>
-	                            <li><a href="#"><i class="ti-twitter"></i></a></li>
-	                            <li><a href="#"><i class="ti-google"></i></a></li>
-	                            <li><a href="#"><i class="ti-linkedin"></i></a></li>
-	                            <li><a href="#"><i class="ti-github"></i></a></li>
+	                            <li><a href="https://www.facebook.com/Pintaar-722335064826744"><i class="ti-facebook"></i></a></li>
+	                            <li><a href="https://www.instagram.com/pintaar_/"><i class="ti-instagram"></i></a></li>
+								 <li><a href="mailto:admin@pintaar.com"><i class="ti-email"></i></a></li>
 	                        </ul>
 	                    </div>
 	                    <div class="col-xs-12 col-sm-6">
