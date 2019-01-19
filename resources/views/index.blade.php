@@ -59,7 +59,7 @@
                                 @if($list_course_code->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
                                 @endif
                                 
                              </div>
@@ -100,7 +100,7 @@
                                 @if($list_course_code->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right">Rp {{ number_format($list_course_with_user->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
                                 @endif
                                 
                              </div>
@@ -129,18 +129,23 @@
                     <div class="testimonials">
                         <div class="testimonial">
                             <div class="testimonial-photo">
-                                <img src="{{ URL::asset('images/user-default.png') }}" alt="">
+                                <img src="{{ URL::asset('images/afiq.jpg') }}" alt="" width="100" height="200">
                             </div>
                             <h3>Afiq Rasyid Muhammad</h3>
-                            <p>Platform ini sangat bagus. Saya bisa belajar dengan mudah.</p>
+                            <p>Platform ini sangat bagus dan mudah. Luar biasa Pintaar adalah solusi untuk pendidikan di Indonesia</p>
+							<p>--</p>
+							<p>Software Engineer dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
-                                <img src="{{ URL::asset('images/user-128x128.jpg') }}" alt="">
+                                <img src="{{ URL::asset('images/luqman.jpg') }}" alt="" width="100" height="200">
                             </div>
                             <h3>Luqman Hakim</h3>
-                            <p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
-                        </div>
+							<p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
+							<p>--</p>
+							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer Indonesia</p>
+								
+						</div>
                                  
                     </div>
                 </div>
