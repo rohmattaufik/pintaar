@@ -58,7 +58,7 @@ class CourseController extends Controller
             ->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
             ->where('rating_courses.id_course', $id)
                 ->get()->first();
-
+				
         $list_review = DB::table('review_courses')
             ->leftJoin('users', 'users.id', '=', 'review_courses.id_user')
             ->where('review_courses.id_course', $id)

@@ -22,7 +22,9 @@
       <div class="row">
           <div class="col-xs-12 col-md-7">
                   <h1>{{ $course->nama_course }}</h1>
-                  <p class="starability-result" data-rating="0"></p>
+                   
+				   <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
+
                   {!! html_entity_decode($course->deskripsi) !!}
                                     
                   <p><strong>Dibuat oleh <a href="{{ route('tutor.show', $course->id_tutor) }}">  {{ $course -> nama }} </a></strong><p>
