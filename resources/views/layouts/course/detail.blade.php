@@ -131,21 +131,22 @@
            <div class="row">
               <div class="col-xs-12 col-md-7">
                   <br>
-                  <h2>Reviews</h2>
-                  <br>
-
+                  <h2>Review Kelas</h2>
+                  
                    @foreach($list_review as $review)
+                      <hr/>
                       <div class="row">
-                        <div class="col-sm-1">
-                          <img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user4-128x128.jpg')}}" alt="User profile picture">
+                        
+                        <div class="col-xs-2 col-md-1">
+                          <img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user-default.png')}}" alt="User profile picture">
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-xs-8 col-md-9">
                           <p><strong>{{ $review->nama }}</strong></p>
                           <p>{{ $review -> review }}</p> 
 
                         </div>
-                        <div class="col-sm-2 text-right">
-                          <p>{{ $review->created_at }}</p>
+                        <div class="col-xs-2 col-md-2 text-right">
+                          <p>{{ substr($review->created_at, 0, 10) }}</p>
                         </div>
                       </div>
                     @endforeach
