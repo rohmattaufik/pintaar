@@ -119,6 +119,9 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('create-tutor',['as'=>'create-tutor','uses'=>'AdminController@createTutor']);
 		Route::post('store-tutor',['as'=>'store-tutor','uses'=>'AdminController@storeNewTutor']);
 
+		// setujui pembelian kelas dengan sharing fb
+		Route::get('approve-purchase-fb',['as'=>'approve-purchase-fb','uses'=>'AdminController@approvePaymentWithSharing']);
+
 	});
 
 

@@ -109,7 +109,7 @@ class CourseOrderController extends MailController
         'course_id' => $course_id,
       ]);
 
-      $status_pembayaran = 3;
+      $status_pembayaran = 2;
       $courseOrder = CourseOrder::create([
           'id_user' => Auth::user()->id,
           'cart_id' => $newCart->id,
@@ -123,7 +123,7 @@ class CourseOrderController extends MailController
 
     public function purchaseSuccess()
     {
-        return view('layouts/course-order/purchase-success');
+        return view('layouts/course-order/purchase-success-with-share');
     }
 
     /**

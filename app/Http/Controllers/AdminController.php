@@ -182,5 +182,11 @@ class AdminController extends MailController
       }
   }
 
+  public function approvePaymentWithSharing()
+  {
+    $order = DB::table('pembelian_courses')->where('status_pembayaran', 2)->update(['status_pembayaran' => 3]);
+    return redirect()->back();
+  }
+
 
 }

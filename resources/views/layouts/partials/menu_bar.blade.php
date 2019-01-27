@@ -60,6 +60,7 @@
                      @elseif (Auth::user()->id_role == 3)
                             <li><a href="{{ route('approve_payment')}}">Verifikasi</a></li>
                             <li><a href="{{ route('create-tutor')}}">Tambah Tutor</a></li>
+                            <li><a href="{{ route('approve-purchase-fb')}}">Setujui Pembelian dengan Share</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
