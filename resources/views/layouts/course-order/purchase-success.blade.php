@@ -1,4 +1,4 @@
-@extends('template')
+	@extends('template')
 @section('title')
   <title>Pintaar</title>
 @endsection
@@ -8,7 +8,13 @@
 @endsection
 
 @section('content')
-  <section class="section-padding">
+	<script>
+	  fbq('track', 'Purchase', {
+		value: 10000,
+		currency: 'IDR',
+	  });
+	</script>  
+	<section class="section-padding">
     <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">

@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+	<script>
+	  fbq('track', 'ViewContent');
+	</script>
   <section class="section-padding">		 
 		<div class="container">
 
