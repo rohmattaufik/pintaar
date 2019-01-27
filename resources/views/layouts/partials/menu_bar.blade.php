@@ -28,9 +28,13 @@
                         </ul>
                     @elseif (Auth::user()->id_role == 2)
                             <li><a href="{{ route('course-index')}}">Kelola Kelas</a></li>
-                            <li><a href="{{ route('history_pembelian_course') }}">Laporan Pembelian</a></li>
+                            <!-- <li><a href="{{ route('history_pembelian_course') }}">Laporan Pembelian</a></li> -->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                @inject('notifications', 'App\Services\NotificationService')
+                                <a href="{{ route('notifications') }}">Notifikasi ({{ count($notifications->getAllNotifications()) }})</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->nama }} <span class="caret"></span>
