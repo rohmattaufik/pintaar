@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="{{ URL::asset('css/notification.css') }}">
 
 		<!-- Facebook Pixel Code -->
+
+	<!-- Facebook Pixel Code -->
 	<script>
 	  !function(f,b,e,v,n,t,s)
 	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -46,9 +48,14 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '363120907856774');
+	  fbq('init', '2163834067280375');
 	  fbq('track', 'PageView');
 	</script>
+	<noscript><img height="1" width="1" style="display:none"
+	  src="https://www.facebook.com/tr?id=2163834067280375&ev=PageView&noscript=1"
+	/></noscript>
+	<!-- End Facebook Pixel Code -->
+
 
 	<noscript><img height="1" width="1" style="display:none"
 	  src="https://www.facebook.com/tr?id=363120907856774&ev=PageView&noscript=1"
