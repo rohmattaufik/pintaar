@@ -55,7 +55,7 @@
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
-            <button type="submit" class="btn btn-primary btn-block">Daftar</button>
+            <button type="submit" class="btn btn-primary btn-block"  onclick="trackLead()" >Daftar</button>
         </div>
     </div>
 
@@ -66,4 +66,24 @@
     </div>
 
 </form>
+
+
+
+<script>
+function trackLead() {
+ 	  
+	   !function(f,b,e,v,n,t,s)
+	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	  n.queue=[];t=b.createElement(e);t.async=!0;
+	  t.src=v;s=b.getElementsByTagName(e)[0];
+	  s.parentNode.insertBefore(t,s)}(window, document,'script',
+	  'https://connect.facebook.net/en_US/fbevents.js');
+	  fbq('init', '2163834067280375');
+	  
+	  fbq('track', 'Lead');
+}
+</script>
+
 @endsection
