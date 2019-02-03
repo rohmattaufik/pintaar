@@ -27,18 +27,15 @@
                   <h1>{{ $course->nama_course }}</h1>
                    
 				   <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
-
-                  {!! html_entity_decode($course->deskripsi) !!}
-                                    
-                  <p><strong>Dibuat oleh <a href="{{ route('tutor.show', $course->id_tutor) }}">  {{ $course -> nama }} </a></strong><p>
+                   
+                  <p><strong>Dibuat oleh {{ $course -> nama }} </strong><p>
                   @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
                     @if($course->harga == 0)
-                      <h3><span class="label label-warning">Gratis</span></h3>
+                      <a href="{{ route('buy-free-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
                     @else
                       <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                      <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
                     @endif  
-                    
-                    <a href="{{ route('buy-free-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
                     <br>
                     <br>
                   @else
@@ -46,6 +43,8 @@
                     <br>
                     <br>
                   @endif
+
+                  {!! html_entity_decode($course->deskripsi) !!}
           </div>
           <div class="col-xs-12 col-md-5">
               <div class="embed-responsive embed-responsive-16by9">

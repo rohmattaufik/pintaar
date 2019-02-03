@@ -14,7 +14,7 @@
 					<p>-Albert Einstein</p>
 					<hr>
                     <p>Pintaar merupakan sebuah platform kelas online yang ingin membantu masyarakat Indonesia memperoleh Ilmu dengan mudah. Saat ini, Pintaar masih menyediakan 2 katogori kelas, yaitu kelas pemrograman dan memasak.</p>
-                    
+                    <a href="#blog-page" class="button white">Ayo Belajar Sekarang</a>
                 </div>
                 <div class="hidden-xs hidden-sm col-md-5 text-right">
                 <!--<div class="screen-box screen-slider">
@@ -75,7 +75,7 @@
 	
           
 
-  <section class="section-padding" id="blog-page">
+  <section class="section-padding" id="blog-page-2">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
