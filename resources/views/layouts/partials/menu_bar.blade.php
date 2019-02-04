@@ -88,6 +88,8 @@
                     @else
                             <li><a href="{{ route('courses') }}">Semua Kelas</a></li>
                             <li><a href="{{ route('kelas_saya') }}">Kelas Saya</a></li>
+                            <li><a href="{{ route('cart') }}">Keranjang</a></li>
+                            <li><a href="{{ route('course-order') }}">Pembelian</a></li>
                         </ul>
 
 

@@ -126,9 +126,8 @@ Route::group(['middleware'=>'auth'],function(){
 
 
 	// Pembelian Course
-	Route::resource('course-order', 'CourseOrderController');
-
-	Route::get('/buy/{course_id}/free',['as'=>'buy-free-course','uses'=>'CourseOrderController@buyFreeCourse']);
+	
+	// Route::get('/buy/{course_id}/free',['as'=>'buy-free-course','uses'=>'CourseOrderController@buyFreeCourse']);
 
 	Route::get('/buy/success/',['as'=>'purchase-success','uses'=>'CourseOrderController@purchaseSuccess']);
 
@@ -137,8 +136,12 @@ Route::group(['middleware'=>'auth'],function(){
 	Route::post('/remove-from-cart',['as'=>'remove-from-cart','uses'=>'CourseOrderController@removeFromCart']);
 	
 	Route::get('/cart',['as'=>'cart','uses'=>'CourseOrderController@showCart']);
+
+	Route::get('/course-order',['as'=>'course-order','uses'=>'CourseOrderController@showCourseOrder']);
 	
 	Route::post('/checkout',['as'=>'checkout','uses'=>'CourseOrderController@checkout']);
+
+	Route::post('/checkout-success',['as'=>'checkout-success','uses'=>'CourseOrderController@checkoutSuccess']);
 
 	// Upload bukti pembayaran
 	Route::post('/store-payment-proof',['as'=>'store-payment-proof','uses'=>'CourseOrderController@storePaymentProof']);

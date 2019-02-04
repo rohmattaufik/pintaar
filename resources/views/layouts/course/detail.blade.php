@@ -31,7 +31,7 @@
                   <p><strong>Dibuat oleh {{ $course -> nama }} </strong><p>
                   @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
                     @if($course->harga == 0)
-                      <a href="{{ route('buy-free-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+                      <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
                     @else
                       <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
                       <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>

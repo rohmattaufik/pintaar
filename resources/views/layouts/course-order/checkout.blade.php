@@ -78,10 +78,10 @@
   <section class="section-padding">
     <div class="container">
     
-        <form role="form" action="{{ route('course-order.store') }}" method="post">
+        <form role="form" action="{{ route('checkout-success') }}" method="post">
           {{ csrf_field() }}
           <input type="hidden" name="cart_id" value="{{ $cart->id }}">
-          <input type="hidden" name="kode_unik" value="{{ $rand }}">
+          
           <div class="row">
             <div class="col-md-8">
               <h2>Mau bayar dengan apa?</h2>
@@ -124,19 +124,13 @@
                   <li class="list-group-item"><a href="#">Punya voucher? Masukkan disini!</a></li>
                   <li class="list-group-item">
                     <table style="width:100%">
-                      <tr>
-                        <td><h4>Kode Unik</h4></td>
-                        <td align="right"><h4>Rp {{ number_format($rand, 0, ',', '.') }}</h4></td>
-                      </tr>
-                      <tr>
-                        <td>*<small>kode unik digunakan untuk memudahkan verifikasi pembayaran dan termasuk kedalam biaya pembelian</small></td>
-                      </tr>
+                    
                       <tr>
                         <td><h4></h4></td>
                       </tr>  
                       <tr>
                         <td><h4>Total Harga</h4></td>
-                        <td align="right"><h4>Rp {{ number_format($cart->total_price + $rand, 0, ',', '.') }}</h4></td>
+                        <td align="right"><h4>Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h4></td>
                       </tr>
                     </table>
                     <br>

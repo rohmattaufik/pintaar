@@ -94,32 +94,29 @@ class CourseOrderController extends MailController
 
     }
 
-    public function buyFreeCourse($course_id)
+    public function checkout(Request $request)
     {
-      $course = Course::where('id', $course_id)->get()->pop();
+        $cart = Cart::where('id', $request['cart_id'])->get()->pop();
 
-      $newCart = Cart::create([
-              'user_id' => Auth::user()->id,
-              'total_price' => $course->harga,
-              'is_active' => 1,
-      ]);
-
-      $cartCourse = CartCourse::create([
-        'cart_id' => $newCart->id,
-        'course_id' => $course_id,
-      ]);
-
-      $status_pembayaran = 2;
-      $courseOrder = CourseOrder::create([
-          'id_user' => Auth::user()->id,
-          'cart_id' => $newCart->id,
-          'status_pembayaran' => $status_pembayaran,
-          'metode_pembayaran' => 0,
-      ]);
-
-      return redirect()->route('purchase-success');
-
+        if ($cart->total_price == 0) {
+          $status_pembayaran = 3;
+          $courseOrder = $this->store($request, $status_pembayaran);
+          return redirect()->route('purchase-success');
+        } else {
+          return view('layouts/course-order/checkout', ['cart' => $cart]);  
+        }
+               
     }
+
+    public function checkoutSuccess(Request $request)
+    {
+        $cart = Cart::where('id', $request['cart_id'])->get()->pop();
+        $status_pembayaran = 1;
+        $courseOrder = $this->store($request, $status_pembayaran);
+        return redirect()->route('course-order.show', $courseOrder->no_order);                       
+    }
+
+    
 
     public function purchaseSuccess()
     {
@@ -132,10 +129,12 @@ class CourseOrderController extends MailController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $status_pembayaran)
     {
-        // buat order baru
-        $status_pembayaran = 3;
+        $cart = Cart::where('id', $request['cart_id'])->get()->pop();
+        $cart->update(['is_active' => 0]);
+
+        // order baru       
         $courseOrder = CourseOrder::create([
           'id_user' => Auth::user()->id,
           'cart_id' => $request['cart_id'],
@@ -143,12 +142,7 @@ class CourseOrderController extends MailController
           'metode_pembayaran' => $request['payment_method'],
         ]);
 
-        // buat cart tidak aktif lagi dan total harga + kode unik
-        $cart = Cart::where('id', $request['cart_id'])->get()->pop();
-        $price = $cart->total_price + $request['kode_unik'];
-        $cart->update(['is_active' => 0, 'total_price' => $price]);
-
-        // buat nomor order
+        // nomor order
         $noOrder = "";
         $date = date("Ymd");
         $simpleDate = substr($date, 2, 4);
@@ -170,11 +164,8 @@ class CourseOrderController extends MailController
 
         //self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
 
+        return $courseOrder;
 
-
-        //return redirect()->route('course-order.show', $noOrder);
- 
-        return redirect()->route('kelas_saya');
 	  }
 
     public function get_message_for_email($cart_id, $noOrder){
@@ -197,16 +188,11 @@ class CourseOrderController extends MailController
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($noOrder)
     {
         $courseOrder = CourseOrder::where('no_order', $noOrder)->get()->pop();
         $cart = Cart::where('id', $courseOrder->cart_id)->get()->pop();
+        
         if (Auth::user()->id == $courseOrder->id_user) {
             return view('layouts/course-order/review-order', ['courseOrder' => $courseOrder, 'cart' => $cart]);
         }
@@ -237,15 +223,7 @@ class CourseOrderController extends MailController
         //
     }
 
-    public function checkout(Request $request)
-    {
-        $cart = Cart::where('id', $request['cart_id'])->get()->pop();
 
-        // kode unik untuk ditambah ke total harga pembelian
-        //$rand = rand(0,999);
-		    $rand = 0;
-        return view('layouts/course-order/checkout', ['cart' => $cart, 'rand' => $rand]);
-    }
 
     public function sendPaymentProof(Request $request)
     {
@@ -268,6 +246,20 @@ class CourseOrderController extends MailController
         $order = CourseOrder::where('id', $request['order_id'])->update(['bukti_pembayaran' => $path]);
 
         return view('layouts/course-order/payment-proof-success');
+    }
+
+    public function showCourseOrder()
+    {
+        $order = DB::table('pembelian_courses')
+                ->select( 'no_order', 'cart.total_price', 'bukti_pembayaran', 'metode_pembayaran', 'status_pembayarans.status as status_pembayaran')
+                ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
+                ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
+                ->where('pembelian_courses.id_user', Auth::user()->id)
+                ->get();
+
+
+           
+        return view('layouts/course-order/course-order')->with('order', $order);
     }
 
 

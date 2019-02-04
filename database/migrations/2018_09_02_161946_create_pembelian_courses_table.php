@@ -19,7 +19,7 @@ class CreatePembelianCoursesTable extends Migration
             $table->string('no_order')->nullable();
             $table->integer('cart_id');
             $table->integer('status_pembayaran');
-            $table->string('metode_pembayaran');
+            $table->string('metode_pembayaran')->nullable();
             $table->string('bukti_pembayaran')->nullable();
             $table->date('waktu_valid_pembelian')->nullable();
             $table->timestamps();

@@ -18,10 +18,10 @@
               <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
               <p>Silahkan transfer sebesar:</p>
               <h2>Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h2>
-              <div class="alert alert-warning" role="alert">
+             <!--  <div class="alert alert-warning" role="alert">
                 <b>Penting!</b> Transfer sampai 3 digit terakhir agar memudahkan kami melakukan verifikasi. 
-              </div>
-              <p>ke rekening <b>12345678999</b> a/n <b>PT iCourse</b> pada Bank :</p>
+              </div> -->
+              <p>ke rekening <b>12345678999</b> a/n <b>PT Indonesia Pintaar</b> pada Bank :</p>
           </div>
       </div>
       <div class="row text-center">
