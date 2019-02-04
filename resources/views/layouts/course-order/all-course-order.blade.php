@@ -25,10 +25,10 @@
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">No. Order</th>
-                                <th scope="col">Tanggal Pembelian</th>
+                                <th scope="col">No. Pesanan</th>
+                                <th scope="col">Tanggal Pemesanan</th>
                                 <th scope="col">Total Harga</th>
-                                <th scope="col">Status Pembayaran</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -40,12 +40,12 @@
                                 <td>{{ $transaksi -> created_at }}</td>
                                 
                                 <td>Rp {{ number_format($transaksi -> total_price, 0, ',', '.') }}</td>
-                                <td>{{ $transaksi -> status_pembayaran }}</td>
+                                <td>{{ $transaksi -> status_pembayaran_info }}</td>
                                 <td>
-                                  @if ($transaksi->bukti_pembayaran == null)   
+                                  @if ($transaksi->status_pembayaran == 1)   
                                     <a href="{{ route('payment-proof', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Upload Bukti Bayar</a>
                                   @endif
-                                  <!-- <a href="{{ URL::asset($transaksi->bukti_pembayaran) }}">Lihat Bukti Bayar</a> -->
+                                  
                                   <a href="{{ route('order-detail', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Lihat</a>
                                 </td>
                             </tr>

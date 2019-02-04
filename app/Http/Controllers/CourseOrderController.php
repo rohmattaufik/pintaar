@@ -190,11 +190,19 @@ class CourseOrderController extends MailController
 
     public function show($order_no)
     {
-        $courseOrder = CourseOrder::where('no_order', $order_no)->get()->pop();
+        $courseOrder = DB::table('pembelian_courses')
+                    ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
+                    ->where('pembelian_courses.no_order', $order_no)
+                    ->get()->pop();
         $cart = Cart::where('id', $courseOrder->cart_id)->get()->pop();
+        $courses = DB::table('cart_course')
+                ->select('courses.nama_course', 'courses.harga')
+                ->leftJoin('courses', 'cart_course.course_id', '=', 'courses.id')
+                ->where('cart_id', $cart->id)
+                ->get();
         
         if (Auth::user()->id == $courseOrder->id_user) {
-            return view('layouts/course-order/review-order', ['courseOrder' => $courseOrder, 'cart' => $cart]);
+            return view('layouts/course-order/review-order', ['courseOrder' => $courseOrder, 'cart' => $cart, 'courses' => $courses]);
         }
         else {
             return view('layouts/course-order/not-found');
@@ -243,7 +251,7 @@ class CourseOrderController extends MailController
         $movea            = $paymentProof->move($destinationPath, $fileName);
         $path             = "bukti-bayar/{$fileName}";
 
-        $order = CourseOrder::where('id', $request['order_id'])->update(['bukti_pembayaran' => $path]);
+        $order = CourseOrder::where('id', $request['order_id'])->update(['bukti_pembayaran' => $path, 'status_pembayaran' => 2]);
 
         return view('layouts/course-order/payment-proof-success');
     }
@@ -251,7 +259,7 @@ class CourseOrderController extends MailController
     public function showAllCourseOrder()
     {
         $order = DB::table('pembelian_courses')
-                ->select('pembelian_courses.created_at', 'no_order', 'cart.total_price', 'bukti_pembayaran', 'metode_pembayaran', 'status_pembayarans.status as status_pembayaran')
+                ->select('pembelian_courses.created_at', 'no_order', 'cart.total_price', 'status_pembayaran', 'metode_pembayaran', 'status_pembayarans.status as status_pembayaran_info')
                 ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
                 ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
                 ->where('pembelian_courses.id_user', Auth::user()->id)
