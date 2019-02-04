@@ -38,17 +38,12 @@ CSS INDEX
 --------------------*/
 
 a {
-    text-decoration: none;
-    outline: none;
     -webkit-transition: 0.4s;
     transition: 0.4s;
-    color: #333333;
 }
 
 input:focus,
-button:focus,
-a:focus,
-a:hover {
+button:focus {
     text-decoration: none;
     outline: none;
     color: #000000;

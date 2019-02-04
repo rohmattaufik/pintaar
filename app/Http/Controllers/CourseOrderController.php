@@ -188,9 +188,9 @@ class CourseOrderController extends MailController
 
     }
 
-    public function show($noOrder)
+    public function show($order_no)
     {
-        $courseOrder = CourseOrder::where('no_order', $noOrder)->get()->pop();
+        $courseOrder = CourseOrder::where('no_order', $order_no)->get()->pop();
         $cart = Cart::where('id', $courseOrder->cart_id)->get()->pop();
         
         if (Auth::user()->id == $courseOrder->id_user) {
@@ -225,9 +225,9 @@ class CourseOrderController extends MailController
 
 
 
-    public function sendPaymentProof(Request $request)
+    public function sendPaymentProof($order_no)
     {
-        $order = CourseOrder::where('id', $request['order_id'])->get()->pop();
+        $order = CourseOrder::where('no_order', $order_no)->get()->pop();
         return view('layouts/course-order/payment-proof', ['order' => $order]);
     }
 
@@ -248,18 +248,16 @@ class CourseOrderController extends MailController
         return view('layouts/course-order/payment-proof-success');
     }
 
-    public function showCourseOrder()
+    public function showAllCourseOrder()
     {
         $order = DB::table('pembelian_courses')
-                ->select( 'no_order', 'cart.total_price', 'bukti_pembayaran', 'metode_pembayaran', 'status_pembayarans.status as status_pembayaran')
+                ->select('pembelian_courses.created_at', 'no_order', 'cart.total_price', 'bukti_pembayaran', 'metode_pembayaran', 'status_pembayarans.status as status_pembayaran')
                 ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
                 ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
                 ->where('pembelian_courses.id_user', Auth::user()->id)
                 ->get();
 
-
-           
-        return view('layouts/course-order/course-order')->with('order', $order);
+        return view('layouts/course-order/all-course-order')->with('order', $order);
     }
 
 

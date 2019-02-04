@@ -137,7 +137,9 @@ Route::group(['middleware'=>'auth'],function(){
 	
 	Route::get('/cart',['as'=>'cart','uses'=>'CourseOrderController@showCart']);
 
-	Route::get('/course-order',['as'=>'course-order','uses'=>'CourseOrderController@showCourseOrder']);
+	Route::get('/course-order',['as'=>'course-order','uses'=>'CourseOrderController@showAllCourseOrder']);
+
+	Route::get('/order-detail/{order_no}',['as'=>'order-detail','uses'=>'CourseOrderController@show']);
 	
 	Route::post('/checkout',['as'=>'checkout','uses'=>'CourseOrderController@checkout']);
 
@@ -145,7 +147,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 	// Upload bukti pembayaran
 	Route::post('/store-payment-proof',['as'=>'store-payment-proof','uses'=>'CourseOrderController@storePaymentProof']);
-	Route::post('/payment-proof',['as'=>'payment-proof','uses'=>'CourseOrderController@sendPaymentProof']);
+	Route::get('/course-order/{order_no}/payment-proof/',['as'=>'payment-proof','uses'=>'CourseOrderController@sendPaymentProof']);
 
 	//Kelas Saya
 	Route::get('/kelas-saya', ['as'=>'kelas_saya','uses'=>'UserController@kelas_saya']);

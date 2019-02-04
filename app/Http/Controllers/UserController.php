@@ -23,20 +23,6 @@ class UserController
             $user            = User::getStudent($idUser)->firstOrFail();
             $user['murid']   = User::getStudent($idUser)->first()->murid;
 
-
-
-            $transaksi = DB::table('courses')
-                ->select( 'nama_course', 'harga' , 'status_pembayarans.status as status_pembayaran', 'bukti_pembayaran')
-                ->leftJoin('rating_courses', 'rating_courses.id_course', '=', 'courses.id')
-                ->leftJoin('cart_course', 'cart_course.course_id', '=', 'courses.id')
-                ->leftJoin('cart', 'cart.id', '=', 'cart_course.cart_id')
-                ->leftJoin('pembelian_courses', 'pembelian_courses.cart_id', '=', 'cart.id')
-                ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
-                ->where('cart.user_id', Auth::user()->id)
-                ->get();
-
-
-            $user['transaksi']  = $transaksi;
             //dd($user);
             return view('layouts.user_profile.index')->with('user', $user);
         }

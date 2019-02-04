@@ -34,11 +34,9 @@
             </div>
           
             <br>
-            <form action="{{ route('payment-proof') }}" method="post" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <input type="hidden" name="order_id" value="{{ $courseOrder->id }}">
-                <button type="submit" class="btn btn-primary btn-lg">Sudah Bayar?</button>
-            </form>
+            
+            <a href="{{ route('payment-proof', $courseOrder->no_order) }}" class="btn btn-primary btn-lg">Sudah Bayar?</a>
+            
           </div>
       </div>
     </div>

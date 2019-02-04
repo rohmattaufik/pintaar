@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-  <title>Pembelian</title>
+  <title>Transaksi</title>
 @endsection
 
 @section('extra-style')
@@ -13,35 +13,41 @@
     <div class="container">
         <div class="row">
           <div class="col-xs-12 text-center">
-              @if (count($order) == 0) {
+              @if (count($order) == 0)
                 <div><i class="fas fa-shopping-cart fa-5x"></i></div>
                 <p>Belum ada kelas yang kamu beli!</p>
                 <a href="{{ route('courses') }}" class="btn btn-lg btn-primary">Beli Kelas Disini</a>
               
-              } 
               @else 
+                <h2>Daftar Transaksi</h2>
                 <div class="table-responsive no-padding text-left">
-                    <table id="table_employee" class="table display responsive no-wrap" width="100%">
+                    <table id="table_pembayaran" class="table display responsive no-wrap" width="100%">
                         <thead>
                             <tr>
+                                <th scope="col">No.</th>
                                 <th scope="col">No. Order</th>
-                                
+                                <th scope="col">Tanggal Pembelian</th>
                                 <th scope="col">Total Harga</th>
                                 <th scope="col">Status Pembayaran</th>
-                                <th scope="col">Bukti Bayar</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($order as $key => $transaksi)
                             <tr>
-                                <td>{{ $transaksi ->  no_order}}</td>
+                                <td>{{ ++$key }}</td>
+                                <td><a href="{{ route('order-detail', $transaksi -> no_order) }}">{{ $transaksi -> no_order }}</a></td>
+                                <td>{{ $transaksi -> created_at }}</td>
+                                
                                 <td>Rp {{ number_format($transaksi -> total_price, 0, ',', '.') }}</td>
-                                <td>{{ $transaksi -> status_pembayaran}}</td>
-                                @if($transaksi->bukti_pembayaran != null)
-                                    <td><a href="{{ URL::asset($transaksi->bukti_pembayaran) }}">Lihat</a></td>
-                                @else
-                                    <td>Kosong</td>
-                                @endif
+                                <td>{{ $transaksi -> status_pembayaran }}</td>
+                                <td>
+                                  @if ($transaksi->bukti_pembayaran == null)   
+                                    <a href="{{ route('payment-proof', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Upload Bukti Bayar</a>
+                                  @endif
+                                  <!-- <a href="{{ URL::asset($transaksi->bukti_pembayaran) }}">Lihat Bukti Bayar</a> -->
+                                  <a href="{{ route('order-detail', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Lihat</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
