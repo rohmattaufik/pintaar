@@ -1,5 +1,39 @@
 <body data-spy="scroll" data-target="#primary-menu">
     <!--Mainmenu-area-->
+
+    <style type="text/css">
+        .thumbnail img {
+          max-width: 100%;
+          height: auto;
+        }
+
+        .row.display-flex {
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .thumbnail {
+          height: 95%;
+        }
+        .thumbnail {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .thumbnail .caption {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 95%;
+        }
+        /*
+        .thumbnail p, .thumbnail h4 {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }*/
+      </style>
+
+
     <div class="mainmenu-area" data-offset-top="100">
         <div class="container">
             <!--Logo-->

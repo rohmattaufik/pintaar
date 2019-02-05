@@ -44,14 +44,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row display-flex">
                 @foreach($list_courses_code as $list_course_code)
             
                   
                     <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_course_code->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
                                 <h4>{{$list_course_code->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
@@ -85,14 +85,14 @@
                 </div>
             </div>
                
-            <div class="row">
+            <div class="row display-flex">
                 @foreach($list_courses_cook as $list_course_cook)
             
                   
                     <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_course_cook->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_cook->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_cook->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
                                 <h4>{{$list_course_cook->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_cook->nama}}</p>
