@@ -20,7 +20,7 @@
                     {{ csrf_field() }}
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img id="preview" class="profile-user-img img-responsive img-circle " src="{{ $user->foto ? URL::asset($user->foto) : URL::asset('images/user4-128x128.jpg')}}" alt="User profile picture"><br>
+                            <img id="preview" class="profile-user-img img-responsive img-circle " src="{{ $user->foto ? URL::asset($user->foto) : URL::asset('images/user-default.png')}}" alt="User profile picture"><br>
                             <div class="form-group">
                                 <label for="foto" class="col-sm-2 control-label">Foto Profile</label>
                                 <div class="col-sm-10">

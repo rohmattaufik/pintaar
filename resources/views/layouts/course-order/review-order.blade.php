@@ -12,18 +12,8 @@
 @section('content')
   <section class="section-padding">
     <div class="container">
-      
-      @if ($courseOrder->status_pembayaran != 2)
-        <div class="row text-center">
-            <div class="col-md-6 col-md-offset-3">        
-              <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
-              <h3><span class="label label-success">{{ $courseOrder->status }}</span></h3>
-              <h4>Total Tagihan : Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h4>
-              <h4>Metode Pembayaran : {{ $courseOrder->metode_pembayaran }}</h4>
-              <h4>Bukti Pembayaran : <a href="{{ URL::asset($courseOrder->bukti_pembayaran) }}" target="_blank">Lihat Bukti Bayar</a></h4>
-            </div>
-        </div>
-      @else
+            
+      @if ($courseOrder->status_pembayaran == 1)
         <div class="row text-center">
             <div class="col-md-6 col-md-offset-3">
                 <h2>Pembayaran via Transfer Bank</h2>
@@ -46,13 +36,19 @@
               </div>
             
               <br>
-
-              
-              
               <a href="{{ route('payment-proof', $courseOrder->no_order) }}" class="btn btn-primary btn-lg">Sudah Bayar?</a>
-              
             </div>
         </div>
+      @else
+         <div class="row text-center">
+            <div class="col-md-6 col-md-offset-3">        
+              <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
+              <h3><span class="label label-success">{{ $courseOrder->status }}</span></h3>
+              <h4>Total Tagihan : Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h4>
+              <h4>Metode Pembayaran : {{ $courseOrder->metode_pembayaran }}</h4>
+              <h4>Bukti Pembayaran : <a href="{{ URL::asset($courseOrder->bukti_pembayaran) }}" target="_blank">Lihat Bukti Bayar</a></h4>
+            </div>
+          </div>
       @endif
       <br>
       <div class="row">

@@ -12,7 +12,7 @@
   <section class="section-padding">
     <div class="container">
         <div class="row">
-          <div class="col-xs-12 text-center">
+          <div class="col-xs-12 col-md-12 text-center">
               @if (count($order) == 0)
                 <div><i class="fas fa-shopping-cart fa-5x"></i></div>
                 <p>Belum ada kelas yang kamu beli!</p>
@@ -36,7 +36,7 @@
                             @foreach($order as $key => $transaksi)
                             <tr>
                                 <td>{{ ++$key }}</td>
-                                <td><a href="{{ route('order-detail', $transaksi -> no_order) }}">{{ $transaksi -> no_order }}</a></td>
+                                <td><a href="{{ route('review-order', $transaksi -> no_order) }}">{{ $transaksi -> no_order }}</a></td>
                                 <td>{{ $transaksi -> created_at }}</td>
                                 
                                 <td>Rp {{ number_format($transaksi -> total_price, 0, ',', '.') }}</td>
@@ -46,7 +46,7 @@
                                     <a href="{{ route('payment-proof', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Upload Bukti Bayar</a>
                                   @endif
                                   
-                                  <a href="{{ route('order-detail', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Lihat</a>
+                                  <a href="{{ route('review-order', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Lihat</a>
                                 </td>
                             </tr>
                             @endforeach

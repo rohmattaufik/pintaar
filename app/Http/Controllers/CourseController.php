@@ -67,7 +67,7 @@ class CourseController extends Controller
         if (Auth::user()){
 
             $status_pembayaran = DB::table('pembelian_courses')
-                        ->select('status_pembayaran', 'waktu_valid_pembelian')
+                        ->select('status_pembayaran')
                         ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
                         ->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
                         ->where('cart_course.course_id', $id)

@@ -113,7 +113,7 @@ class CourseOrderController extends MailController
         $cart = Cart::where('id', $request['cart_id'])->get()->pop();
         $status_pembayaran = 1;
         $courseOrder = $this->store($request, $status_pembayaran);
-        return redirect()->route('course-order.show', $courseOrder->no_order);                       
+        return redirect()->route('review-order', $courseOrder->no_order);                       
     }
 
     
@@ -263,6 +263,7 @@ class CourseOrderController extends MailController
                 ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
                 ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
                 ->where('pembelian_courses.id_user', Auth::user()->id)
+                ->orderBy('pembelian_courses.created_at','DESC')
                 ->get();
 
         return view('layouts/course-order/all-course-order')->with('order', $order);
