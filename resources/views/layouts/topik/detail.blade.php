@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-md-8 col-md-offset-2">
-        <h2>{{ $topik->judul_topik }}</h2>  
+        <h3>{{ $topik->judul_topik }}</h3>  
       </div>
     </div>
 
@@ -24,114 +24,117 @@
           </div>
         </div>
       </div>
-      <br>
     @endif
 
     <!-- Deskripsi Topik -->
-    <div class="row">
-      <div class="col-xs-12 col-md-8 col-md-offset-2">
-        {!! html_entity_decode($topik->penjelasan) !!}
+    @if (!empty($topik->penjelasan))
+      <br>
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+          {!! html_entity_decode($topik->penjelasan) !!}
+        </div>
       </div>
-    </div>
+    @endif
 
     <!-- FILE ATTACHMENTS -->
-    <div class="row">
-      <div class="col-xs-12 col-md-8 col-md-offset-2">
-        @if (count($file_topik) > 0)
-            <h3>Lampiran</h3>
-            <ul>
-              @foreach ($file_topik as $file)
-                <li><a href="{{URL::asset('attachments/'.$file->url)}}" target="_blank">{{$file->file_name}}</a></li>
-              @endforeach
-            </ul>
-        @endif
+    @if (count($file_topik) > 0)
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">     
+              <h3>Lampiran</h3>
+              <ul>
+                @foreach ($file_topik as $file)
+                  <li><a href="{{URL::asset('attachments/'.$file->url)}}" target="_blank">{{$file->file_name}}</a></li>
+                @endforeach
+              </ul>
+        </div>
       </div>
-    </div>
+    @endif
 
     <!-- PERTANYAAN -->
-    <div class="row">
-      <div class="col-xs-12 col-md-8 col-md-offset-2">
-        <br/>
-        @foreach ($questions as $key => $question)
-          <div class="panel panel-primary">
-            <div class="panel-heading"><strong>{{ $question->judul_pertanyaan }}</strong></div>
-            <div class="panel-body">           
-                <p>{{ $question->pertanyaan }}</p>
+    @if (count($questions) > 0)
+      <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+          @foreach ($questions as $key => $question)
+            <div class="panel panel-primary">
+              <div class="panel-heading"><strong>{{ $question->judul_pertanyaan }}</strong></div>
+              <div class="panel-body">           
+                  <p>{{ $question->pertanyaan }}</p>
 
-                @if (!empty($question->gambar))
-                  <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('images/gambar_pertanyaan/'.$question->gambar) }}">
-                @endif
-              
-                <form>
-                  @if (!empty($question->opsi_1))
-                    <div class="radio">
-                      <label for="radio_1">
-                        <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_1" value=1 />
-                        {{ $question->opsi_1 }}
-                    </label>
-                    </div>
+                  @if (!empty($question->gambar))
+                    <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('images/gambar_pertanyaan/'.$question->gambar) }}">
                   @endif
-
-                  @if (!empty($question->opsi_2))
-                    <div class="radio">
-                      <label for="radio_2">
-                        <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_2" value=2 />
-                        {{ $question->opsi_2 }}
-                      </label>
-                    </div>
-                  @endif
-
-                  @if (!empty($question->opsi_3))
-                    <div class="radio">
-                        <label for="radio_3">
-                          <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_3" value=3 />
-                          {{ $question->opsi_3 }}
-                        </label>
-                    </div>
-                  @endif
-
-                  @if (!empty($question->opsi_4))
-                    <div class="radio">
-                       <label for="radio_4">
-                          <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_4" value=4 />
-                          {{ $question->opsi_4 }}
-                        </label>
-                    </div>
-                  @endif
-                </form>
                 
-                <button onclick="check_jawaban({{$question->id}})" type="button" data-id="1"  class="btn btn-primary">Jawab</button>
-                          
-                <div class="row">
-                   <div class="col-md-8 col-md-offset-2 text-center">
-                    <i id="salah-{{$question->id}}" class="far fa-times-circle" style="display:none; font-size:60px; color:red;"></i>
-                   </div>
-                </div>
-                <div class="row">
-                   <div class="col-md-8 col-md-offset-2 text-center">
-                      <p id="jawaban_salah-{{$question->id}}" style="display:none;">Jawaban kamu kurang tepat</p>
-                   </div>
-                </div>
-                <div class="row">
-                   <div class="col-md-8 col-md-offset-2 text-center">
-                      <i id="benar-{{$question->id}}" class="far fa-check-circle" style="display:none; font-size:60px; color:green;"></i>
-                   </div>
-                </div>
-                <div class="row">
-                   <div class="col-md-8 col-md-offset-2 text-center">
-                      <p id="jawaban_benar-{{$question->id}}" style=" display:none;">Jawaban kamu benar</p>
-                   </div>
-                </div>
-              </div>    
-            </div>
-          @endforeach
+                  <form>
+                    @if (!empty($question->opsi_1))
+                      <div class="radio">
+                        <label for="radio_1">
+                          <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_1" value=1 />
+                          {{ $question->opsi_1 }}
+                      </label>
+                      </div>
+                    @endif
 
+                    @if (!empty($question->opsi_2))
+                      <div class="radio">
+                        <label for="radio_2">
+                          <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_2" value=2 />
+                          {{ $question->opsi_2 }}
+                        </label>
+                      </div>
+                    @endif
+
+                    @if (!empty($question->opsi_3))
+                      <div class="radio">
+                          <label for="radio_3">
+                            <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_3" value=3 />
+                            {{ $question->opsi_3 }}
+                          </label>
+                      </div>
+                    @endif
+
+                    @if (!empty($question->opsi_4))
+                      <div class="radio">
+                         <label for="radio_4">
+                            <input name="opsi-{{$question->id}}" type="radio" data-id="{{ $question->jawaban }}" id="radio_4" value=4 />
+                            {{ $question->opsi_4 }}
+                          </label>
+                      </div>
+                    @endif
+                  </form>
+                  
+                  <button onclick="check_jawaban({{$question->id}})" type="button" data-id="1"  class="btn btn-primary">Jawab</button>
+                            
+                  <div class="row">
+                     <div class="col-md-8 col-md-offset-2 text-center">
+                      <i id="salah-{{$question->id}}" class="far fa-times-circle" style="display:none; font-size:60px; color:red;"></i>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-8 col-md-offset-2 text-center">
+                        <p id="jawaban_salah-{{$question->id}}" style="display:none;">Jawaban kamu kurang tepat</p>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-8 col-md-offset-2 text-center">
+                        <i id="benar-{{$question->id}}" class="far fa-check-circle" style="display:none; font-size:60px; color:green;"></i>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-8 col-md-offset-2 text-center">
+                        <p id="jawaban_benar-{{$question->id}}" style=" display:none;">Jawaban kamu benar</p>
+                     </div>
+                  </div>
+                </div>    
+              </div>
+            @endforeach
+
+        </div>
       </div>
-    </div>
+    @endif
 
     <!-- NAVIGASI TOPIK -->
+    <br>
     <div class="row">
-      <br/>
       <div class="col-xs-12 col-md-8 col-md-offset-2">
         @if (empty($topik_after-> id) && empty($topik_before-> id))
         
@@ -193,7 +196,7 @@
       <div class="col-xs-12 col-md-8 col-md-offset-2">
          <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            <h2 id="commentTitle">Komentar</h2>
+            <h3 id="commentTitle">Komentar</h3>
             <!-- FORM ISI KOMENTAR -->       
             <form class="form" method="post" action="" role="form">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">

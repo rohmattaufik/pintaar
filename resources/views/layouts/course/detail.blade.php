@@ -8,7 +8,7 @@
 	<script>
 	  fbq('track', 'ViewContent');
 	</script>
-  <section class="section-padding">		 
+<section class="section-padding">		 
 		<div class="container">
 
       @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
@@ -24,27 +24,26 @@
 
       <div class="row">
           <div class="col-xs-12 col-md-7">
-                  <h1>{{ $course->nama_course }}</h1>
-                   
-				   <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
-                   
-                  <p><strong>Dibuat oleh {{ $course -> nama }} </strong><p>
-                  @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
-                    @if($course->harga == 0)
-                      <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
-                    @else
-                      <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-                      <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
-                    @endif  
-                    <br>
-                    <br>
-                  @else
-                    <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar</a>
-                    <br>
-                    <br>
-                  @endif
-
-                  {!! html_entity_decode($course->deskripsi) !!}
+              <h1>{{ $course->nama_course }}</h1>
+               
+		          <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
+               
+              <p><strong>Dibuat oleh {{ $course -> nama }} </strong><p>
+              @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
+                @if($course->harga == 0)
+                  <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+                @else
+                  <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                  <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini</a>
+                @endif  
+                <br>
+                <br>
+                {!! html_entity_decode($course->deskripsi) !!}
+              @else
+                <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar</a>
+                <br>
+                <br>
+              @endif    
           </div>
           <div class="col-xs-12 col-md-5">
               <div class="embed-responsive embed-responsive-16by9">
@@ -58,7 +57,7 @@
             
       <div class="row">
           <div class="col-xs-12 col-md-7">
-              <h2>Konten Kelas</h2>
+              <h3>Konten Kelas</h3>
               <div class="panel-group" id="accordion">
                
 			          @foreach($list_topik as $topik)
@@ -92,11 +91,11 @@
               <meta name="csrf-token" content="{{ csrf_token() }}">
               <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-7"> 
-                    <h2>Bagaimana pendapat kamu tentang kelas ini?</h2>
+                    <h3>Bagaimana pendapat kamu tentang kelas ini?</h3>
                           <form class="form" method="post" action="" role="form">
 
                             <fieldset class="starability-basic">
-                              <h4>Rating</h4>
+                              <h4>Beri Rating</h4>
                               <input type="radio" id="rate1" name="rating" value="1" />
                               <label for="rate1" title="Terrible">1 star</label>
 
@@ -112,10 +111,10 @@
                               <input type="radio" id="rate5" name="rating" value="5" />
                               <label for="rate5" title="Amazing">5 stars</label>
                             </fieldset>
-                            <h4>Review</h4>
+                            <h4>Beri Review</h4>
                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
                              <div class="form-group">
-                                <textarea required name="body_review" class="form-control" rows="5" id="comment" style="background-color:#FAF9F9;" ></textarea>
+                                <textarea required name="body_review" class="form-control" rows="5" id="comment"></textarea>
                              </div>
                              
                              <div class="form-group">
@@ -135,7 +134,7 @@
            <div class="row">
               <div class="col-xs-12 col-md-7">
                   <br>
-                  <h2>Review Kelas</h2>
+                  <h3>Review Kelas</h3>
                   
                    @foreach($list_review as $review)
                       <hr/>
