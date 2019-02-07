@@ -120,7 +120,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
                     <div class="page-title">
-                        <h2>Testimoni Pengguna Pintaar</h2>
+                        <h2>Testimoni</h2>
                     </div>
                 </div>
             </div>
@@ -131,20 +131,21 @@
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/afiq.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h3>Afiq Rasyid Muhammad</h3>
+                            <h4>Afiq Rasyid Muhammad</h4>
+                            <p>Software Engineer dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
+                            <p>--</p>
                             <p>Platform ini sangat bagus dan mudah. Luar biasa Pintaar adalah solusi untuk pendidikan di Indonesia</p>
-							<p>--</p>
-							<p>Software Engineer dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
+														
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/luqman.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h3>Luqman Hakim</h3>
-							<p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
-							<p>--</p>
+                            <h4>Luqman Hakim</h4>
 							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
-								
+                            <p>--</p>
+                            <p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
+							
 						</div>
                                  
                     </div>

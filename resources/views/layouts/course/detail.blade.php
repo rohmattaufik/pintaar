@@ -62,8 +62,8 @@
                
 			          @foreach($list_topik as $topik)
                       <div class="panel">       
-                          <h4 class="panel-title" data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($topik['id'])}}">
-                              <a href="#"> {{ $topik -> judul_topik }}</a>
+                          <h4 class="panel-title">
+                              <a data-toggle="collapse" data-parent="#accordion" href="'#collapse{{($topik['id'])}}"> {{ $topik -> judul_topik }}</a>
                           </h4>
 
                           <div id="collapse{{($topik['id'])}}" class="panel-collapse collapse">
