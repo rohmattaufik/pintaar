@@ -45,8 +45,10 @@
               <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
               <h3><span class="label label-success">{{ $courseOrder->status }}</span></h3>
               <h4>Total Tagihan : Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h4>
-              <h4>Metode Pembayaran : {{ $courseOrder->metode_pembayaran }}</h4>
-              <h4>Bukti Pembayaran : <a href="{{ URL::asset($courseOrder->bukti_pembayaran) }}" target="_blank">Lihat Bukti Bayar</a></h4>
+              @if ($courseOrder->metode_pembayaran != null)
+                <h4>Metode Pembayaran : {{ $courseOrder->metode_pembayaran }}</h4>
+                <h4>Bukti Pembayaran : <a href="{{ URL::asset($courseOrder->bukti_pembayaran) }}" target="_blank">Lihat Bukti Bayar</a></h4>
+              @endif
             </div>
           </div>
       @endif

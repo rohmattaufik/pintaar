@@ -124,7 +124,7 @@ Route::group(['middleware'=>'auth'], function() {
 
 	Route::get('/buy/success/',['as'=>'purchase-success','uses'=>'CourseOrderController@purchaseSuccess']);
 
-	Route::get('/buy/{course_id}',['as'=>'buy-course','uses'=>'CourseOrderController@addToCart']);
+	Route::get('/buy/{course_id}',['as'=>'buy-course','uses'=>'CourseOrderController@buyCourse']);
 	
 	Route::post('/remove-from-cart',['as'=>'remove-from-cart','uses'=>'CourseOrderController@removeFromCart']);
 	
