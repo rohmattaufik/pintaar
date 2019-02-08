@@ -67,7 +67,11 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 @inject('notifications', 'App\Services\NotificationService')
-                                <a href="{{ route('notifications') }}">Notifikasi ({{ count($notifications->getAllNotifications()) }})</a>
+                                @if (count($notifications->getAllNotifications()) > 0)
+                                    <a href="{{ route('notifications') }}">Notifikasi <strong style="color:red;">({{ count($notifications->getAllNotifications()) }})</strong></a>
+                                @else
+                                    <a href="{{ route('notifications') }}">Notifikasi</a>
+                                @endif
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -144,7 +148,7 @@
                                         </div>
                                     </ul>
                                 @else
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifikasi ({{ count($notifications->getAllNotifications()) }})</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifikasi <strong style='color: red;'> ({{ count($notifications->getAllNotifications()) }})</strong></a>
                                     <ul class="dropdown-menu notify-drop">
                                         <div class="drop-content">
                                                 @foreach($notifications->getAllNotifications() as $notification)
