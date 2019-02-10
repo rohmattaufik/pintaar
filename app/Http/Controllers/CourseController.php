@@ -199,6 +199,39 @@ class CourseController extends Controller
         return view('layouts.course.tutor.create-course')->with('course', $course)->with('tutors', $tutors);
     }
 	
+	public function category($id_category)
+	{
+
+				
+      $list_courses_with_users = DB::table('courses')
+            ->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') , 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
+            ->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
+            ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
+            ->leftJoin('rating_courses', 'rating_courses.id_course', '=', 'courses.id')
+			 ->where('courses.kategori', '=', $id_category)
+			->groupBy('courses.id', 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
+            ->get();
+		
+		$kategori_kelas_str = "";
+		
+		switch ($id_category) {
+			case 1:
+				$kategori_kelas_str = "Pemrograman";
+				break;
+			case 2:
+				$kategori_kelas_str = "Bahasa";
+				break;
+			case 3:
+				$kategori_kelas_str = "Bisnis";
+				break;
+			case 4:
+				$kategori_kelas_str = "Lainnya";
+				break;
+		}
+	
+        return view('layouts.course.index', ["kategori_kelas_str"=>$kategori_kelas_str, "list_courses_with_users" => $list_courses_with_users]);
+	}
+	
 	public function subscribe_course($id_topik)
 	{
 		 $topik= DB::table('topiks')

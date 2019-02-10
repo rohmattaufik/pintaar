@@ -16,7 +16,6 @@
               <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
                 <div><i class="fas fa-book-open fa-5x"></i></div>
                 <h3>Kamu belum membeli kelas!</h3>
-                <a href="{{ route('courses') }}" class="btn btn-lg btn-primary">Beli Kelas Disini</a>
               </div>
             </div>
           @else

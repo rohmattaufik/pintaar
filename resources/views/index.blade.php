@@ -37,7 +37,7 @@
                 <div class="col-xs-12">
                     <div class="alert alert-danger alert-dismissible" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
+                      <h4><strong>Pemberitahuan!</strong> Saat ini, hampir semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
                     </div>
                     <div class="page-title">
                         <h2>Kelas Pemrograman Website</h2>
@@ -80,27 +80,27 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-title">
-                        <h2>Kelas Memasak</h2>
+                        <h2>Kelas Lainnya</h2>
                     </div>
                 </div>
             </div>
                
             <div class="row display-flex">
-                @foreach($list_courses_cook as $list_course_cook)
+                @foreach($list_courses_others as $list_courses_others)
             
                   
                     <div class="col-xs-12 col-md-3">
-                      <a href="{{route(('course'), $list_course_cook->id)}}">
+                      <a href="{{route(('course'), $list_courses_others->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_cook->foto ) }}" alt="Gambar Kelas" height="120" width="500">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_courses_others->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
-                                <h4>{{$list_course_cook->nama_course}}</h4>
-                                <p><span class="ti-user"></span> {{$list_course_cook->nama}}</p>
-                                <p class="starability-result" data-rating="{{ round($list_course_cook->rating) }}"></p>
-                                @if($list_course_cook->harga == 0)
+                                <h4>{{$list_courses_others->nama_course}}</h4>
+                                <p><span class="ti-user"></span> {{$list_courses_others->nama}}</p>
+                                <p class="starability-result" data-rating="{{ round($list_courses_others->rating) }}"></p>
+                                @if($list_courses_others->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right">Rp {{ number_format($list_course_cook->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right">Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</h4>
                                 @endif
                                 
                              </div>

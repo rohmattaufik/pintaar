@@ -51,10 +51,23 @@
             <nav class="collapse navbar-collapse" id="primary-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    
-                        
-                    @if (Auth::guest())
-                            <li><a href="{{ route('courses') }}">Semua Kelas</a></li>
+					
+					  <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Kategori Kelas <span class="caret"></span>
+                                </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ route('courses-category', 1) }}">Kelas Pemrograman</a></li>
+                                <li><a href="{{ route('courses-category', 2) }}">Kelas Bahasa</a></li>
+								<li><a href="{{ route('courses-category', 3) }}">Kelas Bisnis</a></li>
+								<li><a href="{{ route('courses-category', 4) }}">Kelas Lainnya</a></li>
+							</ul>
+                       </li>
+					
+					
+					@if (Auth::guest())
+                            
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ route('register') }}">Daftar</a></li>
@@ -120,7 +133,7 @@
                         </ul>
 
                     @else
-                            <li><a href="{{ route('courses') }}">Semua Kelas</a></li>
+                           
                             <li><a href="{{ route('kelas_saya') }}">Kelas Saya</a></li>
                             <li><a href="{{ route('cart') }}">Keranjang</a></li>
                             <li><a href="{{ route('course-order') }}">Transaksi</a></li>
