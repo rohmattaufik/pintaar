@@ -55,12 +55,9 @@
               <form class="form" method="post" action="" role="form">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <select name= "status_pembayaran">
-                  <option value=1>Belum Dibayar</option>
-                  <option value=2>Sudah Dibayar</option>
                   <option value=3>Disetujui</option>
                   <option value=4>Jumlah Transfer Kurang</option>
                   <option value=5>Pembayaran Invalid</option>
-                  <option value=6>Langganan Kadaluarsa</option>
                 </select>
                 <br>
                 <button type="submit" name="approve" class="btn btn-primary">Ubah Status</button>

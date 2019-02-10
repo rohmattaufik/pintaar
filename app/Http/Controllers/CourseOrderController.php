@@ -57,54 +57,64 @@ class CourseOrderController extends MailController
         }
     }
 
-    public function addToCart($course_id)
-    {
-        $cart = Cart::where('user_id', Auth::user()->id)
-                    ->where('is_active', 1)
-                    ->get()->pop();
-
+    public function buyCourse($course_id)
+    { 
         $course = Course::where('id', $course_id)->get()->pop();
 
-        if ($cart != null) {
-            $cartCourse = CartCourse::create([
-              'cart_id' => $cart->id,
-              'course_id' => $course_id,
-            ]);
-
-            $totalPrice = $course->harga + $cart->total_price;
-
-            $cart->update(['total_price' => $totalPrice]);
-
-            return redirect()->route('cart');
+        if ($course->harga == 0) {
+          $cart = $this->addCourseToNewCart($course);
+          $status_pembayaran = 6;
+          $paymentMethod = null;
+          $courseOrder = $this->store($cart, $paymentMethod, $status_pembayaran);
+          return redirect()->route('purchase-success')->with('free-course', 'true');;
         }
+
         else {
-            $newCart = Cart::create([
-              'user_id' => Auth::user()->id,
-              'total_price' => $course->harga,
-              'is_active' => 1,
-            ]);
+          $cart = Cart::where('user_id', Auth::user()->id)
+                      ->where('is_active', 1)
+                      ->get()->pop();
 
-            $cartCourse = CartCourse::create([
-              'cart_id' => $newCart->id,
-              'course_id' => $course_id,
-            ]);
+          if ($cart != null) {
+              $cartCourse = CartCourse::create([
+                'cart_id' => $cart->id,
+                'course_id' => $course_id,
+              ]);
 
-            return redirect()->route('cart');
+              $totalPrice = $course->harga + $cart->total_price;
+
+              $cart->update(['total_price' => $totalPrice]);
+
+              return redirect()->route('cart');
+          }
+          else {
+              $cart = $this->addCourseToNewCart($course);
+              return redirect()->route('cart');
+          }
         }
 
+    }
+
+    public function addCourseToNewCart(Course $course)
+    {
+        $newCart = Cart::create([
+                'user_id' => Auth::user()->id,
+                'total_price' => $course->harga,
+                'is_active' => 1,
+        ]);
+
+        $cartCourse = CartCourse::create([
+          'cart_id' => $newCart->id,
+          'course_id' => $course->id,
+        ]);
+
+        return $newCart;
     }
 
     public function checkout(Request $request)
     {
         $cart = Cart::where('id', $request['cart_id'])->get()->pop();
 
-        if ($cart->total_price == 0) {
-          $status_pembayaran = 3;
-          $courseOrder = $this->store($request, $status_pembayaran);
-          return redirect()->route('purchase-success');
-        } else {
-          return view('layouts/course-order/checkout', ['cart' => $cart]);  
-        }
+        return view('layouts/course-order/checkout', ['cart' => $cart]);          
                
     }
 
@@ -112,34 +122,27 @@ class CourseOrderController extends MailController
     {
         $cart = Cart::where('id', $request['cart_id'])->get()->pop();
         $status_pembayaran = 1;
-        $courseOrder = $this->store($request, $status_pembayaran);
+        $paymentMethod = $request['payment_method'];
+        $courseOrder = $this->store($cart, $paymentMethod, $status_pembayaran);
         return redirect()->route('review-order', $courseOrder->no_order);                       
     }
 
-    
 
     public function purchaseSuccess()
     {
-        return view('layouts/course-order/purchase-success-with-share');
+        return view('layouts/course-order/purchase-success');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, $status_pembayaran)
+    public function store(Cart $cart, $paymentMethod, $status_pembayaran)
     {
-        $cart = Cart::where('id', $request['cart_id'])->get()->pop();
         $cart->update(['is_active' => 0]);
 
         // order baru       
         $courseOrder = CourseOrder::create([
           'id_user' => Auth::user()->id,
-          'cart_id' => $request['cart_id'],
+          'cart_id' => $cart->id,
           'status_pembayaran' => $status_pembayaran,
-          'metode_pembayaran' => $request['payment_method'],
+          'metode_pembayaran' => $paymentMethod,
         ]);
 
         // nomor order
@@ -209,29 +212,15 @@ class CourseOrderController extends MailController
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
-
-
 
     public function sendPaymentProof($order_no)
     {
@@ -253,7 +242,7 @@ class CourseOrderController extends MailController
 
         $order = CourseOrder::where('id', $request['order_id'])->update(['bukti_pembayaran' => $path, 'status_pembayaran' => 2]);
 
-        return view('layouts/course-order/payment-proof-success');
+        return redirect()->route('purchase-success');
     }
 
     public function showAllCourseOrder()
