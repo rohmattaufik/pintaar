@@ -14,31 +14,58 @@
     <div class="container">
             
       @if ($courseOrder->status_pembayaran == 1)
-        <div class="row text-center">
-            <div class="col-md-6 col-md-offset-3">
-                <h2>Pembayaran via Transfer Bank</h2>
-                <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
-                <p>Silahkan transfer sebesar:</p>
-                <h2>Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h2>
-               <!--  <div class="alert alert-warning" role="alert">
-                  <b>Penting!</b> Transfer sampai 3 digit terakhir agar memudahkan kami melakukan verifikasi. 
-                </div> -->
-                <p>ke rekening <b>12345678999</b> a/n <b>PT Indonesia Pintaar</b> pada Bank :</p>
-            </div>
-        </div>
+        @if($courseOrder->metode_pembayaran == 'payment1')
+          <div class="row text-center">
+              <div class="col-xs-12 col-md-6 col-md-offset-3">
+                  <h2>Pembayaran via Transfer Bank BNI</h2>
+                  <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
+                  <p>Silahkan transfer sebesar:</p>
+                  <h2>Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h2>
+                  <p>ke nomor rekening <b>0302916703</b> a/n <b>Muhammad Luqman Hakim</b> pada Bank :</p>
+                  <img src="{{ asset('/images/bank-bni.png') }}" height="50" width="150" alt="Card image cap">
+              </div>
+          </div>
+        @elseif ($courseOrder->metode_pembayaran == 'payment2')
+          <div class="row text-center">
+              <div class="col-md-6 col-md-offset-3">
+                  <h2>Pembayaran via Transfer Bank BCA</h2>
+                  <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
+                  <p>Silahkan transfer sebesar:</p>
+                  <h2>Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h2>
+                  <p>ke nomor rekening <b>4210161274</b> a/n <b>Muhammad Luqman Hakim</b> pada Bank :</p>
+                  <img src="{{ asset('/images/bank-bca.png') }}" height="50" width="150" alt="Card image cap">
+              </div>
+          </div>
+        @elseif ($courseOrder->metode_pembayaran == 'payment3')
+          <div class="row text-center">
+              <div class="col-md-6 col-md-offset-3">
+                  <h2>Pembayaran via Transfer OVO</h2>
+                  <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
+                  <p>Silahkan transfer sebesar:</p>
+                  <h2>Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h2>
+                  <p>ke nomor <b>082361888896</b> a/n <b>Muhammad Luqman Hakim</b> dengan :</p>
+                  <img src="{{ asset('/images/ovo.png') }}" height="50" width="150" alt="Card image cap">
+              </div>
+          </div>
+        @elseif ($courseOrder->metode_pembayaran == 'payment4')
+          <div class="row text-center">
+              <div class="col-md-6 col-md-offset-3">
+                  <h2>Pembayaran via Transfer GO-PAY</h2>
+                  <h3>Nomor Pesanan : {{ $courseOrder->no_order }}</h3>
+                  <p>Silahkan transfer sebesar:</p>
+                  <h2>Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h2>
+                  <p>ke nomor <b>082361888896</b> a/n <b>Luqman</b> dengan :</p>
+                  <img src="{{ asset('/images/gopay.png') }}" height="50" width="150" alt="Card image cap">
+              </div>
+          </div>
+        @endif
+        <br>
         <div class="row text-center">
             <div class="col-md-4 col-md-offset-4">
-              <div class="card">
-                <img class="card-img-top" src="{{ asset('/images/mandiri.png') }}" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-title">Cab. UI Depok {{ $courseOrder->metode_pembayaran }}</p>
-                </div>
-              </div>
-            
-              <br>
-              <a href="{{ route('payment-proof', $courseOrder->no_order) }}" class="btn btn-primary btn-lg">Sudah Bayar?</a>
+              <a href="{{ route('payment-proof', $courseOrder->no_order) }}" class="btn btn-primary btn-lg">Upload Bukti Bayar</a>
             </div>
         </div>
+          
       @else
          <div class="row text-center">
             <div class="col-md-6 col-md-offset-3">        
@@ -56,7 +83,6 @@
       <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
               
-              
               <div>
               <ul class="list-group list-group-flush">
                   <li class="list-group-item">
@@ -73,9 +99,13 @@
                     </li>
                   @endforeach
               </ul>
-            </div> 
-             
-             
+            </div>
+
+            <div class="alert alert-warning" role="alert">
+              <h4>Butuh bantuan? Hubungi kami disini</h4>
+              <a class="btn btn-success" href="https://wa.me/6282361888896">WhatsApp</a>
+              <a class="btn btn-primary" href="https://www.facebook.com/Pintaar-722335064826744">Facebook</a>
+            </div>             
           </div>
       </div>
 
