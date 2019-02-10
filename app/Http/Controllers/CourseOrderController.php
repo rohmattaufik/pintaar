@@ -163,15 +163,17 @@ class CourseOrderController extends MailController
 
         $user_yang_membeli = User::find(Auth::user()->id);
 
-        $message = self::get_message_for_email($cart->id, $noOrder);
+        $courses_that_bougth = self::get_courses_that_bougth($cart->id);
+		
+		$total_price = $cart->total_price;
 
-        self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
+        self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
 
         return $courseOrder;
 
 	  }
 
-    public function get_message_for_email($cart_id, $noOrder){
+    public function get_courses_that_bougth($cart_id){
 
               $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
               $nama_course = "";
@@ -179,9 +181,10 @@ class CourseOrderController extends MailController
                 $nama_course = $nama_course.", ".(Course::find($cart_course->course_id))->nama_course;
               }
 
-            $message = "<p>Selamat! anda telah membeli kelas ".$nama_course." dengan nomor order <b>".$noOrder."</b>. Silahkan selesaikan pembayaran</p>";
-            return $message;
+            
+            return $nama_course;
     }
+
 
     public function test()
     {
