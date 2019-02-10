@@ -7,7 +7,8 @@
 @section('content')
     <section class="section-padding">
         <div class="container" style="word-wrap: break-word;">
-		  <h1> Belajar Sekarang!</h1>
+		  <h1> Ayo Belajar Sekarang!</h1>
+		  <br>
           <h1>Kelas {{$kategori_kelas_str}}</h1>
           <br>
 

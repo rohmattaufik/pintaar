@@ -161,11 +161,11 @@ class CourseOrderController extends MailController
           $courseOrder->update(['no_order' => $noOrder]);
         }
 
-        //$user_yang_membeli = User::find(Auth::user()->id);
+        $user_yang_membeli = User::find(Auth::user()->id);
 
-        //$message = self::get_message_for_email($request['cart_id'], $noOrder);
+        $message = self::get_message_for_email($cart->id, $noOrder);
 
-        //self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
+        self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
 
         return $courseOrder;
 
