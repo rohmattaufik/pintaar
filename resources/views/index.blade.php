@@ -129,23 +129,30 @@
                     <div class="testimonials">
                         <div class="testimonial">
                             <div class="testimonial-photo">
+                                <img src="{{ URL::asset('images/odie.jpg') }}" alt="" width="100" height="200">
+                            </div>
+                            <h4>Yudhistira Oktaviandie, S.Si.</h4>
+                            <p>Mahasiswa Berprestasi UI 2017 dan Juara 2 Mahasiswa Berprestasi Nasional</p>
+                            <p>--</p>
+                            <p>"Belajar menjadi lebih mudah dan fleksibel. Cocok untuk mereka yang ingin belajar hal baru, namun memiliki keterbatasan waktu."</p>                            
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/afiq.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h4>Afiq Rasyid Muhammad</h4>
-                            <p>Software Engineer dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
+                            <h4>Afiq Rasyid Muhammad, S.Kom.</h4>
+                            <p>Software Engineer dan Alumni Fakultas Ilmu Komputer UI</p>
                             <p>--</p>
-                            <p>Platform ini sangat bagus dan mudah. Luar biasa Pintaar adalah solusi untuk pendidikan di Indonesia</p>
-														
+                            <p>"Platform ini sangat bagus dan mudah. Luar biasa, Pintaar adalah solusi untuk pendidikan di Indonesia."</p>					
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/luqman.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h4>Luqman Hakim</h4>
-							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
+                            <h4>Luqman Hakim, S.Kom.</h4>
+							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer UI</p>
                             <p>--</p>
-                            <p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
-							
+                            <p>"Ini merupakan solusi belajar terbaru. Dengan materi pelajaran yang bagus dan pengajar yang berpengalaman, masyarakat Indonesia bisa belajar banyak hal dengan mudah."</p>		
 						</div>
                                  
                     </div>
