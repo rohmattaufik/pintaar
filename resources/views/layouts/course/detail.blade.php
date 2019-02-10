@@ -52,7 +52,7 @@
                 @if($course->harga == 0)
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
                 @else
-                  <h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                  <h2><strike>Rp 50.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
                 @endif  
                 <br>
