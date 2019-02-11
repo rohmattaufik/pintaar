@@ -160,15 +160,17 @@ class CourseOrderController extends MailController
           $noOrder = $simpleDate.$suffix;
           $courseOrder->update(['no_order' => $noOrder]);
         }
-
-        $user_yang_membeli = User::find(Auth::user()->id);
-
-        $courses_that_bougth = self::get_courses_that_bougth($cart->id);
-		
+	
 		$total_price = $cart->total_price;
+    	if($total_price != 0) {
+	
+			$user_yang_membeli = User::find(Auth::user()->id);
 
-        self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
-
+			$courses_that_bougth = self::get_courses_that_bougth($cart->id);
+		
+		
+			self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
+		}
         return $courseOrder;
 
 	  }
