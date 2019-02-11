@@ -35,8 +35,8 @@
                 <div style="color:green;"><i class="fas fa-check-circle fa-7x"></i></div>
                 <br>
                 <h4>Bukti pembayaran telah kami terima!</h4>
-                <p>Silahkan tunggu dalam 1x24 jam dan kamu akan bisa menikmati kelas yang sudah dibeli!</p>
-                <a href="{{ route('courses') }}" class="btn btn-primary btn-lg">Kembali ke halaman utama</a>  
+                <p>Silahkan tunggu dalam 1x24 jam dan kamu akan bisa menikmati kelas yang sudah dibeli.</p>
+                <a href="{{ route('courses') }}" class="btn btn-primary btn-lg">Beli Kelas Lagi</a>  
               </div>
             </div>
         @endif

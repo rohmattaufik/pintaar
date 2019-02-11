@@ -86,30 +86,30 @@
             <div class="col-md-8">
               <h2>Mau bayar dengan apa?</h2>
               <div class="panel panel-default">
-                <h5 class="panel-heading">Transfer Bank</h5>
+                
                 <div class="panel-body">
                   
                   <div class="form-check">  
-                    <label class="radio-button">Bank BRI
-                      <input class="form-check-input" value="option1" type="radio" checked="checked" name="payment_method" required>
+                    <label class="radio-button">Transfer Bank BNI
+                      <input class="form-check-input" value="payment1" type="radio" checked="checked" name="payment_method" required>
                       <span class="checkmark"></span>
                     </label>
                   </div>
                   <div class="form-check">
-                    <label class="radio-button">Bank Mandiri
-                      <input class="form-check-input" value="option2" type="radio" name="payment_method" required>
+                    <label class="radio-button">Transfer Bank BCA
+                      <input class="form-check-input" value="payment2" type="radio" name="payment_method" required>
                       <span class="checkmark"></span>
                     </label>
                   </div>
                   <div class="form-check">
-                    <label class="radio-button">Bank BNI
-                      <input class="form-check-input" value="option3" type="radio" name="payment_method" required>
+                    <label class="radio-button">Transfer OVO
+                      <input class="form-check-input" value="payment3" type="radio" name="payment_method" required>
                       <span class="checkmark"></span>
                     </label>
                   </div>
                   <div class="form-check">
-                    <label class="radio-button">Bank BCA
-                      <input class="form-check-input" value="option4" type="radio" name="payment_method" required>
+                    <label class="radio-button">Transfer GO-PAY
+                      <input class="form-check-input" value="payment4" type="radio" name="payment_method" required>
                       <span class="checkmark"></span>
                     </label>
                   </div>
@@ -134,7 +134,7 @@
                       </tr>
                     </table>
                     <br>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Bayar</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Bayar Sekarang</button>
                   </li>
                 </ul>
               </div>
