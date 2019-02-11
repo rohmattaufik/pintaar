@@ -30,6 +30,7 @@ Route::prefix('course')->group(function () {
 	Route::get('{id}',['as'=>'course','uses'=>'CourseController@detail']);
 	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
 	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
+	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
 });
 
 Auth::routes();

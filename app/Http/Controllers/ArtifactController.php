@@ -20,9 +20,9 @@ class ArtifactController extends Controller
             ->groupBy('courses.id', 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
             ->get();
 		
-		$list_courses_cook = DB::table('courses')
+		$list_courses_others = DB::table('courses')
             ->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') , 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
-			 ->where('courses.kategori', 1)
+			 ->where('courses.kategori', 4)
 			->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
             ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
             ->leftJoin('rating_courses', 'rating_courses.id_course', '=', 'courses.id')
@@ -30,6 +30,6 @@ class ArtifactController extends Controller
             ->get();
 			
 		
-		return view('index',  ["list_courses_code"=>$list_courses_code],  ["list_courses_cook"=>$list_courses_cook]);
+		return view('index',  ["list_courses_code"=>$list_courses_code],  ["list_courses_others"=>$list_courses_others]);
     }
 }
