@@ -2,8 +2,10 @@
 
 @section('title')
   <title>Pintaar</title>
-  <link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
-  <link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+@endsection
+
+@section('extra-style')
+
 @endsection
 
 @section('content')
@@ -47,38 +49,25 @@
 <div class="col-xs-12">
   <div class="box">
     <div class="box-header">
-        <a href="{{ route('pertanyaan-topik-create', $topik->id)}}" class="btn btn-success pull-left">Tambah Pertanyaan</a>
+      <a href="{{ route('pertanyaan-topik-create', $topik->id)}}" class="btn btn-success pull-left">Tambah Pertanyaan</a>
       <h3 class="box-title">Kuis</h3>
-      
-      <div class="box-tools">
-        <div class="input-group input-group-sm" style="width: 150px;">
-          <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-          
-          <div class="input-group-btn">
-            
-            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- /.box-header -->
-    <div class="box-body table-responsive no-padding">
+    <div class="box-body table-responsive no-padding text-left">
       <table class="table table-hover">
         <tr>
-          <th>Nomor</th>
           <th>Judul Pertanyaan</th>
           <th>Pertanyaan</th>
           <th>Gambar</th>
           <th>Jawaban</th>
-          <th>Opsi_1</th>
-          <th>Opsi_2</th>
-          <th>Opsi_3</th>
-          <th>Opsi_4</th>
-          <th>Action</th>
+          <th>Opsi 1</th>
+          <th>Opsi 2</th>
+          <th>Opsi 3</th>
+          <th>Opsi 4</th>
+          <th>Aksi</th>
         </tr>
         @foreach($topik['pertanyaanTopiks'] as $key => $pertanyaan)
         <tr>
-          <td>{{ ++$key }}</td>
           <td>{{ $pertanyaan->judul_pertanyaan}}</td>
           <td>{{ $pertanyaan->pertanyaan}}</td>
           <td>@if($pertanyaan->gambar != null)<img 
@@ -90,7 +79,7 @@
                 Tidak ada gambar
               @endif  
             </td>
-          <td>{{ $pertanyaan->jawaban}}</td>
+          <td>Opsi {{ $pertanyaan->jawaban}}</td>
           <td>{{ $pertanyaan->opsi_1}}</td>
           <td>{{ $pertanyaan->opsi_2}}</td>
           <td>{{ $pertanyaan->opsi_3}}</td>
@@ -111,11 +100,9 @@
 </div>
   </div>       
 </section>
+@endsection
 
-<script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>
-
+@section('extra-script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
 
 @endsection
