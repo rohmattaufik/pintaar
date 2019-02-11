@@ -13,7 +13,7 @@
                     <h2>Ketika kamu berhenti belajar, saat itu kamu akan mati.</h2>
 					<p>-Albert Einstein</p>
 					<hr>
-                    <p>Pintaar merupakan sebuah platform kelas online yang ingin membantu masyarakat Indonesia memperoleh Ilmu dengan mudah. Saat ini, Pintaar masih menyediakan 2 katogori kelas, yaitu kelas pemrograman dan memasak.</p>
+                    <p>Pintaar merupakan sebuah platform kelas online yang ingin membantu masyarakat Indonesia memperoleh Ilmu dengan mudah.</p>
                     <a href="#blog-page" class="button white">Ayo Belajar Sekarang</a>
                 </div>
                 <div class="hidden-xs hidden-sm col-md-5 text-right">
@@ -138,16 +138,16 @@
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
-                                <img src="{{ URL::asset('images/afiq.jpg') }}" alt="" width="100" height="200">
+                                <img src="{{ URL::asset('images/bagus.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h4>Bagus Aris Saputra, ST, Mahasiswa National Taiwan University of Science and Technology</h4>
-                            <p>Software Engineer dan Alumni Fakultas Ilmu Komputer UI</p>
+                            <h4>Bagus Aris Saputra, ST </h4>
+                            <p>Mahasiswa National Taiwan University of Science and Technology</p>
                             <p>--</p>
                             <p>"Sarana yang tepat untuk orang yang haus ilmu"</p>
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
-                                <img src="{{ URL::asset('images/luqman.jpg') }}" alt="" width="100" height="200">
+                                <img src="{{ URL::asset('images/said.jpg') }}" alt="" width="100" height="200">
                             </div>
                             <h4>Said Iskandar, SIA</h4>
 							              <p>Mahasiswa FISIP UI</p>
