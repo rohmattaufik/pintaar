@@ -8,6 +8,39 @@
  
 @endsection
 
+@section('extra-script')
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Feb 15, 2019 23:59:55").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("timer-diskon").innerHTML = days + " hari " + hours + " jam "
+  + minutes + " menit " + seconds + " detik ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer-diskon").innerHTML = "DISKON TELAH HABIS!";
+  }
+}, 1000);
+</script>
+@endsection
+
 @section('content')
 	<script>
 	  fbq('track', 'ViewContent');
@@ -16,25 +49,15 @@
 <section class="section-padding">		 
 		<div class="container">
 
-<<<<<<< HEAD
-      @if((empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3) && $course->harga == 0)
-        <div class="row">
-          <div class="col-xs-12">	
-  			    <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4><strong>Pemberitahuan!</strong> Saat ini, kelas ini masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
-            </div>
-          </div>
-        </div>
-=======
-      @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
+
+	  @if((empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3))
         
             @if ($course->harga == 0)
               <div class="row">
                 <div class="col-xs-12 col-md-12"> 
         			    <div class="alert alert-danger alert-dismissible" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
+                     <h4><strong>Pemberitahuan!</strong> Saat ini, kelas ini masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
                   </div>
                 </div>
               </div>
@@ -43,14 +66,14 @@
                 <div class="col-xs-12 col-md-12"> 
                   <div class="alert alert-danger alert-dismissible text-center" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4>Kelas ini diskon 50% hingga 15 Februari 2019</h4>
+                      <h4>Kelas ini diskon 90% hingga 15 Februari 2019</h4>
                       <h4 id="timer-diskon"></h4>
                   </div>
                 </div>
               </div>
             @endif
          
->>>>>>> edee9aaaabab5a40d96e81fe08d83821ce2c585e
+
       @endif
 
       <div class="row">
@@ -64,17 +87,18 @@
                 @if($course->harga == 0)
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
                 @else
-                  <h2><strike>Rp 50.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                  <h2><strike>Rp 100.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
                 @endif  
                 <br>
                 <br>
-                {!! html_entity_decode($course->deskripsi) !!}
+               
               @else
                 <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
                 <br>
                 <br>
-              @endif    
+              @endif
+			   {!! html_entity_decode($course->deskripsi) !!}
           </div>
           <div class="col-xs-12 col-md-5">
               <div class="embed-responsive embed-responsive-16by9">
@@ -197,35 +221,3 @@
 
 @endsection
 
-@section('extra-script')
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("Feb 15, 2019 23:59:55").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get todays date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("timer-diskon").innerHTML = days + " hari " + hours + " jam "
-  + minutes + " menit " + seconds + " detik ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer-diskon").innerHTML = "DISKON TELAH HABIS!";
-  }
-}, 1000);
-</script>
-@endsection
