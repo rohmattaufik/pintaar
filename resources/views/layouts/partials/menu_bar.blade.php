@@ -1,5 +1,39 @@
 <body data-spy="scroll" data-target="#primary-menu">
     <!--Mainmenu-area-->
+
+    <style type="text/css">
+        .thumbnail img {
+          max-width: 100%;
+          height: auto;
+        }
+
+        .row.display-flex {
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .thumbnail {
+          height: 95%;
+        }
+        .thumbnail {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .thumbnail .caption {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 95%;
+        }
+        /*
+        .thumbnail p, .thumbnail h4 {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }*/
+      </style>
+
+
     <div class="mainmenu-area" data-offset-top="100">
         <div class="container">
             <!--Logo-->
@@ -17,10 +51,23 @@
             <nav class="collapse navbar-collapse" id="primary-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    
-                        
-                    @if (Auth::guest())
-                            <li><a href="{{ route('courses') }}">Semua Kelas</a></li>
+					
+					  <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Kategori Kelas <span class="caret"></span>
+                                </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ route('courses-category', 1) }}">Kelas Pemrograman</a></li>
+                                <li><a href="{{ route('courses-category', 2) }}">Kelas Bahasa</a></li>
+								<li><a href="{{ route('courses-category', 3) }}">Kelas Bisnis</a></li>
+								<li><a href="{{ route('courses-category', 4) }}">Kelas Lainnya</a></li>
+							</ul>
+                       </li>
+					
+					
+					@if (Auth::guest())
+                            
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ route('register') }}">Daftar</a></li>
@@ -28,12 +75,16 @@
                         </ul>
                     @elseif (Auth::user()->id_role == 2)
                             <li><a href="{{ route('course-index')}}">Kelola Kelas</a></li>
-                            <!-- <li><a href="{{ route('history_pembelian_course') }}">Laporan Pembelian</a></li> -->
+                            <li><a href="{{ route('history_pembelian_course') }}">Laporan Pembelian</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 @inject('notifications', 'App\Services\NotificationService')
-                                <a href="{{ route('notifications') }}">Notifikasi ({{ count($notifications->getAllNotifications()) }})</a>
+                                @if (count($notifications->getAllNotifications()) > 0)
+                                    <a href="{{ route('notifications') }}">Notifikasi <strong style="color:red;">({{ count($notifications->getAllNotifications()) }})</strong></a>
+                                @else
+                                    <a href="{{ route('notifications') }}">Notifikasi</a>
+                                @endif
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -41,7 +92,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Lihat Profil</a></li>
+                                    <!-- <li><a href="{{ route('tutor-edit-profile') }}">Lihat Profil</a></li> -->
                                     <li><a href="{{ route('change-password') }}">Ubah Password</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -86,8 +137,10 @@
                         </ul>
 
                     @else
-                            <li><a href="{{ route('courses') }}">Semua Kelas</a></li>
+                           
                             <li><a href="{{ route('kelas_saya') }}">Kelas Saya</a></li>
+                            <li><a href="{{ route('cart') }}">Keranjang</a></li>
+                            <li><a href="{{ route('course-order') }}">Transaksi</a></li>
                         </ul>
 
 
@@ -108,7 +161,7 @@
                                         </div>
                                     </ul>
                                 @else
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifikasi ({{ count($notifications->getAllNotifications()) }})</a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notifikasi <strong style='color: red;'> ({{ count($notifications->getAllNotifications()) }})</strong></a>
                                     <ul class="dropdown-menu notify-drop">
                                         <div class="drop-content">
                                                 @foreach($notifications->getAllNotifications() as $notification)

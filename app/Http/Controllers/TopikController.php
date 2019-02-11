@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Course;
-use App\Topik;
 use Illuminate\Support\Facades\DB;
-use App\KomentarTopik;
-use App\Notification;
 use Illuminate\Support\Facades\Input;
 use Auth;
+use App\Topik;
 use App\LogUserTontonTopik;
 use App\ReplyKomentarTopik;
 use App\FileTopik;
 use App\PertanyaanTopik;
+use App\Course;
+use App\User;
+use App\KomentarTopik;
+use App\Notification;
 
 class TopikController extends Controller
 {
@@ -58,26 +59,27 @@ class TopikController extends Controller
 
 
         #topik pertama selalu  digratiskan
-        if($list_id_topik-> first()-> id != $id){
+        if($list_id_topik-> first()-> id != $id) {
 
-        $status_pembayaran = DB::table('pembelian_courses')
-                            ->select('status_pembayaran')
-                            ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
-                            ->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
-                            ->where('cart_course.course_id', $id_course)
-                            ->where('cart.user_id', Auth::user()->id)
-                            ->get()->first();
-        #jika yang membuka adalah tutor pembuat kelas tersebut
-        if(Auth::user()-> id == $id_user_tutor){
+            $status_pembayaran = DB::table('pembelian_courses')
+                                ->select('status_pembayaran')
+                                ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
+                                ->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
+                                ->where('cart_course.course_id', $id_course)
+								->where('status_pembayaran', '=', 3)
+                                ->where('cart.user_id', Auth::user()->id)
+                                ->get()->first();
+            
+            #jika yang membuka adalah tutor pembuat kelas tersebut
+            if (Auth::user()-> id == $id_user_tutor) {
+                $status_pembayaran = new \stdClass();
+                $status_pembayaran->status_pembayaran = 3;
+            }
 
-            $status_pembayaran = new \stdClass();
-            $status_pembayaran->status_pembayaran = 3;
-        }
-
-        ##cek pembayaran sudah lunas apa belum
-        if($status_pembayaran == null || $status_pembayaran -> status_pembayaran != 3 ){
-            return redirect()->route('course', ['id' => $id_course]);
-        }
+            ##cek pembayaran sudah lunas apa belum
+            if($status_pembayaran == null || $status_pembayaran -> status_pembayaran != 3 ){
+                return redirect()->route('course', ['id' => $id_course]);
+            }
         }
 
         self::save_log_user_tonton_topik($id);
@@ -96,11 +98,12 @@ class TopikController extends Controller
         }
 
 
-		$comments_and_user = DB::table('komentar_topiks')
-          ->select('komentar_topiks.komentar', 'users.nama', 'komentar_topiks.created_at','komentar_topiks.id')
-					->where('komentar_topiks.id_topik', '=', $id)
-					->leftJoin('users', 'users.id', '=', 'komentar_topiks.id_user')
-          ->get();
+		// $comments_and_user = DB::table('komentar_topiks')
+  //                   ->select('komentar_topiks.komentar', 'users.nama', 'komentar_topiks.created_at','komentar_topiks.id')
+		// 			->where('komentar_topiks.id_topik', '=', $id)
+		// 			->leftJoin('users', 'users.id', '=', 'komentar_topiks.id_user')
+  //                   ->orderBy('created_at', 'desc')
+  //                   ->get();
 
 
           $comments_and_user = KomentarTopik::where('id_topik', $id)
@@ -146,15 +149,8 @@ class TopikController extends Controller
         }
 
         foreach ($commentUser as $idUser) {
-          $notification = Notification::create([
-              "id_user"         => $idUser,
-              "type"            => 1,
-              "id_destination"  => $comment1->id,
-              "description"     => "Seseorang telah membalas komentar anda pada topik ini",
-              'url'             => "topik/".$id
-          ]);
+            $notification = $this->sendNotification($idUser, $id, $comment1->id);
         }
-
 
 
         // simpan komentar level 2
@@ -175,10 +171,43 @@ class TopikController extends Controller
   			$comment->komentar = Input::get('body_comment');
   			$comment->save();
 
-        return redirect(route('topik', ['id' => $id]) . '#commentTitle');
+            // send notification to teacher
+
+            $idUserTutor = DB::table('topiks')
+                            ->select('users.id as id_user_tutor' )
+                            ->leftJoin('courses', 'courses.id', '=', 'topiks.id_course')
+                            ->leftJoin('tutors', 'tutors.id', '=',  'courses.id_tutor')
+                            ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
+                            ->where('topiks.id', '=', $id)
+                            ->get()->first()->id_user_tutor;
+
+            $notification = $this->sendNotification($idUserTutor, $comment->id_topik, $comment->id);
+            
+            return redirect(route('topik', ['id' => $id]) . '#commentTitle');
       }
 
 
+    }
+
+    public function sendNotification($idUserDestination, $idTopik, $idComment)
+    {
+        $user = User::where('id', $idUserDestination)->get()->first();
+        if ($user->id_role == 2) {
+            $message = "Seorang murid telah memberikan komentar pada topik ini";
+        }
+        else {
+            $message = "Seseorang telah memberikan komentar pada topik ini";
+        }
+
+        $notification = Notification::create([
+              "id_user"         => $idUserDestination,
+              "type"            => 1,
+              "id_destination"  => $idComment,
+              "description"     => $message,
+              'url'             => "topik/".$idTopik
+        ]);
+
+        return $notification;
     }
 
     // TUTOR PAGE

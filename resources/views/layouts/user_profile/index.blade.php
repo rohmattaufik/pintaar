@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-  <title>Profile</title>
+  <title>Profil</title>
   <link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
   <link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
 @endsection
@@ -58,52 +58,15 @@
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab">Transaksi</a></li>
+                        <!-- <li><a href="#activity" data-toggle="tab">Transaksi</a></li> -->
                         <!-- <li><a href="#timeline" data-toggle="tab">Timeline</a></li> -->
-                        <li><a href="#settings" data-toggle="tab">Ubah Informasi Diri</a></li>
+                        <li class="active"><a href="#settings" data-toggle="tab">Ubah Informasi Diri</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="active tab-pane" id="activity">
-                            <div class="box box-primary">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Daftar Transaksi</h1>
-                                </div>
-
-                                <div class="box-body table-responsive no-padding text-left">
-
-                                    <table id="table_employee" class="table display responsive no-wrap" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">No</th>
-                                                <th scope="col">Nama Course</th>
-                                                <th scope="col">Harga</th>
-                                                <th scope="col">Status Pembayaran</th>
-                                                <th scope="col">Bukti Bayar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach( $user['transaksi'] as $key => $transaksi)
-                                            <tr>
-                                                <td>{{ ++$key }}</td>
-                                                <td>{{ $transaksi ->  nama_course}}</td>
-                                                <td>Rp {{ $transaksi -> harga }}</td>
-                                                <td>{{ $transaksi -> status_pembayaran}}</td>
-                                                @if($transaksi->bukti_pembayaran != null)
-                                                    <td><a href="{{ URL::asset($transaksi->bukti_pembayaran) }}">Lihat</a></td>
-                                                @else
-                                                    <td>Kosong</td>
-                                                @endif
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <!-- UPDATE INFORMATION TAB -->
-                        <div class="tab-pane" id="settings">
+                        <div class="active tab-pane" id="settings">
                             <div class="col-sm-10 col-sm-offset-2" style="margin-bottom:10px;">
                                 <img id="preview" style="width:128px;height:128px;" src="{{ $user->foto ? URL::asset($user->foto) : URL::asset('images/user-default.png')}}" alt="your image" />
                             </div>

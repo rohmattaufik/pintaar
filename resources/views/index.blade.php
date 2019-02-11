@@ -37,21 +37,21 @@
                 <div class="col-xs-12">
                     <div class="alert alert-danger alert-dismissible" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
+                      <h4><strong>Pemberitahuan!</strong> Saat ini, hampir semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
                     </div>
                     <div class="page-title">
                         <h2>Kelas Pemrograman Website</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row display-flex">
                 @foreach($list_courses_code as $list_course_code)
             
                   
                     <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_course_code->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
                                 <h4>{{$list_course_code->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
@@ -59,7 +59,7 @@
                                 @if($list_course_code->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right">Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right"><strike>Rp 50.000</strike> Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
                                 @endif
                                 
                              </div>
@@ -80,27 +80,27 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-title">
-                        <h2>Kelas Memasak</h2>
+                        <h2>Kelas Lainnya</h2>
                     </div>
                 </div>
             </div>
                
-            <div class="row">
-                @foreach($list_courses_cook as $list_course_cook)
+            <div class="row display-flex">
+                @foreach($list_courses_others as $list_courses_others)
             
                   
                     <div class="col-xs-12 col-md-3">
-                      <a href="{{route(('course'), $list_course_cook->id)}}">
+                      <a href="{{route(('course'), $list_courses_others->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_cook->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_courses_others->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
-                                <h4>{{$list_course_cook->nama_course}}</h4>
-                                <p><span class="ti-user"></span> {{$list_course_cook->nama}}</p>
-                                <p class="starability-result" data-rating="{{ round($list_course_cook->rating) }}"></p>
-                                @if($list_course_cook->harga == 0)
+                                <h4>{{$list_courses_others->nama_course}}</h4>
+                                <p><span class="ti-user"></span> {{$list_courses_others->nama}}</p>
+                                <p class="starability-result" data-rating="{{ round($list_courses_others->rating) }}"></p>
+                                @if($list_courses_others->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right">Rp {{ number_format($list_course_cook->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right">Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</h4>
                                 @endif
                                 
                              </div>
@@ -120,7 +120,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
                     <div class="page-title">
-                        <h2>Testimoni Pengguna Pintaar</h2>
+                        <h2>Testimoni</h2>
                     </div>
                 </div>
             </div>
@@ -129,22 +129,30 @@
                     <div class="testimonials">
                         <div class="testimonial">
                             <div class="testimonial-photo">
+                                <img src="{{ URL::asset('images/odie.jpg') }}" alt="" width="100" height="200">
+                            </div>
+                            <h4>Yudhistira Oktaviandie, S.Si.</h4>
+                            <p>Mahasiswa Berprestasi UI 2017 dan Juara 2 Mahasiswa Berprestasi Nasional</p>
+                            <p>--</p>
+                            <p>"Belajar menjadi lebih mudah dan fleksibel. Cocok untuk mereka yang ingin belajar hal baru, namun memiliki keterbatasan waktu."</p>                            
+                        </div>
+                        <div class="testimonial">
+                            <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/afiq.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h3>Afiq Rasyid Muhammad</h3>
-                            <p>Platform ini sangat bagus dan mudah. Luar biasa Pintaar adalah solusi untuk pendidikan di Indonesia</p>
-							<p>--</p>
-							<p>Software Engineer dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
+                            <h4>Afiq Rasyid Muhammad, S.Kom.</h4>
+                            <p>Software Engineer dan Alumni Fakultas Ilmu Komputer UI</p>
+                            <p>--</p>
+                            <p>"Platform ini sangat bagus dan mudah. Luar biasa, Pintaar adalah solusi untuk pendidikan di Indonesia."</p>					
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/luqman.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h3>Luqman Hakim</h3>
-							<p>Ini merupakan solusi belajar terbaru. Dengan ada Pintaar, pendidikan bagus bisa diakses seluruh masyarakat Indonesia dengan mudah</p>
-							<p>--</p>
-							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer Universitas Indonesia</p>
-								
+                            <h4>Luqman Hakim, S.Kom.</h4>
+							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer UI</p>
+                            <p>--</p>
+                            <p>"Ini merupakan solusi belajar terbaru. Dengan materi pelajaran yang bagus dan pengajar yang berpengalaman, masyarakat Indonesia bisa belajar banyak hal dengan mudah."</p>		
 						</div>
                                  
                     </div>

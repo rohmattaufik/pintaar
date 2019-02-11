@@ -7,16 +7,18 @@
 @section('content')
     <section class="section-padding">
         <div class="container" style="word-wrap: break-word;">
-          <h1>Belajar dapat lebih menyenangkan disini!</h1>
+		  <h1> Ayo Belajar Sekarang!</h1>
+		  <br>
+          <h1>Kelas {{$kategori_kelas_str}}</h1>
           <br>
 
           @foreach($list_courses_with_users as $list_course_with_user)
                @if (($loop->index) % 4  == 0)
-                  <div class="row">
+                  <div class="row display-flex">
                     <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_course_with_user->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
                                 <h4>{{$list_course_with_user->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
@@ -35,7 +37,7 @@
                     <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_course_with_user->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
                                 <h4>{{$list_course_with_user->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
@@ -56,7 +58,7 @@
                    <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_course_with_user->id)}}">
                          <div class="thumbnail">
-                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="">
+                             <img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
                                 <h4>{{$list_course_with_user->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>

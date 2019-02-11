@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-  <title>Pemesanan</title>
+  <title>Keranjang</title>
 @endsection
 
 @section('extra-style')

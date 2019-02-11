@@ -35,8 +35,9 @@
     <script src="{{ URL::asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
     <link rel="stylesheet" href="{{ URL::asset('css/starability-all.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('css/notification.css') }}">
-
-		<!-- Facebook Pixel Code -->
+    @yield('extra-style')
+      
+	<!-- Facebook Pixel Code -->
 
 	<!-- Facebook Pixel Code -->
 	<script>
@@ -61,6 +62,6 @@
 	  src="https://www.facebook.com/tr?id=363120907856774&ev=PageView&noscript=1"
 	/></noscript>
 	<!-- End Facebook Pixel Code -->
-	@yield('extra-style')
+	
    
 </head>

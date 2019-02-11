@@ -37,7 +37,6 @@ class AdminController extends MailController
                             ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
                             ->leftJoin('users', 'users.id', '=', 'cart.user_id')
                             ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
-                            ->orderBy('pembelian_courses.status_pembayaran','ASC')
                             ->orderBy('pembelian_courses.created_at','DESC')
                             ->get();
 
@@ -184,7 +183,7 @@ class AdminController extends MailController
 
   public function approvePaymentWithSharing()
   {
-    $order = DB::table('pembelian_courses')->where('status_pembayaran', 2)->update(['status_pembayaran' => 3]);
+    $order = DB::table('pembelian_courses')->where('status_pembayaran', 6)->update(['status_pembayaran' => 3]);
     return redirect()->back();
   }
 
