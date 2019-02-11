@@ -66,6 +66,7 @@ class TopikController extends Controller
                                 ->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
                                 ->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
                                 ->where('cart_course.course_id', $id_course)
+								->where('status_pembayaran', '=', 3)
                                 ->where('cart.user_id', Auth::user()->id)
                                 ->get()->first();
             
