@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row v-center">
                 <div class="col-xs-12 col-md-7 header-text">
-                    <h2>Ketika kamu berhenti belajar, saat itu kamu akan mati.</h2> 
+                    <h2>Ketika kamu berhenti belajar, saat itu kamu akan mati.</h2>
 					<p>-Albert Einstein</p>
 					<hr>
                     <p>Pintaar merupakan sebuah platform kelas online yang ingin membantu masyarakat Indonesia memperoleh Ilmu dengan mudah. Saat ini, Pintaar masih menyediakan 2 katogori kelas, yaitu kelas pemrograman dan memasak.</p>
@@ -46,8 +46,8 @@
             </div>
             <div class="row display-flex">
                 @foreach($list_courses_code as $list_course_code)
-            
-                  
+
+
                     <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_course_code->id)}}">
                          <div class="thumbnail">
@@ -61,19 +61,19 @@
                                 @else
                                   <h4 class="text-right"><strike>Rp 50.000</strike> Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
                                 @endif
-                                
+
                              </div>
                          </div>
                        </a>
                     </div>
-             
+
               @endforeach
             </div>
         </div>
     </section>
-	
-	
-          
+
+
+
 
   <section class="section-padding" id="blog-page-2">
         <div class="container">
@@ -84,11 +84,11 @@
                     </div>
                 </div>
             </div>
-               
+
             <div class="row display-flex">
                 @foreach($list_courses_others as $list_courses_others)
-            
-                  
+
+
                     <div class="col-xs-12 col-md-3">
                       <a href="{{route(('course'), $list_courses_others->id)}}">
                          <div class="thumbnail">
@@ -102,19 +102,19 @@
                                 @else
                                   <h4 class="text-right">Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</h4>
                                 @endif
-                                
+
                              </div>
                          </div>
                        </a>
                     </div>
-             
+
               @endforeach
-            
+
             </div>
         </div>
     </section>
 
-   
+
     <section class="testimonial-area section-padding gray-bg overlay">
         <div class="container">
             <div class="row">
@@ -134,27 +134,27 @@
                             <h4>Yudhistira Oktaviandie, S.Si.</h4>
                             <p>Mahasiswa Berprestasi UI 2017 dan Juara 2 Mahasiswa Berprestasi Nasional</p>
                             <p>--</p>
-                            <p>"Belajar menjadi lebih mudah dan fleksibel. Cocok untuk mereka yang ingin belajar hal baru, namun memiliki keterbatasan waktu."</p>                            
+                            <p>"Belajar menjadi lebih mudah dan fleksibel. Cocok untuk mereka yang ingin belajar hal baru, namun memiliki keterbatasan waktu."</p>
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/afiq.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h4>Afiq Rasyid Muhammad, S.Kom.</h4>
+                            <h4>Bagus Aris Saputra, ST, Mahasiswa National Taiwan University of Science and Technology</h4>
                             <p>Software Engineer dan Alumni Fakultas Ilmu Komputer UI</p>
                             <p>--</p>
-                            <p>"Platform ini sangat bagus dan mudah. Luar biasa, Pintaar adalah solusi untuk pendidikan di Indonesia."</p>					
+                            <p>"Sarana yang tepat untuk orang yang haus ilmu"</p>
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/luqman.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h4>Luqman Hakim, S.Kom.</h4>
-							<p>Founder Startup dan Alumni Fakultas Ilmu Komputer UI</p>
+                            <h4>Said Iskandar, SIA</h4>
+							              <p>Mahasiswa FISIP UI</p>
                             <p>--</p>
-                            <p>"Ini merupakan solusi belajar terbaru. Dengan materi pelajaran yang bagus dan pengajar yang berpengalaman, masyarakat Indonesia bisa belajar banyak hal dengan mudah."</p>		
-						</div>
-                                 
+                            <p>"Bodoh itu absolut, pintar itu pilihan. Makanya, ayo belajar"</p>
+						             </div>
+
                     </div>
                 </div>
             </div>
@@ -163,5 +163,5 @@
 
 
 
-    
+
 @endsection
