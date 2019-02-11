@@ -35,12 +35,7 @@ class DatabaseSeeder extends Seeder
 		   
 
         DB::table('tutors')->insert([
-                  'id_user' => '1',
-                  'mata_pelajaran' => '',
-                  'video_profil' => '',
-                  'lama_mengajar' => '',
-                  'pendidikan' => '',
-                  'story' => ''
+                  'id_user' => '1'
         ]);
 
         DB::table('users')->insert([

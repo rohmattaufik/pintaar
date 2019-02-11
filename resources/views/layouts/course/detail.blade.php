@@ -5,7 +5,11 @@
 @endsection
 
 @section('extra-style')
- 
+<style type="text/css">
+.morecontent span {
+  display: none;
+}
+</style>
 @endsection
 
 @section('content')
@@ -47,7 +51,7 @@
                
 		          <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
                
-              <p><strong>Dibuat oleh {{ $course -> nama }} </strong><p>
+              <p><strong>Dibuat oleh {{ $course->creator->users->nama }} </strong><p>
               @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
                 @if($course->harga == 0)
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
@@ -103,11 +107,31 @@
           </div>
       </div>
 
+        <div class="row">
+          <div class="col-xs-12 col-md-7">
+              <h3>Pengajar</h3>
+              <br>
+              @foreach($course->tutors as $tutorCourse)
+                <div class="row">
+                    <div class="col-xs-2 col-md-2">
+                    <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) }}" alt="User profile picture">
+                    </div>
+                  <div class="col-xs-10 col-md-10">
+                    <h5>{{ $tutorCourse->tutor->name }}</h5>
+                    <p class="more">{{ $tutorCourse->tutor->story }}</p> 
+
+                  </div>
+                </div>
+              @endforeach
+          </div>
+        </div>
+
 
             
 
             @if(!empty($status_pembayaran) && $status_pembayaran->status_pembayaran == 3 && empty($status_pernah_review))
               <meta name="csrf-token" content="{{ csrf_token() }}">
+              <br>
               <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-7"> 
                     <h3>Bagaimana pendapat kamu tentang kelas ini?</h3>
@@ -186,6 +210,45 @@
 @endsection
 
 @section('extra-script')
+<script>
+$(document).ready(function() {
+  var showChar = 200;
+  var ellipsestext = "...";
+  var moretext = "Lihat semua";
+  var lesstext = "Tutup";
+  $('.more').each(function() {
+    var content = $(this).html();
+
+    if(content.length > showChar) {
+
+      var c = content.substr(0, showChar);
+      var h = content.substr(showChar-1, content.length - showChar);
+
+      var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+      $(this).html(html);
+    }
+
+  });
+
+  $(".morelink").click(function(){
+    if($(this).hasClass("less")) {
+      $(this).removeClass("less");
+      $(this).html(moretext);
+    } else {
+      $(this).addClass("less");
+      $(this).html(lesstext);
+    }
+    $(this).parent().prev().toggle();
+    $(this).prev().toggle();
+    return false;
+  });
+});
+
+</script>
+
+
+
 <script>
 // Set the date we're counting down to
 var countDownDate = new Date("Feb 15, 2019 23:59:55").getTime();

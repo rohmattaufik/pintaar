@@ -94,7 +94,7 @@
       <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <a href="{{ route('topik-create', $course->id)}}" class="btn btn-success pull-left">Tambah Pengajar</a>
+              <a href="{{ route('add-tutor-course', $course->id)}}" class="btn btn-success pull-left">Tambah Pengajar</a>
               <h3 class="box-title">Daftar Pengajar</h3>
             </div>
             <!-- /.box-header -->
@@ -106,16 +106,19 @@
                   <th>Deskripsi</th>
                   <th width="20%">Aksi</th>
                 </tr>
-                
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <a href="#" class="btn btn-info">Ubah</a>
-                    <a href="#" class="btn btn-danger">Hapus</a>
-                  </td>
-                </tr>
+                @foreach($course->tutors as $key => $tutorCourse)
+                  <tr>
+                    <td>{{ $tutorCourse->tutor->name }}</td>
+                    <td>
+                      <img src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) }}" width="500" height="500" alt="Sorry, Fail load image"></img>
+                    </td>
+                    <td>{{ $tutorCourse->tutor->story }}</td>
+                    <td>
+                      <a href="{{ route('edit-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-info">Ubah</a>
+                      <a href="{{ route('edit-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-danger">Hapus</a>
+                    </td>
+                  </tr>
+                @endforeach
                
               </table>
             </div>

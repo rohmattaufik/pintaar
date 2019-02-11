@@ -9,7 +9,7 @@ class Tutor extends Model
     protected $table = 'tutors';
 
     protected $fillable = [
-        'id_user', 'mata_pelajaran', 'video_profil', 'lama_mengajar', 'pendidikan', 'story'
+        'id_user', 'name', 'profile_photo', 'lama_mengajar', 'pendidikan', 'story'
     ];
 
   public function users()

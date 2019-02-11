@@ -69,6 +69,14 @@ Route::group(['middleware'=>'auth'], function() {
 			Route::get('delete/{id}', 'CourseController@delete')->name('course-delete');
 
 			Route::get('detail/{id}', 'CourseController@get_course_detail')->name('course-detail');
+
+			Route::get('/{courseID}/tutor-course', 'CourseController@addTutor')->name('add-tutor-course');
+
+			Route::get('/{courseID}/tutor-course/{tutorID}/edit', 'CourseController@editTutor')->name('edit-tutor-course');
+
+			Route::get('/{courseID}/tutor-course/{tutorID}/delete', 'CourseController@deleteTutor')->name('delete-tutor-course');
+
+			Route::post('tutor-course-submit', 'CourseController@storeTutor')->name('tutor-course-submit');
 		});
 			
 		// TUTOR TOPIK
