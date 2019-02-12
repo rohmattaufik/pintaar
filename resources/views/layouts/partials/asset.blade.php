@@ -30,9 +30,9 @@
     <link rel="stylesheet" href="{{ URL::asset('css/animate.css') }}">
     <!-- Main-Stylesheets -->
     <link rel="stylesheet" href="{{ URL::asset('css/normalize.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}?v=1.1">
     <link rel="stylesheet" href="{{ URL::asset('css/responsive.css') }}">
-    <script src="{{ URL::asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    
     <link rel="stylesheet" href="{{ URL::asset('css/starability-all.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('css/notification.css') }}">
     @yield('extra-style')

@@ -40,7 +40,7 @@
                       <h4><strong>Pemberitahuan!</strong> Saat ini, semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
                     </div>
                     <div class="page-title">
-                        <h2>Kelas Pemrograman Website</h2>
+                        <h2>Kelas Pemrograman</h2>
                     </div>
                 </div>
             </div>

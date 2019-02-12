@@ -50,7 +50,7 @@
 	<!--Vendor-JS-->
 	<script src="{{ URL::asset('js/vendor_js/jquery-1.12.4.min.js') }}"></script>
 	<script src="{{ URL::asset('js/vendor_js/bootstrap.min.js') }}"></script>
-	
+	<script src="{{ URL::asset('js/vendor_js/modernizr-2.8.3.min.js') }}"></script>
 	<!--Plugin-JS-->
 	<script src="{{ URL::asset('js/owl.carousel.min.js') }}"></script>
 	<script src="{{ URL::asset('js/contact-form.js') }}"></script>
