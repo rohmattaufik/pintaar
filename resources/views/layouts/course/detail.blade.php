@@ -88,8 +88,19 @@ var x = setInterval(function() {
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
                 @else
                   <h2><strike>Rp 100.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-                  <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
-                @endif  
+                  <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion()" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+				  
+				<script>
+				function trackWebConversion() {
+				
+				  fbq('track', 'Purchase', {
+					value: {{ $course->harga }},
+					currency: 'IDR',
+				  });
+
+				}
+				</script>
+			   @endif  
                 <br>
                 <br>
                
