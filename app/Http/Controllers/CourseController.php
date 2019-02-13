@@ -48,22 +48,30 @@ class CourseController extends Controller
   public function detail($id)
   {
 		$course = DB::table('courses')
-            ->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
-            ->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
-            ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
-            ->where('courses.id', $id)
-            ->get()->first();
+				->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
+				->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
+				->leftJoin('users', 'users.id', '=', 'tutors.id_user')
+				->where('courses.id', $id)
+				->get()->first();
 
         $rating = DB::table('rating_courses')
-            ->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
-            ->where('rating_courses.id_course', $id)
+				->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
+				->where('rating_courses.id_course', $id)
                 ->get()->first();
 				
         $list_review = DB::table('review_courses')
-            ->leftJoin('users', 'users.id', '=', 'review_courses.id_user')
-            ->where('review_courses.id_course', $id)
-            ->get();
-
+						->leftJoin('users', 'users.id', '=', 'review_courses.id_user')
+						->where('review_courses.id_course', $id)
+						->get();
+			
+		$count_student_learned = DB::table('pembelian_courses')
+								->select('id_user')
+								->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
+								->where('cart_course.course_id', $id)
+								->distinct()
+								->count();
+								
+		
         if (Auth::user()){
 
             $status_pembayaran = DB::table('pembelian_courses')
@@ -75,14 +83,9 @@ class CourseController extends Controller
                         ->where('cart.user_id', Auth::user()->id)
                         ->get()->first();
 
-            // $status_pembayaran = self::check_and_set_valid_date_course_oder($status_pembayaran);
-
-
             if(Auth::user()-> id == $course-> id_user_tutor){
                         $status_pembayaran = new \stdClass();
                         $status_pembayaran->status_pembayaran = 3;
-                        $status_pembayaran->waktu_valid_pembelian = "-";
-                        $status_pembayaran->waktu_disetujui = "-";
             }
 
             $status_pernah_review = DB::table('review_courses')
@@ -90,34 +93,7 @@ class CourseController extends Controller
                                     ->where('review_courses.id_user', Auth::user()->id)
                                     ->where('review_courses.id_course', $id)
                                     ->get()->first();
-
-
-            $list_topik = DB::table('topiks')
-                            ->select('topiks.id', 'topiks.penjelasan', 'topiks.judul_topik')
-                            ->leftJoin('log_user_tonton_topik', 'log_user_tonton_topik.id_topik', '=', 'topiks.id')
-                            ->where('topiks.id_course', $id)
-                            ->orderBy('topiks.created_at','ASC')
-                            ->get();
-
-
-            $list_topik = Topik::where('id_course', $id)->get();
-
-            # mapping topik by parent
-            $list_topik_parents = array();
-            $list_topik_childs  = array();
-            $list_topik_by_id_parent = array();
-            foreach ($list_topik as $idx => $topik)
-            {
-                if ($topik['parent_id'] == null)
-                    $list_topik_parents[] = $topik;
-                else
-                    $list_topik_childs[]  = $topik;
-            }   
-            foreach ($list_topik_childs as $idx => $list_topik_child)
-                $list_topik_by_id_parent[$list_topik_child['parent_id']][] = $list_topik_child;
-            foreach ($list_topik_parents as $idx => $list_topik_parent)
-                $list_topik_parents[$idx]['childs'] = !empty($list_topik_by_id_parent[$list_topik_parent['id']]) ? $list_topik_by_id_parent[$list_topik_parent['id']] : array();
-            $list_topik = $list_topik_parents;
+           
         }
         else
         {
@@ -125,9 +101,15 @@ class CourseController extends Controller
 
             $status_pernah_review = null;
 
-            $list_topik = Topik::where('id_course', $id)->get();
+        }
+		$list_topik = self::mapping_topik_by_parent($id);
 
-            # mapping topik by parent
+		return view('layouts.course.detail',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
+    }
+	
+	public function mapping_topik_by_parent($id_course){
+	
+			$list_topik = Topik::where('id_course', $id_course)->get();
             $list_topik_parents = array();
             $list_topik_childs  = array();
             $list_topik_by_id_parent = array();
@@ -143,11 +125,9 @@ class CourseController extends Controller
             foreach ($list_topik_parents as $idx => $list_topik_parent)
                 $list_topik_parents[$idx]['childs'] = !empty($list_topik_by_id_parent[$list_topik_parent['id']]) ? $list_topik_by_id_parent[$list_topik_parent['id']] : array();
             $list_topik = $list_topik_parents;
-
-        }
-
-      return view('layouts.course.detail',  ["status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
-    }
+		
+			return $list_topik;
+	}
 
 	public function course_review_post(Request $request, $id)
 	{

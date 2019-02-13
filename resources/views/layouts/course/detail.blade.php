@@ -83,6 +83,7 @@ var x = setInterval(function() {
 		          <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
                
               <p><strong>Dibuat oleh {{ $course -> nama }} </strong><p>
+			  <p> Murid yang sudah mengambil: {{ $count_student_learned}} </p>
               @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
                 @if($course->harga == 0)
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
