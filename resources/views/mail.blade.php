@@ -1,11 +1,16 @@
+<h4>Hai {{ $name }},</h4>
+<p>Terimakasih telah&nbsp;membeli kelas:&nbsp; {!! $courses_that_bougth !!}, dengan nomor pesanan: {!! $noOrder !!} <br /><br /></p>
+<p>Segera bayar pesananmu sebesar: <strong>Rp {!! $totalPrice !!}</strong></p>
+<p>Silahkan bayar pesananmu ke salah satu akun dibawah ini:</p>
 
-<p>Hai, {{ $name }}</p>
-<br>
-<p>Terimakasih telah&nbsp;membeli kelas:&nbsp; {!! $courses_that_bougth !!}, dengan nomor tagihan {!! $noOrder !!} <br /><br /></p>
-<p><span style="font-size: 13pt;">Segera bayar tagihan mu sebesar: Rp. {!! $totalPrice !!} </span></p>
-<p><br />Silahkan bayar tagihan ke salah satu akun dibawah ini:</p>
-<br>
-<p style="padding-left: 30px;"><span style="font-size: 11pt;">BNI:nomor rekening&nbsp;<strong>0302916703</strong>&nbsp;a/n&nbsp;<strong>Muhammad Luqman Hakim<br /></strong>BCA :nomor rekening&nbsp;<strong>4210161274</strong>&nbsp;a/n&nbsp;<strong>Muhammad Luqman Hakim<br /></strong>OVO: <strong>082361888896</strong>&nbsp;a/n&nbsp;<strong>Muhammad Luqman Hakim<br /></strong>Gopay:<strong> 082361888896&nbsp;</strong>a/n<strong>&nbsp;Luqman</strong></span></p>
-<br>
-<p>Jika sudah, silahkan upload pembayaran kamu ke <a href = "pintaar.com/course-order">sini</a>, yang sesuai dengan nomor order kamu. Pembayaran kamu akan dikonfirmasi paling lama 1X24 jam setelah kamu membayar.<br /><br />Jika ada pertanyaan, kamu bisa tanya ke WA (<span style="font-size: 11pt;"><strong>082361888896</strong>&nbsp;- Luqman</span>) atau dengan membalas email ini<br /><br />Terimakasih.<br /><br />Sahabatmu,<br /><br />Luqman</p>
-<p>&nbsp;</p>
+<p style="padding-left: 30px;">
+	BNI : no. rekening&nbsp;<strong>0302916703</strong>&nbsp;a/n&nbsp;<strong>Muhammad Luqman Hakim</strong>
+	<br/>BCA : no. rekening&nbsp;<strong>4210161274</strong>&nbsp;a/n&nbsp;<strong>Muhammad Luqman Hakim</strong>
+	<br/>OVO : <strong> 082361888896</strong>&nbsp;a/n&nbsp;<strong>Muhammad Luqman Hakim</strong>
+	<br/>Gopay : <strong> 082361888896&nbsp;</strong>a/n<strong>&nbsp;Luqman</strong>
+</p>
+
+<p>Jika sudah membayar, silahkan upload bukti pembayaran kamu <a href = "pintaar.com/course-order">disini</a>. Pembayaran kamu akan dikonfirmasi paling lama 1x24 jam setelah kamu membayar.</p>
+<p>Jika kamu membutuhkan bantuan, bisa hubungi kami via WhatsApp disini <strong>082361888896</strong> atau dengan membalas email ini.</p>
+<p>Sahabatmu,</p>
+<p>Luqman</p>
