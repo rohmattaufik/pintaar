@@ -24,6 +24,16 @@ class PembelianCourse extends Model
         return $this->hasOne('App\StatusPembayaran', 'id', 'status_pembayaran');
     }
 
+    public function getUser()
+    {
+        return $this->hasOne('App\User', 'id', 'id_user');
+    }
+
+    public function getCart()
+    {
+        return $this->hasOne('App\Cart', 'id', 'cart_id');
+    }
+
     public function getBoughtCoursesNames($cartID)
     {
         $cart_courses = (Cart::find($cartID))->getCartCourses()->get();

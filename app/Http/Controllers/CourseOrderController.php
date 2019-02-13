@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\DB;
 use App\Course;
 use App\Cart;
 use App\User;
-use App\Email;
+use Mail;
 use App\PembelianCourse;
 use App\CartCourse;
 use App\CourseOrder;
 use Auth;
 use Carbon\Carbon;
+use App\Mail\CourseOrderMail;
 
 class CourseOrderController extends MailController
 {
@@ -164,10 +165,9 @@ class CourseOrderController extends MailController
 	
 		  $total_price = $cart->total_price;
     	if ($total_price != 0) {
-        $mail = new Email;
   			$user_yang_membeli = User::find(Auth::user()->id);
   			$courses_that_bougth = $courseOrder->getBoughtCoursesNames($cart->id);
-  			$sentEmail = $mail->sendPaymentInfo($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
+  			self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
 		  }
       
       return $courseOrder;

@@ -11,7 +11,7 @@ use App\Cart;
 use App\CourseOrder;
 use App\CartCourse;
 use App\Course;
-use App\Email;
+use Mail;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -95,7 +95,6 @@ class AdminController extends MailController
     $id_role_admin = 3;
     
     if ($user -> id_role == $id_role_admin) {
-      $mail = new Email;
       $pembelian_course = PembelianCourse::find($id_pembelian);
 
       $pembelian_course->status_pembayaran = Input::get('status_pembayaran');
@@ -104,7 +103,25 @@ class AdminController extends MailController
 
       $user_yang_membeli = User::find($pembelian_course->id_user);
       $boughtCourses = $pembelian_course->getBoughtCoursesNames($pembelian_course->cart_id);
-      $sentEmail = $mail->sendPaymentStatus($user_yang_membeli->nama, $user_yang_membeli->email, $boughtCourses, $pembelian_course->no_order, $pembelian_course->status_pembayaran);
+      $emailUser = $user_yang_membeli->email;
+
+      // kirim email
+      $data = array('name'=>$user_yang_membeli->nama, 'boughtCourses'=>$boughtCourses, 'noOrder'=> $pembelian_course->no_order);
+      
+      if ($pembelian_course->status_pembayaran == 3) {
+        Mail::send('layouts/email/payment-success', $data, function($message) use ($emailUser, $data) {
+          $message->to($emailUser)->subject('Ayo Belajar Sekarang! Kelas Sudah Dapat Diakses.');
+          $message->from('pintaar.bantuan@gmail.com','Pintaar');
+        });
+      }
+      else {
+        Mail::send('layouts/email/payment-fail', $data, function($message) use ($emailUser, $data) {
+          $message->to($emailUser)->subject('Pembayaran Kelas Belum Berhasil');
+          $message->from('pintaar.bantuan@gmail.com','Pintaar');
+          $message->from('pintaar.bantuan@gmail.com','Pintaar');
+        });
+      }
+        
       return redirect()->route('approve_payment_detail', ['id' => $id_pembelian]);
 
     }
