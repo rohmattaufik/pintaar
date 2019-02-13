@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Course;
 use App\Cart;
 use App\User;
+use App\Email;
 use App\PembelianCourse;
 use App\CartCourse;
 use App\CourseOrder;
@@ -138,7 +139,7 @@ class CourseOrderController extends MailController
         $cart->update(['is_active' => 0]);
 
         // order baru       
-        $courseOrder = CourseOrder::create([
+        $courseOrder = PembelianCourse::create([
           'id_user' => Auth::user()->id,
           'cart_id' => $cart->id,
           'status_pembayaran' => $status_pembayaran,
@@ -163,26 +164,26 @@ class CourseOrderController extends MailController
 	
 		  $total_price = $cart->total_price;
     	if ($total_price != 0) {
+        $mail = new Email;
   			$user_yang_membeli = User::find(Auth::user()->id);
-  			$courses_that_bougth = self::get_courses_that_bougth($cart->id);
-  			self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
+  			$courses_that_bougth = $courseOrder->getBoughtCoursesNames($cart->id);
+  			$sentEmail = $mail->sendPaymentInfo($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
 		  }
       
       return $courseOrder;
 
 	  }
 
-    public function get_courses_that_bougth($cart_id){
+    // public function get_courses_that_bought($cart_id){
 
-              $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
-              $nama_course = "";
-              foreach ($cart_courses as $cart_course){
-                $nama_course = $nama_course.", ".(Course::find($cart_course->course_id))->nama_course;
-              }
+    //           $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
+    //           $nama_course = "";
+    //           foreach ($cart_courses as $cart_course){
+    //             $nama_course = $nama_course.(Course::find($cart_course->course_id))->nama_course.', ';
+    //           }
 
-            
-            return $nama_course;
-    }
+    //         return $nama_course;
+    // }
 
 
     public function test()
