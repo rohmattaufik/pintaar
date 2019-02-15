@@ -22,6 +22,7 @@ class CreateCoursesTable extends Migration
             $table->integer('id_tutor');
             $table->string('video');
 			$table->integer('kategori');
+            $table->integer('isPublished')->nullable();
             $table->timestamps();
         });
     }

@@ -70,6 +70,8 @@ Route::group(['middleware'=>'auth'], function() {
 			Route::get('delete/{id}', 'CourseController@delete')->name('course-delete');
 
 			Route::get('detail/{id}', 'CourseController@get_course_detail')->name('course-detail');
+
+			Route::get('publish/{id}', 'CourseController@publishCourse')->name('publish-course');
 		});
 			
 		// TUTOR TOPIK
