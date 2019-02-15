@@ -183,17 +183,11 @@ class CourseController extends Controller
 	public function category($id_category)
 	{
 
-				
-      $list_courses_with_users = DB::table('courses')
-            ->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') , 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
-            ->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
-            ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
-            ->leftJoin('rating_courses', 'rating_courses.id_course', '=', 'courses.id')
-			 ->where('courses.kategori', '=', $id_category)
-			->groupBy('courses.id', 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
-            ->get();
+	    $course = new Course;	
+      
+		$list_courses_with_users = $course->getAllCourseByCategory($id_category);
 		
-		$kategori_kelas_str = "";
+        $kategori_kelas_str = "";
 		
 		switch ($id_category) {
 			case 1:
@@ -327,6 +321,14 @@ class CourseController extends Controller
     public function delete($id)
     {
         Course::whereId($id)->delete();
+        return redirect()->back();
+    }
+
+    public function publishCourse($id)
+    {
+        $course = Course::whereId($id)->first();
+        $course->isPublished = 1;
+        $course->update();
         return redirect()->back();
     }
 

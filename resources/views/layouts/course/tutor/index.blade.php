@@ -13,41 +13,30 @@
 <div class="col-xs-12">
   <div class="box">
     <div class="box-header">
-        <a href="{{ route('course-create')}}" class="btn btn-success pull-left">Tambah Kelas</a>
+      <a href="{{ route('course-create')}}" class="btn btn-success pull-left">Buat Kelas Baru</a>
       <h3 class="box-title">Daftar Kelas</h3>
-
-      <div class="box-tools">
-        <div class="input-group input-group-sm" style="width: 150px;">
-          <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-          <div class="input-group-btn">
-
-            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
       <table class="table table-hover text-left">
         <tr>
           <th>Nomor</th>
-          <th>Course Name</th>
+          <th>Nama Kelas</th>
           <th>Harga</th>
-          <th>Foto</th>
           <th>Aksi</th>
         </tr>
         @foreach($courses as $key => $course)
         <tr>
           <td>{{ ++$key }}</td>
           <td>{{ $course->nama_course}}</td>
-          <td>Rp. {{ $course->harga}}</td>
-          <td><img style="width:200px; height:200px;" src='{{URL::asset("images/gambar_course/".$course->foto)}}'></td>
+          <td>Rp {{ $course->harga}}</td>
           <td>
-            <a href="{{ route('course-detail',$course->id)}}" class="btn btn-primary">Detail</a>
-            <a href="{{ route('course-update', $course->id) }}" class="btn btn-info">Update</a>
-            <a href="{{ route('course-delete',$course->id)}}" class="btn btn-danger">Delete</a>
-            <a href="{{ route('course',$course->id)}}" class="btn btn-default">Preview</a>
+            <a href="{{ route('course-detail',$course->id)}}" class="btn btn-primary">Lihat</a>
+            <a href="{{ route('course-update', $course->id) }}" class="btn btn-info">Ubah</a>
+            <a href="{{ route('course',$course->id)}}" class="btn btn-default" target="_blank">Lihat Sebagai Murid</a>
+            
+            <a href="{{ route('publish-course',$course->id)}}" class="btn btn-danger">Rilis</a>
+            
           </td>
         </tr>
         @endforeach

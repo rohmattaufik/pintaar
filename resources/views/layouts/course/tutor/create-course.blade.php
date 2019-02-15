@@ -22,15 +22,15 @@
               
                 <div class="form-group">
                   <label for="name">Nama Kelas</label>
-                  <input type="text" class="form-control" name="nama_course" id="name" value="{{ $course != null ? $course->nama_course : null }}" placeholder="">
+                  <input type="text" class="form-control" name="nama_course" id="name" value="{{ $course != null ? $course->nama_course : null }}" required placeholder="">
                 </div>
                 <div class="form-group">
                   <label for="harga">Harga</label>
-                  <input type="number" class="form-control" name="harga" id="harga" value="{{ $course != null ? $course->harga : null }}" placeholder="Isi 0 untuk kelas gratis">
+                  <input type="number" class="form-control" name="harga" id="harga" value="{{ $course != null ? $course->harga : null }}" required placeholder="Isi 0 untuk kelas gratis">
                 </div>
                 <div class="form-group">
                   <label for="foto">Gambar Kelas</label>
-                  <input type="file" id="foto" name="foto">                
+                  <input type="file" id="foto" name="foto" required>                
                 </div>
                 @if($course != null and $course->foto != null and $course->foto != "")
                   <img id="preview_image" src="{{ URL::asset('images/gambar_course/'.$course->foto) }}" width="200" height="200"></img>
@@ -48,7 +48,7 @@
                 @endif
                 <div class="form-group">
                   <label for="deskripsi">Deskripsi</label>
-                  <textarea id="deskripsi-editor" class="form-control" rows="5" name="deskripsi">{{ $course != null ? $course->deskripsi : null}}</textarea>
+                  <textarea id="deskripsi-editor" class="form-control" rows="5" name="deskripsi" required>{{ $course != null ? $course->deskripsi : null}}</textarea>
                 </div>
                 
                 <div class="form-group">
