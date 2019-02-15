@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Input;
 use Auth;
 use Carbon\Carbon;
 
-class CourseController extends Controller
+class CourseController extends CourseOrderController
 {
     /**
      * Create a new controller instance.
@@ -40,8 +40,10 @@ class CourseController extends Controller
             ->leftJoin('rating_courses', 'rating_courses.id_course', '=', 'courses.id')
             ->groupBy('courses.id', 'nama_course','users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi')
             ->get();
-
-
+		
+		
+		
+		
         return view('layouts.course.index', ["list_courses_with_users"=>$list_courses_with_users]);
    }
 
@@ -209,7 +211,13 @@ class CourseController extends Controller
 				$kategori_kelas_str = "Lainnya";
 				break;
 		}
-	
+		
+		
+		
+
+		
+					
+		
         return view('layouts.course.index', ["kategori_kelas_str"=>$kategori_kelas_str, "list_courses_with_users" => $list_courses_with_users]);
 	}
 	

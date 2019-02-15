@@ -28,16 +28,33 @@ class Kernel extends ConsoleKernel
     {
 
         $schedule->call(function () {
-          self::update_status_pembayaran_when_invalid();
+          self::job_send_email_reminder_order();
         })->daily();
     }
-    protected function update_status_pembayaran_when_invalid()
+    protected function job_send_email_reminder_order()
     {
-          DB::table('pembelian_courses')
-                ->where('pembelian_courses.waktu_valid_pembelian'  , '='  , Carbon::now()->format('Y-m-d') )
-                ->where('pembelian_courses.status_pembayaran', 3 )
-                ->update(['status_pembayaran' => 6]);
-    }
+
+		$pembelians_course_not_pay_yet= DB::table('pembelian_courses')
+					->select('pembelian_courses.id_user', 'pembelian_courses.cart_id', 'cart.total_price', 'pembelian_courses.no_order',  'pembelian_courses.created_at')
+					->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
+					->leftJoin('users', 'users.id', '=', 'cart.user_id')
+					->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
+					->where('cart.total_price', '>', 0)
+					->whereDate('pembelian_courses.created_at', '=', Carbon::yesterday()->toDateString())
+					->where('pembelian_courses.status_pembayaran', 1 )
+					->get();
+					
+
+		foreach ($pembelians_course_not_pay_yet as $pembelian_course_not_pay_yet){ 
+		
+			
+			app()->call('App\Http\Controllers\CourseOrderController@send_email_reminder', 
+				[$pembelian_course_not_pay_yet->id_user, 
+				 $pembelian_course_not_pay_yet->cart_id,
+				 $pembelian_course_not_pay_yet->total_price, 
+				 $pembelian_course_not_pay_yet->no_order ]);
+		}
+	}
     /**
      * Register the Closure based commands for the application.
      *

@@ -161,20 +161,26 @@ class CourseOrderController extends MailController
           $courseOrder->update(['no_order' => $noOrder]);
         }
 	
-		$total_price = $cart->total_price;
-    	if($total_price != 0) {
-	
-			$user_yang_membeli = User::find(Auth::user()->id);
-
-			$courses_that_bougth = self::get_courses_that_bougth($cart->id);
+		self::send_email_reminder(Auth::user()->id, $cart->id, $cart->total_price, $noOrder);
 		
 		
-			self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
-		}
         return $courseOrder;
 
-	  }
+	}
+	
+	public function send_email_reminder($user_id, $cart_id, $total_price, $noOrder) {
+	
+    	if($total_price != 0) {
+	
+			$user_that_bought = User::find($user_id);
 
+			$courses_that_bougth = self::get_courses_that_bougth($cart_id);
+		
+			self::html_email($user_that_bought->nama, $user_that_bought->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
+		}
+		
+	}
+	
     public function get_courses_that_bougth($cart_id){
 
               $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
@@ -187,14 +193,6 @@ class CourseOrderController extends MailController
             return $nama_course;
     }
 
-
-    public function test()
-    {
-        $date = date("Ymd");
-        $simpleDate = substr($date, 2, 4);
-        dd($simpleDate);
-
-    }
 
     public function show($order_no)
     {

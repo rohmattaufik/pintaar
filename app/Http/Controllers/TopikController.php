@@ -98,18 +98,10 @@ class TopikController extends Controller
         }
 
 
-		// $comments_and_user = DB::table('komentar_topiks')
-  //                   ->select('komentar_topiks.komentar', 'users.nama', 'komentar_topiks.created_at','komentar_topiks.id')
-		// 			->where('komentar_topiks.id_topik', '=', $id)
-		// 			->leftJoin('users', 'users.id', '=', 'komentar_topiks.id_user')
-  //                   ->orderBy('created_at', 'desc')
-  //                   ->get();
-
-
           $comments_and_user = KomentarTopik::where('id_topik', $id)
                               ->orderBy('created_at', 'desc')
                               ->get();
-        //dd($comments_and_user);
+        
         return view('layouts.topik.detail', ["topik_after" => $topik_after, "topik_before" => $topik_before,"questions" => $questions,"topik" => $topik, "comments_and_user" => $comments_and_user, "file_topik" => $file_topik ]);
     }
 
