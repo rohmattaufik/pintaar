@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\DB;
 use App\Course;
 use App\Cart;
 use App\User;
+use Mail;
 use App\PembelianCourse;
 use App\CartCourse;
 use App\CourseOrder;
 use Auth;
 use Carbon\Carbon;
+use App\Mail\CourseOrderMail;
 
 class CourseOrderController extends MailController
 {
@@ -138,7 +140,7 @@ class CourseOrderController extends MailController
         $cart->update(['is_active' => 0]);
 
         // order baru       
-        $courseOrder = CourseOrder::create([
+        $courseOrder = PembelianCourse::create([
           'id_user' => Auth::user()->id,
           'cart_id' => $cart->id,
           'status_pembayaran' => $status_pembayaran,
@@ -161,7 +163,8 @@ class CourseOrderController extends MailController
           $courseOrder->update(['no_order' => $noOrder]);
         }
 	
-		self::send_email_reminder(Auth::user()->id, $cart->id, $cart->total_price, $noOrder);
+
+		    self::send_email_reminder(Auth::user()->id, $cart->id, $cart->total_price, $noOrder);
 		
 		
         return $courseOrder;
@@ -181,15 +184,15 @@ class CourseOrderController extends MailController
 		
 	}
 	
-    public function get_courses_that_bougth($cart_id){
+    public function get_courses_that_bougth($cart_id) {
+
 
               $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
               $nama_course = "";
               foreach ($cart_courses as $cart_course){
-                $nama_course = $nama_course.", ".(Course::find($cart_course->course_id))->nama_course;
+                $nama_course = $nama_course.(Course::find($cart_course->course_id))->nama_course.', ';
               }
 
-            
             return $nama_course;
     }
 

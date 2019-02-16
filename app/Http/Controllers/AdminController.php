@@ -8,8 +8,10 @@ use App\Tutor;
 use App\StatusPembayaran;
 use App\PembelianCourse;
 use App\Cart;
+use App\CourseOrder;
 use App\CartCourse;
 use App\Course;
+use Mail;
 use Carbon\Carbon;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -88,57 +90,62 @@ class AdminController extends MailController
 
   public function approve_payment_detail_post($id_pembelian)
   {
-    $idUser          = Auth::user();
+    $idUser = Auth::user();
     $user = User::find($idUser->id);
     $id_role_admin = 3;
-      if($user -> id_role == $id_role_admin){
+    
+    if ($user -> id_role == $id_role_admin) {
+      $pembelian_course = PembelianCourse::find($id_pembelian);
 
-        $pembelian_course = PembelianCourse::find($id_pembelian);
+      $pembelian_course->status_pembayaran = Input::get('status_pembayaran');
 
-        $pembelian_course->status_pembayaran = Input::get('status_pembayaran');
+      $pembelian_course->save();
 
-        if($pembelian_course->status_pembayaran  == 3) {
+      $user_yang_membeli = User::find($pembelian_course->id_user);
+      $boughtCourses = $pembelian_course->getBoughtCoursesNames($pembelian_course->cart_id);
+      $emailUser = $user_yang_membeli->email;
 
-          $pembelian_course->waktu_valid_pembelian = Carbon::now()->addMonths(1)->format('Y-m-d');
-
-        }
-
-        $pembelian_course->save();
-
-
-        $user_yang_membeli = User::find($pembelian_course->id_user);
-
-        // $message = self::get_message_for_email($pembelian_course);
-
-        // self::html_email($user_yang_membeli->nama, $user_yang_membeli->email, Carbon::now()->format('d-m-Y'), $message);
-
-
-         return redirect()->route('approve_payment_detail', ['id' => $id_pembelian]);
-
+      // kirim email
+      $data = array('name'=>$user_yang_membeli->nama, 'boughtCourses'=>$boughtCourses, 'noOrder'=> $pembelian_course->no_order);
+      
+      if ($pembelian_course->status_pembayaran == 3) {
+        Mail::send('layouts/email/payment-success', $data, function($message) use ($emailUser, $data) {
+          $message->to($emailUser)->subject('Ayo Belajar Sekarang! Kelas Sudah Dapat Diakses.');
+          $message->from('pintaar.bantuan@gmail.com','Pintaar');
+        });
       }
-      else{
-
-          return redirect()->route('home');
-
+      else {
+        Mail::send('layouts/email/payment-fail', $data, function($message) use ($emailUser, $data) {
+          $message->to($emailUser)->subject('Pembayaran Kelas Belum Berhasil');
+          $message->from('pintaar.bantuan@gmail.com','Pintaar');
+          $message->from('pintaar.bantuan@gmail.com','Pintaar');
+        });
       }
+        
+      return redirect()->route('approve_payment_detail', ['id' => $id_pembelian]);
+
+    }
+    else {
+      return redirect()->route('home');
+    }
   }
 
 
-  public function get_message_for_email($pembelian_course){
+//   public function get_message_for_email($pembelian_course){
 
-    $status_pembayaran = StatusPembayaran::find((int)$pembelian_course->status_pembayaran)->status;
-    $cart_courses = (Cart::find($pembelian_course->cart_id)) -> getCartCourses()->get();
+//     $status_pembayaran = StatusPembayaran::find((int)$pembelian_course->status_pembayaran)->status;
+//     $cart_courses = (Cart::find($pembelian_course->cart_id)) -> getCartCourses()->get();
 
-    $nama_course = "";
-    foreach ($cart_courses as $cart_course){
-      $nama_course = $nama_course.", ".(Course::find($cart_course->course_id))->nama_course;
-    }
+//     $nama_course = "";
+//     foreach ($cart_courses as $cart_course){
+//       $nama_course = $nama_course.", ".(Course::find($cart_course->course_id))->nama_course;
+//     }
 
-    $message = "<p>Status pembelian anda terhadap kelas yang berjudul ".$nama_course.
-                " sudah berubah menjadi ". $status_pembayaran." dengan nomor order <b>".$pembelian_course->no_order."</b>. </p>";
+//     $message = "<p>Status pembelian anda terhadap kelas yang berjudul ".$nama_course.
+//                 " sudah berubah menjadi ". $status_pembayaran." dengan nomor order <b>".$pembelian_course->no_order."</b>. </p>";
 
-    return $message;
-}
+//     return $message;
+// }
 
   public function createTutor()
   {

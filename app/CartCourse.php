@@ -12,6 +12,6 @@ class CartCourse extends Model
 
 	public function getCourse()
     {
-        return $this->hasOne('App\Course','id');
+        return $this->hasOne('App\Course','id', 'course_id');
     }
 }
