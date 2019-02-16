@@ -113,7 +113,7 @@ class DatabaseSeeder extends Seeder
       ]);
       DB::table('status_pembayarans')->insert([
                      'id' => 2,
-                     'status' => "Belum Disetujui",
+                     'status' => "Sudah Dibayar",
       ]);
       DB::table('status_pembayarans')->insert([
                      'id' => 3,
@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
       ]);
       DB::table('status_pembayarans')->insert([
                      'id' => 6,
-                     'status' => "Langganan Kadaluarsa",
+                     'status' => "Belum Disetujui",
       ]);
 
 
