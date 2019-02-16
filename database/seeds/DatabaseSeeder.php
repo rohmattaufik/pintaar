@@ -22,23 +22,20 @@ class DatabaseSeeder extends Seeder
            'kategori' => 1, 
            'video' => 'fisika_energi.mp4'
         ]);
+
+        DB::table('courses')->insert([
+           'nama_course' => "Fisika Nuklir",
+           'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
+           'harga' => 10000,
+           'id_tutor' => 1,
+           'foto' => 'html-nol.jpg',
+           'kategori' => 1, 
+           'video' => 'fisika_energi.mp4'
+        ]);
 		   
-		   
-
-      
-
-
-
-
-
 
         DB::table('tutors')->insert([
-                  'id_user' => '1',
-                  'mata_pelajaran' => '',
-                  'video_profil' => '',
-                  'lama_mengajar' => '',
-                  'pendidikan' => '',
-                  'story' => ''
+                  'id_user' => '1'
         ]);
 
         DB::table('users')->insert([
@@ -50,7 +47,7 @@ class DatabaseSeeder extends Seeder
                     'id_role' => '2',
                     'password' => bcrypt(123456),
                     'remember_token' => ''
-          ]);
+        ]);
 
           DB::table('users')->insert([
                       'nama' => 'admin',
@@ -68,10 +65,18 @@ class DatabaseSeeder extends Seeder
                  'id_course' => 1,
                  'video' => 'fisika_energi.mp4',
                  'created_at'=> '2017-10-10'
-             ]);
+          ]);
+
+          DB::table('topiks')->insert([
+                 'judul_topik' => 'Energi Cahaya',
+                 'penjelasan' => 'Energi Cahaya merupakan topik yang sangat sering keluar di sbmptn',
+                 'id_course' => 2,
+                 'video' => 'fisika_energi.mp4',
+                 'created_at'=> '2017-10-10'
+          ]);
 
 
-           DB::table('pertanyaan_topiks')->insert([
+          DB::table('pertanyaan_topiks')->insert([
                 'id_topik' => 1,
                 'pertanyaan' => 'Energi panas disebut juga ...?',
                 'judul_pertanyaan' => 'Soal SBMPTN Tahun 2018',
@@ -80,10 +85,10 @@ class DatabaseSeeder extends Seeder
                 'opsi_2' => "Energi Kinetik",
                 'opsi_3' => "Energi Listrik",
                 'opsi_4' =>  "Energi Kalor"
-             ]);
+          ]);
 
 
-             DB::table('topiks')->insert([
+          DB::table('topiks')->insert([
                     'judul_topik' => 'Energi Kalor',
                     'penjelasan' => 'Energi Kalor merupakan topik yang sangat sering keluar di sbmptn',
                     'id_course' => 1,
@@ -91,7 +96,17 @@ class DatabaseSeeder extends Seeder
                     'video' => 'fisika_energi.mp4',
                     'created_at'=> '2017-11-10'
 
-                ]);
+          ]);
+
+          DB::table('topiks')->insert([
+                    'judul_topik' => 'Energi Kalor',
+                    'penjelasan' => 'Energi Kalor merupakan topik yang sangat sering keluar di sbmptn',
+                    'id_course' => 2,
+                    'parent_id' => 2,
+                    'video' => 'fisika_energi.mp4',
+                    'created_at'=> '2017-11-10'
+
+          ]);
 
 
               DB::table('pertanyaan_topiks')->insert([

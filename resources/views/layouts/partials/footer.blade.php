@@ -49,9 +49,8 @@
 
 	<!--Vendor-JS-->
 	<script src="{{ URL::asset('js/vendor_js/jquery-1.12.4.min.js') }}"></script>
-<script src="{{ URL::asset('js/vendor_js/bootstrap.min.js') }}"></script>
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-
+	<script src="{{ URL::asset('js/vendor_js/bootstrap.min.js') }}"></script>
+	<script src="{{ URL::asset('js/vendor_js/modernizr-2.8.3.min.js') }}"></script>
 	<!--Plugin-JS-->
 	<script src="{{ URL::asset('js/owl.carousel.min.js') }}"></script>
 	<script src="{{ URL::asset('js/contact-form.js') }}"></script>
@@ -63,6 +62,29 @@
 	<script src="{{ URL::asset('js/main.js') }}"></script>
 
 	@yield('extra-script')
+
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+		  var showChar = 65;
+		  var ellipsestext = "...";
+		  $('.thumbnail .caption h4').each(function() {
+		    var content = $(this).html();
+
+		    if(content.length > showChar) {
+
+		      var c = content.substr(0, showChar);
+		      var h = content.substr(showChar-1, content.length - showChar);
+
+		      var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span>';
+
+		      $(this).html(html);
+		    }
+
+		  });
+		});
+
+	</script>
 	
 </html>
 

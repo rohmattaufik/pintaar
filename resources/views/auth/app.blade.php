@@ -16,6 +16,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     @yield('title')
 
+    <link rel="shortcut icon" type="image/ico" href="{{ URL::asset('images/favicon.png') }}" />
+
     <!-- CSS -->
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
 

@@ -2,8 +2,10 @@
 
 @section('title')
   <title>Pintaar</title>
-  <link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
-  <link href="{{ URL::asset('css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+@endsection
+
+@section('extra-style')
+  
 @endsection
 
 @section('content')
@@ -11,7 +13,9 @@
   <div class="container">
     <div class="row">
         <div class="col-xs-12">
-      
+          <a href="{{ route('course-update', $course->id) }}" class="btn btn-success">Ubah Informasi Kelas</a>
+          <a href="{{ route('course', $course->id)}}" class="btn btn-default">Preview</a>
+          <br><br>
           <table class="table table-bordered">
             <thead>
             <tr>
@@ -29,7 +33,7 @@
               <td>{!! html_entity_decode($course->deskripsi) !!}</td>
             </tr>
             <tr>
-              <td>Video</td>
+              <td>Video Pengenalan Kelas</td>
               <td><video controls
                     muted
                     src="{{ URL::asset('video/video_course/'.$course->video) }}"
@@ -40,7 +44,7 @@
               </td>
             </tr>
             <tr>
-              <td>Foto</td>
+              <td>Gambar Kelas</td>
               <td><img 
                     src="{{ URL::asset('images/gambar_course/'.$course->foto) }}"
                     width="300"
@@ -50,62 +54,84 @@
             </tr>
             </tbody>
           </table>
-        </div>
-        
-  </div>
+        </div> 
+    </div>
      
-
-<div class="row">
-<div class="col-xs-12">
-  <div class="box">
-    <div class="box-header">
-        <a href="{{ route('topik-create', $course->id)}}" class="btn btn-success pull-left">Tambah Topik</a>
-      <h3 class="box-title">Daftar Topik</h3>
-      
-      <div class="box-tools">
-        <div class="input-group input-group-sm" style="width: 150px;">
-          <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-          
-          <div class="input-group-btn">
-            
-            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+    <!-- DAFTAR TOPIK -->
+    <div class="row">
+      <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <a href="{{ route('topik-create', $course->id)}}" class="btn btn-success pull-left">Tambah Topik</a>
+              <h3 class="box-title">Daftar Topik</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover text-left">
+                <tr>
+                  <th>Nama Topik</th>
+                  <th width="30%">Aksi</th>
+                </tr>
+                @foreach($course['topiks'] as $key => $topik)
+                <tr>
+                  <td>{{ $topik->judul_topik}}</td>
+                  <td>
+                    <a href="{{ route('topik-detail',$topik->id)}}" class="btn btn-primary">Detail</a>
+                    <a href="{{ route('topik-update', $topik->id) }}" class="btn btn-info">Ubah</a>
+                    <a href="{{ route('topik-delete',$topik->id)}}" class="btn btn-danger">Hapus</a>
+                  </td>
+                </tr>
+                @endforeach
+              </table>
+            </div>
+          </div>
+        
           </div>
         </div>
-      </div>
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body table-responsive no-padding">
-      <table class="table table-hover text-left">
-        <tr>
-          <th>Nomor</th>
-          <th>Nama Topik</th>
-          <th width="30%">Aksi</th>
-        </tr>
-        @foreach($course['topiks'] as $key => $topik)
-        <tr>
-          <td>{{ ++$key }}</td>
-          <td>{{ $topik->judul_topik}}</td>
-          <td>
-            <a href="{{ route('topik-detail',$topik->id)}}" class="btn btn-primary">Detail</a>
-            <a href="{{ route('topik-update', $topik->id) }}" class="btn btn-info">Update</a>
-            <a href="{{ route('topik-delete',$topik->id)}}" class="btn btn-danger">Delete</a>
-          </td>
-        </tr>
-        @endforeach
-      </table>
-    </div>
-    <!-- /.box-body -->
-  </div>
-  <!-- /.box -->
-</div>
-</div>
-</div>       
+
+        <!-- Daftar Pengajar -->
+    <div class="row">
+      <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <a href="{{ route('add-tutor-course', $course->id)}}" class="btn btn-success pull-left">Tambah Pengajar</a>
+              <h3 class="box-title">Daftar Pengajar</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover text-left">
+                <tr>
+                  <th>Nama</th>
+                  <th>Foto</th>
+                  <th>Deskripsi</th>
+                  <th width="20%">Aksi</th>
+                </tr>
+                @foreach($course->tutors as $key => $tutorCourse)
+                  <tr>
+                    <td>{{ $tutorCourse->tutor->name }}</td>
+                    <td>
+                      <img src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) }}" width="500" height="500" alt="Sorry, Fail load image"></img>
+                    </td>
+                    <td>{{ $tutorCourse->tutor->story }}</td>
+                    <td>
+                      <a href="{{ route('edit-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-info">Ubah</a>
+                      <a href="{{ route('edit-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-danger">Hapus</a>
+                    </td>
+                  </tr>
+                @endforeach
+               
+              </table>
+            </div>
+          </div>
+        
+          </div>
+        </div>
+
+
+  </div>       
 </section>
+@endsection
 
-<script src="{{ URL::asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ URL::asset('js/dataTables.bootstrap.min.js') }}"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
+@section('extra-script')
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 @endsection

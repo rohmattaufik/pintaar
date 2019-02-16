@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\KomentarCourse;
 use App\Topik;
 use App\Tutor;
+use App\TutorCourse;
 use App\PertanyaanTopik;
 use App\ReviewCourse;
 use App\RatingCourse;
@@ -49,12 +50,23 @@ class CourseController extends CourseOrderController
 
   public function detail($id)
   {
+
 		$course = DB::table('courses')
 				->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
 				->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
 				->leftJoin('users', 'users.id', '=', 'tutors.id_user')
 				->where('courses.id', $id)
 				->get()->first();
+
+		// $course = DB::table('courses')
+  //           // ->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
+  //           // ->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
+  //           // ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
+  //           ->where('id', $id)
+  //           ->get()->first();
+
+        $course = Course::whereId($id)->get()->first();
+
 
         $rating = DB::table('rating_courses')
 				->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
@@ -85,7 +97,14 @@ class CourseController extends CourseOrderController
                         ->where('cart.user_id', Auth::user()->id)
                         ->get()->first();
 
+
             if(Auth::user()-> id == $course-> id_user_tutor){
+
+            // $status_pembayaran = self::check_and_set_valid_date_course_oder($status_pembayaran);
+
+
+            if (Auth::user()->id == $course->id_tutor) {
+
                         $status_pembayaran = new \stdClass();
                         $status_pembayaran->status_pembayaran = 3;
             }
@@ -342,7 +361,7 @@ class CourseController extends CourseOrderController
 
     public function get_course_detail( $id )
     {
-        $course = Course::whereId($id)->with('topiks')->first();
+        $course = Course::whereId($id)->with('topiks')->get()->first();
         foreach( $course['topiks'] as $topik)
         {
             $topik['pertanyaan'] = PertanyaanTopik::whereIdTopik($topik->id)->get();
@@ -377,4 +396,61 @@ class CourseController extends CourseOrderController
       return $list_topik;
     }
 
+
+    public function addTutor($courseID)
+    {
+        $tutor = null;
+        $course = Course::where('id', $courseID)->get()->first();
+        return view('layouts/course/tutor/tutor-course')->with(['tutor' => $tutor, 'course' => $course]);
+    }
+
+    public function editTutor($courseID, $tutorID)
+    {
+        $tutor = Tutor::where('id', $tutorID)->get()->first();
+        $course = Course::where('id', $courseID)->get()->first();
+        return view('layouts/course/tutor/tutor-course')->with(['tutor' => $tutor, 'course' => $course]);
+    }
+
+    public function deleteTutor($courseID, $tutorID)
+    {
+        Tutor::whereId($tutorID)->delete();
+        TutorCourse::where('tutor_id', $tutorID)->delete();
+        return redirect()->back();
+    }    
+
+    public function storeTutor(Request $request)
+    {
+        $profilePhoto     = $request->file('tutor_photo');
+        $urlPhoto       = "";
+        if($profilePhoto != null){
+            $destinationPath   = 'images/gambar_course';
+            $photoName         = $profilePhoto->getClientOriginalName();
+            $move              = $profilePhoto->move($destinationPath, $photoName);
+            $urlPhoto          = "{$photoName}";
+        }
+        
+        if ($request->tutor_id == null) {
+            $tutor = Tutor::create([
+                "name"  => $request->tutor_name,
+                "profile_photo"  => $urlPhoto,
+                "story"         => $request->deskripsi
+            ]);
+
+            $tutorCourse = TutorCourse::create([
+                "course_id"  => $request->course_id,
+                "tutor_id"         => $tutor->id
+            ]);
+        } 
+        else {
+
+            $course = Tutor::whereId($request->tutor_id)->update([
+                "name"  => $request->tutor_name,
+                "profile_photo"  => $urlPhoto,
+                "story"         => $request->deskripsi
+            ]);
+
+        }
+        
+        return redirect()->route('course-detail', $request->course_id);
+    }
 }
