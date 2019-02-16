@@ -165,11 +165,11 @@ var x = setInterval(function() {
               @foreach($course->tutors as $tutorCourse)
                 <div class="row">
                     <div class="col-xs-2 col-md-2">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) }}" alt="User profile picture">
+                    <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor) }}" alt="User profile picture">
                     </div>
                   <div class="col-xs-10 col-md-10">
-                    <h5>{{ $tutorCourse->tutor->name }}</h5>
-                    <p class="more">{{ $tutorCourse->tutor->story }}</p> 
+                    <h5>{{ $tutorCourse->tutor }}</h5>
+                    <p class="more">{{ $tutorCourse->tutor }}</p> 
 
                   </div>
                 </div>
@@ -260,7 +260,7 @@ var x = setInterval(function() {
 
 @endsection
 
-
+@section('extra-script')
 <script>
 $(document).ready(function() {
   var showChar = 200;

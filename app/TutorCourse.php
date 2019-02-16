@@ -12,6 +12,6 @@ class TutorCourse extends Model
 
 	public function tutor()
 	{
-	   return $this->hasOne('App\Tutor', 'id');
+	   return $this->hasOne('App\Tutor', 'id', 'tutor_id');
 	}
 }
