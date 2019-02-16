@@ -174,16 +174,16 @@ class CourseOrderController extends MailController
 
 	  }
 
-    // public function get_courses_that_bought($cart_id){
+    public function get_courses_that_bought($cart_id){
 
-    //           $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
-    //           $nama_course = "";
-    //           foreach ($cart_courses as $cart_course){
-    //             $nama_course = $nama_course.(Course::find($cart_course->course_id))->nama_course.', ';
-    //           }
+              $cart_courses = (Cart::find($cart_id))-> getCartCourses()->get();
+              $nama_course = "";
+              foreach ($cart_courses as $cart_course){
+                $nama_course = $nama_course.(Course::find($cart_course->course_id))->nama_course.', ';
+              }
 
-    //         return $nama_course;
-    // }
+            return $nama_course;
+    }
 
 
     public function test()
