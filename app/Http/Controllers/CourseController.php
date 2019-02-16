@@ -50,7 +50,7 @@ class CourseController extends CourseOrderController
 
   public function detail($id)
   {
-
+		
 		// $course = DB::table('courses')
 		// 		->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
 		// 		->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')

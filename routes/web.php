@@ -16,6 +16,14 @@ Route::get('/home', function(){
 	return redirect()->route('home');
 });
 
+// ALL USER WITHOUT AUTH
+Route::prefix('course')->group(function () {
+	Route::get('{id}',['as'=>'course','uses'=>'CourseController@detail']);
+	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
+	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
+	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
+});
+
 Route::get('/',['as'=>'home','uses'=>'ArtifactController@index']);
 
 Route::get('/home',['as'=>'home','uses'=>'ArtifactController@index']);
@@ -24,14 +32,6 @@ Route::get('test-email','MailController@test_email');
 
 //Daftar kelas
 Route::get('/daftar-pengajar', ['as'=>'daftar_pengajar','uses'=>'UserController@daftar_pengajar']);
-
-// ALL USER WITHOUT AUTH
-Route::prefix('course')->group(function () {
-	Route::get('{id}',['as'=>'course','uses'=>'CourseController@detail']);
-	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
-	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
-	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
-});
 
 Auth::routes();
 

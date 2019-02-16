@@ -18,11 +18,7 @@ use App\Mail\CourseOrderMail;
 class CourseOrderController extends MailController
 {
 
-    public function __construct()
-    {
-      $this->middleware('auth');
-    }
-
+    
     public function removeFromCart(Request $request)
     {
         $course = Course::where('id', $request['course_id'])->get()->pop();
