@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
           self::job_send_email_reminder_order();
-        })->dailyAt('16:00');
+        })->dailyAt('02:00');
     }
     protected function job_send_email_reminder_order()
     {
