@@ -130,23 +130,6 @@ class AdminController extends MailController
     }
   }
 
-
-//   public function get_message_for_email($pembelian_course){
-
-//     $status_pembayaran = StatusPembayaran::find((int)$pembelian_course->status_pembayaran)->status;
-//     $cart_courses = (Cart::find($pembelian_course->cart_id)) -> getCartCourses()->get();
-
-//     $nama_course = "";
-//     foreach ($cart_courses as $cart_course){
-//       $nama_course = $nama_course.", ".(Course::find($cart_course->course_id))->nama_course;
-//     }
-
-//     $message = "<p>Status pembelian anda terhadap kelas yang berjudul ".$nama_course.
-//                 " sudah berubah menjadi ". $status_pembayaran." dengan nomor order <b>".$pembelian_course->no_order."</b>. </p>";
-
-//     return $message;
-// }
-
   public function createTutor()
   {
       $idRole = Auth::user()->id_role;

@@ -51,19 +51,6 @@ class CourseController extends CourseOrderController
   public function detail($id)
   {
 		
-		// $course = DB::table('courses')
-		// 		->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
-		// 		->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
-		// 		->leftJoin('users', 'users.id', '=', 'tutors.id_user')
-		// 		->where('courses.id', $id)
-		// 		->get()->first();
-
-		// $course = DB::table('courses')
-  //           // ->select('nama_course', 'users.nama', 'courses.id', 'harga', 'courses.foto', 'deskripsi', 'courses.video', 'users.id as id_user_tutor', 'tutors.id as id_tutor' )
-  //           // ->leftJoin('tutors', 'courses.id_tutor', '=',  'tutors.id')
-  //           // ->leftJoin('users', 'users.id', '=', 'tutors.id_user')
-  //           ->where('id', $id)
-  //           ->get()->first();
 
         $course = Course::whereId($id)->get()->first();
 
@@ -96,10 +83,6 @@ class CourseController extends CourseOrderController
 						->where('status_pembayaran', '=', 3)
                         ->where('cart.user_id', Auth::user()->id)
                         ->get()->first();
-
-
-            
-            // $status_pembayaran = self::check_and_set_valid_date_course_oder($status_pembayaran);
 
 
             if (Auth::user()->id == $course->id_tutor) {

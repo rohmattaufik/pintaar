@@ -15,7 +15,7 @@ use Auth;
 use Carbon\Carbon;
 use App\Mail\CourseOrderMail;
 
-class CourseOrderController extends MailController
+class CourseOrderController 
 {
 
     
@@ -179,6 +179,17 @@ class CourseOrderController extends MailController
 		}
 		
 	}
+	
+	
+	public function html_email($name, $email_user, $update_date, $courses_that_bougth, $noOrder, $totalPrice){
+        $data = array('name'=>$name, 'update_date'=>$update_date, 'courses_that_bougth'=>$courses_that_bougth, 'noOrder'=> $noOrder,'totalPrice'=>  $totalPrice);
+        Mail::send('layouts/email/payment', $data, function($message) use ($email_user, $name, $data) {
+
+          $message->to($email_user, $name)->subject('Silahkan Bayar Kelas Kamu Sebesar '. number_format($data['totalPrice'], 0, ',', '.'));
+          $message->from('pintaar.bantuan@gmail.com','Pintaar');
+        });
+        echo "HTML Email Sent. Check your inbox.";
+   	}
 	
     public function get_courses_that_bougth($cart_id) {
 
