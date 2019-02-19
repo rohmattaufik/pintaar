@@ -341,13 +341,9 @@ class CourseController extends CourseOrderController
         return redirect()->back();
     }
 
-    public function get_course_detail( $id )
+    public function get_course_detail($id)
     {
-        $course = Course::whereId($id)->with('topiks')->get()->first();
-        foreach( $course['topiks'] as $topik)
-        {
-            $topik['pertanyaan'] = PertanyaanTopik::whereIdTopik($topik->id)->get();
-        }
+        $course = Course::whereId($id)->first();
         return view('layouts.course.tutor.course-detail')->with('course', $course);
     }
 

@@ -73,7 +73,17 @@
               <h3><span class="label label-success">{{ $courseOrder->status }}</span></h3>
               <h4>Total Tagihan : Rp {{ number_format($cart->total_price, 0, ',', '.') }}</h4>
               @if ($courseOrder->metode_pembayaran != null)
-                <h4>Metode Pembayaran : {{ $courseOrder->metode_pembayaran }}</h4>
+                <h4>Metode Pembayaran :
+                    @if ($courseOrder->metode_pembayaran == 'payment1')
+                      Transfer Bank BNI
+                    @elseif ($courseOrder->metode_pembayaran == 'payment2')
+                      Transfer Bank BNI
+                    @elseif ($courseOrder->metode_pembayaran == 'payment3')
+                      Transfer OVO
+                    @elseif ($courseOrder->metode_pembayaran == 'payment4')
+                      Transfer GO-PAY
+                    @endif
+                </h4>
                 <h4>Bukti Pembayaran : <a href="{{ URL::asset($courseOrder->bukti_pembayaran) }}" target="_blank">Lihat Bukti Bayar</a></h4>
               @endif
             </div>

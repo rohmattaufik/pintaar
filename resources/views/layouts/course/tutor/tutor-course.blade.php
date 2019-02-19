@@ -5,7 +5,7 @@
 @endsection
 
 @section('extra-style')
-  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.css" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -27,9 +27,9 @@
                 </div>
                 <div class="form-group">
                   <label for="tutor_photo">Foto Pengajar</label>
-                  <input type="file" id="tutor_photo" name="tutor_photo" required>                
+                  <input type="file" id="tutor_photo" name="tutor_photo">                
                 </div>
-                @if($tutor != null and $tutor->tutor_photo != null and $tutor->tutor_photo != "")
+                @if($tutor != null and $tutor->profile_photo != null and $tutor->profile_photo != "")
                   <img id="preview_image" src="{{ URL::asset('images/gambar_course/'.$tutor->profile_photo) }}" width="200" height="200"></img>
                 @else 
                   <img id="preview_image" class="hidden" width="128" height="128"></img>
@@ -37,7 +37,7 @@
                 
                 <div class="form-group">
                   <label for="deskripsi">Deskripsi Pengajar</label>
-                  <textarea id="deskripsi" class="form-control" rows="7" name="deskripsi" required>{{ $tutor != null ? $tutor->story : null}}</textarea>
+                  <textarea id="description-tutor" class="form-control" rows="7" name="deskripsi" required>{{ $tutor != null ? $tutor->story : null}}</textarea>
                 </div>
                 
                 <div class="form-group">
@@ -47,31 +47,36 @@
          
           </div>
       </div>     
- </sction>
+</section>
 @endsection
 
 
 @section('extra-script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-lite.js"></script>
 
 <script>
-function readURL(input) {
+  $('#description-tutor').summernote({
+      height: 300
+  });  
+    
+  function readURL(input) {
 
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
+      if (input.files && input.files[0]) {
+      var reader = new FileReader();
 
-    reader.onload = function(e) {
-        $('#preview_image').attr('src', e.target.result);
-        $('#preview_image').removeClass('hidden');
-    }
+      reader.onload = function(e) {
+          $('#preview_image').attr('src', e.target.result);
+          $('#preview_image').removeClass('hidden');
+      }
 
-    reader.readAsDataURL(input.files[0]);
-    }
-}
+      reader.readAsDataURL(input.files[0]);
+      }
+  }
 
-$("#tutor_photo").change(function() {
-    readURL(this);
-});
+  $("#tutor_photo").change(function() {
+      readURL(this);
+  });
 
 </script>
 

@@ -72,16 +72,18 @@
                   <th>Nama Topik</th>
                   <th width="30%">Aksi</th>
                 </tr>
-                @foreach($course['topiks'] as $key => $topik)
-                <tr>
-                  <td>{{ $topik->judul_topik}}</td>
-                  <td>
-                    <a href="{{ route('topik-detail',$topik->id)}}" class="btn btn-primary">Detail</a>
-                    <a href="{{ route('topik-update', $topik->id) }}" class="btn btn-info">Ubah</a>
-                    <a href="{{ route('topik-delete',$topik->id)}}" class="btn btn-danger">Hapus</a>
-                  </td>
-                </tr>
-                @endforeach
+                @if (count($course->topiks) > 0)
+                  @foreach($course->topiks as $key => $topik)
+                    <tr>
+                      <td>{{ $topik->judul_topik}}</td>
+                      <td>
+                        <a href="{{ route('topik-detail',$topik->id)}}" class="btn btn-primary">Detail</a>
+                        <a href="{{ route('topik-update', $topik->id) }}" class="btn btn-info">Ubah</a>
+                        <a href="{{ route('topik-delete',$topik->id)}}" class="btn btn-danger">Hapus</a>
+                      </td>
+                    </tr>
+                  @endforeach
+                @endif
               </table>
             </div>
           </div>
@@ -95,7 +97,7 @@
           <div class="box">
             <div class="box-header">
               <a href="{{ route('add-tutor-course', $course->id)}}" class="btn btn-success pull-left">Tambah Pengajar</a>
-              <h3 class="box-title">Daftar Pengajar</h3>
+              <h3 class="box-title">Pengajar</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
@@ -106,19 +108,21 @@
                   <th>Deskripsi</th>
                   <th width="20%">Aksi</th>
                 </tr>
-                @foreach($course->tutors as $key => $tutorCourse)
-                  <tr>
-                    <td>{{ $tutorCourse->tutor->name }}</td>
-                    <td>
-                      <img src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) }}" width="500" height="500" alt="Sorry, Fail load image"></img>
-                    </td>
-                    <td>{{ $tutorCourse->tutor->story }}</td>
-                    <td>
-                      <a href="{{ route('edit-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-info">Ubah</a>
-                      <a href="{{ route('edit-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-danger">Hapus</a>
-                    </td>
-                  </tr>
-                @endforeach
+                @if (count($course->tutors) > 0)
+                  @foreach($course->tutors as $key => $tutorCourse)
+                    <tr>
+                      <td>{{ $tutorCourse->tutor->name }}</td>
+                      <td>
+                        <img src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) }}" width="500" height="500" alt="Sorry, Fail load image"></img>
+                      </td>
+                      <td>{!! html_entity_decode($tutorCourse->tutor->story) !!} </td>
+                      <td>
+                        <a href="{{ route('edit-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-info">Ubah</a>
+                        <a href="{{ route('delete-tutor-course', [$course->id, $tutorCourse->tutor->id]) }}" class="btn btn-danger">Hapus</a>
+                      </td>
+                    </tr>
+                  @endforeach
+                @endif
                
               </table>
             </div>

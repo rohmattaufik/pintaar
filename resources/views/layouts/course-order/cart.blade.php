@@ -59,7 +59,7 @@
                   {{ csrf_field() }}
                   <input type="hidden" name="cart_id" value="{{ $cart->id }}">
                   <div class="col-xs-6 col-md-6">
-                      <a href="{{ route('courses') }}" class="btn btn-success btn-block">Beli Kelas Lain</a>
+                      <a href="{{ route('courses-category', 1) }}" class="btn btn-success btn-block">Beli Kelas Lain</a>
                   </div>
                   <div class="col-xs-6 col-md-6">
                       <button type="submit" class="btn btn-primary btn-block">Bayar</button>

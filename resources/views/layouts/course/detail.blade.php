@@ -5,44 +5,11 @@
 @endsection
 
 @section('extra-style')
-<style type="text/css">
-.morecontent span {
-  display: none;
-}
-</style>
-@endsection
-
-@section('extra-script')
-<script>
-// Set the date we're counting down to
-var countDownDate = new Date("Feb 18, 2019 23:59:55").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get todays date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("timer-diskon").innerHTML = days + " hari " + hours + " jam "
-  + minutes + " menit " + seconds + " detik ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer-diskon").innerHTML = "DISKON TELAH HABIS!";
-  }
-}, 1000);
-</script>
+  <style type="text/css">
+    .morecontent span {
+      display: none;
+    }
+  </style>
 @endsection
 
 @section('content')
@@ -82,12 +49,11 @@ var x = setInterval(function() {
 
       <div class="row">
           <div class="col-xs-12 col-md-7">
-              <h1>{{ $course->nama_course }}</h1>
+            <h1>{{ $course->nama_course }}</h1>
                
-		          <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
+		        <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
                
-              <p><strong>Dibuat oleh {{ $course -> nama }} </strong><p>
-			       <p><strong>Murid yang sudah mengambil: {{ $count_student_learned}}</strong></p>
+			      <p><strong>Murid yang sudah mengambil: {{ $count_student_learned}}</strong></p>
 
               <!-- <p><strong>Dibuat oleh {{ $course->creator->users->nama }} </strong><p> -->
 
@@ -111,13 +77,13 @@ var x = setInterval(function() {
 			   @endif  
                 <br>
                 <br>
-               
+                {!! html_entity_decode($course->deskripsi) !!} 
               @else
                 <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
                 <br>
                 <br>
               @endif
-			   {!! html_entity_decode($course->deskripsi) !!}
+			   
           </div>
           <div class="col-xs-12 col-md-5">
               <div class="embed-responsive embed-responsive-16by9">
@@ -157,7 +123,7 @@ var x = setInterval(function() {
               </div>
           </div>
       </div>
-
+        @if (count($course->tutors) > 0)
         <div class="row">
           <div class="col-xs-12 col-md-7">
               <h3>Pengajar</h3>
@@ -165,17 +131,20 @@ var x = setInterval(function() {
               @foreach($course->tutors as $tutorCourse)
                 <div class="row">
                     <div class="col-xs-2 col-md-2">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset('images/gambar_course/'.$tutorCourse->tutor) }}" alt="User profile picture">
+                    <img class="profile-user-img img-responsive img-circle" src="{{ $tutorCourse->tutor->profile_photo ? URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) : URL::asset('images/user-default.png') }}" alt="User profile picture">
                     </div>
                   <div class="col-xs-10 col-md-10">
-                    <h5>{{ $tutorCourse->tutor }}</h5>
-                    <p class="more">{{ $tutorCourse->tutor }}</p> 
+                    <h5>{{ $tutorCourse->tutor->name }}</h5>
+                    <div id="more">
+                      {!! html_entity_decode($tutorCourse->tutor->story) !!}
+                    </div> 
 
                   </div>
                 </div>
               @endforeach
           </div>
         </div>
+        @endif
 
 
             
@@ -261,73 +230,38 @@ var x = setInterval(function() {
 @endsection
 
 @section('extra-script')
+<script src="{{ URL::asset('js/readmore.min.js') }}"></script>
 <script>
-$(document).ready(function() {
-  var showChar = 200;
-  var ellipsestext = "...";
-  var moretext = "Lihat semua";
-  var lesstext = "Tutup";
-  $('.more').each(function() {
-    var content = $(this).html();
-
-    if(content.length > showChar) {
-
-      var c = content.substr(0, showChar);
-      var h = content.substr(showChar-1, content.length - showChar);
-
-      var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-
-      $(this).html(html);
-    }
-
-  });
-
-  $(".morelink").click(function(){
-    if($(this).hasClass("less")) {
-      $(this).removeClass("less");
-      $(this).html(moretext);
-    } else {
-      $(this).addClass("less");
-      $(this).html(lesstext);
-    }
-    $(this).parent().prev().toggle();
-    $(this).prev().toggle();
-    return false;
-  });
-});
-
+  $('#more').readmore({ moreLink: '<a href="#">Lihat Semua</a>', lessLink: '<a href="#">Tutup</a>' });
 </script>
 
-
-
 <script>
-// Set the date we're counting down to
-var countDownDate = new Date("Feb 15, 2019 23:59:55").getTime();
+  // Set the date we're counting down to
+  var countDownDate = new Date("Feb 20, 2019 23:59:55").getTime();
 
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-  // Get todays date and time
-  var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
-  var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
-  document.getElementById("timer-diskon").innerHTML = days + " hari " + hours + " jam "
-  + minutes + " menit " + seconds + " detik ";
-    
-  // If the count down is over, write some text 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer-diskon").innerHTML = "DISKON TELAH HABIS!";
-  }
-}, 1000);
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+    // Get todays date and time
+    var now = new Date().getTime();
+      
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+      
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+    // Output the result in an element with id="demo"
+    document.getElementById("timer-diskon").innerHTML = days + " hari " + hours + " jam "
+    + minutes + " menit " + seconds + " detik ";
+      
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("timer-diskon").innerHTML = "DISKON TELAH HABIS!";
+    }
+  }, 1000);
 </script>
 @endsection

@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                   <label for="foto">Gambar Kelas</label>
-                  <input type="file" id="foto" name="foto" required>                
+                  <input type="file" id="foto" name="foto">                
                 </div>
                 @if($course != null and $course->foto != null and $course->foto != "")
                   <img id="preview_image" src="{{ URL::asset('images/gambar_course/'.$course->foto) }}" width="200" height="200"></img>
