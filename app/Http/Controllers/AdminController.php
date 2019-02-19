@@ -110,13 +110,13 @@ class AdminController extends MailController
       
       if ($pembelian_course->status_pembayaran == 3) {
         Mail::send('layouts/email/payment-success', $data, function($message) use ($emailUser, $data) {
-          $message->to($emailUser)->subject('Ayo Belajar Sekarang! Kelas Sudah Dapat Diakses.');
+          $message->to($emailUser)->subject('Ayo Belajar Sekarang! Pesanan '.$data['noOrder'].' Berhasil');
           $message->from('pintaar.bantuan@gmail.com','Pintaar');
         });
       }
       else {
         Mail::send('layouts/email/payment-fail', $data, function($message) use ($emailUser, $data) {
-          $message->to($emailUser)->subject('Pembayaran Kelas Belum Berhasil');
+          $message->to($emailUser)->subject('Pembayaran Pesanan '.$data['noOrder'].' Belum Berhasil');
           $message->from('pintaar.bantuan@gmail.com','Pintaar');
           $message->from('pintaar.bantuan@gmail.com','Pintaar');
         });
