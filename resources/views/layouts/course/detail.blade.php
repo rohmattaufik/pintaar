@@ -56,12 +56,21 @@
 			      <p><strong>Murid yang sudah mengambil: {{ $count_student_learned}}</strong></p>
 
               <!-- <p><strong>Dibuat oleh {{ $course->creator->users->nama }} </strong><p> -->
+				<br>
 
               @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
                 @if($course->harga == 0)
                   <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
-                @else
+					<br>
+					<br>
+					{!! html_entity_decode($course->deskripsi) !!} 
+					<br>
+					<br>
+					<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+				  
+			  @else
                   <h2><strike>Rp 100.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+				  <br>
                   <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion()" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 				  
 				<script>
@@ -74,14 +83,25 @@
 
 				}
 				</script>
-			   @endif  
-                <br>
+				<br>
                 <br>
                 {!! html_entity_decode($course->deskripsi) !!} 
+				<br>
+				<br>
+				<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+              
+			   @endif  
+                
               @else
                 <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
                 <br>
                 <br>
+				{!! html_entity_decode($course->deskripsi) !!} 
+				<br>
+				<br>
+				<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
+              
+            
               @endif
 			   
           </div>
