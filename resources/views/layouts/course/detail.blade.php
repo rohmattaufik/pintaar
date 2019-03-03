@@ -37,7 +37,7 @@
                 <div class="col-xs-12 col-md-12"> 
                   <div class="alert alert-danger alert-dismissible text-center" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4>Kelas ini diskon 90% hingga 15 Februari 2019</h4>
+                      <h4>Kelas ini diskon 83% hingga 4 Maret 2019</h4>
                       <h4 id="timer-diskon"></h4>
                   </div>
                 </div>
@@ -69,7 +69,7 @@
 					<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
 				  
 			  @else
-                  <h2><strike>Rp 100.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                  <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
 				  <br>
                   <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion()" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 				  
@@ -257,7 +257,7 @@
 
 <script>
   // Set the date we're counting down to
-  var countDownDate = new Date("Feb 20, 2019 23:59:55").getTime();
+  var countDownDate = new Date("March 4, 2019 23:59:55").getTime();
 
   // Update the count down every 1 second
   var x = setInterval(function() {

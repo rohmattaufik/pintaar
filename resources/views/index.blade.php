@@ -108,7 +108,7 @@
                                 @if($list_course_code->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right"><strike>Rp 100.000</strike> Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right"><strike>Rp 300.000</strike> Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
                                 @endif
 
                              </div>
@@ -149,7 +149,7 @@
                                 @if($list_courses_others->harga == 0)
                                   <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @else
-                                  <h4 class="text-right"><strike>Rp 100.000</strike> Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</h4>
+                                  <h4 class="text-right"><strike>Rp 300.000</strike> Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</h4>
                                 @endif
 
                              </div>
