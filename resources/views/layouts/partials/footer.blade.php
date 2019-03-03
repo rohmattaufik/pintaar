@@ -20,17 +20,23 @@
 	            <div class="container">
 	                <div class="row">
 	                    <div class="col-xs-12 col-sm-6 pull-right">
-	                        <ul class="social-menu text-right x-left">
-	                            <li><a href="https://www.facebook.com/Pintaar-722335064826744"><i class="ti-facebook"></i></a></li>
-	                            <li><a href="https://www.instagram.com/pintaar_/"><i class="ti-instagram"></i></a></li>
-								 <li><a href="mailto:admin@pintaar.com"><i class="ti-email"></i></a></li>
-	                        </ul>
+							
+							<ul class="social-menu text-right x-left">
+								<p>Jl. Kedoya Raya No.55</p>
+								<p>RT.1/RW.3, Pondok Cina, Beji, Kota Depok, Jawa Barat 16424</p>
+								<br>
+								<li><a href="https://www.facebook.com/pintaar101/"><i class="ti-facebook"></i></a></li>
+								<li><a href="https://www.instagram.com/pintaar_/"><i class="ti-instagram"></i></a></li>
+								<li><a href="mailto:pintaar.bantuan@gmail.com"><i class="ti-email"></i></a></li>
+								<li><a href="tel:081360341347"><i class="ti-comments"></i></a></li>
+	                        
+							</ul>
 	                    </div>
 	                    <div class="col-xs-12 col-sm-6">
 	                    	<h4>Ingin membuat kelas di platform Pintaar?</h4>
 	                    	<a href="https://goo.gl/forms/1gj7XCBjVWWYXGSA2" class="btn btn-danger">Daftar Disini</a>
 	                    </div>
-	                </div>
+					 </div>
 	            </div>
 	        </div>
 
