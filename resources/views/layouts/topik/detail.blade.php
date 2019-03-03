@@ -38,6 +38,7 @@
 
     <!-- FILE ATTACHMENTS -->
     @if (count($file_topik) > 0)
+      <br>
       <div class="row">
         <div class="col-xs-12 col-md-8 col-md-offset-2">     
               <h3>Lampiran</h3>

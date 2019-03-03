@@ -10,11 +10,10 @@
         <div class="container">
             <div class="row v-center">
                 <div class="col-xs-12 col-md-7 header-text">
-                    <h2>Ketika kamu berhenti belajar, saat itu kamu akan mati.</h2>
-					<p>-Albert Einstein</p>
+                    <h2>Ayo Bergabung dan Berkembang Bersama Ribuan Orang Pintar!</h2>
 					<hr>
                     <p>Pintaar merupakan sebuah platform kelas online yang ingin membantu masyarakat Indonesia memperoleh Ilmu dengan mudah.</p>
-                    <a href="#blog-page" class="button white">Ayo Belajar Sekarang</a>
+                    <a href="#blog-page" class="button white">Gabung ke Kelas Sekarang</a>
                 </div>
                 <div class="hidden-xs hidden-sm col-md-5 text-right">
                 <!--<div class="screen-box screen-slider">
@@ -31,14 +30,64 @@
         </div>
     </header>
 
+     <section class="section-padding" id="feature-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                    <div class="page-title">
+                        <h2>Mengapa Belajar di Pintaar?</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="box">
+                        <div class="box-icon">
+                            <img src="images/portfolio-icon-6.png" alt="">
+                        </div>
+                        <h3>100% Kelas Online</h3>
+                        <p>Kamu bisa belajar kapanpun dan dimanapun. Kamu akan belajar melalui video, ditambah dengan file pendukung lainnya.</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="box">
+                        <div class="box-icon">
+                            <img src="images/portfolio-icon-1.png" alt="">
+                        </div>
+                        <h3>Akses Kelas Selamanya</h3>
+                        <p>Sekali kamu membeli kelas, kamu akan bergabung ke kelas dan dapat akses materi selamanya.</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="box">
+                        <div class="box-icon">
+                            <img src="images/rsz_teacher-icon.png" alt="">
+                        </div>
+                        <h3>Dibimbing Pengajar Berpengalaman</h3>
+                        <p>Kamu akan mendapatkan materi yang diterapkan di praktik aslinya. Kamu juga akan dibantu saat kesulitan.</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="box">
+                        <div class="box-icon">
+                            <img src="images/service-icon-1.png" alt="">
+                        </div>
+                        <h3>Diskusi dan Kolaborasi</h3>
+                        <p>Kamu akan belajar dan berbagi ilmu bersama teman yang memiliki minat dan tujuan yang sama.</p>
+                    </div>
+                </div>
+              
+               
+               
+            </div>
+            <hr/>
+        </div>
+    </section>
+
     <section class="section-padding" id="blog-page">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4><strong>Pemberitahuan!</strong> Saat ini, hampir semua kelas masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN SAJA!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
-                    </div>
                     <div class="page-title">
                         <h2>Kelas Pemrograman</h2>
                     </div>
