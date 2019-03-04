@@ -19,6 +19,7 @@
               </div>
             </div>
           @else
+            <h2>Kelas Saya</h2>
             @foreach($list_courses_that_has_bought as $list_course_with_user_that_has_bought)
                  @if (($loop->index) % 4  == 0)
                    <div class="row display-flex">
