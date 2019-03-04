@@ -12,10 +12,7 @@
 <section class="section-padding">
       <div class="row">
         <!-- left column -->
-        <div class="col-md-6 col-md-offset-3">
-            
-            <h2>Tambah Topik</h2>
-            
+        <div class="col-md-8 col-md-offset-2">
             
             <form role="form" method="post" action="{{ route('topik-submit') }}" enctype="multipart/form-data">
               <input type="hidden" name="id" value="{{ $topik != null ? $topik->id : null}}">
@@ -46,6 +43,7 @@
             
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="{{ route('topik-detail', $topik->id) }}" class="btn btn-danger">Batal</a>
               </div>
             </form>
          
@@ -61,7 +59,7 @@
 
 <script>
     $('#deskripsi-editor').summernote({
-        height: 300
+        height: 500
     });  
 </script>
 
@@ -69,20 +67,20 @@
 <script>
 function readURLVideo(input) {
 
-if (input.files && input.files[0]) {
-var reader = new FileReader();
+  if (input.files && input.files[0]) {
+  var reader = new FileReader();
 
-reader.onload = function(e) {
-    $('#preview_video').attr('src', e.target.result);
-    $('#preview_video').removeClass('hidden');
+  reader.onload = function(e) {
+      $('#preview_video').attr('src', e.target.result);
+      $('#preview_video').removeClass('hidden');
+  }
+
+  reader.readAsDataURL(input.files[0]);
+  }
 }
 
-reader.readAsDataURL(input.files[0]);
-}
-}
-
-$("#video").change(function() {
-readURLVideo(this);
-});
+  $("#video").change(function() {
+    readURLVideo(this);
+  });
 </script>
 @endsection

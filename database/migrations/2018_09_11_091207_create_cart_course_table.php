@@ -17,6 +17,8 @@ class CreateCartCourseTable extends Migration
           $table->increments('id');
           $table->integer('cart_id');
           $table->integer('course_id');
+          $table->integer('course_price')->nullable();
+          $table->integer('discount_percentage')->nullable();
           $table->timestamps();
         });
     }

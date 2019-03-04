@@ -126,6 +126,8 @@ Route::group(['middleware'=>'auth'], function() {
 		// setujui pembelian kelas dengan sharing fb
 		Route::get('approve-purchase-fb',['as'=>'approve-purchase-fb','uses'=>'AdminController@approvePaymentWithSharing']);
 
+		Route::get('all-sales',['as'=>'sales','uses'=>'AdminController@getAllSales']);
+
 	});
 
 	// MURID

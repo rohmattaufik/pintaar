@@ -13,23 +13,21 @@
     <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-8 col-md-offset-2">
-            <h2>Keranjang Kamu</h2>
+            <h2>Keranjang</h2>
             <div>
               <ul class="list-group list-group-flush">
-                  @foreach($courses as $course)
+                  @foreach($cart->getCartCourses as $cartCourse)
                     <li class="list-group-item">
                       <table style="width:100%">
                         <tr>
-                          <td><font size="4">{{ $course->nama_course }}</font></td>
-                          <td align="right"><font size="4">Rp {{ number_format($course->harga, 0, ',', '.') }}</font></td>
+                          <td><font size="4">{{ $cartCourse->getCourse->nama_course }}</font></td>
+                          <td align="right"><font size="4">Rp {{ number_format($cartCourse->course_price, 0, ',', '.') }}</font></td>
                         </tr>
                         <tr>
                            <td>
                               <form role="form" action="{{ route('remove-from-cart') }}" method="post">
                                 {{ csrf_field() }}
-                                <input type="hidden" name="cart_course_id" value="{{ $course->id }}"> <!-- ini cart_course->id -->
-                                <input type="hidden" name="course_id" value="{{ $course->course_id }}">
-                                <input type="hidden" name="cart_id" value="{{ $course->cart_id }}">
+                                <input type="hidden" name="cart_course_id" value="{{ $cartCourse->id }}">
                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                               </form>
                           </td>

@@ -13,7 +13,9 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-          <a href="{{ route('topik-create', $course->id) }}" class="btn btn-success">Tambah Topik</a>
+          <a href="{{ route('topik-update', $topik->id) }}" class="btn btn-info">Ubah Topik Ini</a>
+          <a href="{{ route('topik-delete', $topik->id) }}" class="btn btn-danger">Hapus Topik Ini</a>
+          <a href="{{ route('topik-create', $course->id) }}" class="btn btn-success">Tambah Topik Baru</a>
           <br>
           <br>
           <table class="table table-bordered">

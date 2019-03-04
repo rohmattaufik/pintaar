@@ -98,12 +98,12 @@
                   <li class="list-group-item">
                     <h3>Kelas Yang Dibeli</h3>
                   </li>
-                  @foreach($courses as $course)
+                  @foreach($cart->getCartCourses as $cartCourse)
                     <li class="list-group-item">
                       <table style="width:100%">
                         <tr>
-                          <td width="70%" align="left">{{ $course->nama_course }}</td>
-                          <td align="right">Rp {{ number_format($course->harga, 0, ',', '.') }}</td>
+                          <td width="70%" align="left">{{ $cartCourse->getCourse->nama_course }}</td>
+                          <td align="right">Rp {{ number_format($cartCourse->course_price, 0, ',', '.') }}</td>
                         </tr>
                       </table>
                     </li>

@@ -21,12 +21,8 @@ class CourseOrderController
     
     public function removeFromCart(Request $request)
     {
-        $course = Course::where('id', $request['course_id'])->get()->pop();
-        $cart = Cart::where('id', $request['cart_id'])->get()->pop();
-
-        $totalPrice = $cart->total_price - $course->harga;
-        $cart->update(['total_price' => $totalPrice]);
-        CartCourse::where('id', $request['cart_course_id'])->delete();
+        $cartCourse = CartCourse::whereId($request['cart_course_id']);
+        $cartCourse->delete();
         return redirect()->route('cart');
     }
 
@@ -38,15 +34,18 @@ class CourseOrderController
 
 
         if ($cart != null) {
-            $courses = DB::table('courses')
-                            ->rightJoin('cart_course', 'cart_course.course_id', '=',  'courses.id')
-                            ->where('cart_course.cart_id', $cart->id)
-                            ->get();
-
-            if (count($courses) == 0) {
+            if (count($cart->getCartCourses) == 0) {
               return view('layouts/course-order/cart-empty');
             } else {
-              return view('layouts/course-order/cart', ['courses' => $courses, 'cart' => $cart]);
+              $totalPrice = 0;
+              
+              foreach ($cart->getCartCourses as $key => $cartCourse) {
+                $totalPrice += $cartCourse->course_price;
+              }
+
+              $cart->update(['total_price' => $totalPrice]);
+              
+              return view('layouts/course-order/cart', ['cart' => $cart]);
               //dd($courses);
             }
         }
@@ -73,15 +72,9 @@ class CourseOrderController
                       ->get()->pop();
 
           if ($cart != null) {
-              $cartCourse = CartCourse::create([
-                'cart_id' => $cart->id,
-                'course_id' => $course_id,
-              ]);
-
-              $totalPrice = $course->harga + $cart->total_price;
-
-              $cart->update(['total_price' => $totalPrice]);
-
+              $cartCourseModel = new CartCourse;
+              $cartCourse = $cartCourseModel->createCartCourse($cart, $course);
+              
               return redirect()->route('cart');
           }
           else {
@@ -100,10 +93,8 @@ class CourseOrderController
                 'is_active' => 1,
         ]);
 
-        $cartCourse = CartCourse::create([
-          'cart_id' => $newCart->id,
-          'course_id' => $course->id,
-        ]);
+        $cartCourseModel = new CartCourse;
+        $cartCourse = $cartCourseModel->createCartCourse($newCart, $course);
 
         return $newCart;
     }
@@ -210,15 +201,10 @@ class CourseOrderController
                     ->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
                     ->where('pembelian_courses.no_order', $order_no)
                     ->get()->pop();
-        $cart = Cart::where('id', $courseOrder->cart_id)->get()->pop();
-        $courses = DB::table('cart_course')
-                ->select('courses.nama_course', 'courses.harga')
-                ->leftJoin('courses', 'cart_course.course_id', '=', 'courses.id')
-                ->where('cart_id', $cart->id)
-                ->get();
-        
+        $cart = Cart::whereId($courseOrder->cart_id)->first();
+                
         if (Auth::user()->id == $courseOrder->id_user) {
-            return view('layouts/course-order/review-order', ['courseOrder' => $courseOrder, 'cart' => $cart, 'courses' => $courses]);
+            return view('layouts/course-order/review-order', ['courseOrder' => $courseOrder, 'cart' => $cart]);
         }
         else {
             return view('layouts/course-order/not-found');

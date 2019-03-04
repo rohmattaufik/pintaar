@@ -197,15 +197,15 @@
       <div class="col-xs-12 col-md-8 col-md-offset-2">
          <meta name="csrf-token" content="{{ csrf_token() }}">
 
-            <h3 id="commentTitle">Komentar</h3>
+            <h3 id="commentTitle">Diskusi</h3>
             <!-- FORM ISI KOMENTAR -->       
             <form class="form" method="post" action="" role="form">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">
-                 <textarea required name="body_comment" class="form-control" rows="5" id="comment" style="background-color:#FAF9F9;" ></textarea>
+                 <textarea required name="body_comment" class="form-control" rows="5" id="comment" style="background-color:#FAF9F9;" placeholder="Tuliskan pertanyaanmu disini"></textarea>
               </div>
               <div class="form-group">
-                 <button type="submit" name="comment" class="btn btn-primary">Beri Komentar</button>
+                 <button type="submit" name="comment" class="btn btn-primary">Beri Pertanyaan</button>
               </div>
             </form>
             

@@ -25,6 +25,34 @@ class AdminController extends MailController
       $this->middleware('auth');
   }
 
+  public function getAllSales()
+  {
+    $idUser = Auth::user();
+    $user = User::find($idUser->id);
+    $id_role_admin = 3;
+    if ($user->id_role == $id_role_admin){
+      $sales = DB::table('pembelian_courses')
+                                ->select(DB::raw("SUM(cart.total_price) as total_sales"))
+                                ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
+                                ->where('pembelian_courses.status_pembayaran', 3)
+                                ->get();
+
+      $salesToday = DB::table('pembelian_courses')
+                                ->select(DB::raw("SUM(cart.total_price) as total_sales"))
+                                ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
+                                ->where('pembelian_courses.status_pembayaran', 3)
+                                ->whereDate('pembelian_courses.created_at', Carbon::today())
+                                ->get();
+           
+      return view('layouts/admin/sales')->with(['sales' => $sales, 'salesToday' => $salesToday]);
+    }
+    else{
+      return redirect()->route('home');
+
+    }
+
+  }
+
   public function approve_payment()
   {
 
@@ -51,7 +79,7 @@ class AdminController extends MailController
             return redirect()->route('home');
 
           }
-      }
+  }
 
       public function approve_payment_detail($id_pembelian)
       {

@@ -13,9 +13,7 @@
       <div class="row">
         <!-- left column -->
         <div class="col-xs-12 col-md-8 col-md-offset-2">
-            
-            <h2 class="box-title">Buat Kelas Baru</h2>
-            
+             
             <form id="form-add-course" role="form" method="post" action="{{ route('course-submit') }}" enctype="multipart/form-data">
               <input type="hidden" name="id" value="{{ $course != null ? $course->id : null}}">
               {{ csrf_field()}}
@@ -58,7 +56,7 @@
          
           </div>
       </div>     
- </sction>
+ </section>
 @endsection
 
 
@@ -68,7 +66,7 @@
 
 <script>
     $('#deskripsi-editor').summernote({
-        height: 300
+        height: 500
     });  
 </script>
 
