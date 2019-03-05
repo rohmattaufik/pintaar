@@ -5,7 +5,7 @@
 @endsection
 
 @section('extra-style')
-	<link rel="stylesheet" href="{{URL::asset('css/admin-lte.min.css')}}">
+	
 @endsection
 
 @section('content')
@@ -48,7 +48,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-danger">Simpan</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
                             </div>
                     	</form>

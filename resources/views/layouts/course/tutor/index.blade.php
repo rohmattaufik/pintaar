@@ -34,7 +34,7 @@
             <a href="{{ route('course-detail',$course->id)}}" class="btn btn-primary">Lihat</a>
             <a href="{{ route('course-update', $course->id) }}" class="btn btn-info">Ubah</a>
             <a href="{{ route('course',$course->id)}}" class="btn btn-default" target="_blank">Lihat Sebagai Murid</a>
-            
+            <a href="{{ route('sales-course',$course->id)}}" class="btn btn-warning">Penjualan Kelas</a>
             <a href="{{ route('publish-course',$course->id)}}" class="btn btn-danger">Rilis</a>
             
           </td>

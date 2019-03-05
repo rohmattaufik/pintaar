@@ -16,6 +16,8 @@
     <div class="container">
         <div class="row">
           <div class="col-xs-12 col-md-12">
+            <a href="{{ route('approve-purchase-fb')}}" class="btn btn-primary">Setujui Pembelian dengan Share</a>
+            <br><br>
             <table id="table_id" class="display">
                 <thead>
                     <tr>

@@ -5,12 +5,46 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Tutor;
+use App\PembelianCourse;
 use App\User;
+use App\Course;
 use Illuminate\Support\Facades\DB;
 
 
 class TutorController extends Controller
 {
+    public function showCourseSales($courseId)
+    {
+        $tutor = Tutor::where('id_user', Auth::user()->id)->first();
+        $course = Course::whereId($courseId)->first();   
+        
+        if ($course->id_tutor == $tutor->id) {
+            $orders = DB::table('pembelian_courses')
+                        ->select(DB::raw('users.email as email_buyer'), DB::raw('cart_course.course_price as course_price'), DB::raw('pembelian_courses.created_at as order_time'))
+                        ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
+                        ->leftJoin('cart_course', 'cart_course.cart_id', 'pembelian_courses.cart_id')
+                        ->leftJoin('users', 'users.id', 'pembelian_courses.id_user')
+                        ->where('pembelian_courses.status_pembayaran', 3)
+                        ->where('cart_course.course_id', $courseId)
+                        ->get();
+
+            $totalRevenue = DB::table('pembelian_courses')
+                        ->select(DB::raw('SUM(cart_course.course_price) as course_price'))
+                        ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
+                        ->leftJoin('cart_course', 'cart_course.cart_id', 'pembelian_courses.cart_id')
+                        ->leftJoin('users', 'users.id', 'pembelian_courses.id_user')
+                        ->where('pembelian_courses.status_pembayaran', 3)
+                        ->where('cart_course.course_id', $courseId)
+                        ->get();
+            //dd($orders);
+            return view('layouts/course/tutor/sales-course', ["orders"=>$orders, "course"=>$course, "totalRevenue"=>$totalRevenue]);
+        }
+        else {
+            return route('home');
+        }
+    }
+
+
     public function index()
     {
         //

@@ -81,6 +81,8 @@ Route::group(['middleware'=>'auth'], function() {
 
 			Route::post('tutor-course-submit', 'CourseController@storeTutor')->name('tutor-course-submit');
 
+			Route::get('/{courseId}/sales', 'TutorController@showCourseSales')->name('sales-course');
+
 		});
 			
 		// TUTOR TOPIK
