@@ -43,8 +43,32 @@ class AdminController extends MailController
                                 ->where('pembelian_courses.status_pembayaran', 3)
                                 ->whereDate('pembelian_courses.created_at', Carbon::today())
                                 ->get();
+
+      $salesThisWeek = DB::table('pembelian_courses')
+                                ->select(DB::raw("SUM(cart.total_price) as total_sales"))
+                                ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
+                                ->where('pembelian_courses.status_pembayaran', 3)
+                                ->whereBetween('pembelian_courses.created_at', 
+                                  [
+                                      Carbon::now()->startOfWeek(),
+                                      Carbon::now()->endOfWeek(),
+                                  ])
+                                ->get();
+       
+
+      $salesThisMonth = DB::table('pembelian_courses')
+                                ->select(DB::raw("SUM(cart.total_price) as total_sales"))
+                                ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
+                                ->where('pembelian_courses.status_pembayaran', 3)
+                                ->whereMonth('pembelian_courses.created_at', Carbon::now()->month)
+                                ->get();
            
-      return view('layouts/admin/sales')->with(['sales' => $sales, 'salesToday' => $salesToday]);
+      return view('layouts/admin/sales')->with([
+                                                'sales' => $sales, 
+                                                'salesToday' => $salesToday,
+                                                'salesThisWeek' => $salesThisWeek,
+                                                'salesThisMonth' => $salesThisMonth
+                                          ]);
     }
     else{
       return redirect()->route('home');
