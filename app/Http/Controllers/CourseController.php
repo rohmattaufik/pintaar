@@ -230,11 +230,22 @@ class CourseController extends CourseOrderController
 		 return view('layouts.course.subscribe', ["course"=>$course]);
 	}
 
-    protected function update($id)
+    public function update($id)
     {
         $course = Course::whereId($id)->first();
-        $tutors = Tutor::with('users')->get();
-        return view('layouts.course.tutor.create-course')->with('course', $course)->with('tutors', $tutors);
+        $tutors = Tutor::with('users')->get(); // ini apa?
+
+        $tutor = Tutor::whereIdUser(Auth::user()->id)->first();
+        
+        if ($tutor != null and $course->id_tutor == $tutor->id)
+        {
+            return view('layouts.course.tutor.create-course')->with('course', $course)->with('tutors', $tutors);
+        }
+        else {
+            return "You don't have permission to access this page";
+        }
+
+        
     }
 
     public function submit(Request $request)
