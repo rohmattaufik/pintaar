@@ -229,10 +229,6 @@ class CourseOrderController
 
     public function storePaymentProof(Request $request)
     {
-        $this->validate($request, [
-            'paymentProof' => 'required|file|max:10000', // max 10MB
-        ]);
-
         $paymentProof     = $request->file('paymentProof');
         $destinationPath  = 'bukti-bayar';
         $fileName         = $paymentProof->getClientOriginalName();

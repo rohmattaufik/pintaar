@@ -25,7 +25,7 @@
                   <input type="hidden" name="order_id" value="{{ $order->id }}">
                   <div class="form-group {{ !$errors->has('paymentProof') ?: 'has-error' }}">
                     <label for="paymentProof">Silahkan upload bukti pembayaran kamu!</label>
-                    <input type="file" name="paymentProof" class="form-control-file" id="paymentProof">
+                    <input type="file" name="paymentProof" class="form-control-file" id="paymentProof" required>
                     <span class="help-block text-danger">{{ $errors->first('paymentProof') }}</span>  
                   </div>
                 
