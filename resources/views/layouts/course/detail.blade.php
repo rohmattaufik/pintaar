@@ -15,7 +15,35 @@
 @section('content')
 	<script>
 	  fbq('track', 'ViewContent');
+	  
+	function trackWebConversion($value){
+		trackGoogleAdWordWebConversion($value);
+		trackFBWebConversion($value);
+	}
+
+	function trackGoogleAdWordWebConversion($value) {
+	  var callback = function () {
+		  window.location = url;
+	  };
+	  gtag('event', 'conversion', {
+		  'send_to': 'AW-810238926/rDzaCMnUupYBEM6HrYID',
+		  'value': $value,
+		  'currency': 'IDR',
+		  'transaction_id': '',
+		  'event_callback': callback
+	  });
+	  return false;
+	}
+	function trackFBWebConversion($value) {
+        				
+		fbq('track', 'Purchase', {
+        	value: $value,
+			currency: 'IDR',
+        });
+
+     }
 	</script>
+
 
 <section class="section-padding">		 
 		<div class="container">
@@ -58,24 +86,15 @@
     			  @else
               <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
   				    
-              <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion()" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+              <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
   				    <br><br>
-      				<script>
-        				function trackWebConversion() {
-        				
-        				  fbq('track', 'Purchase', {
-        					value: {{ $course->harga }},
-        					currency: 'IDR',
-        				  });
-
-        				}
-      				</script>
+      			
   				    
                   
               {!! html_entity_decode($course->deskripsi) !!} 
   				    <br>
               <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-  				    <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion()" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+  				    <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
   				      
   			   @endif  
                 
