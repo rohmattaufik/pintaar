@@ -207,7 +207,7 @@ class TopikController extends Controller
     public function create($idCourse)
     {
         $course = Course::whereId($idCourse)->first();
-        $topik = null;
+        $topik = new Topik;
         return view('layouts.topik.tutor.create-topik')->with('course', $course)->with('topik', $topik);
     }
 

@@ -5,11 +5,7 @@
 @endsection
 
 @section('extra-style')
-  <style type="text/css">
-    .morecontent span {
-      display: none;
-    }
-  </style>
+  
 @endsection
 
 @section('content')
@@ -55,12 +51,14 @@
     					{!! html_entity_decode($course->deskripsi) !!} 
     					<br><br>
     					<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+              <br><br>
     			  @else
               <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
   				    
               <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion()" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
   				    <br><br>
-      				<script>
+      				
+              <script>
         				function trackWebConversion() {
         				
         				  fbq('track', 'Purchase', {
@@ -76,7 +74,7 @@
   				    <br>
               <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
   				    <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion()" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
-  				      
+  				    <br><br>
   			   @endif  
                 
       @else
