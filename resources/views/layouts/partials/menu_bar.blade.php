@@ -141,6 +141,7 @@
                             <li><a href="{{ route('kelas_saya') }}">Kelas Saya</a></li>
                             <li><a href="{{ route('cart') }}">Keranjang</a></li>
                             <li><a href="{{ route('course-order') }}">Transaksi</a></li>
+							<li><a href="{{ route('referral') }}">Dapatkan Kelas Gratis!</a></li>
                         </ul>
 
 

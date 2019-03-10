@@ -110,12 +110,16 @@
                   @endforeach
               </ul>
             </div>
-
-            <div class="alert alert-warning" role="alert">
+			<br>
+            <h4>Ingin mendapatkan kelas gratis? Klik <a href="{{ route('referral') }}">disini </a>sekarang</h4>
+			<br>
+			
+			<div class="alert alert-warning" role="alert">
               <h4>Butuh bantuan? Hubungi kami disini</h4>
               <a class="btn btn-success" href="https://wa.me/6282361888896">WhatsApp</a>
               <a class="btn btn-primary" href="https://www.facebook.com/Pintaar-722335064826744">Facebook</a>
-            </div>             
+            </div>
+			
           </div>
       </div>
 

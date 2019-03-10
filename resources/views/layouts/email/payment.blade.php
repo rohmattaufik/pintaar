@@ -16,6 +16,10 @@
 
 <p>Jika kamu sudah membayar, silahkan upload bukti pembayaran kamu <a href="https://pintaar.com/course-order">disini</a>. Pembayaran kamu akan dikonfirmasi paling lama 1x24 jam setelah kamu membayar.</p>
 <p>Jika kamu membutuhkan bantuan, bisa hubungi saya melalui WhatsApp disini <strong>082361888896</strong> atau dengan membalas email ini.</p>
+
+<br>
+ <h4>Ingin mendapatkan kelas gratis? Klik <a href="{{ route('referral') }}">disini </a>sekarang</h4>
+<br>
 <br/>
 <p>Sahabatmu,</p>
 <p>Luqman</p>

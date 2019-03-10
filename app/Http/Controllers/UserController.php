@@ -86,6 +86,15 @@ class UserController
 
 
     }
+	
+	
+    public function referral(){
+        if(Auth::user())
+        {
+            return view('layouts.user_profile.referral');
+        } 
+        return redirect()->route('login');
+    }
 
     public function change_password(){
         if(Auth::user())

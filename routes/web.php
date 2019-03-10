@@ -161,6 +161,12 @@ Route::group(['middleware'=>'auth'], function() {
 	// MURID Kelas Saya
 	Route::get('/kelas-saya', ['as'=>'kelas_saya','uses'=>'UserController@kelas_saya']);
 
+	
+	// Referral Murid
+	Route::get('/referral', ['as'=>'referral','uses'=>'UserController@referral']);
+
+	
+	
 
 	// MURID TOPIK
 	Route::prefix('topik')->group(function () {

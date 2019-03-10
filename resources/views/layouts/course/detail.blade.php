@@ -18,8 +18,10 @@
 	}
 
 	function trackGoogleAdWordWebConversion($value) {
-	  var callback = function () {
+	 var callback = function () {
+		if (typeof(url) != 'undefined') {
 		  window.location = url;
+		
 	  };
 	  gtag('event', 'conversion', {
 		  'send_to': 'AW-810238926/rDzaCMnUupYBEM6HrYID',
