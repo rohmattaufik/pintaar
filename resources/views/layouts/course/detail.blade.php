@@ -5,6 +5,25 @@
 @endsection
 
 @section('extra-style')
+  <style>
+    .section {
+      margin-top: 20px;
+    }
+    
+    #image_for_mobile {
+        display: none;
+    }
+    
+    @media only screen and (max-width: 600px) {
+      #image_for_mobile {
+         display: block;
+         margin-bottom: 15px;
+      }
+      #image_for_desktop {
+         display: none;
+      }
+    }
+  </style>
   
 @endsection
 
@@ -42,23 +61,10 @@
      }
 	</script>
 	
-	<style>
-		
-		#image_for_mobile {
-			  display: none;
-		 }
-		@media only screen and (max-width: 600px) {
-		  #image_for_mobile {
-			 display: block;
-		  }
-		  #image_for_desktop {
-			   display: none;
-		  }
-		}
-	</style>
 
 
-<section class="section-padding">		 
+
+<section class="section">		 
 		<div class="container">
 
 
@@ -70,7 +76,7 @@
                 @if ($course->harga == 0)
                   <h4><strong>Pemberitahuan!</strong> Kelas ini masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
                 @else
-                  <h4>Kelas ini diskon 75% hingga 11 Maret 2019.</h4>
+                  <h4>Kelas ini diskon 88% hingga 18 Maret 2019.</h4>
                   <h4 id="timer-diskon"></h4>
                 @endif
               </div>
@@ -79,61 +85,58 @@
     @endif
 
     <div class="row">
+      <div class="col-xs-12"> 
+          <div id="image_for_mobile" class="embed-responsive embed-responsive-16by9" >
+            <img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-12 col-md-7"> 
-			
-			<br>
-			
-			<div id="image_for_mobile" class="embed-responsive embed-responsive-16by9" >
-				<img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
-				<br>
-				<br>
-				<br>
-			</div>
-			
-				<br>
-				<br>
-			
-          <h1>{{ $course->nama_course }}</h1>
-             
+			    <h1>{{ $course->nama_course }}</h1> 
+                       
 	        <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
              
 		      <p><strong>Murid yang sudah mengambil: {{ $count_student_learned}}</strong></p>
 
           <!-- <p><strong>Dibuat oleh {{ $course->creator->users->nama }} </strong><p> -->
-			    <br>
-
-        @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
-            @if($course->harga == 0)
-              <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
-    					<br><br>
-    					{!! html_entity_decode($course->deskripsi) !!} 
-    					<br><br>
-    					<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
-              <br><br>
-    			  @else
-              <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-  				    
-              <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
-  				    <br><br>
-
-  				    
-                  
-              {!! html_entity_decode($course->deskripsi) !!} 
-  				    <br>
-              <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-
-  				    <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
- 			   @endif         
-      @else
-          <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
-          <br>
-  				{!! html_entity_decode($course->deskripsi) !!} 
-  		  <br>  
-      @endif
+			    
+          @if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
+              @if($course->harga == 0)
+                <a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+      					<br><br>
+                <h3>Deskripsi Kelas</h3> 
+      					{!! html_entity_decode($course->deskripsi) !!} 
+      					<br><br>
+      					<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+                <br>
+      			  @else
+                <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+                <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+    				    
+                <br><br>    				    
+                
+                <h3>Deskripsi Kelas</h3> 
+                
+                {!! html_entity_decode($course->deskripsi) !!} 
+    				    
+                <br><br>
+                
+                <h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+    				    <a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+   			   @endif         
+        @else
+            <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
+            <br><br>
+            <h3>Deskripsi Kelas</h3> 
+    				{!! html_entity_decode($course->deskripsi) !!} 
+    		    <br>  
+        @endif
 			   
       </div>
 	  
-	  <div  class="col-xs-12 col-md-5">
+	    <div class="col-xs-12 col-md-5">
           <div id="image_for_desktop" class="embed-responsive embed-responsive-16by9">
               <img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
           </div>
@@ -142,7 +145,8 @@
                 
     </div>
     <hr/>
-            
+
+        
             
       <div class="row">
           <div class="col-xs-12 col-md-7">
@@ -286,7 +290,7 @@
 
 <script>
   // Set the date we're counting down to
-  var countDownDate = new Date("March 11, 2019 23:59:55").getTime();
+  var countDownDate = new Date("March 18, 2019 23:59:55").getTime();
 
   // Update the count down every 1 second
   var x = setInterval(function() {

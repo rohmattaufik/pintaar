@@ -46,7 +46,7 @@
                             <img src="images/portfolio-icon-6.png" alt="">
                         </div>
                         <h3>100% Kelas Online</h3>
-                        <p>Kamu bisa belajar kapanpun dan dimanapun. Kamu akan belajar melalui video, ditambah dengan file pendukung lainnya.</p>
+                        <p>Kamu bisa belajar kapanpun dan dimanapun. Kamu akan belajar dengan menonton rekaman video.</p>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -55,7 +55,7 @@
                             <img src="images/portfolio-icon-1.png" alt="">
                         </div>
                         <h3>Akses Kelas Selamanya</h3>
-                        <p>Sekali kamu membeli kelas, kamu akan bergabung ke kelas dan dapat akses materi selamanya.</p>
+                        <p>Cukup sekali membeli kelas, kamu akan bergabung ke kelas dan dapat mengakses materi selamanya.</p>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
@@ -76,9 +76,6 @@
                         <p>Kamu akan belajar dan berbagi ilmu bersama teman yang memiliki minat dan tujuan yang sama.</p>
                     </div>
                 </div>
-              
-               
-               
             </div>
             <hr/>
         </div>
@@ -169,7 +166,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
                     <div class="page-title">
-                        <h2>Testimoni</h2>
+                        <h2>Testimoni Pintaar</h2>
                     </div>
                 </div>
             </div>
@@ -183,26 +180,31 @@
                             <h4>Yudhistira Oktaviandie, S.Si.</h4>
                             <p>Mahasiswa Berprestasi UI 2017 dan Juara 2 Mahasiswa Berprestasi Nasional</p>
                             <p>--</p>
-                            <p>"Belajar menjadi lebih mudah dan fleksibel. Cocok untuk mereka yang ingin belajar hal baru, namun memiliki keterbatasan waktu."</p>
+                            <p><strong>"Belajar menjadi lebih mudah dan fleksibel. Cocok untuk mereka yang ingin belajar hal baru, namun memiliki keterbatasan waktu."
+                            </strong></p>
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/bagus.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h4>Bagus Aris Saputra, ST </h4>
-                            <p>Mahasiswa National Taiwan University of Science and Technology</p>
+                            <h4>Bagus Aris Saputra, S.T. </h4>
+                            <p>Mahasiswa Pascasarjana National Taiwan University of Science and Technology</p>
                             <p>--</p>
-                            <p>"Sarana yang tepat untuk orang yang haus ilmu"</p>
+                            <p><strong>
+                                "Sarana yang tepat untuk orang yang haus ilmu"
+                            </strong></p>
                         </div>
                         <div class="testimonial">
                             <div class="testimonial-photo">
                                 <img src="{{ URL::asset('images/said.jpg') }}" alt="" width="100" height="200">
                             </div>
-                            <h4>Said Iskandar, SIA</h4>
-							              <p>Mahasiswa FISIP UI</p>
+                            <h4>Said Iskandar, S.I.A.</h4>
+							<p>Mahasiswa FISIP UI</p>
                             <p>--</p>
-                            <p>"Bodoh itu absolut, pintar itu pilihan. Makanya, ayo belajar"</p>
-						             </div>
+                            <p><strong>
+                                "Bodoh itu absolut, pintar itu pilihan. Makanya, ayo belajar"
+                            </strong></p>
+						</div>
 
                     </div>
                 </div>

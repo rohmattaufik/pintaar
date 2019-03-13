@@ -35,7 +35,7 @@
 	                    </div>
 	                    
 	                    <div class="col-xs-12 col-sm-6">
-	                    	<h4>Ingin membuat kelas di platform Pintaar?</h4>
+	                    	<h4>Ingin menjadi pengajar di Pintaar?</h4>
 	                    	<a href="https://goo.gl/forms/1gj7XCBjVWWYXGSA2" class="btn btn-danger">Daftar Disini</a>
 	                    </div>
 					 </div>
@@ -47,7 +47,7 @@
 			    <div class="container">
 			        <div class="row">
 			            <div class="col-xs-12 text-center">
-			                <p>&copy;Copyright 2018. Template made by <a style="color:white;" href="https://colorlib.com">Colorlib</a> and modified by Pintaar Team.</p>
+			                <p>&copy; 2019. Designed by <a style="color:white;" href="https://colorlib.com">Colorlib</a> and modified by Pintaar.</p>
 			            </div>
 			        </div>
 			    </div>
