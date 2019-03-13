@@ -25,8 +25,8 @@
 								<p>Jalan Kedoya Raya No.55 RT 01 RW 03</p>
 								<p>Pondok Cina, Beji, Kota Depok, Jawa Barat 16424</p>
 								
-								<li><a href="https://www.facebook.com/pintaar101/"><i class="ti-facebook"></i></a></li>
-								<li><a href="https://www.instagram.com/pintaar101/"><i class="ti-instagram"></i></a></li>
+								<li><a href="https://www.facebook.com/pintaar101/" target="_blank"><i class="ti-facebook"></i></a></li>
+								<li><a href="https://www.instagram.com/pintaar101/" target="_blank"><i class="ti-instagram"></i></a></li>
 								<li><a href="mailto:pintaar.bantuan@gmail.com"><i class="ti-email"></i></a></li>
 								<li><a href="tel:081360341347"><i class="ti-comments"></i></a></li>
 	                        
