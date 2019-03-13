@@ -90,7 +90,8 @@
 				<br>
 			</div>
 			
-			
+				<br>
+				<br>
 			
           <h1>{{ $course->nama_course }}</h1>
              
