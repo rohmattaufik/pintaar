@@ -41,6 +41,21 @@
 
      }
 	</script>
+	
+	<style>
+		
+		#image_for_mobile {
+			  display: none;
+		 }
+		@media only screen and (max-width: 600px) {
+		  #image_for_mobile {
+			 display: block;
+		  }
+		  #image_for_desktop {
+			   display: none;
+		  }
+		}
+	</style>
 
 
 <section class="section-padding">		 
@@ -64,7 +79,19 @@
     @endif
 
     <div class="row">
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-7"> 
+			
+			<br>
+			
+			<div id="image_for_mobile" class="embed-responsive embed-responsive-16by9" >
+				<img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
+				<br>
+				<br>
+				<br>
+			</div>
+			
+			
+			
           <h1>{{ $course->nama_course }}</h1>
              
 	        <p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
@@ -100,15 +127,17 @@
           <a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
           <br>
   				{!! html_entity_decode($course->deskripsi) !!} 
-  				<br>  
+  		  <br>  
       @endif
 			   
       </div>
-      <div class="col-xs-12 col-md-5">
-          <div class="embed-responsive embed-responsive-16by9">
+	  
+	  <div  class="col-xs-12 col-md-5">
+          <div id="image_for_desktop" class="embed-responsive embed-responsive-16by9">
               <img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
           </div>
       </div>
+     
                 
     </div>
     <hr/>
