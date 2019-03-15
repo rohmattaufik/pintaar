@@ -75,7 +75,6 @@
                         </ul>
                     @elseif (Auth::user()->id_role == 2)
                             <li><a href="{{ route('course-index')}}">Kelola Kelas</a></li>
-                            <li><a href="{{ route('history_pembelian_course') }}">Laporan Pembelian</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
@@ -92,7 +91,6 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <!-- <li><a href="{{ route('tutor-edit-profile') }}">Lihat Profil</a></li> -->
                                     <li><a href="{{ route('change-password') }}">Ubah Password</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"

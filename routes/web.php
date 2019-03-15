@@ -50,11 +50,11 @@ Route::group(['middleware'=>'auth'], function() {
 	Route::prefix('tutor')->group(function() {
 
 		// Tutor history pembelian_detail
-		Route::get('history-pembelian-course', ['as'=>'history_pembelian_course','uses'=>'TutorController@history_pembelian_course']);
+		// Route::get('history-pembelian-course', ['as'=>'history_pembelian_course','uses'=>'TutorController@history_pembelian_course']);
 		
 		// Update profle
-		Route::get('edit', 'TutorController@edit')->name('tutor-edit-profile');
-		Route::post('update', 'TutorController@update')->name('tutor-update');
+		// Route::get('edit', 'TutorController@edit')->name('tutor-edit-profile');
+		// Route::post('update', 'TutorController@update')->name('tutor-update');
 
 
 		// TUTOR COURSE

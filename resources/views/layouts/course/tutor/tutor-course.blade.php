@@ -63,14 +63,14 @@
   function readURL(input) {
 
       if (input.files && input.files[0]) {
-      var reader = new FileReader();
+        var reader = new FileReader();
 
-      reader.onload = function(e) {
-          $('#preview_image').attr('src', e.target.result);
-          $('#preview_image').removeClass('hidden');
-      }
+        reader.onload = function(e) {
+            $('#preview_image').attr('src', e.target.result);
+            $('#preview_image').removeClass('hidden');
+        }
 
-      reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(input.files[0]);
       }
   }
 

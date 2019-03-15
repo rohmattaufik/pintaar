@@ -395,8 +395,8 @@ class CourseController extends CourseOrderController
 
     public function editTutor($courseID, $tutorID)
     {
-        $tutor = Tutor::where('id', $tutorID)->get()->first();
-        $course = Course::where('id', $courseID)->get()->first();
+        $tutor = Tutor::whereId($tutorID)->first();
+        $course = Course::whereId($courseID)->first();
         return view('layouts/course/tutor/tutor-course')->with(['tutor' => $tutor, 'course' => $course]);
     }
 
