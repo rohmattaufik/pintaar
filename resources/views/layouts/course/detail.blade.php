@@ -78,7 +78,7 @@
 						@else
 							<h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
 						@endif
-						<a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<a href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif         
 				@else
 					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
