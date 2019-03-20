@@ -21,9 +21,8 @@ class CartCourse extends Model
     public function createCartCourse(Cart $cart, Course $course)
     {
         $cartCourse = CartCourse::create([
-                'cart_id' => $cart->id,
-                'course_id' => $course->id,
-                'course_price' => $course->harga,
+            'cart_id' => $cart->id,
+            'course_id' => $course->id
         ]);
         return $cartCourse;
     }

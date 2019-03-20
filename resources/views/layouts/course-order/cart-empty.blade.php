@@ -15,7 +15,7 @@
           <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
               <div><i class="fas fa-shopping-cart fa-5x"></i></div>
               <p>Keranjang kamu kosong!</p>
-              <a href="{{ route('courses') }}" class="btn btn-lg btn-primary">Beli Kelas Disini</a>
+              <a href="{{ route('courses-category', 1) }}" class="btn btn-lg btn-primary">Beli Kelas Disini</a>
            
           </div>
         </div>      

@@ -24,8 +24,8 @@
 						<p>Untuk membantu kamu belajar bersama, <strong>kami akan memberikan hadiah kepadamu berupa kelas gratis!</strong></p>
 						<p>Iya, kamu bisa mendapatkan kelas gratis di Pintaar dengan belajar bersama dengan teman Pintarmu! Berikut adalah langkah-langkahnya:</p>
 						<ol>
-						<li>Cari 3 cari teman pintarmu, baik itu teman nongkrong, teman kerja ataupun teman kuliahmu yang kamu suka belajar bersama</li>
-						<li>Ajak setiap dari mereka untuk minimal membeli 1 kelas berbayar di Pintaar (kelasnya bebas, sesuai minat dan kebutuhan masing-masing)</li>
+						<li>Cari 2 teman pintarmu, baik itu teman nongkrong, teman kerja ataupun teman kuliahmu yang kamu suka belajar bersama</li>
+						<li>Ajak mereka untuk minimal membeli 1 kelas berbayar di Pintaar (kelasnya bebas, sesuai minat dan kebutuhan masing-masing)</li>
 						<li>Kirimkan setiap no order mereka yang telah disetujui, beserta satu kelas yang ingin kamu dapatkan secara gratis ke <a href="https://wa.me/6285212221431" target="_blank">WA (085212221431)</a> atau ke email <a href="mailto:pintaar.bantuan@gmail.com">pintaar.bantuan@gmail.com</a></li>
 						<li>Kamu dapat menunggu dalam 1x24 jam dan kelas tersebut akan menjadi milikmu secara gratis!</li>
 						</ol>

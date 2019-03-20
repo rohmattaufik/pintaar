@@ -16,7 +16,7 @@
               @if (count($order) == 0)
                 <div><i class="fas fa-shopping-cart fa-5x"></i></div>
                 <p>Belum ada kelas yang kamu beli!</p>
-                <a href="{{ route('courses') }}" class="btn btn-lg btn-primary">Beli Kelas Disini</a>
+                <a href="{{ route('courses-category', 1) }}" class="btn btn-lg btn-primary">Beli Kelas Disini</a>
               
               @else 
                 <h2>Daftar Transaksi</h2>
