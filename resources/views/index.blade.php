@@ -99,13 +99,23 @@
                          <div class="thumbnail">
                              <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
-                                <h4>{{$list_course_code->nama_course}}</h4>
+                                <h4 id="thumbnail-nama-kelas">{{$list_course_code->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_course_code->rating) }}"></p>
-                                @if($list_course_code->harga == 0)
-                                  <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
+
+                                @if($list_course_code->harga > 0)
+                                    @if($list_course_code->diskon > 0)
+                                        <h4 class="text-right">
+                                            <strike>Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</strike>
+                                            Rp {{ number_format($list_course_code->harga*$list_course_code->diskon/100, 0, ',', '.') }}
+                                        </h4>
+                                    @else
+                                        <h4 class="text-right">
+                                            Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}
+                                        </h4>
+                                    @endif
                                 @else
-                                  <h4 class="text-right"><strike>Rp 300.000</strike> Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</h4>
+                                    <h4 class="text-right"><span class="label label-warning">Gratis</span></h4>
                                 @endif
 
                              </div>
@@ -140,13 +150,23 @@
                          <div class="thumbnail">
                              <img src="{{ URL::asset('images/gambar_course/'.$list_courses_others->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
-                                <h4>{{$list_courses_others->nama_course}}</h4>
+                                <h4 id="thumbnail-nama-kelas">{{$list_courses_others->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_courses_others->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_courses_others->rating) }}"></p>
-                                @if($list_courses_others->harga == 0)
-                                  <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
+                                
+                                @if($list_courses_others->harga > 0)
+                                    @if($list_courses_others->diskon > 0)
+                                        <h4 class="text-right">
+                                            <strike>Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</strike>
+                                            Rp {{ number_format($list_courses_others->harga*$list_courses_others->diskon/100, 0, ',', '.') }}
+                                        </h4>
+                                    @else
+                                        <h4 class="text-right">
+                                            Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}
+                                        </h4>
+                                    @endif
                                 @else
-                                  <h4 class="text-right"><strike>Rp 300.000</strike> Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</h4>
+                                    <h4 class="text-right"><span class="label label-warning">Gratis</span></h4>
                                 @endif
 
                              </div>

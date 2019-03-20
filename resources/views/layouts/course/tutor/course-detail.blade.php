@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-xs-12">
           <a href="{{ route('course-update', $course->id) }}" class="btn btn-success">Ubah Informasi Kelas</a>
-          <a href="{{ route('course', $course->id)}}" class="btn btn-default">Preview</a>
+          <a href="{{ route('course', $course->id)}}" target="_blank" class="btn btn-default">Preview</a>
           <br><br>
           <table class="table table-bordered">
             <thead>
@@ -25,11 +25,15 @@
             </thead>
             <tbody>
             <tr>
-              <td>Harga</td>
-              <td>{{ $course->harga}}</td>
+              <td>Harga Kelas</td>
+              <td>Rp {{ $course->harga}}</td>
             </tr>
             <tr>
-              <td>Deskripsi</td>
+              <td>Diskon Kelas</td>
+              <td>{{ $course->diskon }} %</td>
+            </tr>
+            <tr>
+              <td>Deskripsi Kelas</td>
               <td>{!! html_entity_decode($course->deskripsi) !!}</td>
             </tr>
             <tr>

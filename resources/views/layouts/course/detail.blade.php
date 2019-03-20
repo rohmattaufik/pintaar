@@ -100,19 +100,23 @@ function trackFBWebConversion($value) {
 
 				<p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
 
-				<h4><span class="label label-danger">Murid yang sudah bergabung: {{ $count_student_learned }}</span></h4>
-
+				<h4><span class="label label-default">Murid yang sudah bergabung: {{ $count_student_learned }}</span></h4>
+				<br>
 				<!-- <p><strong>Dibuat oleh {{ $course->creator->users->nama }} </strong><p> -->
 
 				@if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
-				@if($course->harga == 0)
-				<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+					@if($course->harga == 0)
+						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+					@else
+						@if($course->diskon != null and $course->diskon > 0)
+							<h2><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format($course->harga*$course->diskon/100, 0, ',', '.') }}</h2>
+						@else
+							<h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+						@endif
+						<a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+					@endif         
 				@else
-				<h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-				<a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
-				@endif         
-				@else
-				<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
+					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
 				@endif
 
 			</div>
@@ -129,19 +133,26 @@ function trackFBWebConversion($value) {
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
 				<h3>Deskripsi Kelas</h3>
-				{!! html_entity_decode($course->deskripsi) !!} 
+				{!! html_entity_decode($course->deskripsi) !!}
+				<br><br> 
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
 				@if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
-				@if($course->harga == 0)
-				<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+					@if($course->harga == 0)
+						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
+					@else
+						@if($course->diskon != null and $course->diskon > 0)
+							<h2><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format($course->harga*$course->diskon/100, 0, ',', '.') }}</h2>
+						@else
+							<h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+						@endif
+						<a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+					@endif         
 				@else
-				<h2><strike>Rp 300.000</strike> Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
-				<a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
-				@endif    
+					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
 				@endif
 			</div>
 		</div>       

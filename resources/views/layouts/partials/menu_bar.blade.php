@@ -11,9 +11,11 @@
           display: flex;
           flex-wrap: wrap;
         }
+
         .thumbnail {
-          height: 95%;
+          height: 100%;
         }
+
         .thumbnail {
           display: flex;
           flex-direction: column;
@@ -23,14 +25,9 @@
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          height: 95%;
+          height: 100%;
         }
-        /*
-        .thumbnail p, .thumbnail h4 {
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }*/
+        
       </style>
 
 

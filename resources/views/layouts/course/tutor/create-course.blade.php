@@ -23,8 +23,12 @@
                   <input type="text" class="form-control" name="nama_course" id="name" value="{{ $course != null ? $course->nama_course : null }}" required placeholder="">
                 </div>
                 <div class="form-group">
-                  <label for="harga">Harga</label>
+                  <label for="harga">Harga Kelas</label>
                   <input type="number" class="form-control" name="harga" id="harga" value="{{ $course != null ? $course->harga : null }}" required placeholder="Isi 0 untuk kelas gratis">
+                </div>
+                <div class="form-group">
+                  <label for="diskon">Diskon Harga Kelas (Persen)</label>
+                  <input type="number" class="form-control" name="diskon" id="harga" value="{{ $course != null ? $course->diskon : null }}" placeholder="Isi 0 untuk tidak memberikan diskon; Hanya isi dengan angka, tanda persen tidak perlu; Contoh: 50">
                 </div>
                 <div class="form-group">
                   <label for="foto">Gambar Kelas</label>
@@ -45,7 +49,7 @@
                   <video id="preview_video" controls class="hidden" width="300" height="200"></video>
                 @endif
                 <div class="form-group">
-                  <label for="deskripsi">Deskripsi</label>
+                  <label for="deskripsi">Deskripsi Kelas</label>
                   <textarea id="deskripsi-editor" class="form-control" rows="5" name="deskripsi" required>{{ $course != null ? $course->deskripsi : null}}</textarea>
                 </div>
                 

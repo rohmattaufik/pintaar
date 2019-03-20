@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
            'nama_course' => "Belajar HTML dari NOL",
            'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
            'harga' => 0,
+           'diskon' => 0,
            'id_tutor' => 1,
            'foto' => 'html-nol.jpg',
            'isPublished' => 1,
@@ -28,6 +29,19 @@ class DatabaseSeeder extends Seeder
            'nama_course' => "Fisika Nuklir",
            'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
            'harga' => 10000,
+           'diskon' => 50,
+           'id_tutor' => 1,
+           'isPublished' => 1,
+           'foto' => 'html-nol.jpg',
+           'kategori' => 1, 
+           'video' => 'fisika_energi.mp4'
+        ]);
+
+         DB::table('courses')->insert([
+           'nama_course' => "How to pick up a random girl",
+           'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
+           'harga' => 10000,
+           'diskon' => 0,
            'id_tutor' => 1,
            'isPublished' => 1,
            'foto' => 'html-nol.jpg',

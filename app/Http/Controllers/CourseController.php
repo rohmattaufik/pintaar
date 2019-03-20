@@ -269,20 +269,22 @@ class CourseController extends CourseOrderController
 			$request['foto']     = $urlFoto;
 			$request['video']    = $url;
 			$course =Course::create([
-				"nama_course"    => $request->nama_course,
+				"nama_course"   => $request->nama_course,
 				"harga"         => $request->harga,
+				"diskon"        => $request->diskon,
 				"id_tutor"      => $tutor->id,
 				'foto'          => $urlFoto,
 				'video'         => $url,
 				'deskripsi'     => $request->deskripsi,
-				'kategori'         => 1
+				'kategori'      => 1
 				]);
 		} else {
 			if($urlFoto != "" and $url != "")
 			{
 				$course = Course::whereId($request->id)->update([
-					"nama_course"    => $request->nama_course,
+					"nama_course"   => $request->nama_course,
 					"harga"         => $request->harga,
+					"diskon"        => $request->diskon,
 					"id_tutor"      => $tutor->id,
 					'foto'          => $urlFoto,
 					'video'         => $url,
@@ -293,8 +295,9 @@ class CourseController extends CourseOrderController
 				if($urlFoto != "")
 				{
 					$course = Course::whereId($request->id)->update([
-						"nama_course"    => $request->nama_course,
+						"nama_course"   => $request->nama_course,
 						"harga"         => $request->harga,
+						"diskon"        => $request->diskon,
 						"id_tutor"      => $tutor->id,
 						'foto'          => $urlFoto,
 						'deskripsi'     => $request->deskripsi,
@@ -303,8 +306,9 @@ class CourseController extends CourseOrderController
 				} else if($url != "")
 				{
 					$course = Course::whereId($request->id)->update([
-						"nama_course"    => $request->nama_course,
+						"nama_course"   => $request->nama_course,
 						"harga"         => $request->harga,
+						"diskon"        => $request->diskon,
 						"id_tutor"      => $tutor->id,
 						'video'         => $url,
 						'deskripsi'     => $request->deskripsi,
@@ -312,8 +316,9 @@ class CourseController extends CourseOrderController
 						]);
 				} else {
 					$course =Course::whereId($request->id)->update([
-						"nama_course"    => $request->nama_course,
+						"nama_course"   => $request->nama_course,
 						"harga"         => $request->harga,
+						"diskon"        => $request->diskon,
 						"id_tutor"      => $tutor->id,
 						'deskripsi'     => $request->deskripsi,
 						'kategori'         => 1

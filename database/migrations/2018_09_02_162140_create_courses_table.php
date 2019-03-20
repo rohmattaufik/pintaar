@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('nama_course');
             $table->integer('harga');
+            $table->integer('diskon')->nullable();
             $table->string('foto');
             $table->longText('deskripsi');
             $table->integer('id_tutor');

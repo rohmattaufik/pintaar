@@ -76,7 +76,7 @@
 		$(document).ready(function() {
 		  var showChar = 65;
 		  var ellipsestext = "...";
-		  $('.thumbnail .caption h4').each(function() {
+		  $('#thumbnail-nama-kelas').each(function() {
 		    var content = $(this).html();
 
 		    if(content.length > showChar) {
