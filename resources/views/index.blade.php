@@ -177,6 +177,22 @@
               @endforeach
 
             </div>
+            <hr>
+        </div>
+    </section>
+
+    <section class="section-padding" id="team-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                    
+                    <h2>Orang Pintaar</h2>
+                    <br>
+                    <div><i class="fas fa-users fa-7x"></i></div>
+                    <h4>{{$allUsers}} murid sudah bergabung di Pintaar</h4>
+                    
+                </div>
+            </div>
         </div>
     </section>
 
@@ -231,6 +247,41 @@
             </div>
         </div>
     </section>
+
+
+    <section class="section-padding" id="team-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                    <div class="page-title">
+                        <h2>Tim Pintaar</h2>
+                        <p>Founder Pintaar merupakan lulusan Fakultas Ilmu Komputer, Universitas Indonesia dan Laboratorium <a href="http://dl2.cs.ui.ac.id/blog/">Digital Library and Distance Learning (DL2)</a> </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-md-offset-3">
+                    <div class="single-team">
+                        <div class="team-photo">
+                            <img src="images/fasilkom-c.png" alt="">
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="single-team">
+                        <div class="team-photo">
+                            <img src="images/dl2-b.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </section>
+
+
 
 
 
