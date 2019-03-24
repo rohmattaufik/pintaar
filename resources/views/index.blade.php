@@ -180,7 +180,7 @@
             <hr>
         </div>
     </section>
-
+  <!--
     <section class="section-padding" id="team-page">
         <div class="container">
             <div class="row">
@@ -195,7 +195,7 @@
             </div>
         </div>
     </section>
-
+-->
 
     <section class="testimonial-area section-padding gray-bg overlay">
         <div class="container">
@@ -255,7 +255,8 @@
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
                     <div class="page-title">
                         <h2>Tim Pintaar</h2>
-                        <p>Founder Pintaar merupakan lulusan Fakultas Ilmu Komputer, Universitas Indonesia dan Laboratorium <a href="http://dl2.cs.ui.ac.id/blog/">Digital Library and Distance Learning (DL2)</a> </p>
+                        <p> Pintaar didirikan oleh lulusan Fakultas Ilmu Komputer, Universitas Indonesia dan Laboratorium <a href="http://dl2.cs.ui.ac.id/blog/">Digital Library and Distance Learning (DL2)</a> 
+							<strong>yang tentunya sangat mengerti kebutuhan belajar online kamu <strong></p>
                     </div>
                 </div>
             </div>
