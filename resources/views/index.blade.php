@@ -12,7 +12,7 @@
                 <div class="col-xs-12 col-md-7 header-text">
                     <h2>Ayo Bergabung dan Berkembang Bersama Ribuan Orang Pintar!</h2>
 					<hr>
-                    <p>Pintaar merupakan sebuah platform kelas online yang dapat membantu kamu memperoleh Ilmu dengan mudah dan fleksibel.</p>
+                    <p>Pintaar merupakan sebuah platform kelas online yang membantu kamu memperoleh Ilmu dengan mudah dan fleksibel.</p>
                     <a href="#blog-page" class="button white">Gabung ke Kelas Sekarang</a>
                 </div>
                 <div class="hidden-xs hidden-sm col-md-5 text-right">
