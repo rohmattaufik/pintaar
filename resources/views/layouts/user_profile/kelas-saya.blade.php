@@ -15,7 +15,9 @@
             <div class="row">
               <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
                 <div><i class="fas fa-book-open fa-5x"></i></div>
-                <h3>Kamu belum membeli kelas!</h3>
+                <h3>Kelas kamu belum ada!</h3>
+                <p>Setelah kamu membeli kelas dan pembayaran sudah dikonfirmasi, kelas dapat diakses disini.</p>
+                <a href="{{ route('courses-category', 1) }}" class="btn btn-lg btn-primary">Beli Kelas Sekarang</a>
               </div>
             </div>
           @else

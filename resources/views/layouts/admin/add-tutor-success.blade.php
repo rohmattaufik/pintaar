@@ -16,7 +16,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h1 class="box-title">Akun Tutor Baru</h1>
+                        <h1 class="box-title">Akun Pengajar</h1>
                     </div>
                     <div class="box-body">
                       	<table width="100%">

@@ -23,7 +23,7 @@
                 <div style="color:green;"><i class="fas fa-check-circle fa-7x"></i></div>
                 <br>
                 <h4>Terima kasih! Pembelian kelas kamu BERHASIL!</h4> 
-                <h4>Kelas ini GRATIS. Namun, kamu harus share postingan Pintaar di Line atau Facebook. Jika sudah, tunggu selama 1x24 jam dan kelas akan dapat kamu akses.</h4>
+                <h4>Kelas ini GRATIS. Namun, kamu harus share postingan Pintaar di Line atau Facebook. Jika sudah, tunggu selama 1x24 jam dan kelas akan dapat kamu akses di menu <strong>Kelas Saya</strong>.</h4>
                 <br>
                 <div class="row">
                   <div class="col-xs-12 col-md-6 col-md-offset-3">
@@ -42,8 +42,9 @@
               <div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
                 <div style="color:green;"><i class="fas fa-check-circle fa-7x"></i></div>
                 <br>
-                <h4>Bukti pembayaran telah kami terima!</h4>
-                <p>Silahkan tunggu dalam 1x24 jam dan kamu akan bisa menikmati kelas yang sudah dibeli.</p>
+                <h4>Bukti Pembayaran Sudah Diterima!</h4>
+                <p>Pembayaran kamu akan dikonfirmasi dalam 1x24 jam. Setelah dikonfirmasi, kamu bisa menikmati kelas yang sudah dibeli di menu <strong>Kelas Saya</strong>.</p>
+                <br>
                 <a href="{{ route('courses-category', 1) }}" class="btn btn-primary btn-lg">Beli Kelas Lain</a>  
               </div>
             </div>

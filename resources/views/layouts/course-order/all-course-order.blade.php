@@ -27,7 +27,6 @@
                                 <th scope="col">No.</th>
                                 <th scope="col">No. Pesanan</th>
                                 <th scope="col">Tanggal Pemesanan</th>
-                                <th scope="col">Total Harga</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -38,8 +37,7 @@
                                 <td>{{ ++$key }}</td>
                                 <td><a href="{{ route('review-order', $transaksi -> no_order) }}">{{ $transaksi -> no_order }}</a></td>
                                 <td>{{ $transaksi -> created_at }}</td>
-                                
-                                <td>Rp {{ number_format($transaksi -> total_price, 0, ',', '.') }}</td>
+                          
                                 <td>{{ $transaksi -> status_pembayaran_info }}</td>
                                 <td>
                                   @if ($transaksi->status_pembayaran == 1)   

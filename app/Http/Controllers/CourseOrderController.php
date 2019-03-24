@@ -182,14 +182,13 @@ class CourseOrderController
 
 	public function show($order_no)
 	{
-		$courseOrder = DB::table('pembelian_courses')
-					->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
-					->where('pembelian_courses.no_order', $order_no)
-					->get()->pop();
+		$courseOrder = PembelianCourse::where('pembelian_courses.no_order', $order_no)
+						->first();
 		$cart = Cart::whereId($courseOrder->cart_id)->first();
 				
 		if (Auth::user()->id == $courseOrder->id_user) {
 			return view('layouts/course-order/review-order', ['courseOrder' => $courseOrder, 'cart' => $cart]);
+			// dd($courseOrder);
 		}
 		else {
 			return view('layouts/course-order/not-found');
