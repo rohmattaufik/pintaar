@@ -8,12 +8,7 @@
 @endsection
 
 @section('content')
-	<script>
-	  fbq('track', 'Purchase', {
-		value: 10000,
-		currency: 'IDR',
-	  });
-	</script>  
+  
 	<section class="section-padding">
     <div class="container">
 

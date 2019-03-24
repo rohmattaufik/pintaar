@@ -28,41 +28,6 @@
 @endsection
 
 @section('content')
-<script>
-fbq('track', 'ViewContent');
-
-function trackWebConversion($value) {
-	trackGoogleAdWordWebConversion($value);
-	trackFBWebConversion($value);
-}
-
-function trackGoogleAdWordWebConversion($value) {
-	var callback = function () {
-		if (typeof(url) != 'undefined') {
-			window.location = url;
-
-		};
-		gtag('event', 'conversion', {
-			'send_to': 'AW-810238926/rDzaCMnUupYBEM6HrYID',
-			'value': $value,
-			'currency': 'IDR',
-			'transaction_id': '',
-			'event_callback': callback
-		});
-		return false;
-	}
-}
-
-function trackFBWebConversion($value) {
-
-	fbq('track', 'Purchase', {
-		value: $value,
-		currency: 'IDR',
-	});
-
-}
-</script>
-
 
 
 
@@ -113,7 +78,7 @@ function trackFBWebConversion($value) {
 						@else
 							<h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
 						@endif
-						<a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<a href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif         
 				@else
 					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
@@ -149,7 +114,7 @@ function trackFBWebConversion($value) {
 						@else
 							<h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
 						@endif
-						<a href="{{ route('buy-course', $course->id) }}" onclick="trackWebConversion({{ $course->harga }})" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif         
 				@else
 					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 

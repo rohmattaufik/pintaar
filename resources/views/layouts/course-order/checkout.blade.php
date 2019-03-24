@@ -71,6 +71,40 @@
 }
 </style>
 @endsection
+<script>
+
+function trackWebConversion($value) {
+	trackGoogleAdWordWebConversion($value);
+	trackFBWebConversion($value);
+}
+
+function trackGoogleAdWordWebConversion($value) {
+	var callback = function () {
+		if (typeof(url) != 'undefined') {
+			window.location = url;
+
+		};
+		gtag('event', 'conversion', {
+			'send_to': 'AW-810238926/rDzaCMnUupYBEM6HrYID',
+			'value': $value,
+			'currency': 'IDR',
+			'transaction_id': '',
+			'event_callback': callback
+		});
+		return false;
+	}
+}
+
+function trackFBWebConversion($value) {
+
+	fbq('track', 'Purchase', {
+		value: $value,
+		currency: 'IDR',
+	});
+
+}
+</script>
+
 
 
 
@@ -134,7 +168,7 @@
                       </tr>
                     </table>
                     <br>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Bayar Sekarang</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="trackWebConversion({{ $cart->total_price }})" >Bayar Sekarang</button>
                   </li>
                 </ul>
               </div>
