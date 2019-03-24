@@ -12,7 +12,7 @@
                 <div class="col-xs-12 col-md-7 header-text">
                     <h2>Ayo Bergabung dan Berkembang Bersama Ribuan Orang Pintar!</h2>
 					<hr>
-                    <p>Pintaar merupakan sebuah platform kelas online yang ingin membantu masyarakat Indonesia memperoleh Ilmu dengan mudah.</p>
+                    <p>Pintaar merupakan sebuah platform kelas online yang dapat membantu kamu memperoleh Ilmu dengan mudah.</p>
                     <a href="#blog-page" class="button white">Gabung ke Kelas Sekarang</a>
                 </div>
                 <div class="hidden-xs hidden-sm col-md-5 text-right">
@@ -153,7 +153,7 @@
                                 <h4 id="thumbnail-nama-kelas">{{$list_courses_others->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_courses_others->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_courses_others->rating) }}"></p>
-                                
+
                                 @if($list_courses_others->harga > 0)
                                     @if($list_courses_others->diskon > 0)
                                         <h4 class="text-right">
@@ -185,12 +185,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
-                    
+
                     <h2>Orang Pintaar</h2>
                     <br>
                     <div><i class="fas fa-users fa-7x"></i></div>
                     <h4>{{$allUsers}} murid sudah bergabung di Pintaar</h4>
-                    
+
                 </div>
             </div>
         </div>
@@ -255,7 +255,7 @@
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
                     <div class="page-title">
                         <h2>Tim Pintaar</h2>
-                        <p> Pintaar didirikan oleh lulusan Fakultas Ilmu Komputer, Universitas Indonesia dan Laboratorium <a href="http://dl2.cs.ui.ac.id/blog/">Digital Library and Distance Learning (DL2)</a> 
+                        <p> Pintaar didirikan oleh lulusan Fakultas Ilmu Komputer, Universitas Indonesia dan Laboratorium <a href="http://dl2.cs.ui.ac.id/blog/">Digital Library and Distance Learning (DL2)</a>
 							<strong>yang tentunya sangat mengerti kebutuhan belajar online kamu <strong></p>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
                         <div class="team-photo">
                             <img src="images/fasilkom-c.png" alt="">
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
