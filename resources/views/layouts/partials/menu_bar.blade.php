@@ -2,32 +2,54 @@
     <!--Mainmenu-area-->
 
     <style type="text/css">
-        .thumbnail img {
-          max-width: 100%;
-          height: auto;
+
+        @media only screen and (min-width : 481px) {
+            .row.display-flex {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .row.display-flex > [class*='col-'] > a > .thumbnail {
+                height: 95%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .row.display-flex > [class*='col-'] > a > .thumbnail .caption {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              height: 95%;
+            }
+
+            .row.display-flex > [class*='col-'] > a > .thumbnail > img {
+                width: 100%;
+                height: 145px; /* force image's height */
+
+                /* force image fit inside it's "box" */
+                -webkit-object-fit: cover;
+                   -moz-object-fit: cover;
+                    -ms-object-fit: cover;
+                     -o-object-fit: cover;
+                        object-fit: cover;
+            }
         }
 
-        .row.display-flex {
-          display: flex;
-          flex-wrap: wrap;
+        @media only screen and (max-width : 480px) {
+            .row.display-flex > [class*='col-'] > a > .thumbnail > img {
+                width: 100%;
+                height: 200px; /* force image's height */
+
+                /* force image fit inside it's "box" */
+                -webkit-object-fit: cover;
+                   -moz-object-fit: cover;
+                    -ms-object-fit: cover;
+                     -o-object-fit: cover;
+                        object-fit: cover;
+            }
         }
 
-        .thumbnail {
-          height: 100%;
-        }
-
-        .thumbnail {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .thumbnail .caption {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          height: 100%;
-        }
-        
+       
       </style>
 
 

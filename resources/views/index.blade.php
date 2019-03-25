@@ -91,7 +91,7 @@
                 </div>
             </div>
             <div class="row display-flex">
-                @foreach($list_courses_code as $list_course_code)
+                @foreach($list_courses_code as $key=>$list_course_code)
 
 
                     <div class="col-xs-12 col-md-3">
@@ -107,7 +107,7 @@
                                     @if($list_course_code->diskon > 0)
                                         <h4 class="text-right">
                                             <strike>Rp {{ number_format($list_course_code->harga, 0, ',', '.') }}</strike>
-                                            Rp {{ number_format($list_course_code->harga*$list_course_code->diskon/100, 0, ',', '.') }}
+                                            Rp {{ number_format((100-$list_course_code->diskon)/100*$list_course_code->harga, 0, ',', '.') }}
                                         </h4>
                                     @else
                                         <h4 class="text-right">
@@ -115,7 +115,7 @@
                                         </h4>
                                     @endif
                                 @else
-                                    <h4 class="text-right"><span class="label label-warning">Gratis</span></h4>
+                                    <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @endif
 
                              </div>
@@ -158,7 +158,7 @@
                                     @if($list_courses_others->diskon > 0)
                                         <h4 class="text-right">
                                             <strike>Rp {{ number_format($list_courses_others->harga, 0, ',', '.') }}</strike>
-                                            Rp {{ number_format($list_courses_others->harga*$list_courses_others->diskon/100, 0, ',', '.') }}
+                                            Rp {{ number_format((100 - $list_course_code->diskon)/100*$list_courses_others->harga, 0, ',', '.') }}
                                         </h4>
                                     @else
                                         <h4 class="text-right">
@@ -166,7 +166,7 @@
                                         </h4>
                                     @endif
                                 @else
-                                    <h4 class="text-right"><span class="label label-warning">Gratis</span></h4>
+                                    <h3 class="text-right"><span class="label label-warning">Gratis</span></h3>
                                 @endif
 
                              </div>
