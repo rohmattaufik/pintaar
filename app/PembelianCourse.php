@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Cart;
+use App\CartCourse;
 use App\Course;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -43,6 +45,35 @@ class PembelianCourse extends Model
         }
 
         return $nama_course;
+    }
+
+    public function getOrderPerCourse($courseId)
+    {
+         $orders = DB::table('pembelian_courses')
+                        ->select(DB::raw('users.email as email_buyer'), DB::raw('cart_course.course_price as course_price'), DB::raw('cart_course.discount_percentage as discount_percentage'), DB::raw('pembelian_courses.created_at as order_time'))
+                        ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
+                        ->leftJoin('cart_course', 'cart_course.cart_id', 'pembelian_courses.cart_id')
+                        ->leftJoin('users', 'users.id', 'pembelian_courses.id_user')
+                        ->where('pembelian_courses.status_pembayaran', 3)
+                        ->where('cart_course.course_id', $courseId)
+                        ->get();
+        return $orders;
+    }
+
+    public function getRevenuePerCourse($courseId)
+    {
+        $totalRevenue = 0;
+        $orders = $this->getOrderPerCourse($courseId);
+        foreach ($orders as $key => $order) {
+            if ($order->course_price > 0 and $order->discount_percentage > 0) {
+                $finalPrice = (100-$order->discount_percentage)/100*$order->course_price;
+                $totalRevenue = $totalRevenue + $finalPrice;
+            }
+            else {
+                $totalRevenue = $totalRevenue + $order->course_price;
+            }
+        }
+        return $totalRevenue;
     }
 
 }
