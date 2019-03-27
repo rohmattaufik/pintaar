@@ -12,7 +12,7 @@
   <section class="section-padding">
     <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-md-12 text-center">
+          <div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
               @if (count($order) == 0)
                 <div><i class="fas fa-shopping-cart fa-5x"></i></div>
                 <p>Belum ada kelas yang kamu beli!</p>
@@ -25,27 +25,31 @@
                         <thead>
                             <tr>
                                 <th scope="col">No.</th>
-                                <th scope="col">No. Pesanan</th>
-                                <th scope="col">Tanggal Pemesanan</th>
+                                <th scope="col">Transaksi</th>
+                                <!-- <th scope="col">Tanggal Pemesanan</th> -->
                                 <th scope="col">Status</th>
-                                <th scope="col">Aksi</th>
+                                <!-- <th scope="col">Aksi</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($order as $key => $transaksi)
                             <tr>
                                 <td>{{ ++$key }}</td>
-                                <td><a href="{{ route('review-order', $transaksi -> no_order) }}">{{ $transaksi -> no_order }}</a></td>
-                                <td>{{ $transaksi -> created_at }}</td>
-                          
-                                <td>{{ $transaksi -> status_pembayaran_info }}</td>
                                 <td>
+                                  <a href="{{ route('review-order', $transaksi -> no_order) }}"><h4>{{ $transaksi -> no_order }}</h4></a>
+                                  <p>{{ $transaksi->created_at }}</p>
+                                  
                                   @if ($transaksi->status_pembayaran == 1)   
                                     <a href="{{ route('payment-proof', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Upload Bukti Bayar</a>
                                   @endif
                                   
                                   <a href="{{ route('review-order', $transaksi -> no_order) }}" class="btn btn-sm btn-primary">Lihat</a>
+
                                 </td>
+                                <!-- <td>{{ $transaksi -> created_at }}</td> -->
+                          
+                                <td>{{ $transaksi -> status_pembayaran_info }}</td>
+                                
                             </tr>
                             @endforeach
                         </tbody>
