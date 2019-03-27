@@ -61,10 +61,10 @@
 		@endif
 		<br>
 		<div class="row">
-			<div class="col-xs-12 col-md-6 col-md-offset-3 text-center">
+			<div class="col-xs-12 col-md-4 col-md-offset-4 text-center">
 				<div class="alert alert-info" role="alert">
 					
-				<h4>Batas waktu pembayaran: {{ $courseOrder->updated_at->addDays(3)->format('d-m-Y') }} pukul 23:59.</h4>
+				<h4>Batas waktu pembayaran:<br> {{ $courseOrder->updated_at->addDays(3)->format('d-m-Y') }} pukul 23:59.</h4>
 				
 				</div>
 			
@@ -115,7 +115,7 @@
 												@if($cartCourse->discount_percentage != null and $cartCourse->discount_percentage > 0)
 													<p><strike>Rp {{ number_format($cartCourse->course_price, 0, ',', '.') }}
 													</strike>
-													Rp {{ number_format($cartCourse->course_price*$cartCourse->discount_percentage/100, 0, ',', '.') }}
+													Rp {{ number_format((100-$cartCourse->discount_percentage)/100*$cartCourse->course_price, 0, ',', '.') }}
 													</p>
 												@else
 													<p>

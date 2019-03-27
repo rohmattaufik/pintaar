@@ -38,15 +38,20 @@
 		@if((empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3))
 		<div class="row">
 			<div class="col-xs-12 col-md-12 text-center"> 
-				<div class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					@if ($course->harga == 0)
-					<h4><strong>Pemberitahuan!</strong> Kelas ini masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera daftar dan belajar di Pintaar!</h4>
-					@else
-					<h4>Kelas ini diskon 88% hingga 18 Maret 2019.</h4>
-					<h4 id="timer-diskon"></h4>
+				@if ($course->harga == 0)
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4>Kelas ini masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera beli dan gabung di kelas ini!</h4>
+					</div>
+				@else
+					@if($course->diskon != null and $course->diskon > 0)
+						<div class="alert alert-danger alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4>Kelas ini diskon {{ $course->diskon }}% hingga 18 Maret 2019.</h4>
+						<h4 id="timer-diskon"></h4>
+						</div>
 					@endif
-				</div>
+				@endif
 			</div>
 		</div>
 		@endif
@@ -74,9 +79,9 @@
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
 					@else
 						@if($course->diskon != null and $course->diskon > 0)
-							<h2><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format($course->harga*$course->diskon/100, 0, ',', '.') }}</h2>
+							<h3><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h3>
 						@else
-							<h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+							<h3>Rp {{ number_format($course->harga, 0, ',', '.') }}</h3>
 						@endif
 						<a href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif         
@@ -110,14 +115,12 @@
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
 					@else
 						@if($course->diskon != null and $course->diskon > 0)
-							<h2><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format($course->harga*$course->diskon/100, 0, ',', '.') }}</h2>
+							<h3><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h3>
 						@else
-							<h2>Rp {{ number_format($course->harga, 0, ',', '.') }}</h2>
+							<h3>Rp {{ number_format($course->harga, 0, ',', '.') }}</h3>
 						@endif
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
-					@endif         
-				@else
-					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
+					@endif
 				@endif
 			</div>
 		</div>       

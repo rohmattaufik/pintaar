@@ -36,7 +36,7 @@ class Cart extends Model
 			  	$course_in_cart->update();
 			  	
 			  	if ($course_in_cart->getCourse->diskon != null and $course_in_cart->getCourse->diskon > 0) {
-			  		$priceAfterDiscount = $course_in_cart->getCourse->harga * $course_in_cart->getCourse->diskon / 100;
+			  		$priceAfterDiscount = (100-$course_in_cart->getCourse->diskon) / 100*$course_in_cart->getCourse->harga;
 
 			  		$totalPrice += $priceAfterDiscount;
 			  	}

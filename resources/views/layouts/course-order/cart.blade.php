@@ -31,7 +31,7 @@
 								<div class="col-xs-4 col-md-4 text-right">
 									@if ($cartCourse->getCourse->diskon != null and $cartCourse->getCourse->diskon > 0)
 										<font size="4"><strike>Rp {{ number_format($cartCourse->getCourse->harga, 0, ',', '.') }}</strike></font>
-										<font size="4">Rp {{ number_format($cartCourse->getCourse->harga*$cartCourse->getCourse->diskon/100, 0, ',', '.') }}</font>
+										<font size="4">Rp {{ number_format((100-$cartCourse->getCourse->diskon)/100*$cartCourse->getCourse->harga, 0, ',', '.') }}</font>
 
 										<br>
 										<span class="label label-primary">Diskon {{ $cartCourse->getCourse->diskon }}%</span>
