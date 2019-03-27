@@ -22,7 +22,7 @@
                 <br>
                 <div class="row">
                   <div class="col-xs-12 col-md-6 col-md-offset-3">
-                      <a href="https://www.instagram.com/p/BvgiaIHgkcO/" target="_blank" class="btn btn-block btn-danger">Share di IG Story Sekarang</a>
+                      <a href="https://www.instagram.com/p/Bvh32ZngZ_f/" target="_blank" class="btn btn-block btn-danger">Share di IG Story Sekarang</a>
                       <p>atau</p>
                       <a href="http://line.me/R/home/public/post?id=lov2313r&postId=1155273919305023787" target="_blank" class="btn btn-block btn-success">Share di Line Sekarang</a>
                       <p>atau</p>
