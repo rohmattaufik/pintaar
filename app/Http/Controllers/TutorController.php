@@ -22,15 +22,6 @@ class TutorController extends Controller
         if ($course->id_tutor == $tutor->id) {
             $orders = $pembelian_courses->getOrderPerCourse($courseId);
             $totalRevenue = $pembelian_courses->getRevenuePerCourse($courseId);
-            
-            // $totalRevenue = DB::table('pembelian_courses')
-            //             ->select(DB::raw('SUM(cart_course.course_price) as course_price'))
-            //             ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
-            //             ->leftJoin('cart_course', 'cart_course.cart_id', 'pembelian_courses.cart_id')
-            //             ->leftJoin('users', 'users.id', 'pembelian_courses.id_user')
-            //             ->where('pembelian_courses.status_pembayaran', 3)
-            //             ->where('cart_course.course_id', $courseId)
-            //             ->get();
             //dd($orders);
             return view('layouts/course/tutor/sales-course', ["orders"=>$orders, "course"=>$course, "totalRevenue"=>$totalRevenue]);
         }
