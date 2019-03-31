@@ -56,5 +56,8 @@
 
 
 @section('extra-script')
-  
+    <script type="text/javascript">
+      window.VWO = window.VWO || [];
+      window.VWO.push(['track.revenueConversion',"1000"]);
+    </script>
 @endsection
