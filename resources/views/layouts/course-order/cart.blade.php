@@ -86,5 +86,8 @@
 
 
 @section('extra-script')
-
+<script type="text/javascript">
+	window._vis_opt_queue = window._vis_opt_queue || [];
+	window._vis_opt_queue.push(function() {_vis_opt_revenue_conversion("1000");});
+</script>
 @endsection
