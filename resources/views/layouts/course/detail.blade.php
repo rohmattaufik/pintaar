@@ -6,21 +6,42 @@
 
 @section('extra-style')
 <style>
+
 .section {
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
-#image_for_mobile {
-	display: none;
+#diskon {
+	font-size: 15px;
+	margin-top: -5px;
+	margin-bottom: 10px;
+}
+
+#info-promo > [class*='col-'] > .alert {
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 0px;	
+}
+
+@media screen and (min-width: 601px) {
+  	#image_for_mobile {
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 600px) {
+	
 	#image_for_mobile {
 		display: block;
-		margin-bottom: 15px;
+		margin-bottom: 10px;
 	}
+
 	#image_for_desktop {
 		display: none;
+	}
+
+	#info-promo > [class*='col-'] > .alert > h4 {
+		font-size: 15px;
 	}
 }
 </style>
@@ -33,10 +54,8 @@
 
 <section class="section">		 
 	<div class="container">
-
-
 		@if((empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3))
-		<div class="row">
+		<div id="info-promo" class="row">
 			<div class="col-xs-12 col-md-12 text-center"> 
 				@if ($course->harga == 0)
 					<div class="alert alert-danger alert-dismissible" role="alert">
@@ -47,8 +66,8 @@
 					@if($course->diskon != null and $course->diskon > 0)
 						<div class="alert alert-danger alert-dismissible" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4>Kelas ini diskon {{ $course->diskon }}% hingga 18 Maret 2019.</h4>
-						<h4 id="timer-diskon"></h4>
+							<h4>Kelas ini diskon {{ $course->diskon }}% hingga 8 April 2019.</h4>
+							<h4 id="timer-diskon"></h4>
 						</div>
 					@endif
 				@endif
@@ -56,15 +75,15 @@
 		</div>
 		@endif
 
-		<div class="row">
+		<div id="image_for_mobile" class="row">
 			<div class="col-xs-12"> 
-				<div id="image_for_mobile" class="embed-responsive embed-responsive-16by9" >
-					<img class="embed-responsive-item"  src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
+				<div class="embed-responsive embed-responsive-16by9">
+					<img id="image_for_mobile" class="embed-responsive-item" src= "{{ URL::asset('images/gambar_course/'.$course->foto ) }}"></img>
 				</div>
 			</div>
 		</div>
 
-		<div class="row">
+		<div id="class-detail" class="row">
 			<div class="col-xs-12 col-md-7"> 
 				<h1>{{ $course->nama_course }}</h1> 
 
@@ -79,9 +98,9 @@
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
 					@else
 						@if($course->diskon != null and $course->diskon > 0)
-							<h3><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h3>
+							<h4><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h4>
 						@else
-							<h3>Rp {{ number_format($course->harga, 0, ',', '.') }}</h3>
+							<h4>Rp {{ number_format($course->harga, 0, ',', '.') }}</h4>
 						@endif
 						<a href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif         
@@ -103,29 +122,42 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
 				<h3>Deskripsi Kelas</h3>
-				{!! html_entity_decode($course->deskripsi) !!}
-				<br><br> 
+				<div id="read-more-description">
+					{!! html_entity_decode($course->deskripsi) !!}
+				</div>
+				
+				<hr> 
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
 				@if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
+					<div class="alert alert-info text-center" role="alert">
 					@if($course->harga == 0)
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
 					@else
 						@if($course->diskon != null and $course->diskon > 0)
-							<h3><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h3>
+							<h4><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h4>
+							<div id="diskon">
+								<span class="label label-primary">Diskon {{ $course->diskon }}%</span>
+							</div>
 						@else
-							<h3>Rp {{ number_format($course->harga, 0, ',', '.') }}</h3>
+							<h4>Rp {{ number_format($course->harga, 0, ',', '.') }}</h4>
 						@endif
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						
 					@endif
+					</div>
 				@endif
+
+				<div class="alert alert-success text-center" role="alert">
+					<h4>Ada yang ingin kamu tanya?</h4>
+					<a class="btn btn-success" href="https://wa.me/6285212221431" target="_blank">Tanya Disini (WhatsApp)</a>
+				</div>
+				<hr>
 			</div>
 		</div>       
-
-		<hr/>
 
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
@@ -167,7 +199,7 @@
 					</div>
 					<div class="col-xs-10 col-md-10">
 						<h5>{{ $tutorCourse->tutor->name }}</h5>
-						<div id="more">
+						<div id="read-more-teacher">
 							{!! html_entity_decode($tutorCourse->tutor->story) !!}
 						</div> 
 
@@ -263,13 +295,15 @@
 
 @section('extra-script')
 <script src="{{ URL::asset('js/readmore.min.js') }}"></script>
+
 <script>
-$('#more').readmore({ moreLink: '<a href="#">Lihat Semua</a>', lessLink: '<a href="#">Tutup</a>' });
+	$('#read-more-description').readmore({ collapsedHeight: 300, moreLink: '<a href="#">Lihat Semua</a>', lessLink: '<a href="#">Tutup</a>' });
+	$('#read-more-teacher').readmore({ moreLink: '<a href="#">Lihat Semua</a>', lessLink: '<a href="#">Tutup</a>' });
 </script>
 
 <script>
   // Set the date we're counting down to
-  var countDownDate = new Date("March 18, 2019 23:59:55").getTime();
+  var countDownDate = new Date("April 8, 2019 23:59:55").getTime();
 
   // Update the count down every 1 second
   var x = setInterval(function() {
