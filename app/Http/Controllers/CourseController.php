@@ -158,16 +158,15 @@ class CourseController extends CourseOrderController
 	public function get_course()
 	{
 		# get course by tutor login
-		$tutor      = Tutor::whereIdUser(Auth::user()->id)->first();
-		$courses    = Course::with('topiks')->whereIdTutor($tutor->id)->get();
+		$tutor      = Tutor::where('id_user', Auth::user()->id)->first();
+		$courses    = Course::where('id_tutor', $tutor->id)->get();
 		return view('layouts.course.tutor.index')->with('courses', $courses);
 	}
 
 	public function create()
 	{
-		$course = null;
-		$tutors = Tutor::with('users')->get();
-		return view('layouts.course.tutor.create-course')->with('course', $course)->with('tutors', $tutors);
+		$course = new Course;
+		return view('layouts.course.tutor.create-course')->with('course', $course);
 	}
 	
 	public function category($id_category)
