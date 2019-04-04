@@ -20,7 +20,7 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-							<th>Email Pembeli</th>
+							<th>Nama Pembeli</th>
 							<th>Harga Kelas</th>
 							<th>Dibeli Pada</th>
 						</tr>
@@ -29,7 +29,7 @@
 						@foreach($orders as $key=>$order)
 						<tr>
 							<td>{{ ++$key }}</td>
-							<td>{{ $order->email_buyer }}</td>
+							<td>{{ $order->buyer_name }}</td>
 							<td>
 								@if ($order->discount_percentage != null and $order->discount_percentage > 0)
 									Rp {{ number_format((100-$order->discount_percentage)/100*$order->course_price, 0, ',', '.') }}

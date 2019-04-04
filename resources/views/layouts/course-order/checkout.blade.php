@@ -155,7 +155,7 @@ function trackFBWebConversion($value) {
               <h2>Pemesanan Kamu</h2>
               <div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item"><a href="#">Punya voucher? Masukkan disini!</a></li>
+                  <!-- <li class="list-group-item"><a href="#">Punya voucher? Masukkan disini!</a></li> -->
                   <li class="list-group-item">
                     <table style="width:100%">
                     

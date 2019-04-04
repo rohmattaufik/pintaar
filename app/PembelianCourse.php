@@ -50,12 +50,13 @@ class PembelianCourse extends Model
     public function getOrderPerCourse($courseId)
     {
          $orders = DB::table('pembelian_courses')
-                        ->select(DB::raw('users.email as email_buyer'), DB::raw('cart_course.course_price as course_price'), DB::raw('cart_course.discount_percentage as discount_percentage'), DB::raw('pembelian_courses.created_at as order_time'))
+                        ->select(DB::raw('users.nama as buyer_name'), DB::raw('cart_course.course_price as course_price'), DB::raw('cart_course.discount_percentage as discount_percentage'), DB::raw('pembelian_courses.created_at as order_time'))
                         ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
                         ->leftJoin('cart_course', 'cart_course.cart_id', 'pembelian_courses.cart_id')
                         ->leftJoin('users', 'users.id', 'pembelian_courses.id_user')
                         ->where('pembelian_courses.status_pembayaran', 3)
                         ->where('cart_course.course_id', $courseId)
+                        ->orderBy('pembelian_courses.created_at', 'desc')
                         ->get();
         return $orders;
     }
