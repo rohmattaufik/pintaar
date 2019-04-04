@@ -38,10 +38,7 @@ class CourseController extends CourseOrderController
 
 	public function detail($id)
 	{
-
-
-		$course = Course::whereId($id)->get()->first();
-
+		$course = Course::whereId($id)->first();
 
 		$rating = DB::table('rating_courses')
 		->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
@@ -60,7 +57,7 @@ class CourseController extends CourseOrderController
 		->count();
 
 
-		if (Auth::user()){
+		if (Auth::user()) {
 
 			$status_pembayaran = DB::table('pembelian_courses')
 			->select('status_pembayaran')
@@ -71,12 +68,20 @@ class CourseController extends CourseOrderController
 			->where('cart.user_id', Auth::user()->id)
 			->get()->first();
 
+			if (Auth::user()->id_role == 2) {
+				$tutor = Tutor::where('id_user', Auth::user()->id)->first();
 
-			if (Auth::user()->id == $course->id_tutor) {
+				if ($tutor->id == $course->id_tutor) {
+					$status_pembayaran = new \stdClass();
+					$status_pembayaran->status_pembayaran = 3;
+				}
+			}
 
+			if (Auth::user()->id_role == 3) {
 				$status_pembayaran = new \stdClass();
 				$status_pembayaran->status_pembayaran = 3;
 			}
+
 
 			$status_pernah_review = DB::table('review_courses')
 			->select('review')
@@ -88,10 +93,9 @@ class CourseController extends CourseOrderController
 		else
 		{
 			$status_pembayaran = null;
-
 			$status_pernah_review = null;
-
 		}
+		
 		$list_topik = self::mapping_topik_by_parent($id);
 
 		return view('layouts.course.detail',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
@@ -276,7 +280,7 @@ class CourseController extends CourseOrderController
 				'video'         => $url,
 				'deskripsi'     => $request->deskripsi,
 				'kategori'      => 1
-				]);
+			]);
 		} else {
 			if($urlFoto != "" and $url != "")
 			{
@@ -289,7 +293,7 @@ class CourseController extends CourseOrderController
 					'video'         => $url,
 					'deskripsi'     => $request->deskripsi,
 					'kategori'         => 1
-					]);
+				]);
 			} else {
 				if($urlFoto != "")
 				{
@@ -301,7 +305,7 @@ class CourseController extends CourseOrderController
 						'foto'          => $urlFoto,
 						'deskripsi'     => $request->deskripsi,
 						'kategori'         => 1
-						]);
+					]);
 				} else if($url != "")
 				{
 					$course = Course::whereId($request->id)->update([
@@ -312,7 +316,7 @@ class CourseController extends CourseOrderController
 						'video'         => $url,
 						'deskripsi'     => $request->deskripsi,
 						'kategori'         => 1
-						]);
+					]);
 				} else {
 					$course =Course::whereId($request->id)->update([
 						"nama_course"   => $request->nama_course,
@@ -321,7 +325,7 @@ class CourseController extends CourseOrderController
 						"id_tutor"      => $tutor->id,
 						'deskripsi'     => $request->deskripsi,
 						'kategori'         => 1
-						]);
+					]);
 				}
 			}
 
@@ -414,12 +418,12 @@ class CourseController extends CourseOrderController
 				"name"  => $request->tutor_name,
 				"profile_photo"  => $urlPhoto,
 				"story"         => $request->deskripsi
-				]);
+			]);
 
 			$tutorCourse = TutorCourse::create([
 				"course_id"  => $request->course_id,
 				"tutor_id"         => $tutor->id
-				]);
+			]);
 		} 
 		else {
 
@@ -427,7 +431,7 @@ class CourseController extends CourseOrderController
 				"name"  => $request->tutor_name,
 				"profile_photo"  => $urlPhoto,
 				"story"         => $request->deskripsi
-				]);
+			]);
 
 		}
 
