@@ -7,20 +7,22 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-132732435-1');
-	  gtag('config', 'AW-810238926');
+	  gtag('config', 'AW-752122225');
     </script>
-    <!--  -->
-
+    <!-- end of google tag -->
+    @yield('extra-style')
+    
     <meta charset="utf-8">
     <meta name="author" content="John Doe">
     <meta name="description" content="">
     <meta name="keywords" content="HTML,CSS,XML,JavaScript">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <!-- Title -->
     @yield('title')
+
     <!-- Place favicon.ico in the root directory -->
-    
     <link rel="shortcut icon" type="image/ico" href="{{ URL::asset('images/favicon.png') }}" />
     <!-- Plugin-CSS -->
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
@@ -36,10 +38,7 @@
     
     <link rel="stylesheet" href="{{ URL::asset('css/starability-all.min.css')}}">
     <link rel="stylesheet" href="{{ URL::asset('css/notification.css') }}">
-    @yield('extra-style')
-      
-	<!-- Facebook Pixel Code -->
-
+    
 	<!-- Facebook Pixel Code -->
 	<script>
 	  !function(f,b,e,v,n,t,s)
