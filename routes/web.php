@@ -17,12 +17,15 @@ Route::get('/home', function(){
 });
 
 // ALL USER WITHOUT AUTH
+// Course
 Route::prefix('course')->group(function () {
 	Route::get('{id}',['as'=>'course','uses'=>'CourseController@detail']);
 	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
 	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
 	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
 });
+
+Route::get('/v/course/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar']);
 
 Route::get('/',['as'=>'home','uses'=>'ArtifactController@index']);
 
