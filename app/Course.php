@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Tutor;
 
 class Course extends Model
 {
@@ -21,6 +22,39 @@ class Course extends Model
 		return $this->hasMany('App\Topik','id_course');
 	}
 
+	public function tutors()
+	{
+		return $this->hasMany('App\TutorCourse','course_id');
+	}
+
+	public function getRating($idCourse)
+	{
+		$rating = DB::table('rating_courses')
+		->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
+		->where('rating_courses.id_course', $idCourse)
+		->get()->first();
+
+		return $rating;
+	}
+
+	public function getReviews($idCourse)
+	{
+		$reviews = DB::table('review_courses')
+					->leftJoin('users', 'users.id', '=', 'review_courses.id_user')
+					->where('review_courses.id_course', $idCourse)
+					->get();
+		return $reviews;
+	}
+
+	public function getEnrolledStudentNumber($idCourse)
+	{
+		$count_student_learned = DB::table('pembelian_courses')
+		->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
+		->where('cart_course.course_id', $idCourse)
+		->where('pembelian_courses.status_pembayaran', 3)
+		->count();
+		return $count_student_learned;
+	}
 
 	public function getAllCourseByCategory($categoryID)
 	{
@@ -36,9 +70,43 @@ class Course extends Model
         return $list_courses;
     }
 
-	public function tutors()
+    public function getStudentPaymentStatus($idCourse)
 	{
-		return $this->hasMany('App\TutorCourse','course_id');
+		$status_pembayaran = DB::table('pembelian_courses')
+			->select('status_pembayaran')
+			->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
+			->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
+			->where('cart_course.course_id', $idCourse)
+			->where('status_pembayaran', '=', 3)
+			->where('cart.user_id', Auth::user()->id)
+			->get()->first();
+
+		if (Auth::user()->id_role == 2) {
+			$tutor = Tutor::where('id_user', Auth::user()->id)->first();
+
+			if ($tutor->id == $course->id_tutor) {
+				$status_pembayaran = new \stdClass();
+				$status_pembayaran->status_pembayaran = 3;
+			}
+		}
+
+		if (Auth::user()->id_role == 3) {
+			$status_pembayaran = new \stdClass();
+			$status_pembayaran->status_pembayaran = 3;
+		}
+
+		return $status_pembayaran;
 	}
 
+	// check if student has reviewed a course
+	public function getReviewStatus($idCourse)
+	{
+		$status_pernah_review = DB::table('review_courses')
+			->select('review')
+			->where('review_courses.id_user', Auth::user()->id)
+			->where('review_courses.id_course', $idCourse)
+			->get()->first();
+		return $status_pernah_review;
+	}
+	
 }

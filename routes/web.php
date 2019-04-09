@@ -11,21 +11,7 @@
 |
 */
 
-
-Route::get('/home', function(){
-	return redirect()->route('home');
-});
-
 // ALL USER WITHOUT AUTH
-// Course
-Route::prefix('course')->group(function () {
-	Route::get('{id}',['as'=>'course','uses'=>'CourseController@detail']);
-	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
-	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
-	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
-});
-
-Route::get('/v/course/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar']);
 
 Route::get('/',['as'=>'home','uses'=>'ArtifactController@index']);
 
@@ -37,6 +23,16 @@ Route::get('test-email','MailController@test_email');
 Route::get('/daftar-pengajar', ['as'=>'daftar_pengajar','uses'=>'UserController@daftar_pengajar']);
 
 Auth::routes();
+
+// Course
+Route::prefix('course')->group(function () {
+	Route::get('/c/{id}',['as'=>'course','uses'=>'CourseController@detail']);
+	Route::get('/v/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar']);
+	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
+	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
+	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
+});
+
 
 // NEED AUTH
 Route::group(['middleware'=>'auth'], function() {

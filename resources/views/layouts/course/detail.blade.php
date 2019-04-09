@@ -12,7 +12,7 @@
 }
 
 #diskon {
-	font-size: 15px;
+	font-size: 17px;
 	margin-top: -5px;
 	margin-bottom: 10px;
 }
@@ -66,7 +66,7 @@
 					@if($course->diskon != null and $course->diskon > 0)
 						<div class="alert alert-danger alert-dismissible" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4>Kelas ini diskon {{ $course->diskon }}% hingga 8 April 2019.</h4>
+							<h4>Kelas ini diskon {{ $course->diskon }}% hingga 15 April 2019.</h4>
 							<h4 id="timer-diskon"></h4>
 						</div>
 					@endif
@@ -85,14 +85,14 @@
 
 		<div id="class-detail" class="row">
 			<div class="col-xs-12 col-md-7"> 
-				<h1>{{ $course->nama_course }}</h1> 
+				<h2>{{ $course->nama_course }}</h2> 
 
 				<p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
 
-				<h4><span class="label label-default">Murid yang sudah bergabung: {{ $count_student_learned }}</span></h4>
-				<br>
+				<h4><span class="label label-default">{{ $count_student_learned }} Murid Sudah Bergabung</span></h4>
+				
 				<!-- <p><strong>Dibuat oleh {{ $course->creator->users->nama }} </strong><p> -->
-
+				<br>
 				@if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
 					@if($course->harga == 0)
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
@@ -105,7 +105,7 @@
 						@else
 							<h4>Rp {{ number_format($course->harga, 0, ',', '.') }}</h4>
 						@endif
-						<a href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<a id="beli-kelas" href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif         
 				@else
 					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
@@ -148,17 +148,19 @@
 						@else
 							<h4>Rp {{ number_format($course->harga, 0, ',', '.') }}</h4>
 						@endif
-						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<a id="beli-kelas" href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 						
 					@endif
 					</div>
+
+					<div class="alert alert-success text-center" role="alert">
+						<h4>Ada yang ingin kamu tanya?</h4>
+						<a id="button-whatsapp" class="btn btn-success" href="https://wa.me/6285212221431" target="_blank">Tanya Disini (WhatsApp)</a>
+					</div>
+					<hr>
 				@endif
 
-				<div class="alert alert-success text-center" role="alert">
-					<h4>Ada yang ingin kamu tanya?</h4>
-					<a class="btn btn-success" href="https://wa.me/6285212221431" target="_blank">Tanya Disini (WhatsApp)</a>
-				</div>
-				<hr>
+				
 			</div>
 		</div>       
 
@@ -265,7 +267,7 @@
 			<div class="col-xs-12 col-md-7">
 				<br>
 				<h3>Review Kelas</h3>
-
+				@if (count($list_review) > 0)
 				@foreach($list_review as $review)
 				<hr/>
 				<div class="row">
@@ -283,6 +285,9 @@
 					</div>
 				</div>
 				@endforeach
+				@else 
+					<p>Belum ada review kelas ini.</p>
+				@endif
 			</div>
 		</div>
 
@@ -300,13 +305,13 @@
 <script src="{{ URL::asset('js/readmore.min.js') }}"></script>
 
 <script>
-	$('#read-more-description').readmore({ collapsedHeight: 300, moreLink: '<a href="#">Lihat Semua</a>', lessLink: '<a href="#">Tutup</a>' });
+	$('#read-more-description').readmore({ collapsedHeight: 400, moreLink: '<a href="#">Lihat Semua</a>', lessLink: '<a href="#">Tutup</a>' });
 	$('#read-more-teacher').readmore({ moreLink: '<a href="#">Lihat Semua</a>', lessLink: '<a href="#">Tutup</a>' });
 </script>
 
 <script>
   // Set the date we're counting down to
-  var countDownDate = new Date("April 8, 2019 23:59:55").getTime();
+  var countDownDate = new Date("April 15, 2019 23:59:55").getTime();
 
   // Update the count down every 1 second
   var x = setInterval(function() {

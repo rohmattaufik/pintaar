@@ -39,56 +39,13 @@ class CourseController extends CourseOrderController
 	public function detail($id)
 	{
 		$course = Course::whereId($id)->first();
-
-		$rating = DB::table('rating_courses')
-		->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
-		->where('rating_courses.id_course', $id)
-		->get()->first();
-
-		$list_review = DB::table('review_courses')
-		->leftJoin('users', 'users.id', '=', 'review_courses.id_user')
-		->where('review_courses.id_course', $id)
-		->get();
-
-		$count_student_learned = DB::table('pembelian_courses')
-		->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
-		->where('cart_course.course_id', $id)
-		->where('pembelian_courses.status_pembayaran', 3)
-		->count();
-
+		$rating = $course->getRating($course->id);
+		$list_review = $course->getReviews($course->id);
+		$count_student_learned = $course->getEnrolledStudentNumber($course->id);
 
 		if (Auth::user()) {
-
-			$status_pembayaran = DB::table('pembelian_courses')
-			->select('status_pembayaran')
-			->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
-			->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
-			->where('cart_course.course_id', $id)
-			->where('status_pembayaran', '=', 3)
-			->where('cart.user_id', Auth::user()->id)
-			->get()->first();
-
-			if (Auth::user()->id_role == 2) {
-				$tutor = Tutor::where('id_user', Auth::user()->id)->first();
-
-				if ($tutor->id == $course->id_tutor) {
-					$status_pembayaran = new \stdClass();
-					$status_pembayaran->status_pembayaran = 3;
-				}
-			}
-
-			if (Auth::user()->id_role == 3) {
-				$status_pembayaran = new \stdClass();
-				$status_pembayaran->status_pembayaran = 3;
-			}
-
-
-			$status_pernah_review = DB::table('review_courses')
-			->select('review')
-			->where('review_courses.id_user', Auth::user()->id)
-			->where('review_courses.id_course', $id)
-			->get()->first();
-
+			$status_pembayaran = $course->getStudentPaymentStatus($course->id);
+			$status_pernah_review = $course->getReviewStatus($course->id);
 		}
 		else
 		{
@@ -104,56 +61,13 @@ class CourseController extends CourseOrderController
 	public function detailVar($id)
 	{
 		$course = Course::whereId($id)->first();
-
-		$rating = DB::table('rating_courses')
-		->select( DB::raw('sum(jumlah_rating)/count(jumlah_rating) as rating') )
-		->where('rating_courses.id_course', $id)
-		->get()->first();
-
-		$list_review = DB::table('review_courses')
-		->leftJoin('users', 'users.id', '=', 'review_courses.id_user')
-		->where('review_courses.id_course', $id)
-		->get();
-
-		$count_student_learned = DB::table('pembelian_courses')
-		->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
-		->where('cart_course.course_id', $id)
-		->where('pembelian_courses.status_pembayaran', 3)
-		->count();
-
+		$rating = $course->getRating($course->id);
+		$list_review = $course->getReviews($course->id);
+		$count_student_learned = $course->getEnrolledStudentNumber($course->id);
 
 		if (Auth::user()) {
-
-			$status_pembayaran = DB::table('pembelian_courses')
-			->select('status_pembayaran')
-			->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
-			->leftJoin('cart_course', 'cart_course.cart_id', '=', 'pembelian_courses.cart_id')
-			->where('cart_course.course_id', $id)
-			->where('status_pembayaran', '=', 3)
-			->where('cart.user_id', Auth::user()->id)
-			->get()->first();
-
-			if (Auth::user()->id_role == 2) {
-				$tutor = Tutor::where('id_user', Auth::user()->id)->first();
-
-				if ($tutor->id == $course->id_tutor) {
-					$status_pembayaran = new \stdClass();
-					$status_pembayaran->status_pembayaran = 3;
-				}
-			}
-
-			if (Auth::user()->id_role == 3) {
-				$status_pembayaran = new \stdClass();
-				$status_pembayaran->status_pembayaran = 3;
-			}
-
-
-			$status_pernah_review = DB::table('review_courses')
-			->select('review')
-			->where('review_courses.id_user', Auth::user()->id)
-			->where('review_courses.id_course', $id)
-			->get()->first();
-
+			$status_pembayaran = $course->getStudentPaymentStatus($course->id);
+			$status_pernah_review = $course->getReviewStatus($course->id);
 		}
 		else
 		{
@@ -162,7 +76,7 @@ class CourseController extends CourseOrderController
 		}
 		
 		$list_topik = self::mapping_topik_by_parent($id);
-
+		
 		return view('layouts.course.detail-var',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
 	}
 
