@@ -58,7 +58,7 @@ class CourseController extends CourseOrderController
 		return view('layouts.course.detail',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
 	}
 
-	public function detailVar($id)
+	public function detailVar1($id)
 	{
 		$course = Course::whereId($id)->first();
 		$rating = $course->getRating($course->id);
@@ -77,7 +77,29 @@ class CourseController extends CourseOrderController
 		
 		$list_topik = self::mapping_topik_by_parent($id);
 		
-		return view('layouts.course.detail-var',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
+		return view('layouts.course.detail-var-1',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
+	}
+
+	public function detailVar2($id)
+	{
+		$course = Course::whereId($id)->first();
+		$rating = $course->getRating($course->id);
+		$list_review = $course->getReviews($course->id);
+		$count_student_learned = $course->getEnrolledStudentNumber($course->id);
+
+		if (Auth::user()) {
+			$status_pembayaran = $course->getStudentPaymentStatus($course->id);
+			$status_pernah_review = $course->getReviewStatus($course->id);
+		}
+		else
+		{
+			$status_pembayaran = null;
+			$status_pernah_review = null;
+		}
+		
+		$list_topik = self::mapping_topik_by_parent($id);
+		
+		return view('layouts.course.detail-var-2',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
 	}
 
 	public function mapping_topik_by_parent($id_course){

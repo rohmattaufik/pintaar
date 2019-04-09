@@ -6,6 +6,7 @@
 
 @section('extra-style')
 <style>
+
 * {
   font-family: Verdana, Geneva, sans-serif;
 }
@@ -97,22 +98,16 @@
 				<!-- <p><strong>Dibuat oleh {{ $course->creator->users->nama }} </strong><p> -->
 				<br>
 				@if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
-					@if($course->harga == 0)
-						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
-					@else
-						@if($course->diskon != null and $course->diskon > 0)
-							<h4><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h4>
-							<div id="diskon">
-								<span class="label label-primary">Diskon {{ $course->diskon }}%</span>
-							</div>
-						@else
-							<h4>Rp {{ number_format($course->harga, 0, ',', '.') }}</h4>
-						@endif
-						<a id="beli-kelas" href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
-					@endif         
+					    
 				@else
 					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
 				@endif
+
+				<h3>Deskripsi Kelas</h3>
+				<div id="read-more-description">
+					{!! html_entity_decode($course->deskripsi) !!}
+				</div>
+				<hr>
 
 			</div>
 
@@ -123,18 +118,7 @@
 			</div>      
 		</div>
 
-		<hr/>
-
-		<div class="row">
-			<div class="col-xs-12 col-md-7">
-				<h3>Deskripsi Kelas</h3>
-				<div id="read-more-description">
-					{!! html_entity_decode($course->deskripsi) !!}
-				</div>
-				
-				<hr> 
-			</div>
-		</div>
+		
 
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
@@ -152,6 +136,18 @@
 							<h4>Rp {{ number_format($course->harga, 0, ',', '.') }}</h4>
 						@endif
 						<a id="beli-kelas" href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<br><br>
+						<div class="row">
+							<div class="col-xs-12 col-md-6 col-md-offset-3">
+							
+								<p><strong>Harga sudah termasuk:</strong></p>
+								<ul align="left">
+									<li>Garansi 7 hari uang kembali</li>
+									<li>Akses kelas selamanya</li>
+								</ul>
+							
+							</div>
+						</div>
 						
 					@endif
 					</div>

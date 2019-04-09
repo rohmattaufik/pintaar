@@ -101,7 +101,7 @@
 						@else
 							<h3>Rp {{ number_format($course->harga, 0, ',', '.') }}</h3>
 						@endif
-						<a href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<a id="beli-kelas" href="{{ route('buy-course', $course->id) }}"  class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif         
 				@else
 					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
@@ -137,7 +137,7 @@
 						@else
 							<h3>Rp {{ number_format($course->harga, 0, ',', '.') }}</h3>
 						@endif
-						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
+						<a id="beli-kelas" href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 					@endif
 				@endif
 			</div>

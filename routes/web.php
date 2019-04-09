@@ -27,7 +27,8 @@ Auth::routes();
 // Course
 Route::prefix('course')->group(function () {
 	Route::get('/c/{id}',['as'=>'course','uses'=>'CourseController@detail']);
-	Route::get('/v/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar']);
+	Route::get('/v1/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar1']);
+	Route::get('/v2/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar2']);
 	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
 	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
 	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
