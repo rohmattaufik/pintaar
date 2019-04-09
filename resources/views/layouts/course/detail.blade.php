@@ -10,6 +10,10 @@
   font-family: Verdana, Geneva, sans-serif;
 }
 
+#read-more-description, #pengajar, #course-review {
+	font-size: 1.1em;
+}
+
 .section {
 	margin-top: 10px;
 }
@@ -201,7 +205,7 @@
 				<h3>Pengajar</h3>
 				<br>
 				@foreach($course->tutors as $tutorCourse)
-				<div class="row">
+				<div id="pengajar" class="row">
 					<div class="col-xs-2 col-md-2">
 						<img class="profile-user-img img-responsive img-circle" src="{{ $tutorCourse->tutor->profile_photo ? URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) : URL::asset('images/user-default.png') }}" alt="User profile picture">
 					</div>
@@ -273,7 +277,7 @@
 				@if (count($list_review) > 0)
 				@foreach($list_review as $review)
 				<hr/>
-				<div class="row">
+				<div id="course-review" class="row">
 
 					<div class="col-xs-2 col-md-1">
 						<img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user-default.png')}}" alt="User profile picture">
