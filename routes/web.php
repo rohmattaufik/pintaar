@@ -26,7 +26,7 @@ Auth::routes();
 
 // Course
 Route::prefix('course')->group(function () {
-	Route::get('{id}', function ($id) { 
+	Route::get('{id}', function ($id) {
 		return redirect()->route('course', $id);
 	});
 	Route::get('/c/{id}',['as'=>'course','uses'=>'CourseController@detail']);
@@ -54,7 +54,7 @@ Route::group(['middleware'=>'auth'], function() {
 
 		// Tutor history pembelian_detail
 		// Route::get('history-pembelian-course', ['as'=>'history_pembelian_course','uses'=>'TutorController@history_pembelian_course']);
-		
+
 		// Update profle
 		// Route::get('edit', 'TutorController@edit')->name('tutor-edit-profile');
 		// Route::post('update', 'TutorController@update')->name('tutor-update');
@@ -145,6 +145,7 @@ Route::group(['middleware'=>'auth'], function() {
 
 
 		Route::get('/tutor-saldo-transaction', 'AdminController@showTutorSaldoTransaction')->name('show-tutor-saldo-transaction');
+		Route::post('/tutor-saldo-transaction', 'AdminController@editTutorSaldoTransaction')->name('edit-tutor-saldo-transaction');
 
 	});
 
