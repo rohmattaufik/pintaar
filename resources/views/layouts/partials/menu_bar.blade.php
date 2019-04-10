@@ -51,11 +51,11 @@
         }
 
         #submenu-separator {
-            border-bottom: 2px solid white; 
+            border-bottom: 2px solid white;
         }
     }
 
-   
+
 </style>
 
 <body data-spy="scroll" data-target="#primary-menu">
@@ -76,7 +76,7 @@
             <nav class="collapse navbar-collapse" id="primary-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home') }}">Home</a></li>
-					
+
     				<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kategori Kelas <span class="caret"></span></a>
 
@@ -89,9 +89,9 @@
 						</ul>
 
                     </li>
-					
-					
-					@if (Auth::guest()) 
+
+
+					@if (Auth::guest())
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{{ route('register') }}">Daftar</a></li>
@@ -99,9 +99,10 @@
                         </ul>
                     @elseif (Auth::user()->id_role == 2)
                         <li><a href="{{ route('course-index')}}">Kelola Kelas</a></li>
-                        
+                        <li><a href="{{ route('show-transaction')}}">Saldo </a></li>
+
                         </ul>
-                        
+
                         <ul class="nav navbar-nav navbar-right">
                             <li>
                                 @inject('notifications', 'App\Services\NotificationService')
@@ -133,9 +134,11 @@
                             </li>
                         </ul>
                      @elseif (Auth::user()->id_role == 3)
-                            <li><a href="{{ route('approve_payment')}}">Verifikasi</a></li>
-                            <li><a href="{{ route('create-tutor')}}">Tambah Tutor</a></li>
+                            <li><a href="{{ route('approve_payment')}}">Verifikasi Pembelian</a></li>
+                            <li><a href="{{ route('show-tutor-saldo-transaction')}}">Verifikasi Saldo Tutor</a></li>
                             <li><a href="{{ route('sales')}}">Penjualan</a></li>
+                            <li><a href="{{ route('create-tutor')}}">Tambah Tutor</a></li>
+                            
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
@@ -161,7 +164,7 @@
                         </ul>
 
                     @else
-                           
+
                             <li><a href="{{ route('kelas_saya') }}">Kelas Saya</a></li>
                             <li><a href="{{ route('cart') }}">Keranjang</a></li>
                             <li><a href="{{ route('course-order') }}">Transaksi</a></li>
@@ -209,7 +212,3 @@
         </div>
     </div>
     <!--Mainmenu-area/-->
-
-
-
-

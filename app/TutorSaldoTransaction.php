@@ -16,6 +16,11 @@ class TutorSaldoTransaction extends Model
     		'id_tutor', 'withdraw_amount', 'withdraw_status'
     	];
 
+      public function tutor()
+      {
+        return $this->hasOne("App\Tutor", "id", "id_tutor");
+      }
+
       public function get_withdraw_status()
       {
         return $this->hasOne("App\TutorSaldoWithdrawStatus", "id", "withdraw_status");

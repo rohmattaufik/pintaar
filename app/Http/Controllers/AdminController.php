@@ -10,6 +10,7 @@ use App\PembelianCourse;
 use App\Cart;
 use App\CourseOrder;
 use App\CartCourse;
+use App\TutorSaldoTransaction;
 use App\Course;
 use Mail;
 use Carbon\Carbon;
@@ -227,6 +228,14 @@ class AdminController extends MailController
   {
     $order = DB::table('pembelian_courses')->where('status_pembayaran', 6)->update(['status_pembayaran' => 3]);
     return redirect()->back();
+  }
+
+  public function showTutorSaldoTransaction(){
+
+      $all_tutor_saldo_transaction =  TutorSaldoTransaction::all();
+
+      return view('layouts/admin/tutor-saldo-transaction', ["all_tutor_saldo_transaction"=>$all_tutor_saldo_transaction]);
+
   }
 
 

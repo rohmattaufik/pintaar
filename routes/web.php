@@ -138,6 +138,9 @@ Route::group(['middleware'=>'auth'], function() {
 
 		Route::get('all-sales',['as'=>'sales','uses'=>'AdminController@getAllSales']);
 
+
+		Route::get('/tutor-saldo-transaction', 'AdminController@showTutorSaldoTransaction')->name('show-tutor-saldo-transaction');
+
 	});
 
 	// MURID
