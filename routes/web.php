@@ -30,8 +30,8 @@ Route::prefix('course')->group(function () {
 		return redirect()->route('course', $id);
 	});
 	Route::get('/c/{id}',['as'=>'course','uses'=>'CourseController@detail']);
-	Route::get('/v1/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar1']);
-	Route::get('/v2/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar2']);
+	Route::get('/v1/{id}',['as'=>'course-var1','uses'=>'CourseController@detailVar1']);
+	Route::get('/v2/{id}',['as'=>'course-var2','uses'=>'CourseController@detailVar2']);
 	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
 	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
 	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
