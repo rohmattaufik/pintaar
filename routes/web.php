@@ -26,9 +26,12 @@ Auth::routes();
 
 // Course
 Route::prefix('course')->group(function () {
+	Route::get('{id}', function ($id) { 
+		return redirect()->route('course', $id);
+	});
 	Route::get('/c/{id}',['as'=>'course','uses'=>'CourseController@detail']);
-	Route::get('/v1/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar1']);
-	Route::get('/v2/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar2']);
+	Route::get('/v1/{id}',['as'=>'course-var1','uses'=>'CourseController@detailVar1']);
+	Route::get('/v2/{id}',['as'=>'course-var2','uses'=>'CourseController@detailVar2']);
 	Route::post('{id}', ['as'=>'course_review_post','uses'=>'CourseController@course_review_post']);
 	Route::get('/',['as'=>'courses','uses'=>'CourseController@index']);
 	Route::get('/category/{id_category}',['as'=>'courses-category','uses'=>'CourseController@category']);
@@ -49,15 +52,17 @@ Route::group(['middleware'=>'auth'], function() {
 	// TUTOR
 	Route::prefix('tutor')->group(function() {
 
+		// Tutor history pembelian_detail
+		// Route::get('history-pembelian-course', ['as'=>'history_pembelian_course','uses'=>'TutorController@history_pembelian_course']);
+		
 		// Update profle
-		Route::get('/', 'TutorController@show')->name('show-tutor');
-		Route::get('edit', 'TutorController@edit')->name('edit-tutor');
-		Route::post('update', 'TutorController@update')->name('tutor-update');
+		// Route::get('edit', 'TutorController@edit')->name('tutor-edit-profile');
+		// Route::post('update', 'TutorController@update')->name('tutor-update');
 
 
 		// TUTOR COURSE
 		Route::prefix('course')->group(function () {
-			Route::get('/', 'CourseController@get_course')->name('course-index');
+			Route::get('', 'CourseController@get_course')->name('course-index');
 
 			Route::get('create', 'CourseController@create')->name('course-create');
 

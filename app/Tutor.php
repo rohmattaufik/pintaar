@@ -12,11 +12,11 @@ use App\TutorSaldoTransaction;
 
 class Tutor extends Model
 {
-	protected $table = 'tutors';
+    protected $table = 'tutors';
 
-	protected $fillable = [
-		'id_user', 'name', 'profile_photo', 'nama_bank', 'no_rekening', 'nama_rekening', 'story'
-	];
+    protected $fillable = [
+        'id_user', 'name', 'profile_photo', 'lama_mengajar', 'pendidikan', 'story'
+    ];
 
 	public function user()
 	{
@@ -67,5 +67,6 @@ class Tutor extends Model
 
 		return $total_saldo - $total_withdrawn_amount;
 	}
+	
 
 }
