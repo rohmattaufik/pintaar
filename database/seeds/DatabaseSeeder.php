@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
            'id_tutor' => 1,
            'foto' => 'html-nol.jpg',
            'isPublished' => 1,
-           'kategori' => 1, 
+           'kategori' => 1,
            'video' => 'fisika_energi.mp4'
         ]);
 
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
            'id_tutor' => 1,
            'isPublished' => 1,
            'foto' => 'html-nol.jpg',
-           'kategori' => 1, 
+           'kategori' => 1,
            'video' => 'fisika_energi.mp4'
         ]);
 
@@ -45,10 +45,10 @@ class DatabaseSeeder extends Seeder
            'id_tutor' => 1,
            'isPublished' => 1,
            'foto' => 'html-nol.jpg',
-           'kategori' => 1, 
+           'kategori' => 1,
            'video' => 'fisika_energi.mp4'
         ]);
-		   
+
 
         DB::table('tutors')->insert([
                   'id_user' => '1'
@@ -164,6 +164,23 @@ class DatabaseSeeder extends Seeder
       ]);
 
 
+
+      DB::table('tutor_saldo_withdraw_status')->insert([
+                     'id' => 1,
+                     'withdraw_status' => "Sedang Direview",
+      ]);
+      DB::table('tutor_saldo_withdraw_status')->insert([
+                     'id' => 2,
+                     'withdraw_status' => "Disetujui",
+      ]);
+      DB::table('tutor_saldo_withdraw_status')->insert([
+                     'id' => 3,
+                     'withdraw_status' => "Telah Ditransfer",
+      ]);
+      DB::table('tutor_saldo_withdraw_status')->insert([
+                     'id' => 4,
+                     'withdraw_status' => "Transaksi Invalid",
+      ]);
 
 
 

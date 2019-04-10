@@ -31,6 +31,6 @@ class CreateWithdrawStatus extends Migration
     {
         //
 
-          Schema::dropIfExists('withdraw_status');
+          Schema::dropIfExists('tutor_saldo_withdraw_status');
     }
 }

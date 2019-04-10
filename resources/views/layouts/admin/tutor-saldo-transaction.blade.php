@@ -31,6 +31,7 @@
 							<th>No Penarikkan Saldo</th>
 							<th>Jumlah Penarikkan Saldo</th>
 							<th>Status Penarikkan Saldo</th>
+              <th>Ubah Status</th>
 							<th>Dibuat Pada</th>
 						</tr>
 					</thead>
