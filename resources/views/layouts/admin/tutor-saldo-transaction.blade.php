@@ -42,6 +42,19 @@
               <td>{{$tutor_saldo_transaction ->id}}</td>
 							<td>{{$tutor_saldo_transaction ->withdraw_amount}}</td>
 				      <td>{{$tutor_saldo_transaction ->get_withdraw_status -> withdraw_status}}</td>
+              <td>
+              <form class="form" method="post" action="" role="form">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <select name= "status_pembayaran">
+                  <option value=3>Disetujui</option>
+                  <option value=4>Jumlah Transfer Kurang</option>
+                  <option value=5>Pembayaran Invalid</option>
+                </select>
+                <br>
+                <button type="submit" name="approve" class="btn btn-primary">Ubah Status</button>
+
+              </form>
+            </td>
 							<td>{{$tutor_saldo_transaction ->created_at}}</td>
 						</tr>
 						@endforeach
