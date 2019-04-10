@@ -26,6 +26,9 @@ Auth::routes();
 
 // Course
 Route::prefix('course')->group(function () {
+	Route::get('{id}', function ($id) { 
+		return redirect()->route('course', $id);
+	});
 	Route::get('/c/{id}',['as'=>'course','uses'=>'CourseController@detail']);
 	Route::get('/v1/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar1']);
 	Route::get('/v2/{id}',['as'=>'course-var','uses'=>'CourseController@detailVar2']);
