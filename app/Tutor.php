@@ -5,7 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Auth;
+use App\PembelianCourse;
+use App\Course;
 use App\User;
+use App\TutorSaldoTransaction;
 
 class Tutor extends Model
 {
@@ -27,7 +30,7 @@ class Tutor extends Model
 
 		$fotoProfil     = $request->file('foto');
 		$urlFoto       = "";
-		
+
 		if ($fotoProfil != null) {
 			$destinationPath = 'user-poto';
 			$fotoName   = $fotoProfil->getClientOriginalName();
@@ -37,14 +40,32 @@ class Tutor extends Model
 		}
 
 		$user->nama = $request->nama;
-		
+
 		$tutor->nama_bank = $request->nama_bank;
 		$tutor->no_rekening = $request->no_rekening;
 		$tutor->nama_rekening = $request->nama_rekening;
-		
-		$tutor->update();    
+
+		$tutor->update();
 		$user->update();
-		
+
+	}
+	public function getTutorSaldo()
+	{
+		$id_tutor = Auth::user()->id;
+		$list_courses = Course::where('id_tutor', $id_tutor)->get();
+		$pembelian_courses = new PembelianCourse;
+		$total_saldo = 0 ;
+		$tutor_commission_percentage = 0.6 ;
+		foreach ($list_courses as $course) {
+				$total_saldo= $total_saldo + $pembelian_courses->getRevenuePerCourse($course->id , $tutor_commission_percentage);
+		}
+
+		$total_withdrawn_amount = TutorSaldoTransaction::where('id_tutor', $id_tutor)
+						->where('withdraw_status', 3)
+						->sum('withdraw_amount');
+
+
+		return $total_saldo - $total_withdrawn_amount;
 	}
 
 }

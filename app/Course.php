@@ -12,7 +12,7 @@ class Course extends Model
     protected $table = 'courses';
 
 	protected $fillable = ['nama_course', 'harga', 'diskon', 'foto', 'deskripsi', 'id_tutor', 'video', 'kategori', 'isPublished'];
-	
+
 	public function creator()
 	{
 	   return $this->hasOne('App\Tutor', 'id', 'id_tutor');
@@ -109,5 +109,7 @@ class Course extends Model
 			->get()->first();
 		return $status_pernah_review;
 	}
-	
+
+
+
 }

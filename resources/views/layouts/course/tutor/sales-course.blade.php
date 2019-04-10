@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 				<h3>Penjualan Kelas {{ $course->nama_course }}</h3>
-				<h4>Total Pendapatan di Kelas Ini : Rp {{ number_format($totalRevenue, 0, ',', '.') }}</h4>
+				<h4>Total Pendapatan di Kelas Ini : Rp {{ number_format($totalRevenue, 0, ',', '.') }} (telah dihitung dengan komisi 60%)</h4>
 				<table id="table_id_detail_penjualan" class="display">
 					<thead>
 						<tr>
@@ -44,7 +44,7 @@
 				</table>
 			</div>
 		</div>
-		
+
 	</div>
 </section>
 

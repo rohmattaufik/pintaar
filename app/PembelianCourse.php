@@ -61,7 +61,7 @@ class PembelianCourse extends Model
         return $orders;
     }
 
-    public function getRevenuePerCourse($courseId)
+    public function getRevenuePerCourse($courseId, $commisionPercentage)
     {
         $totalRevenue = 0;
         $orders = $this->getOrderPerCourse($courseId);
@@ -74,7 +74,7 @@ class PembelianCourse extends Model
                 $totalRevenue = $totalRevenue + $order->course_price;
             }
         }
-        return $totalRevenue;
+        return $totalRevenue * $commisionPercentage;
     }
 
 }

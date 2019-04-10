@@ -81,8 +81,10 @@ Route::group(['middleware'=>'auth'], function() {
 
 			Route::get('/{courseId}/sales', 'TutorController@showCourseSales')->name('sales-course');
 
+
+
 		});
-			
+
 		// TUTOR TOPIK
 		Route::prefix('topik')->group(function () {
 			Route::get('create/{idCourse}', 'TopikController@create')->name('topik-create');
@@ -108,8 +110,16 @@ Route::group(['middleware'=>'auth'], function() {
 			Route::get('delete/{id}', 'PertanyaanTopikController@delete')->name('pertanyaan-topik-delete');
 		});
 
+		Route::prefix('saldo-transaction')->group(function () {
+
+			Route::get('/show', 'TutorController@showTutorSaldoTransaction')->name('show-transaction');
+			Route::post('/create', 'TutorController@createTutorSaldoTransaction')->name('create-transaction');
+
+		});
+
+
 	});
-	
+
 	// ADMIN
 	Route::prefix('admin')->group(function () {
 		Route::prefix('approve-payment')->group(function () {
@@ -133,21 +143,21 @@ Route::group(['middleware'=>'auth'], function() {
 	// MURID
 
 	// Pembelian Course
-	
+
 	// Route::get('/buy/{course_id}/free',['as'=>'buy-free-course','uses'=>'CourseOrderController@buyFreeCourse']);
 
 	Route::get('/buy/success/',['as'=>'purchase-success','uses'=>'CourseOrderController@purchaseSuccess']);
 
 	Route::get('/buy/{course_id}',['as'=>'buy-course','uses'=>'CourseOrderController@buyCourse']);
-	
+
 	Route::post('/remove-from-cart',['as'=>'remove-from-cart','uses'=>'CourseOrderController@removeFromCart']);
-	
+
 	Route::get('/cart',['as'=>'cart','uses'=>'CourseOrderController@showCart']);
 
 	Route::get('/course-order',['as'=>'course-order','uses'=>'CourseOrderController@showAllCourseOrder']);
 
 	Route::get('/review-order/{order_no}',['as'=>'review-order','uses'=>'CourseOrderController@show']);
-	
+
 	Route::post('/checkout',['as'=>'checkout','uses'=>'CourseOrderController@checkout']);
 
 	Route::post('/checkout-success',['as'=>'checkout-success','uses'=>'CourseOrderController@checkoutSuccess']);
@@ -159,12 +169,12 @@ Route::group(['middleware'=>'auth'], function() {
 	// MURID Kelas Saya
 	Route::get('/kelas-saya', ['as'=>'kelas_saya','uses'=>'UserController@kelas_saya']);
 
-	
+
 	// Referral Murid
 	Route::get('/referral', ['as'=>'referral','uses'=>'UserController@referral']);
 
-	
-	
+
+
 
 	// MURID TOPIK
 	Route::prefix('topik')->group(function () {

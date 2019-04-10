@@ -48,13 +48,13 @@ class AdminController extends MailController
                                 ->select(DB::raw("SUM(cart.total_price) as total_sales"))
                                 ->leftJoin('cart', 'cart.id', 'pembelian_courses.cart_id')
                                 ->where('pembelian_courses.status_pembayaran', 3)
-                                ->whereBetween('pembelian_courses.created_at', 
+                                ->whereBetween('pembelian_courses.created_at',
                                   [
                                       Carbon::now()->startOfWeek(),
                                       Carbon::now()->endOfWeek(),
                                   ])
                                 ->get();
-       
+
 
       $salesThisMonth = DB::table('pembelian_courses')
                                 ->select(DB::raw("SUM(cart.total_price) as total_sales"))
@@ -62,9 +62,9 @@ class AdminController extends MailController
                                 ->where('pembelian_courses.status_pembayaran', 3)
                                 ->whereMonth('pembelian_courses.created_at', Carbon::now()->month)
                                 ->get();
-           
+
       return view('layouts/admin/sales')->with([
-                                                'sales' => $sales, 
+                                                'sales' => $sales,
                                                 'salesToday' => $salesToday,
                                                 'salesThisWeek' => $salesThisWeek,
                                                 'salesThisMonth' => $salesThisMonth
@@ -145,7 +145,7 @@ class AdminController extends MailController
     $idUser = Auth::user();
     $user = User::find($idUser->id);
     $id_role_admin = 3;
-    
+
     if ($user -> id_role == $id_role_admin) {
       $pembelian_course = PembelianCourse::find($id_pembelian);
 
@@ -159,7 +159,7 @@ class AdminController extends MailController
 
       // kirim email
       $data = array('name'=>$user_yang_membeli->nama, 'boughtCourses'=>$boughtCourses, 'noOrder'=> $pembelian_course->no_order);
-      
+
       if ($pembelian_course->status_pembayaran == 3) {
         Mail::send('layouts/email/payment-success', $data, function($message) use ($emailUser, $data) {
           $message->to($emailUser)->subject('Ayo Belajar Sekarang! Pesanan '.$data['noOrder'].' Berhasil');
@@ -173,7 +173,7 @@ class AdminController extends MailController
           $message->from('pintaar.bantuan@gmail.com','Pintaar');
         });
       }
-        
+
       return redirect()->route('approve_payment_detail', ['id' => $id_pembelian]);
 
     }
