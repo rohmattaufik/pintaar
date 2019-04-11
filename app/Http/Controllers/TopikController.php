@@ -15,17 +15,17 @@ use App\Course;
 use App\User;
 use App\KomentarTopik;
 use App\Notification;
-
+use Carbon\Carbon;
 class TopikController extends Controller
 {
     public function __construct()
     {
       $this->middleware('auth');
     }
-    
+
     public function index()
     {
-       
+
     }
 
     public function detail(Request $request, $id)
@@ -34,7 +34,7 @@ class TopikController extends Controller
         $topik= DB::table('topiks')
                 ->where('topiks.id', '=', $id)
                 ->get()->first();
-        
+
         $file_topik = FileTopik::whereIdTopik($id)->get();
 
         $questions= DB::table('pertanyaan_topiks')
@@ -69,7 +69,7 @@ class TopikController extends Controller
 								->where('status_pembayaran', '=', 3)
                                 ->where('cart.user_id', Auth::user()->id)
                                 ->get()->first();
-            
+
             #jika yang membuka adalah tutor pembuat kelas tersebut
             if (Auth::user()-> id == $id_user_tutor) {
                 $status_pembayaran = new \stdClass();
@@ -101,7 +101,7 @@ class TopikController extends Controller
           $comments_and_user = KomentarTopik::where('id_topik', $id)
                               ->orderBy('created_at', 'desc')
                               ->get();
-        
+
         return view('layouts.topik.detail', ["topik_after" => $topik_after, "topik_before" => $topik_before,"questions" => $questions,"topik" => $topik, "comments_and_user" => $comments_and_user, "file_topik" => $file_topik ]);
     }
 
@@ -174,7 +174,7 @@ class TopikController extends Controller
                             ->get()->first()->id_user_tutor;
 
             $notification = $this->sendNotification($idUserTutor, $comment->id_topik, $comment->id);
-            
+
             return redirect(route('topik', ['id' => $id]) . '#commentTitle');
       }
 
@@ -238,8 +238,12 @@ class TopikController extends Controller
         if($attachment != null){
             $destinationPath    = 'attachments';
             $att_name           = $attachment->getClientOriginalName();
+            $filename = pathinfo($att_name, PATHINFO_FILENAME);
+            $extension = pathinfo($att_name, PATHINFO_EXTENSION);
+            $att_name = $filename."_".Carbon::now()->timestamp."_".Auth::user()->id.".".$extension;
             $move               = $attachment->move($destinationPath, $att_name);
             $urlAttachment      = "{$att_name}";
+
         }
         $request['video'] = $urlVideo;
         $id_topik = "";
