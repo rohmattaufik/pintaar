@@ -28,42 +28,23 @@
 					<thead>
 						<tr>
 							<th>No Penarikkan Saldo</th>
-              <th>Email Tutor</th>
-							<th>No Rekening Tutor</th>
+              <th>Nama Tutor</th>
 							<th>Jumlah Penarikkan Saldo</th>
 							<th>Status Penarikkan Saldo</th>
-              <th>Ubah Status</th>
 							<th>Dibuat Pada</th>
+							<th>Detail</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($all_tutor_saldo_transaction as $tutor_saldo_transaction)
 						<tr>
 							<td>{{$tutor_saldo_transaction ->id}}</td>
-						  <td>{{$tutor_saldo_transaction ->tutor -> user ->email}}</td>
-							<td>123123123123123123</td>
+						  <td>{{$tutor_saldo_transaction ->tutor -> user ->nama}}</td>
 							<td>{{$tutor_saldo_transaction ->withdraw_amount}}</td>
 				      <td>{{$tutor_saldo_transaction ->get_withdraw_status -> withdraw_status}}</td>
-              <td>
+            	<td>{{$tutor_saldo_transaction ->created_at}}</td>
+							<td><a href="{{route(('show-tutor-saldo-transaction-detail'), $tutor_saldo_transaction -> id)}}">Detail</a></td>
 
-							<br>
-              <form class="form" method="post" action="" role="form">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <select name= "withdraw_status">
-                  <option value=1>Sedang Direview</option>
-                  <option value=2>Disetujui</option>
-                  <option value=3>Telah Ditransfer</option>
-									<option value=4>Transaksi Invalid</option>
-									<input type="text" name="tutor_saldo_transaction_id" value="{{$tutor_saldo_transaction ->id}}" hidden>
-
-                </select>
-                <br>
-								<br>
-                <button type="submit" name="approve" class="btn btn-primary">Ubah Status</button>
-
-              </form>
-            </td>
-							<td>{{$tutor_saldo_transaction ->created_at}}</td>
 						</tr>
 						@endforeach
 					</tbody>

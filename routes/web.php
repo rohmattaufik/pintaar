@@ -144,8 +144,14 @@ Route::group(['middleware'=>'auth'], function() {
 		Route::get('all-sales',['as'=>'sales','uses'=>'AdminController@getAllSales']);
 
 
-		Route::get('/tutor-saldo-transaction', 'AdminController@showTutorSaldoTransaction')->name('show-tutor-saldo-transaction');
-		Route::post('/tutor-saldo-transaction', 'AdminController@editTutorSaldoTransaction')->name('edit-tutor-saldo-transaction');
+		Route::prefix('tutor-saldo-transaction')->group(function () {
+
+			Route::get('', 'AdminController@showTutorSaldoTransaction')->name('show-tutor-saldo-transaction');
+			Route::get('{id}', 'AdminController@showTutorSaldoTransactionDetail')->name('show-tutor-saldo-transaction-detail');
+			Route::post('{id}', 'AdminController@updateTutorSaldoTransactionDetail')->name('show-tutor-saldo-transaction-update');
+		});
+
+
 
 	});
 

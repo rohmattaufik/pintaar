@@ -238,17 +238,26 @@ class AdminController extends MailController
 
   }
 
-  public function editTutorSaldoTransaction(Request $request){
+  public function showTutorSaldoTransactionDetail($id){
 
-      $tutor_saldo_transaction = TutorSaldoTransaction::find(Input::get('tutor_saldo_transaction_id'));
+      $tutor_saldo_transaction =  TutorSaldoTransaction::find($id);
 
-      $tutor_saldo_transaction->withdraw_status = Input::get('withdraw_status') ;
+      return view('layouts/admin/tutor-saldo-transaction-detail', ["tutor_saldo_transaction"=>$tutor_saldo_transaction]);
 
-      $tutor_saldo_transaction->save();
-
-
-      return redirect()->route('show-tutor-saldo-transaction');
   }
+
+
+    public function updateTutorSaldoTransactionDetail($id){
+
+        $tutor_saldo_transaction = TutorSaldoTransaction::find($id);
+
+        $tutor_saldo_transaction->withdraw_status = Input::get('withdraw_status') ;
+
+        $tutor_saldo_transaction->save();
+
+        return redirect()->route('show-tutor-saldo-transaction-detail', ['id' => $id]);
+
+    }
 
 
 }
