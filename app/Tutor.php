@@ -15,7 +15,7 @@ class Tutor extends Model
 		'id_user', 'name', 'profile_photo', 'nama_bank', 'no_rekening', 'nama_rekening', 'story'
 	];
 
-	public function user()
+	public function users()
 	{
 		return $this->hasOne("App\User", "id", "id_user");
 	}
