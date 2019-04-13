@@ -23,23 +23,23 @@
                   </tr>
                   <tr>
                     <td>Nama Tutor</td>
-                    <td>{{$tutor_saldo_transaction -> tutor -> user ->nama}}</td>
+                    <td>{{$tutor_saldo_transaction -> tutor -> users ->nama}}</td>
                   </tr>
                   <tr>
                     <td>Email Tutor</td>
-                    <td>{{$tutor_saldo_transaction -> tutor -> user ->email}}</td>
+                    <td>{{$tutor_saldo_transaction -> tutor -> users ->email}}</td>
                   </tr>
                   <tr>
                   <td>Nama Bank Tutor</td>
-                    <td>BCA</td>
+                    <td>{{$tutor_saldo_transaction -> tutor -> nama_bank}}</td>
                   </tr>
                   <tr>
                   <td>No Rekening Tutor</td>
-                    <td>123123123</td>
+                    <td>{{$tutor_saldo_transaction -> tutor -> no_rekening}}</td>
                   </tr>
                   <tr>
                   <td>Nama Rekening Tutor</td>
-                    <td>Toni Juga</td>
+                    <td>{{$tutor_saldo_transaction -> tutor ->nama_rekening}}</td>
                   </tr>
                   <tr>
                     <td>Jumlah Penarikkan Saldo</td>

@@ -235,12 +235,23 @@
                                 <img src="{{ URL::asset('images/said.jpg') }}" alt="" width="100" height="200">
                             </div>
                             <h4>Said Iskandar, S.I.A.</h4>
-							<p>Mahasiswa FISIP UI</p>
+							<p>Alumni FISIP UI</p>
                             <p>--</p>
                             <p><strong>
                                 "Bodoh itu absolut, pintar itu pilihan. Makanya, ayo belajar"
                             </strong></p>
 						</div>
+                        <div class="testimonial">
+                            <div class="testimonial-photo">
+                                <img src="{{ URL::asset('images/satria.jpg') }}" alt="" width="100" height="200">
+                            </div>
+                            <h4>Satria Faturrahman, S.Ak.</h4>
+                            <p>Universiti Malaya Student Exchange 2017</p>
+                            <p>--</p>
+                            <p><strong>
+                                "INGIN PINTAR HANYA DENGAN HANYA BERMODALKAN INTERNET? PINTAAR.COM TEMPATNYA!"
+                            </strong></p>
+                        </div>
 
                     </div>
                 </div>

@@ -5,6 +5,7 @@ use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      *
@@ -52,6 +53,13 @@ class DatabaseSeeder extends Seeder
 
         DB::table('tutors')->insert([
                   'id_user' => '1'
+        ]);
+    
+        DB::table('tutors')->insert([
+          'id_user' => '1',
+          'nama_bank' => 'BCAAA',
+          'no_rekening' => '12312311',
+          'nama_rekening' => 'lulu hakim'
         ]);
 
         DB::table('users')->insert([
@@ -185,4 +193,5 @@ class DatabaseSeeder extends Seeder
 
 
     }
+
 }

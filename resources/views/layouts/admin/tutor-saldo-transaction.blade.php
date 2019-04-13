@@ -38,11 +38,11 @@
 					<tbody>
 						@foreach($all_tutor_saldo_transaction as $tutor_saldo_transaction)
 						<tr>
-							<td>{{$tutor_saldo_transaction ->id}}</td>
-						  <td>{{$tutor_saldo_transaction ->tutor -> user ->nama}}</td>
-							<td>{{$tutor_saldo_transaction ->withdraw_amount}}</td>
-				      <td>{{$tutor_saldo_transaction ->get_withdraw_status -> withdraw_status}}</td>
-            	<td>{{$tutor_saldo_transaction ->created_at}}</td>
+						<td>{{$tutor_saldo_transaction ->id}}</td>
+						  <td>{{$tutor_saldo_transaction ->tutor -> users ->nama}}</td>
+						  <td>{{$tutor_saldo_transaction ->withdraw_amount}}</td>
+					      <td>{{$tutor_saldo_transaction ->get_withdraw_status -> withdraw_status}}</td>
+            				<td>{{$tutor_saldo_transaction ->created_at}}</td>
 							<td><a href="{{route(('show-tutor-saldo-transaction-detail'), $tutor_saldo_transaction -> id)}}">Detail</a></td>
 
 						</tr>

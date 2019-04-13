@@ -69,9 +69,9 @@ class TopikController extends Controller
 								->where('status_pembayaran', '=', 3)
                                 ->where('cart.user_id', Auth::user()->id)
                                 ->get()->first();
-
-            #jika yang membuka adalah tutor pembuat kelas tersebut
-            if (Auth::user()-> id == $id_user_tutor) {
+            
+            #jika yang membuka adalah tutor pembuat kelas tersebut atau admin
+            if (Auth::user()->id == $id_user_tutor or Auth::user()->id_role == 3) {
                 $status_pembayaran = new \stdClass();
                 $status_pembayaran->status_pembayaran = 3;
             }

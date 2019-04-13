@@ -165,7 +165,7 @@ class CourseController extends CourseOrderController
 		# get course by tutor login
 		$tutor      = Tutor::where('id_user', Auth::user()->id)->first();
 		$courses    = Course::where('id_tutor', $tutor->id)->get();
-		return view('layouts.course.tutor.index')->with('courses', $courses);
+		return view('layouts/tutor/course/index')->with('courses', $courses);
 	}
 
 	public function create()
