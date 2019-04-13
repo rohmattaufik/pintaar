@@ -54,7 +54,7 @@
                         <label for="mapel" class="col-sm-2 control-label">Nomor Rekening</label>
                         <div class="col-sm-10">
                             <div class="form-line">
-                                <input type="text" placeholder="Misal: 12345678" name="no_rekening" class="form-control" value="{{ $tutor->no_rekening }}">
+                                <input type="number" placeholder="Misal: 12345678" name="no_rekening" class="form-control" value="{{ $tutor->no_rekening }}">
                             </div>
                         </div>
                     </div>
