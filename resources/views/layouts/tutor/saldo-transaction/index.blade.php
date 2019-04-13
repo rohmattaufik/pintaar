@@ -14,38 +14,41 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-				<h3>Total Saldo: {{  number_format($tutor->getTutorSaldo(), 0, ',', '.')   }}</h3>
-        <br>
-        <div class="col-xs-3 col-md-3">
-          <form role="form" method="POST" action="{{ route('create-transaction') }}">
-              {{ csrf_field() }}
+				<h3>Total Saldo: Rp {{  number_format($tutor->getTutorSaldo(), 0, ',', '.')   }}</h3>
+				
+				
+				<div class="row">
+					<div class="col-xs-12 col-md-4">
+						<p>Masukkan jumlah saldo yang ingin ditarik (Maks. 10 juta)</p>
+						<form role="form" method="POST" action="{{ route('create-transaction') }}">
+							{{ csrf_field() }}
 
-                <input type="number" class="form-control" name="withdaw_amount" id="withdaw_amount" value="">
-                  <button type="submit" class="btn btn-danger">Ambil Saldo</button>
-          </form>
-          <br>
-          <br>
-          <br>
-        </div>
+							<input type="number" class="form-control" name="withdaw_amount" id="withdaw_amount" value="">
+							<button type="submit" class="btn btn-primary">Tarik Saldo</button>
+						</form>
+					</div>
+				</div>
 
-        <br>
-        <br>
-        <br>
+
+
+				<br>
+				<br>
+				<h3>Riwayat Penarikan Saldo</h3>
 				<table id="table_id_list_penarikkan_saldo" class="display">
 					<thead>
 						<tr>
-							<th>No Penarikkan Saldo</th>
-							<th>Jumlah Penarikkan Saldo</th>
-							<th>Status Penarikkan Saldo</th>
+							<th>No.</th>
+							<th>Jumlah Penarikan Saldo</th>
+							<th>Status</th>
 							<th>Dibuat Pada</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($list_tutor_saldo_transaction as $tutor_saldo_transaction)
 						<tr>
-              <td>{{$tutor_saldo_transaction ->id}}</td>
-							<td>{{$tutor_saldo_transaction ->withdraw_amount}}</td>
-				      <td>{{$tutor_saldo_transaction ->get_withdraw_status -> withdraw_status}}</td>
+							<td>{{$tutor_saldo_transaction ->id}}</td>
+							<td>Rp {{$tutor_saldo_transaction ->withdraw_amount}}</td>
+							<td>{{$tutor_saldo_transaction ->get_withdraw_status -> withdraw_status}}</td>
 							<td>{{$tutor_saldo_transaction ->created_at}}</td>
 						</tr>
 						@endforeach
@@ -53,7 +56,6 @@
 				</table>
 			</div>
 		</div>
-
 	</div>
 </section>
 

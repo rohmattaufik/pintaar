@@ -57,6 +57,8 @@ Route::group(['middleware'=>'auth'], function() {
 		Route::get('edit', 'TutorController@edit')->name('edit-tutor');
 		Route::post('update', 'TutorController@update')->name('tutor-update');
 
+		// dashboard
+		Route::get('/dashboard', 'TutorController@showDashboard')->name('tutor-dashboard');
 
 		// TUTOR COURSE
 		Route::prefix('course')->group(function () {

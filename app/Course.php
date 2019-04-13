@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Tutor;
+use App\Course;
 use Auth;
 
 class Course extends Model
@@ -73,6 +74,7 @@ class Course extends Model
 
     public function getStudentPaymentStatus($idCourse)
 	{
+		$course = Course::where('id', $idCourse)->first();
 		$status_pembayaran = DB::table('pembelian_courses')
 			->select('status_pembayaran')
 			->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')

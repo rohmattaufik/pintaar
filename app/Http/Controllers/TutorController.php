@@ -39,6 +39,7 @@ class TutorController extends Controller
 
 
     }
+
     public function createTutorSaldoTransaction(Request $request){
 
 
@@ -48,10 +49,7 @@ class TutorController extends Controller
       $tutor_saldo_transaction->withdraw_status = 1 ;
       $tutor_saldo_transaction->save();
 
-
-
       return redirect()->route('show-transaction');
-
 
     }
 
@@ -97,5 +95,12 @@ class TutorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showDashboard()
+    {
+        $user = Auth::user();
+        $tutor = Tutor::where('id_user', $user->id)->first();
+        return view('layouts/tutor/dashboard', ['user'=>$user, 'tutor'=>$tutor]);
     }
 }

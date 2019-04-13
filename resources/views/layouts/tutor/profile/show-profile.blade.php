@@ -61,7 +61,7 @@
                 </div>
                 
                 <a href="{{ route('edit-tutor')}}" class="btn btn-primary">Ubah Informasi Pengajar</a>  
-                <a href="{{ route('course-index')}}" class="btn btn-danger">Kembali</a>
+                <a href="{{ route('tutor-dashboard')}}" class="btn btn-danger">Kembali</a>
             </div>
             <!-- /.col -->
         </div>

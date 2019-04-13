@@ -72,7 +72,7 @@
                         <div class="col-sm-10">
                             <div class="form-line">
                                 <input type="submit" class="btn btn-lg btn-primary" value="Simpan">
-                                <a href="{{ route('course-index') }}" class="btn btn-lg btn-danger">Batal</a>
+                                <a href="{{ route('tutor-dashboard') }}" class="btn btn-lg btn-danger">Batal</a>
                             </div>
                         </div>
                     </div>

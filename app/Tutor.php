@@ -9,7 +9,6 @@ use App\PembelianCourse;
 use App\Course;
 use App\User;
 use App\TutorSaldoTransaction;
-use App\User;
 
 class Tutor extends Model
 {
@@ -64,7 +63,7 @@ class Tutor extends Model
 		}
 
 		$total_withdrawn_amount = TutorSaldoTransaction::where('id_tutor', $id_tutor)
-						->where('withdraw_status', 3)
+						->where('withdraw_status', 2)
 						->sum('withdraw_amount');
 
 

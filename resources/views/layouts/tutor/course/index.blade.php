@@ -9,16 +9,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-				<h3>Informasi Pengajar</h3>
-				<a href="{{ route('show-tutor') }}" class="btn btn-primary">Lihat Informasi Pengajar</a>
-				<a href="{{ route('edit-tutor') }}" class="btn btn-primary">Ubah Informasi Pengajar</a>
-
-			</div>
-		</div>
-		<br>
-
-		<div class="row">
-			<div class="col-xs-12 col-md-12">
 				<h3>Daftar Kelas</h3>
 
 				<a href="{{ route('course-create')}}" class="btn btn-primary">Buat Kelas Baru</a>

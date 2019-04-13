@@ -99,7 +99,8 @@
                         </ul>
                     @elseif (Auth::user()->id_role == 2)
                         <li><a href="{{ route('course-index')}}">Kelola Kelas</a></li>
-                        <li><a href="{{ route('show-transaction')}}">Saldo </a></li>
+                        <li><a href="{{ route('tutor-dashboard')}}">Dashboard</a></li>
+
 
                         </ul>
 
