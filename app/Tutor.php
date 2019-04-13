@@ -9,6 +9,7 @@ use App\PembelianCourse;
 use App\Course;
 use App\User;
 use App\TutorSaldoTransaction;
+use App\User;
 
 class Tutor extends Model
 {
@@ -30,7 +31,7 @@ class Tutor extends Model
 
 		$fotoProfil     = $request->file('foto');
 		$urlFoto       = "";
-
+		
 		if ($fotoProfil != null) {
 			$destinationPath = 'user-poto';
 			$fotoName   = $fotoProfil->getClientOriginalName();
@@ -50,6 +51,7 @@ class Tutor extends Model
 		$user->update();
 
 	}
+
 	public function getTutorSaldo()
 	{
 		$id_tutor = Auth::user()->id;
@@ -68,6 +70,4 @@ class Tutor extends Model
 
 		return $total_saldo - $total_withdrawn_amount;
 	}
-	
-
 }
