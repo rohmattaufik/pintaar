@@ -51,9 +51,9 @@ class Tutor extends Model
 
 	}
 
-	public function getTutorSaldo()
+	public function getTutorSaldo($idTutor)
 	{
-		$id_tutor = Auth::user()->id;
+		$id_tutor = $idTutor;
 		$list_courses = Course::where('id_tutor', $id_tutor)->get();
 		$pembelian_courses = new PembelianCourse;
 		$total_saldo = 0 ;
