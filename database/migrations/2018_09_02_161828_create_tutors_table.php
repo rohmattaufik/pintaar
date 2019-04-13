@@ -18,8 +18,9 @@ class CreateTutorsTable extends Migration
             $table->integer('id_user')->nullable();
             $table->string('name')->nullable();
             $table->string('profile_photo')->nullable();
-            $table->string('lama_mengajar')->nullable();
-            $table->string('pendidikan')->nullable();
+            $table->string('nama_bank')->nullable();
+            $table->string('no_rekening')->nullable();
+            $table->string('nama_rekening')->nullable();
             $table->longText('story')->nullable();
             $table->timestamps();
         });
