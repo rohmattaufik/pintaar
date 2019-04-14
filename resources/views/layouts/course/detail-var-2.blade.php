@@ -284,11 +284,9 @@
 								<strong>{{ $review->getUser->nama }}</strong> | 
 								<small>{{ $review->created_at->format("d-m-Y") }}</small>
 							</p>
-							
+							<p id="rating-star" class="starability-result" data-rating="{{ $review->getRating($course->id, $review->getUser->id) }}"></p>
 							<p>{{ $review->review }}</p> 
-
 						</div>
-						
 					</div>
 					@endforeach
 				@else 

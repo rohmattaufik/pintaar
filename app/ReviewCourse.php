@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use App\RatingCourse;
 
 class ReviewCourse extends Model
 {
@@ -21,5 +22,11 @@ class ReviewCourse extends Model
 		$this->id_course = $idCourse;
 		$this->review = $review;
 		$this->save();
+  	}
+
+  	public function getRating($idCourse, $idUser)
+  	{
+    	$jumlahRating = RatingCourse::where('id_user', $idUser)->where('id_course', $idCourse)->first()->jumlah_rating;
+    	return $jumlahRating;
   	}
 }
