@@ -104,7 +104,8 @@
 				@if(empty($status_pembayaran) || $status_pembayaran->status_pembayaran != 3)
 					    
 				@else
-					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a> 
+					<a href="{{ route('topik', $list_topik[0]->id) }}" class="btn btn-primary btn-lg">Mulai Belajar Sekarang</a>
+					<br><br> 
 				@endif
 
 				<h3>Deskripsi Kelas</h3>
@@ -202,15 +203,14 @@
 				<br>
 				@foreach($course->tutors as $tutorCourse)
 				<div id="pengajar" class="row">
-					<div class="col-xs-2 col-md-2">
+					<div class="col-xs-3 col-sm-3 col-md-2">
 						<img class="profile-user-img img-responsive img-circle" src="{{ $tutorCourse->tutor->profile_photo ? URL::asset('images/gambar_course/'.$tutorCourse->tutor->profile_photo) : URL::asset('images/user-default.png') }}" alt="User profile picture">
 					</div>
-					<div class="col-xs-10 col-md-10">
-						<h5>{{ $tutorCourse->tutor->name }}</h5>
+					<div class="col-xs-9 col-sm-9 col-md-10">
+						<h4>{{ $tutorCourse->tutor->name }}</h4>
 						<div id="read-more-teacher">
 							{!! html_entity_decode($tutorCourse->tutor->story) !!}
-						</div> 
-
+						</div>
 					</div>
 				</div>
 				@endforeach
@@ -222,15 +222,15 @@
 
 
 		@if(!empty($status_pembayaran) && $status_pembayaran->status_pembayaran == 3 && empty($status_pernah_review))
-		<meta name="csrf-token" content="{{ csrf_token() }}">
+		
 		<br>
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-7"> 
-				<h3>Bagaimana pendapat kamu tentang kelas ini?</h3>
-				<form class="form" method="post" action="" role="form">
+				<h3>Bagaimana penilaianmu terhadap kelas ini?</h3>
+				<form class="form" method="post" action="{{ route('course_review_submit')}}" role="form">
 
 					<fieldset class="starability-basic">
-						<h4>Beri Rating</h4>
+						<h4>Beri Bintang</h4>
 						<input type="radio" id="rate1" name="rating" value="1" />
 						<label for="rate1" title="Terrible">1 star</label>
 
@@ -246,8 +246,9 @@
 						<input type="radio" id="rate5" name="rating" value="5" />
 						<label for="rate5" title="Amazing">5 stars</label>
 					</fieldset>
-					<h4>Beri Review</h4>
+					<h4>Beri Ulasan</h4>
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="hidden" name="idCourse" value="{{ $course->id }}">
 					<div class="form-group">
 						<textarea required name="body_review" class="form-control" rows="5" id="comment"></textarea>
 					</div>
@@ -269,25 +270,27 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
 				<br>
-				<h3>Review Kelas</h3>
-				@if (count($list_review) > 0)
-				@foreach($list_review as $review)
-				<hr/>
-				<div id="course-review" class="row">
+				<h3>Ulasan Kelas</h3>
+				@if (count($course->reviews) > 0)
+					@foreach($course->reviews as $review)
+					<hr/>
+					<div id="course-review" class="row">
 
-					<div class="col-xs-2 col-md-1">
-						<img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user-default.png')}}" alt="User profile picture">
-					</div>
-					<div class="col-xs-8 col-md-9">
-						<p><strong>{{ $review->nama }}</strong></p>
-						<p>{{ $review -> review }}</p> 
+						<div class="col-xs-3 col-md-2">
+							<img class="profile-user-img img-responsive img-circle" src="{{ $review->foto ? URL::asset($review->foto) : URL::asset('images/user-default.png')}}" alt="User profile picture">
+						</div>
+						<div class="col-xs-9 col-md-10">
+							<p>
+								<strong>{{ $review->getUser->nama }}</strong> | 
+								<small>{{ $review->created_at->format("d-m-Y") }}</small>
+							</p>
+							
+							<p>{{ $review->review }}</p> 
 
+						</div>
+						
 					</div>
-					<div class="col-xs-2 col-md-2 text-right">
-						<p>{{ substr($review->created_at, 0, 10) }}</p>
-					</div>
-				</div>
-				@endforeach
+					@endforeach
 				@else 
 					<p>Belum ada review kelas ini.</p>
 				@endif

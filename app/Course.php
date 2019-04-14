@@ -29,6 +29,16 @@ class Course extends Model
 		return $this->hasMany('App\TutorCourse','course_id');
 	}
 
+	public function reviews()
+	{
+		return $this->hasMany('App\ReviewCourse', 'id_course');
+	}
+
+	public function ratings()
+	{
+		return $this->hasMany('App\RatingCourse', 'id_course');
+	}
+
 	public function getRating($idCourse)
 	{
 		$rating = DB::table('rating_courses')

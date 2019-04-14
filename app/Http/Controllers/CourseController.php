@@ -124,31 +124,26 @@ class CourseController extends CourseOrderController
 		return $list_topik;
 	}
 
-	public function course_review_post(Request $request, $id)
+	public function course_review_post(Request $request)
 	{
-
-		if( Auth::user() ){
-
-
+		if (Auth::user()) {
 			$review = new ReviewCourse;
-			$review->id_user = Auth::user()->id;
-			$review->id_course = $id;
-			$review->review = Input::get('body_review');
-			$review->save();
+			$review->storeReview($request['idCourse'], $request['body_review']);
 
 			$jumlah_rating;
-			if( Input::get('rating') == null) $jumlah_rating = 5 ;
-			else $jumlah_rating = Input::get('rating');
+			if ($request['rating'] == null) {
+				$jumlah_rating = 5;
+			}
+			else {
+				$jumlah_rating = $request['rating'];	
+			} 
 
 			$rating = new RatingCourse;
-			$rating->id_user = Auth::user()->id;
-			$rating->id_course = $id;
-			$rating->jumlah_rating = $jumlah_rating;
-			$rating->save();
+			$rating->storeRating($request['idCourse'], $jumlah_rating);
 
-
-			return redirect()->route('course', ['id' => $id]);
+			return redirect()->route('course', ['id' => $request['idCourse']]);
 		}
+
 		else {
 			return redirect()->route('login');
 
