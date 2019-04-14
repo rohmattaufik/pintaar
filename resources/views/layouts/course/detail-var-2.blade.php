@@ -149,6 +149,7 @@
 								<ul align="left">
 									<li>Garansi 7 hari uang kembali</li>
 									<li>Akses kelas selamanya</li>
+									<li>Sertifikat kelas</li>
 								</ul>
 							
 							</div>
