@@ -72,6 +72,16 @@ class DatabaseSeeder extends Seeder
 			'remember_token' => ''
 		]);
 
+		DB::table('users')->insert([
+			'nama' => 'haha',
+			'email' => 'haha@haha.id',
+			'alamat' => '',
+			'foto' => '',
+			'id_role' => '1',
+			'password' => bcrypt(123456),
+			'remember_token' => ''
+		]);
+
 		DB::table('topiks')->insert([
 			'judul_topik' => 'Energi Cahaya',
 			'penjelasan' => 'Energi Cahaya merupakan topik yang sangat sering keluar di sbmptn',
@@ -149,7 +159,7 @@ class DatabaseSeeder extends Seeder
 		]);
 		DB::table('status_pembayarans')->insert([
 			'id' => 4,
-			'status' => "Jumlah Transfer Kurang",
+			'status' => "Refund",
 		]);
 		DB::table('status_pembayarans')->insert([
 			'id' => 5,
@@ -159,6 +169,19 @@ class DatabaseSeeder extends Seeder
 		DB::table('status_pembayarans')->insert([
 			'id' => 6,
 			'status' => "Belum Disetujui",
+		]);
+
+		DB::table('tutor_saldo_withdraw_status')->insert([
+			'id' => 1,
+			'withdraw_status' => "Sedang Diproses",
+		]);
+		DB::table('tutor_saldo_withdraw_status')->insert([
+			'id' => 2,
+			'withdraw_status' => "Sudah Ditransfer",
+		]);
+		DB::table('tutor_saldo_withdraw_status')->insert([
+			'id' => 3,
+			'withdraw_status' => "Tidak Valid",
 		]);
 
 	}

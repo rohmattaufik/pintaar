@@ -14,7 +14,7 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-				<h3>Total Saldo: Rp {{  number_format($tutor->getTutorSaldo(), 0, ',', '.')   }}</h3>
+				<h3>Total Saldo: Rp {{  number_format($data['tutor-saldo'], 0, ',', '.')   }}</h3>
 				
 				
 				<div class="row">
@@ -44,9 +44,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($list_tutor_saldo_transaction as $tutor_saldo_transaction)
+						@foreach($data['list_tutor_saldo_transaction'] as $key=>$tutor_saldo_transaction)
 						<tr>
-							<td>{{$tutor_saldo_transaction ->id}}</td>
+							<td>{{++$key}}</td>
 							<td>Rp {{$tutor_saldo_transaction ->withdraw_amount}}</td>
 							<td>{{$tutor_saldo_transaction ->get_withdraw_status -> withdraw_status}}</td>
 							<td>{{$tutor_saldo_transaction ->created_at}}</td>

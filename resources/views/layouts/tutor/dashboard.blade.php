@@ -14,7 +14,7 @@
 				<a href="{{ route('edit-tutor') }}" class="btn btn-primary">Ubah Informasi Pengajar</a>
 				<br><br>
 				<h3>Saldo</h3>
-				<h4>Rp {{ number_format($tutor->getTutorSaldo(), 0, ',', '.') }}</h4>
+				<h4>Rp {{ number_format($data['tutor-saldo'], 0, ',', '.') }}</h4>
 				<a href="{{ route('show-transaction') }}" class="btn btn-primary">Tarik Saldo</a>
 				<br><br>
 				

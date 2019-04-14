@@ -59,9 +59,8 @@
               <form class="form" method="post" action="" role="form">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <select name= "withdraw_status">
-                  <option value=2>Disetujui</option>
-                  <option value=3>Telah Ditransfer</option>
-                  <option value=4>Transaksi Invalid</option>
+                  <option value=2>Telah Ditransfer</option>
+                  <option value=3>Tidak Valid</option>
                 </select>
                 <br>
                 <button type="submit" name="approve" class="btn btn-primary">Ubah Status</button>
