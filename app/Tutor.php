@@ -30,7 +30,7 @@ class Tutor extends Model
 
 		$fotoProfil     = $request->file('foto');
 		$urlFoto       = "";
-		
+
 		if ($fotoProfil != null) {
 			$destinationPath = 'user-poto';
 			$fotoName   = $fotoProfil->getClientOriginalName();

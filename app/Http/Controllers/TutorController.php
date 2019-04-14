@@ -41,9 +41,9 @@ class TutorController extends Controller
 
 	public function createTutorSaldoTransaction(Request $request){
 
-
+		$tutor = Tutor::where('id_user', Auth::user()->id)->first();
 		$tutor_saldo_transaction = new TutorSaldoTransaction;
-		$tutor_saldo_transaction->id_tutor = Auth::user()->id;
+		$tutor_saldo_transaction->id_tutor = $tutor->id;
 		$tutor_saldo_transaction->withdraw_amount = $request->withdaw_amount;
 		$tutor_saldo_transaction->withdraw_status = 1 ;
 		$tutor_saldo_transaction->save();
@@ -72,7 +72,7 @@ class TutorController extends Controller
 	{
 		$user = Auth::user();
 		$tutor = Tutor::where('id_user', $user->id)->first();
-		
+
 		return view('layouts/tutor/profile/show-profile', ['tutor' => $tutor, 'user' => $user]);
 	}
 
@@ -80,7 +80,7 @@ class TutorController extends Controller
 	{
 		$user = Auth::user();
 		$tutor = Tutor::where('id_user', $user->id)->first();
-		
+
 		return view('layouts/tutor/profile/edit', ['tutor' => $tutor, 'user' => $user]);
 	}
 
@@ -103,7 +103,7 @@ class TutorController extends Controller
 		// $data['user'] = $user;
 		// $data['tutor'] = $tutor;
 		$data['tutor-saldo'] = $tutor->getTutorSaldo($tutor->id);
-		
+
 		return view('layouts/tutor/dashboard', ['data'=>$data]);
 	}
 }
