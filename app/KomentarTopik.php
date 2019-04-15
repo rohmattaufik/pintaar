@@ -10,7 +10,7 @@ class KomentarTopik extends Model
 
     public function reply_komentar_topik()
 	{
-	   return $this->hasMany('App\ReplyKomentarTopik', 'id_komentar_topik','id')->orderBy('created_at', 'desc');
+	   return $this->hasMany('App\ReplyKomentarTopik', 'id_komentar_topik','id')->orderBy('created_at', 'asc');
 	}
 
   	public function user()
