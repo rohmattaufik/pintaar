@@ -69,4 +69,5 @@ class Tutor extends Model
 
 		return $total_saldo - $total_withdrawn_amount;
 	}
+
 }

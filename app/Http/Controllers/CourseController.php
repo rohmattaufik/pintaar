@@ -386,9 +386,18 @@ class CourseController extends CourseOrderController
 
 	public function editTutor($courseID, $tutorID)
 	{
-		$tutor = Tutor::whereId($tutorID)->first();
-		$course = Course::whereId($courseID)->first();
-		return view('layouts/course/tutor/tutor-course')->with(['tutor' => $tutor, 'course' => $course]);
+		$course = Course::where('id', $courseID)->first();
+		$courseCreator = Tutor::where('id', $course->id_tutor)->first();
+
+		if (Auth::User() and Auth::User()->id_role == 2 and Auth::User()->id == $courseCreator->id_user) {
+			$tutor = Tutor::whereId($tutorID)->first();
+			
+			return view('layouts/course/tutor/tutor-course')->with(['tutor' => $tutor, 'course' => $course]);
+		}
+		else {
+			return redirect()->route('home');
+		}
+		
 	}
 
 	public function deleteTutor($courseID, $tutorID)
@@ -400,37 +409,17 @@ class CourseController extends CourseOrderController
 
 	public function storeTutor(Request $request)
 	{
-		$profilePhoto     = $request->file('tutor_photo');
-		$urlPhoto       = "";
-		if($profilePhoto != null){
-			$destinationPath   = 'images/gambar_course';
-			$photoName         = $profilePhoto->getClientOriginalName();
-			$move              = $profilePhoto->move($destinationPath, $photoName);
-			$urlPhoto          = "{$photoName}";
+		$course = Course::where('id', $request->course_id)->first();
+		$courseCreator = Tutor::where('id', $course->id_tutor)->first();
+		
+		if (Auth::User() and Auth::User()->id_role == 2 and Auth::User()->id == $courseCreator->id_user) {
+			$tutorCourse = new TutorCourse;
+			$tutorCourse->store($request);
+			return redirect()->route('course-detail', $course->id);
 		}
-
-		if ($request->tutor_id == null) {
-			$tutor = Tutor::create([
-				"name"  => $request->tutor_name,
-				"profile_photo"  => $urlPhoto,
-				"story"         => $request->deskripsi
-			]);
-
-			$tutorCourse = TutorCourse::create([
-				"course_id"  => $request->course_id,
-				"tutor_id"         => $tutor->id
-			]);
-		} 
 		else {
-
-			$course = Tutor::whereId($request->tutor_id)->update([
-				"name"  => $request->tutor_name,
-				"profile_photo"  => $urlPhoto,
-				"story"         => $request->deskripsi
-			]);
-
+			return redirect()->route('home');
 		}
-
-		return redirect()->route('course-detail', $request->course_id);
+		
 	}
 }
