@@ -64,7 +64,7 @@
 
     <div class="form-group row text-center social-btn">
         <div class="col-md-8 col-md-offset-2">
-          <a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Login dengan <b>Facebook</b></a>
+          <a href="{{route('social-login', 'facebook')}}" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Login dengan <b>Facebook</b></a>
         </div>
     </div>
 
