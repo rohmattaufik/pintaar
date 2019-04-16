@@ -13,9 +13,15 @@ class SocialAuthController extends Controller
 {
     //
 
-    public function redirectToProvider()
+    public function redirectToProvider($social_login)
     {
-        return Socialite::driver('google')->redirect();
+
+      if($social_login == 'google'){
+          return Socialite::driver('google')->redirect();
+      }
+      else{
+        return Socialite::driver('facebook')->redirect();
+      }
     }
 
     /**
@@ -23,8 +29,10 @@ class SocialAuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback($social_login)
     {
+
+      if($social_login == 'google') {
         try {
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
@@ -48,6 +56,10 @@ class SocialAuthController extends Controller
             auth()->login($newUser, true);
         }
         return redirect()->to('/home');
+      }
+      else{
+        return redirect()->to('/home');
+      }
     }
 
 }
