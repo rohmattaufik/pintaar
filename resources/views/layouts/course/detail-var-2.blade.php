@@ -133,22 +133,25 @@
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
 					@else
 						@if($course->diskon != null and $course->diskon > 0)
+							<h4 id="sisa-hari-promo"></h4>
 							<h4><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h4>
-							<div id="diskon">
+							<!-- <div id="diskon">
 								<span class="label label-primary">Diskon {{ $course->diskon }}%</span>
-							</div>
+							</div> -->
+							
 						@else
 							<h4>Rp {{ number_format($course->harga, 0, ',', '.') }}</h4>
 						@endif
 						<a id="beli-kelas" href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Sekarang</a>
 						<br><br>
+
 						<div class="row">
 							<div class="col-xs-12 col-md-6 col-md-offset-3">
 							
 								<p><strong>Harga sudah termasuk:</strong></p>
 								<ul align="left">
 									<li>Garansi 7 hari uang kembali</li>
-									<li>Akses kelas selamanya</li>
+									<li>Akses materi kelas selamanya</li>
 									<li>Sertifikat kelas</li>
 								</ul>
 							
@@ -334,7 +337,7 @@
 
 <script>
   	// Set the date we're counting down to
-  	var countDownDate = new Date("April 17, 2019 23:59:55").getTime();
+  	var countDownDate = new Date("April 22, 2019 23:59:55").getTime();
 
   	// Update the count down every 1 second
   	var x = setInterval(function() {
@@ -351,13 +354,15 @@
 		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 		
 		// Output the result in an element with id="demo"
-		document.getElementById("timer-diskon").innerHTML = days + " hari " + hours + " jam "
-		+ minutes + " menit " + seconds + " detik ";
+		document.getElementById("timer-diskon").innerHTML = days + " hari " + hours + " jam " + minutes + " menit " + seconds + " detik ";
+
+		document.getElementById("sisa-hari-promo").innerHTML = "Promo tinggal " + days + " hari lagi!";
 		
 		// If the count down is over, write some text 
 		if (distance < 0) {
 			clearInterval(x);
-			document.getElementById("timer-diskon").innerHTML = "DISKON TELAH HABIS!";
+			document.getElementById("timer-diskon").innerHTML = "";
+			document.getElementById("sisa-hari-promo").innerHTML = "";
 		}
 	}, 1000);
 </script>
