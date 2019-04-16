@@ -52,13 +52,17 @@
             <button type="submit" class="btn btn-primary btn-block">
                 Login
             </button>
+            <br>
+            <div class="text-center col-md-4 col-md-offset-4">atau</div>
+
         </div>
+
     </div>
 
 
     <div class="form-group row text-center social-btn">
         <div class="col-md-8 col-md-offset-2">
-               <a href="{{route('social-login', 'google')}}" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Login dengan <b>Google</b></a>
+               <a href="{{route('social-login', 'google')}}" class="btn btn-default btn-block"><i class="fa fa-google"></i> Login dengan <b>Google</b></a>
         </div>
     </div>
 

@@ -59,17 +59,19 @@
         <div class="col-md-8 col-md-offset-2">
             <button type="submit" class="btn btn-primary btn-block"  onclick="trackLead()" >Daftar</button>
         </div>
+        <br>
+        <div class="text-center col-md-4 col-md-offset-4">atau</div>
     </div>
 
     <div class="form-group row text-center social-btn">
             <div class="col-md-8 col-md-offset-2">
-                   <a href="{{route('social-login', 'google')}}" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Daftar dengan <b>Google</b></a>
+                   <a href="{{route('social-login', 'google')}}" class="btn btn-default btn-block" onclick="trackLead()" ><i class="fa fa-google"></i> Daftar dengan <b>Google</b></a>
             </div>
     </div>
 
     <div class="form-group row text-center social-btn">
             <div class="col-md-8 col-md-offset-2">
-              <a href="{{route('social-login', 'facebook')}}" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Daftar dengan <b>Facebook</b></a>
+              <a href="{{route('social-login', 'facebook')}}" class="btn btn-primary btn-block" onclick="trackLead()" ><i class="fa fa-facebook"></i> Daftar dengan <b>Facebook</b></a>
             </div>
     </div>
 
