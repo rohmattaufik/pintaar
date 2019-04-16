@@ -5,9 +5,11 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <form role="form" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
-    
+
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
             <h2>Daftar Akun Baru</h2>
@@ -44,19 +46,31 @@
                     <strong>{{ $errors->first('password') }}</strong>
                 </span>
             @endif
-        </div>    
+        </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
             <input type="password" class="form-control" name="password_confirmation" placeholder="Ulangi Password" required>
-        </div>    
+        </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
             <button type="submit" class="btn btn-primary btn-block"  onclick="trackLead()" >Daftar</button>
         </div>
+    </div>
+
+    <div class="form-group row text-center social-btn">
+            <div class="col-md-8 col-md-offset-2">
+                   <a href="{{route('social-login')}}" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Daftar dengan <b>Google</b></a>
+            </div>
+    </div>
+
+    <div class="form-group row text-center social-btn">
+            <div class="col-md-8 col-md-offset-2">
+              <a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Daftar dengan <b>Facebook</b></a>
+            </div>
     </div>
 
     <div class="form-group row">
@@ -71,7 +85,7 @@
 
 <script>
 function trackLead() {
- 	  
+
 	   !function(f,b,e,v,n,t,s)
 	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -81,7 +95,7 @@ function trackLead() {
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
 	  fbq('init', '2163834067280375');
-	  
+
 	  fbq('track', 'Lead');
 }
 </script>

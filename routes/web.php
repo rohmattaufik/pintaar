@@ -24,6 +24,9 @@ Route::get('/daftar-pengajar', ['as'=>'daftar_pengajar','uses'=>'UserController@
 
 Auth::routes();
 
+Route::get('/redirect', 'Auth\SocialAuthController@redirectToProvider')->name('social-login');
+Route::get('/callback', 'Auth\SocialAuthController@handleProviderCallback');
+
 // Course
 Route::prefix('course')->group(function () {
 	Route::get('{id}', function ($id) {

@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <form role="form" method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
@@ -33,7 +34,7 @@
                     <strong>{{ $errors->first('password') }}</strong>
                 </span>
             @endif
-        </div>    
+        </div>
     </div>
 
     <div class="form-group row">
@@ -51,6 +52,19 @@
             <button type="submit" class="btn btn-primary btn-block">
                 Login
             </button>
+        </div>
+    </div>
+
+
+    <div class="form-group row text-center social-btn">
+        <div class="col-md-8 col-md-offset-2">
+               <a href="{{route('social-login')}}" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Login dengan <b>Google</b></a>
+        </div>
+    </div>
+
+    <div class="form-group row text-center social-btn">
+        <div class="col-md-8 col-md-offset-2">
+          <a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Login dengan <b>Facebook</b></a>
         </div>
     </div>
 
