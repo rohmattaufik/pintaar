@@ -1,7 +1,11 @@
 @extends('template')
 
 @section('title')
-    <title>Pintaar - Home</title>
+<title>Pintaar - Home</title>
+@endsection
+
+@section('extra-style')
+
 @endsection
 
 @section('content')
@@ -266,8 +270,7 @@
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
                     <div class="page-title">
                         <h2>Tim Pintaar</h2>
-                        <p> Pintaar didirikan oleh lulusan Fakultas Ilmu Komputer, Universitas Indonesia dan Laboratorium <a href="http://dl2.cs.ui.ac.id/blog/">Digital Library and Distance Learning (DL2)</a>
-							<strong>yang tentunya sangat mengerti kebutuhan belajar online kamu <strong></p>
+                        <p>Pintaar didirikan oleh lulusan Fakultas Ilmu Komputer Universitas Indonesia dan Lab <a href="http://dl2.cs.ui.ac.id/blog/">Digital Library and Distance Learning (DL2)</a> <strong>yang tentunya sangat mengerti kebutuhan belajar online kamu.<strong></p>
                     </div>
                 </div>
             </div>
@@ -289,6 +292,70 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <hr>
+            
+        </div>
+    </section>
+
+    <section class="section" id="faq-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 text-center">
+                    <div class="page-title">
+                        <h2>FAQ | Hal Yang Sering Ditanyakan</h2>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="panel-group" id="accordion">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Bagaimana cara belajarnya?</a>
+                        </h4>
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <p style="font-weight: normal;">Kamu akan belajar dengan menonton rekaman video di web Pintaar.com. Kamu dapat mengulangi video hingga paham.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Apakah ada biaya tambahan?</a>
+                        </h4>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <p style="font-weight: normal;">Tidak ada. Cukup sekali membayar harga kelas yang tercantum, kamu bisa mengakses materi selamanya.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel">
+                        <h4 class="panel-title">
+                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Bagaimana jika saya ingin bertanya ke pengajar?</a>
+                        </h4>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <p style="font-weight: normal;">Kamu bisa bertanya ke pengajar melalui kolom diskusi dibawah materi kelas. Biasanya, pengajar juga menyediakan grup media sosial untuk diskusi.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Bagaimana jika materi kelas tidak sesuai ekspektasi saya?</a>
+                        </h4>
+                        <div id="collapse4" class="panel-collapse collapse">
+                            <p style="font-weight: normal;">Kamu dapat melakukan refund (meminta uang kembali) dalam 7 hari setelah transaksi. Hubungi kontak layanan Pintaar untuk melakukan refund.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
             <br>
         </div>
     </section>
