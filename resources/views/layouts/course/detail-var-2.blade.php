@@ -152,6 +152,7 @@
 								<ul align="left">
 									<li>Garansi 7 hari uang kembali</li>
 									<li>Akses materi kelas selamanya</li>
+									<li>Tanya jawab dengan pengajar</li>
 									<li>Sertifikat kelas</li>
 								</ul>
 							
