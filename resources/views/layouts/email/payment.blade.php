@@ -17,7 +17,7 @@
 <p>Jika kamu sudah membayar, silahkan upload bukti pembayaran kamu <a href="https://pintaar.com/course-order">disini</a>. Pembayaran kamu akan dikonfirmasi paling lama 1x24 jam setelah kamu membayar.</p>
 <p>Jika kamu membutuhkan bantuan, bisa hubungi saya melalui <a href="https://wa.me/6285212221431">WhatsApp - 085212221431</a> atau dengan membalas email ini.</p>
 
-<p>Kamu dapat membayar transaksi ini paling lama 3 hari setelah transaksi ini dibuat </p>
+<p>{!! $remaining_days_copy !!}</p>
 
 <p>Terlebih lagi, kamu juga boleh membayar ketika weekend atau hari libur, dan kami akan tetap mengkonfirmasi pembayaranmu</p>
 
