@@ -15,10 +15,10 @@ use Auth;
 use Carbon\Carbon;
 use App\Mail\CourseOrderMail;
 
-class CourseOrderController 
+class CourseOrderController
 {
 
-	
+
 	public function removeFromCart(Request $request)
 	{
 		$cartCourse = CartCourse::whereId($request['cart_course_id']);
@@ -43,7 +43,7 @@ class CourseOrderController
 	}
 
 	public function buyCourse($course_id)
-	{ 
+	{
 		$course = Course::whereId($course_id)->first();
 
 		if ($course->harga > 0) {
@@ -54,7 +54,7 @@ class CourseOrderController
 			if ($cart != null) {
 				$cartCourseModel = new CartCourse;
 				$cartCourse = $cartCourseModel->createCartCourse($cart, $course);
-				  
+
 				return redirect()->route('cart');
 			}
 			else {
@@ -99,7 +99,7 @@ class CourseOrderController
 		$status_pembayaran = 1;
 		$paymentMethod = $request['payment_method'];
 		$courseOrder = $this->store($cart, $paymentMethod, $status_pembayaran);
-		return redirect()->route('review-order', $courseOrder->no_order);                       
+		return redirect()->route('review-order', $courseOrder->no_order);
 	}
 
 
@@ -112,7 +112,7 @@ class CourseOrderController
 	{
 		$cart->update(['is_active' => 0]);
 
-		// order baru       
+		// order baru
 		$courseOrder = PembelianCourse::create([
 		  'id_user' => Auth::user()->id,
 		  'cart_id' => $cart->id,
@@ -135,38 +135,56 @@ class CourseOrderController
 		  $noOrder = $simpleDate.$suffix;
 		  $courseOrder->update(['no_order' => $noOrder]);
 		}
-	
 
-		$this->send_email_reminder(Auth::user()->id, $cart->id, $cart->total_price, $noOrder);
-		
-		
+		$email_reminder_count = 0;
+
+		$this->send_email_reminder(Auth::user()->id, $cart->id, $cart->total_price, $noOrder, $email_reminder_count);
+
+
 		return $courseOrder;
 
 	}
-	
-	public function send_email_reminder($user_id, $cart_id, $total_price, $noOrder) {
-	
+
+	public function send_email_reminder($user_id, $cart_id, $total_price, $noOrder, $email_reminder_count) {
+
 		if($total_price != 0) {
-	
+
 			$user_that_bought = User::find($user_id);
 
 			$courses_that_bougth = $this->get_courses_that_bougth($cart_id);
-		
-			$this->html_email($user_that_bought->nama, $user_that_bought->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price);
+
+			$this->html_email($user_that_bought->nama, $user_that_bought->email, Carbon::now()->format('d-m-Y'), $courses_that_bougth, $noOrder, $total_price, $email_reminder_count);
 		}
-		
+
 	}
-	
-	
-	public function html_email($name, $email_user, $update_date, $courses_that_bougth, $noOrder, $totalPrice){
-		$data = array('name'=>$name, 'update_date'=>$update_date, 'courses_that_bougth'=>$courses_that_bougth, 'noOrder'=> $noOrder,'totalPrice'=>  $totalPrice);
+
+
+	public function html_email($name, $email_user, $update_date, $courses_that_bougth, $noOrder, $totalPrice, $email_reminder_count){
+		if($email_reminder_count == 0){
+			$prefix_subject = "Silahkan Bayar Kelas Kamu Sebesar ";
+			$remaining_days_copy = "Kamu dapat membayar transaksi ini paling lama 3 hari setelah transaksi ini dibuat";
+		}
+		else if($email_reminder_count == 1){
+			$prefix_subject = "[Reminder] Silahkan Bayar Kelas Kamu Sebesar ";
+			$remaining_days_copy = "Kamu dapat membayar transaksi ini paling lama 3 hari setelah transaksi ini dibuat";
+		}
+		else if($email_reminder_count == 2){
+			$prefix_subject = "[Tinggal 2 hari lagi!] Silahkan Bayar Kelas Kamu Sebesar ";
+			$remaining_days_copy = "Kamu dapat membayar transaksi ini paling lama 2 hari lagi";
+		}
+		else{
+			$prefix_subject = "[Hari Terakhir!] Silahkan Bayar Kelas Kamu Sebesar ";
+			$remaining_days_copy = "Hari ini adalah hari terakhir kamu harus membayar sebelum transaksi dengan harga ini hangus";
+		}
+
+		$data = array('name'=>$name, 'update_date'=>$update_date, 'courses_that_bougth'=>$courses_that_bougth, 'noOrder'=> $noOrder,'totalPrice'=>  $totalPrice,  'prefix_subject'=> $prefix_subject, 'remaining_days_copy'=>$remaining_days_copy);
 		Mail::send('layouts/email/payment', $data, function($message) use ($email_user, $name, $data) {
-		  	$message->to($email_user, $name)->subject('Silahkan Bayar Kelas Kamu Sebesar '. number_format($data['totalPrice'], 0, ',', '.'). ' [No. Pesanan: '. $data['noOrder']. ']');
+		  	$message->to($email_user, $name)->subject($data['prefix_subject']. number_format($data['totalPrice'], 0, ',', '.'). ' [No. Pesanan: '. $data['noOrder']. ']');
 		  	$message->from('pintaar.bantuan@gmail.com','Pintaar');
 		});
 		echo "HTML Email Sent. Check your inbox.";
 	}
-	
+
 	public function get_courses_that_bougth($cart_id) {
 
 
@@ -185,7 +203,7 @@ class CourseOrderController
 		$courseOrder = PembelianCourse::where('pembelian_courses.no_order', $order_no)
 						->first();
 		$cart = Cart::whereId($courseOrder->cart_id)->first();
-				
+
 		if (Auth::user()->id == $courseOrder->id_user) {
 			return view('layouts/course-order/review-order', ['courseOrder' => $courseOrder, 'cart' => $cart]);
 			// dd($courseOrder);
