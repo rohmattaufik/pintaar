@@ -12,14 +12,20 @@ class ArtifactController extends Controller
 
 
     public function index()
-    {	
-		$course = new Course;
-        $list_courses_code = $course->getAllCourseByCategory(1);
-		$list_courses_others = $course->getAllCourseByCategory(4);
+    {
 
-		$allUsers = User::all()->count();
+      $course = new Course;
+      $list_courses_code = $course->getAllCourseByCategory(1);
+		  $list_courses_others = $course->getAllCourseByCategory(4);
+		  $allUsers = User::all()->count();
 
-		
-		return view('index',  ["list_courses_code"=>$list_courses_code, "list_courses_others"=>$list_courses_others, 'allUsers'=>$allUsers]);
+
+		  return view('index',  ["list_courses_code"=>$list_courses_code, "list_courses_others"=>$list_courses_others, 'allUsers'=>$allUsers]);
+    }
+
+
+    public function faq()
+    {
+      return redirect(route('home') . '#faq-page');
     }
 }

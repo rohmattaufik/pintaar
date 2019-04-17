@@ -15,6 +15,8 @@
 
 Route::get('/',['as'=>'home','uses'=>'ArtifactController@index']);
 
+Route::get('/faq',['as'=>'faq','uses'=>'ArtifactController@faq']);
+
 Route::get('/home',['as'=>'home','uses'=>'ArtifactController@index']);
 
 Route::get('test-email','MailController@test_email');
