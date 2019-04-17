@@ -141,7 +141,7 @@ class CourseController extends CourseOrderController
 			$rating = new RatingCourse;
 			$rating->storeRating($request['idCourse'], $jumlah_rating);
 
-			return redirect()->route('course', ['id' => $request['idCourse']]);
+			return redirect()->back()->with('submit-review', true);
 		}
 
 		else {
@@ -204,16 +204,15 @@ class CourseController extends CourseOrderController
 
 	public function subscribe_course($id_topik)
 	{
-		$topik= DB::table('topiks')
-		->where('topiks.id', '=', $id_topik)
-		->get()->first();
-		$id_course = $topik -> id_course;
+		$user = Auth::User();
+		$topik= Topik::where('id', $id_topik)->first();
+		$course = Course::where('id', $topik->id_course)->first();
+		$status_pernah_review = $course->getReviewStatus($course->id);
+		$data['user'] = $user;
+		$data['course'] = $course;
+		$data['status_pernah_review'] = $status_pernah_review;
 
-		$course = DB::table('courses')
-		->where('courses.id', '=', $id_course)
-		->get()->first();
-
-		return view('layouts.course.subscribe', ["course"=>$course]);
+		return view('layouts/course/subscribe', ["data"=>$data]);
 	}
 
 	public function update($id)
