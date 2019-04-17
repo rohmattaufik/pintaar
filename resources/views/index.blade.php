@@ -355,6 +355,11 @@
                 </div>
             </div>
             </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <h4>Punya pertanyaan lain? <a href="https://wa.me/6285212221431">Tanya disini (Whatsapp)</a> </h4>
+                </div>
+            </div>
             
             <br>
         </div>

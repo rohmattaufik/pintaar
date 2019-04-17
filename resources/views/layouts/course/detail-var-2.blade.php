@@ -164,14 +164,14 @@
 
 					<div class="alert alert-success text-center" role="alert">
 						<h4>Ada yang ingin kamu tanya?</h4>
-            <br>
-            <a class="btn btn-primary" href="{{ route('faq') }}" target="_blank">Baca FAQ</a>
-            <br>
-            <br>
-            <p> atau </p>
-            <br>
-            <a id="button-whatsapp" class="btn btn-success" href="https://wa.me/6285212221431" target="_blank">Tanya Disini (WhatsApp)</a>
-          </div>
+						
+            			
+            			<a class="btn btn-success" href="{{ route('faq') }}" target="_blank">Baca FAQ Disini</a>
+            			<br>
+            			<p> atau </p>
+            			<a id="button-whatsapp" class="btn btn-success" href="https://wa.me/6285212221431" target="_blank">Tanya Disini (WhatsApp)</a>
+            
+          			</div>
 					<hr>
 				@endif
 
