@@ -25,7 +25,7 @@
             <input id="password" type="password" class="form-control {{ $errors->has('password') ? ' error' : '' }}" name="password" placeholder="Password" required>
         </div>
     </div>
-    
+
     @if ($errors->has('email') or $errors->has('password'))
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
@@ -56,12 +56,6 @@
         </div>
     </div>
 
-
-    <div class="form-group row text-center social-btn">
-        <div class="col-md-8 col-md-offset-2">
-               <a href="{{route('social-login', 'google')}}" class="btn btn-default btn-block"><i class="fa fa-google"></i> Login dengan <b>Google</b></a>
-        </div>
-    </div>
 
     <div class="form-group row text-center social-btn">
         <div class="col-md-8 col-md-offset-2">

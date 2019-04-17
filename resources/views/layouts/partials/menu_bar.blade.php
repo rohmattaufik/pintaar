@@ -94,7 +94,8 @@
 					@if (Auth::guest())
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="{{ route('register') }}">Daftar</a></li>
+                            <li><a href="https://goo.gl/forms/1gj7XCBjVWWYXGSA2">Daftar Pengajar</a></li>
+                            <li><a href="{{ route('register') }}">Daftar Murid</a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                         </ul>
                     @elseif (Auth::user()->id_role == 2)
@@ -139,7 +140,7 @@
                             <li><a href="{{ route('show-tutor-saldo-transaction')}}">Verifikasi Saldo Tutor</a></li>
                             <li><a href="{{ route('sales')}}">Penjualan</a></li>
                             <li><a href="{{ route('create-tutor')}}">Tambah Tutor</a></li>
-                            
+
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">

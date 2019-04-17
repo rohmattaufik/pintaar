@@ -67,11 +67,6 @@
         </div>
     </div>
 
-    <div class="form-group row text-center social-btn">
-            <div class="col-md-8 col-md-offset-2">
-                   <a href="{{route('social-login', 'google')}}" class="btn btn-default btn-block" onclick="trackLead()" ><i class="fa fa-google"></i> Daftar dengan <b>Google</b></a>
-            </div>
-    </div>
 
     <div class="form-group row text-center social-btn">
             <div class="col-md-8 col-md-offset-2">
