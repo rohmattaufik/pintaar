@@ -12,7 +12,7 @@
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
-            <h2>Daftar Akun Baru</h2>
+            <h3>Daftar Akun Baru</h3>
         </div>
     </div>
     <div class="form-group row">
@@ -59,8 +59,12 @@
         <div class="col-md-8 col-md-offset-2">
             <button type="submit" class="btn btn-primary btn-block"  onclick="trackLead()" >Daftar</button>
         </div>
-        <br>
-        <div class="text-center col-md-4 col-md-offset-4">atau</div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+            <p>atau</p>
+        </div>
     </div>
 
     <div class="form-group row text-center social-btn">
@@ -74,7 +78,7 @@
               <a href="{{route('social-login', 'facebook')}}" class="btn btn-primary btn-block" onclick="trackLead()" ><i class="fa fa-facebook"></i> Daftar dengan <b>Facebook</b></a>
             </div>
     </div>
-
+    <hr>
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
             <label>Sudah punya akun? <a href="{{ route('login') }}">Log in disini</a></label>
