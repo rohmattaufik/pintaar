@@ -48,7 +48,7 @@
 
     <div class="form-group row">
         <div class="col-md-8 col-md-offset-2">
-            <button type="submit" class="btn btn-primary btn-block">
+            <button id="login-button" type="submit" class="btn btn-primary btn-block">
                 Login
             </button>
             <br>
