@@ -19,6 +19,10 @@ Route::get('/faq',['as'=>'faq','uses'=>'ArtifactController@faq']);
 
 Route::get('/home',['as'=>'home','uses'=>'ArtifactController@index']);
 
+
+Route::get('/kue',['as'=>'cookie','uses'=>'ArtifactController@get_cookie']);
+
+
 Route::get('test-email','MailController@test_email');
 
 //Daftar kelas

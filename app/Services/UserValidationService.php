@@ -17,6 +17,9 @@ class UserValidationService
         $channel_acqusition_str[50] = "ig sharing";
         $channel_acqusition_str[60] = "qoura";
         $channel_acqusition_str[70] = "line sharing";
+        $channel_acqusition_str[80] = "youtube ads";
+        $channel_acqusition_str[90] = "linkedin organic";
+        $channel_acqusition_str[100] = "PPC";
 
         if($channel_acqusition_str[$channel_acqusition] == NULL){
 
