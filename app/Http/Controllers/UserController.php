@@ -134,6 +134,6 @@ class UserController extends Controller
     }
 
 	public function daftar_pengajar(){
-				return view('layouts.tutor.daftar-pengajar');
+		return view('layouts.tutor.daftar-pengajar');
 	}
 }
