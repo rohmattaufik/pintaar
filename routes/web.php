@@ -19,12 +19,6 @@ Route::get('/faq',['as'=>'faq','uses'=>'ArtifactController@faq']);
 
 Route::get('/home',['as'=>'home','uses'=>'ArtifactController@index']);
 
-
-Route::get('/cookie',['as'=>'cookie','uses'=>'ArtifactController@get_cookie']);
-
-Route::get('/set_cookie',['as'=>'cookie','uses'=>'ArtifactController@setCookie']);
-
-
 Route::get('test-email','MailController@test_email');
 
 //Daftar kelas
