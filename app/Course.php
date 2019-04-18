@@ -122,6 +122,4 @@ class Course extends Model
 		return $status_pernah_review;
 	}
 
-
-
 }
