@@ -69,12 +69,6 @@
 
     <div class="form-group row text-center social-btn">
             <div class="col-md-8 col-md-offset-2">
-                   <a href="{{route('social-login', 'google')}}" id="sign-up-button-google" class="btn btn-default btn-block" onclick="trackLead()" ><i class="fa fa-google"></i> Daftar dengan <b>Google</b></a>
-            </div>
-    </div>
-
-    <div class="form-group row text-center social-btn">
-            <div class="col-md-8 col-md-offset-2">
               <a href="{{route('social-login', 'facebook')}}" id="sign-up-button-fb" class="btn btn-primary btn-block" onclick="trackLead()" ><i class="fa fa-facebook"></i> Daftar dengan <b>Facebook</b></a>
             </div>
     </div>
