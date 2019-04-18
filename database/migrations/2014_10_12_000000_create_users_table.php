@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('foto')->nullable();
             $table->integer('id_role');
             $table->string('password');
+            $table->string('channel_acquisition')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

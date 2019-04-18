@@ -15,8 +15,11 @@ class PertanyaanTopikController extends Controller
 {
     public function __construct()
     {
+      $this->middleware('cookieTrackingChannelAcqusition');
       $this->middleware('auth');
+
     }
+
 
     public function create($idTopik)
     {
@@ -29,7 +32,7 @@ class PertanyaanTopikController extends Controller
     {
         $pertanyaanTopik = PertanyaanTopik::whereId($id)->first();
         $topik = Topik::whereId($pertanyaanTopik->id_topik)->first();
-        
+
         return view('layouts.pertanyaan_topik.tutor.form')->with('pertanyaanTopik', $pertanyaanTopik)->with('topik', $topik);
     }
 
@@ -70,7 +73,7 @@ class PertanyaanTopikController extends Controller
                     'opsi_3'            => $request->opsi_3,
                     'opsi_4'            => $request->opsi_4
                 ]);
-            } else 
+            } else
             {
                 PertanyaanTopik::whereId($request->id)->update([
                     "id_topik"          => $request->id_topik,
@@ -84,8 +87,8 @@ class PertanyaanTopikController extends Controller
                     'opsi_4'            => $request->opsi_4
                 ]);
             }
-            
-            
+
+
         }
         return redirect()->route('topik-detail', $request->id_topik);
     }
@@ -96,5 +99,5 @@ class PertanyaanTopikController extends Controller
         return redirect()->back();
     }
 
-  
+
 }

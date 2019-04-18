@@ -11,9 +11,12 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class UserController
+class UserController extends Controller
 {
-
+    public function __construct()
+    {
+           $this->middleware('cookieTrackingChannelAcqusition');
+    }
     public function index()
     {
         if( Auth::user() )
@@ -86,13 +89,13 @@ class UserController
 
 
     }
-	
-	
+
+
     public function referral(){
         if(Auth::user())
         {
             return view('layouts.user_profile.referral');
-        } 
+        }
         return redirect()->route('login');
     }
 
@@ -100,7 +103,7 @@ class UserController
         if(Auth::user())
         {
             return view('layouts.user_profile.change_password')->with('user', Auth::user());
-        } 
+        }
         return redirect()->route('login');
     }
 
@@ -112,7 +115,7 @@ class UserController
            ]);
            Auth::logout();
            return redirect()->route('login');
-        } 
+        }
         return redirect()->route('login');
     }
 
@@ -129,7 +132,7 @@ class UserController
         $notification->delete();
         return redirect(route('topik', ['id' => $id]) . '#comment'.$notification->id_destination);
     }
-	
+
 	public function daftar_pengajar(){
 				return view('layouts.tutor.daftar-pengajar');
 	}

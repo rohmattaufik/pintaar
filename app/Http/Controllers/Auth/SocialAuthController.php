@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
 use App\User;
+use App\Http\Requests;
+use Cookie;
+use App\Services\UserValidationService;
 
 
 class SocialAuthController extends Controller
@@ -38,11 +41,15 @@ class SocialAuthController extends Controller
             auth()->login($existingUser, true);
         } else {
             // create a new user
+             $channel_acqusition = Cookie::get('channel_acqusition');
+             $channel_acqusition = UserValidationService::processChannelAcqusition($channel_acqusition);
+
             $newUser                  = new User;
             $newUser->nama            = $user->name;
             $newUser->email           = $user->email;
             $newUser->id_role         =1;
             $newUser->password        =bcrypt($user->email);
+            $newUser->channel_acqusition = $channel_acqusition;
             $newUser->save();
 
             auth()->login($newUser, true);

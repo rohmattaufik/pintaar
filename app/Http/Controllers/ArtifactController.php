@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Course;
 use App\User;
+use Illuminate\Http\Response;
+use App\Http\Requests;
+use Cookie;
 
 class ArtifactController extends Controller
 {
-
-
+  public function __construct()
+  {
+       $this->middleware('cookieTrackingChannelAcqusition');
+  }
     public function index()
     {
 
@@ -27,5 +32,11 @@ class ArtifactController extends Controller
     public function faq()
     {
       return redirect(route('home') . '#faq-page');
+    }
+
+    public function get_cookie(Request $request){
+
+       $value = Cookie::get('channel_acqusition');
+      return $value;
     }
 }

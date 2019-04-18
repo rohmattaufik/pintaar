@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\DB;
 
 class TutorController extends Controller
 {
+	public function __construct()
+	{
+				 $this->middleware('cookieTrackingChannelAcqusition');
+	}
 	public function showCourseSales($courseId)
 	{
 		$tutor = Tutor::where('id_user', Auth::user()->id)->first();
