@@ -20,6 +20,8 @@ class UserValidationService
         $channel_acqusition_str[80] = "youtube ads";
         $channel_acqusition_str[90] = "linkedin organic";
         $channel_acqusition_str[100] = "PPC";
+        $channel_acqusition_str[110] = "fb organic";
+        $channel_acqusition_str[120] = "ig organic";
 
         if($channel_acqusition_str[$channel_acqusition] == NULL){
 
