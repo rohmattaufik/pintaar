@@ -22,6 +22,12 @@
 				</div>
 			</div>
 		@else
+				@if (empty(Auth::User()->foto))
+					<div class="alert alert-info alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<p><strong>Selamat belajar {{Auth::User()->nama}}!</strong> Ayo lengkapi profil kamu <a href="{{ route('user-profil') }}"><strong>disini.</strong></a></p>
+					</div>
+				@endif
 		<h2>Kelas Saya</h2>
 		<br>
 		<div class="row display-flex">
