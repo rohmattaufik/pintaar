@@ -49,7 +49,7 @@ class SocialAuthController extends Controller
             $newUser->email           = $user->email;
             $newUser->id_role         =1;
             $newUser->password        =bcrypt($user->email);
-            $newUser->channel_acqusition = $channel_acqusition;
+            $newUser->channel_acquisition = $channel_acqusition;
             $newUser->save();
 
             auth()->login($newUser, true);
