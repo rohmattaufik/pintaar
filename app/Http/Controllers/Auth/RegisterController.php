@@ -6,6 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Cookie;
+use App\Services\UserValidationService;
 
 class RegisterController extends Controller
 {
@@ -37,6 +39,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->middleware('cookieTrackingChannelAcqusition');
     }
 
     /**
@@ -62,13 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+       $channel_acqusition = Cookie::get('channel_acqusition');
+       $channel_acqusition = UserValidationService::processChannelAcqusition($channel_acqusition);
         return User::create([
             'nama'      => $data['name'],
             'email'     => $data['email'],
             'password'  => bcrypt($data['password']),
             'foto'      => "",
             'alamat'      => "-",
-            'id_role'   => 1
+            'id_role'   => 1,
+            'channel_acquisition' => $channel_acqusition,
         ]);
     }
 }

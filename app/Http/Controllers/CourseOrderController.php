@@ -15,9 +15,13 @@ use Auth;
 use Carbon\Carbon;
 use App\Mail\CourseOrderMail;
 
-class CourseOrderController
+class CourseOrderController extends Controller
 {
 
+	public function __construct()
+  {
+       $this->middleware('cookieTrackingChannelAcqusition');
+  }
 
 	public function removeFromCart(Request $request)
 	{

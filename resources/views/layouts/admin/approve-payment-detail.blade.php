@@ -26,6 +26,10 @@
                     <td>{{$pembelian_detail -> nama}}</td>
                   </tr>
                   <tr>
+                    <td>Channel Acquisition</td>
+                    <td>{{$pembelian_detail -> channel_acquisition}}</td>
+                  </tr>
+                  <tr>
                     <td>Email User</td>
                     <td>{{$pembelian_detail -> email}}</td>
                   </tr>
@@ -48,7 +52,7 @@
 
                 </tbody>
               </table>
-              
+
               <p>Status: <strong>{{$pembelian_detail -> status}} </strong></p>
 
               <p> Ubah Status:</p>
@@ -61,7 +65,7 @@
                 </select>
                 <br>
                 <button type="submit" name="approve" class="btn btn-primary">Ubah Status</button>
-               
+
               </form>
 
             </div>
@@ -69,7 +73,7 @@
           <br><br>
           <div class="row">
             <div class="col-xs-12 col-md-12">
-    
+
               <h3>Kelas Yang Dibeli</h3>
               <table class="table">
                   <thead>
@@ -91,7 +95,7 @@
                 </table>
 
           </div>
-        </div>      
+        </div>
     </div>
   </section>
 @endsection

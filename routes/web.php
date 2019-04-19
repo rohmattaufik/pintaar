@@ -19,6 +19,10 @@ Route::get('/faq',['as'=>'faq','uses'=>'ArtifactController@faq']);
 
 Route::get('/home',['as'=>'home','uses'=>'ArtifactController@index']);
 
+
+Route::get('/kue',['as'=>'cookie','uses'=>'ArtifactController@get_cookie']);
+
+
 Route::get('test-email','MailController@test_email');
 
 //Daftar kelas
@@ -33,7 +37,7 @@ Route::get('auth/{social_login}/callback', 'Auth\SocialAuthController@handleProv
 Route::prefix('course')->group(function () {
 	Route::get('{id}', function ($id) {
 		return redirect()->route('course', $id);
-	});
+	})->middleware('cookieTrackingChannelAcqusition');
 	Route::get('/c/{id}',['as'=>'course','uses'=>'CourseController@detailVar2']);
 	Route::get('/v1/{id}',['as'=>'course-var1','uses'=>'CourseController@detailVar1']);
 	Route::get('/v2/{id}',['as'=>'course-var2','uses'=>'CourseController@detailVar2']);

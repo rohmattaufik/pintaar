@@ -88,7 +88,7 @@ class AdminController extends MailController
 
 
 			$list_pembelian_course = DB::table('pembelian_courses')
-			->select(DB::raw('pembelian_courses.id as id_pembelian'),'nama', 'no_order','email','total_price','bukti_pembayaran','status',  DB::raw('pembelian_courses.created_at as waktu_order'))
+			->select(DB::raw('pembelian_courses.id as id_pembelian'),'nama','channel_acquisition' ,'no_order','email','total_price','bukti_pembayaran','status',  DB::raw('pembelian_courses.created_at as waktu_order'))
 			->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
 			->leftJoin('users', 'users.id', '=', 'cart.user_id')
 			->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')
@@ -115,7 +115,7 @@ class AdminController extends MailController
 		if($user -> id_role == $id_role_admin){
 
 			$pembelian_detail = DB::table('pembelian_courses')
-			->select(DB::raw('pembelian_courses.id as id_pembelian'), 'no_order',DB::raw('cart.id as id_cart'),'nama', 'email','total_price','bukti_pembayaran','status_pembayaran','status',  DB::raw('pembelian_courses.created_at as waktu_order'))
+			->select(DB::raw('pembelian_courses.id as id_pembelian'), 'no_order',DB::raw('cart.id as id_cart'),'nama', 'channel_acquisition','email','total_price','bukti_pembayaran','status_pembayaran','status',  DB::raw('pembelian_courses.created_at as waktu_order'))
 			->leftJoin('cart', 'cart.id', '=', 'pembelian_courses.cart_id')
 			->leftJoin('users', 'users.id', '=', 'cart.user_id')
 			->leftJoin('status_pembayarans', 'status_pembayarans.id', '=', 'pembelian_courses.status_pembayaran')

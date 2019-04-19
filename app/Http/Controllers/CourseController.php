@@ -19,6 +19,12 @@ use Carbon\Carbon;
 
 class CourseController extends CourseOrderController
 {
+
+	public function __construct()
+  {
+       $this->middleware('cookieTrackingChannelAcqusition');
+  }
+
 	public function index()
 	{
 
@@ -52,7 +58,7 @@ class CourseController extends CourseOrderController
 			$status_pembayaran = null;
 			$status_pernah_review = null;
 		}
-		
+
 		$list_topik = self::mapping_topik_by_parent($id);
 
 		return view('layouts.course.detail',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
@@ -74,9 +80,9 @@ class CourseController extends CourseOrderController
 			$status_pembayaran = null;
 			$status_pernah_review = null;
 		}
-		
+
 		$list_topik = self::mapping_topik_by_parent($id);
-		
+
 		return view('layouts.course.detail-var-1',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
 	}
 
@@ -96,9 +102,9 @@ class CourseController extends CourseOrderController
 			$status_pembayaran = null;
 			$status_pernah_review = null;
 		}
-		
+
 		$list_topik = self::mapping_topik_by_parent($id);
-		
+
 		return view('layouts.course.detail-var-2',  [ "count_student_learned" => $count_student_learned,"status_pernah_review" =>$status_pernah_review, "status_pembayaran"=> $status_pembayaran,"rating" => $rating, "list_topik"=>$list_topik , "course"=>$course, "list_review" => $list_review ]);
 	}
 
@@ -114,7 +120,7 @@ class CourseController extends CourseOrderController
 				$list_topik_parents[] = $topik;
 			else
 				$list_topik_childs[]  = $topik;
-		}   
+		}
 		foreach ($list_topik_childs as $idx => $list_topik_child)
 			$list_topik_by_id_parent[$list_topik_child['parent_id']][] = $list_topik_child;
 		foreach ($list_topik_parents as $idx => $list_topik_parent)
@@ -135,8 +141,8 @@ class CourseController extends CourseOrderController
 				$jumlah_rating = 5;
 			}
 			else {
-				$jumlah_rating = $request['rating'];	
-			} 
+				$jumlah_rating = $request['rating'];
+			}
 
 			$rating = new RatingCourse;
 			$rating->storeRating($request['idCourse'], $jumlah_rating);
@@ -168,11 +174,11 @@ class CourseController extends CourseOrderController
 		$course = new Course;
 		return view('layouts.course.tutor.create-course')->with('course', $course);
 	}
-	
+
 	public function category($id_category)
 	{
 
-		$course = new Course;	
+		$course = new Course;
 
 		$list_courses_with_users = $course->getAllCourseByCategory($id_category);
 
@@ -221,7 +227,7 @@ class CourseController extends CourseOrderController
 		$tutors = Tutor::with('users')->get(); // ini apa?
 
 		$tutor = Tutor::whereIdUser(Auth::user()->id)->first();
-		
+
 		if ($tutor != null and $course->id_tutor == $tutor->id)
 		{
 			return view('layouts.course.tutor.create-course')->with('course', $course)->with('tutors', $tutors);
@@ -230,7 +236,7 @@ class CourseController extends CourseOrderController
 			return "You don't have permission to access this page";
 		}
 
-		
+
 	}
 
 	public function submit(Request $request)
@@ -390,13 +396,13 @@ class CourseController extends CourseOrderController
 
 		if (Auth::User() and Auth::User()->id_role == 2 and Auth::User()->id == $courseCreator->id_user) {
 			$tutor = Tutor::whereId($tutorID)->first();
-			
+
 			return view('layouts/course/tutor/tutor-course')->with(['tutor' => $tutor, 'course' => $course]);
 		}
 		else {
 			return redirect()->route('home');
 		}
-		
+
 	}
 
 	public function deleteTutor($courseID, $tutorID)
@@ -404,13 +410,13 @@ class CourseController extends CourseOrderController
 		Tutor::whereId($tutorID)->delete();
 		TutorCourse::where('tutor_id', $tutorID)->delete();
 		return redirect()->back();
-	}    
+	}
 
 	public function storeTutor(Request $request)
 	{
 		$course = Course::where('id', $request->course_id)->first();
 		$courseCreator = Tutor::where('id', $course->id_tutor)->first();
-		
+
 		if (Auth::User() and Auth::User()->id_role == 2 and Auth::User()->id == $courseCreator->id_user) {
 			$tutorCourse = new TutorCourse;
 			$tutorCourse->store($request);
@@ -419,6 +425,6 @@ class CourseController extends CourseOrderController
 		else {
 			return redirect()->route('home');
 		}
-		
+
 	}
 }

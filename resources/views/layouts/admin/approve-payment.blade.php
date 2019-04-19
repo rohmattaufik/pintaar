@@ -26,6 +26,7 @@
                         <th>Dipesan Pada</th>
                         <th>Email User</th>
                         <th>Nama User</th>
+                        <th>Channel Acquisition </th>
                         <th>Jumlah Tagihan</th>
                         <th>Status Pembayaran</th>
                         <th>Aksi</th>
@@ -39,9 +40,10 @@
                         <td>{{$pembelian_course->waktu_order}}</td>
                         <td>{{$pembelian_course->email}}</td>
                         <td>{{$pembelian_course->nama}}</td>
+                        <td>{{$pembelian_course->channel_acquisition}}</td>
                         <td>Rp. {{$pembelian_course->total_price}}</td>
                         <td>{{$pembelian_course->status}}</td>
-                                                  
+
                         <td> <a href ="{{route(('approve_payment_detail'), $pembelian_course -> id_pembelian)}}">Detail</a></td>
                     </tr>
                   @endforeach
@@ -52,7 +54,7 @@
 
           </div>
 
-        </div>      
+        </div>
     </div>
 </section>
 
