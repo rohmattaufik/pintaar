@@ -22,7 +22,7 @@ class UserValidationService
         $channel_acqusition_str[100] = "PPC";
         $channel_acqusition_str[110] = "fb organic";
         $channel_acqusition_str[120] = "ig organic";
-        $channel_acqusition_str[130] = "fb influencer;
+        $channel_acqusition_str[130] = "fb influencer";
 
         if($channel_acqusition_str[$channel_acqusition] == NULL){
 
