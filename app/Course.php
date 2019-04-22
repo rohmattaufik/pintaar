@@ -122,4 +122,14 @@ class Course extends Model
 		return $status_pernah_review;
 	}
 
+    public function getRecommendedCourse($id)
+    {
+        $recommendedCourse = Course::where('isPublished', 1)->where('id', '!=', $id)->get();
+        $shuffled = $recommendedCourse->shuffle();
+        $chunk = $shuffled->take(3);
+        $chunk->all();
+
+        return $chunk;
+    }
+
 }

@@ -11,10 +11,6 @@
   font-family: Verdana, Geneva, sans-serif;
 }
 
-#read-more-description, #pengajar, #course-review {
-	font-size: 1.1em;
-}
-
 .section {
 	margin-top: 10px;
 }
@@ -35,6 +31,10 @@
   	#image_for_mobile {
 		display: none;
 	}
+
+    #read-more-description, #pengajar, #course-review {
+        font-size: 1.1em;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -51,6 +51,14 @@
 	#info-promo > [class*='col-'] > .alert > h4 {
 		font-size: 15px;
 	}
+
+    #read-more-description, #pengajar, #course-review {
+        font-size: 1.2em;
+    }
+
+    #course-name {
+        font-size: 24px;
+    }
 }
 </style>
 
@@ -93,7 +101,7 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
-				<h2>{{ $course->nama_course }}</h2>
+				<h2 id="course-name">{{ $course->nama_course }}</h2>
 
 				<p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
 
@@ -164,13 +172,13 @@
 
 					<div class="alert alert-success text-center" role="alert">
 						<h4>Ada yang ingin kamu tanya?</h4>
-						
-            			
+
+
             			<a class="btn btn-success" href="{{ route('faq') }}" target="_blank">Baca FAQ Disini</a>
             			<br>
             			<p> atau </p>
             			<a id="button-whatsapp" class="btn btn-success" href="https://wa.me/6285212221431" target="_blank">Tanya Disini (WhatsApp)</a>
-            
+
           			</div>
 					<hr>
 				@endif
@@ -229,6 +237,16 @@
 		</div>
 		@endif
 
+        <div id="recommended-course" class="row">
+            <div class="col-xs-12 col-md-7">
+                <h3>Murid Lain Juga Membeli Kelas Ini</h3>
+
+                @include('layouts.course.recommended-course')
+
+                <h4><a href="{{ route('courses-category', 1) }}"><i class="fa fa-angle-right" aria-hidden="true"></i> Lihat Kelas Lainnya</a></h4>
+                <hr>
+            </div>
+        </div>
 
 
 
