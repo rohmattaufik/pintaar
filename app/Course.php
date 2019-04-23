@@ -124,7 +124,35 @@ class Course extends Model
 
     public function getRecommendedCourse($id)
     {
-        $recommendedCourse = Course::where('isPublished', 1)->where('id', '!=', $id)->get();
+        if (Auth::guest()) {
+
+            $recommendedCourse = Course::where('isPublished', 1)->where('id', '!=', $id)->get();
+
+        }
+        else{
+            $user_id = Auth::user()->id;
+
+            $courses_bought = Course::where('isPublished', 1)
+                                ->select('courses.id' )
+                                ->leftJoin('cart_course', 'cart_course.course_id', '=', 'courses.id')
+                                ->leftJoin('pembelian_courses', 'pembelian_courses.cart_id', '=', 'cart_course.cart_id')
+                                ->where('pembelian_courses.id_user','=', $user_id)
+                                ->where('pembelian_courses.status_pembayaran','=' , 3 )
+                                ->get();
+
+            $list_id_courses_bought[] = -1  ;
+            foreach ($courses_bought as $course_bought)
+            {
+                    	$list_id_courses_bought[] = $course_bought->id;
+            }
+            $recommendedCourse = Course::where('isPublished', 1)
+                                ->whereNotIn('id',$list_id_courses_bought )
+                                ->where('courses.id', '!=', $id)
+                                ->get();
+        }
+
+
+
         $shuffled = $recommendedCourse->shuffle();
         $chunk = $shuffled->take(3);
         $chunk->all();

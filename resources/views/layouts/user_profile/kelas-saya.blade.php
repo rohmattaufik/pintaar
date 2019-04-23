@@ -32,9 +32,9 @@
 		<br>
 		<div class="row display-flex">
 		@foreach($list_courses_that_has_bought as $list_course_with_user_that_has_bought)
-			
+
 				<div class="col-xs-12 col-md-3">
-					<a href="{{ route(('course'), $list_course_with_user_that_has_bought->id) }}">                     
+					<a href="{{ route(('course'), $list_course_with_user_that_has_bought->id) }}">
 						<div class="thumbnail">
 							<img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user_that_has_bought->foto ) }}" alt="Gambar Kelas" height="120" width="500">
 							<div class="caption">
@@ -45,18 +45,18 @@
 									<p class="starability-result" data-rating="0"></p>
 								@else
 									<p class="starability-result" data-rating="{{ round($list_course_with_user_that_has_bought->rating) }}"></p>
-								@endif 
+								@endif
 								<br>
 								<button class="btn btn-block btn-primary">Belajar Di Kelas Ini</button>
 							</div>
 						</div>
-					</a>                      
+					</a>
 				</div>
-			
+
 
 			@endforeach
 			</div>
-		
+
 		@endif
 
 	</div>
