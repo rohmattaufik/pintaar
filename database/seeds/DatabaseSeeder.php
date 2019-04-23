@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 			'id_tutor' => 1,
 			'foto' => 'html-nol.jpg',
 			'isPublished' => 1,
-			'kategori' => 1, 
+			'kategori' => 1,
 			'video' => 'fisika_energi.mp4'
 		]);
 
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 			'id_tutor' => 1,
 			'isPublished' => 1,
 			'foto' => 'html-nol.jpg',
-			'kategori' => 1, 
+			'kategori' => 1,
 			'video' => 'fisika_energi.mp4'
 		]);
 
@@ -39,9 +39,45 @@ class DatabaseSeeder extends Seeder
 			'id_tutor' => 1,
 			'isPublished' => 1,
 			'foto' => 'html-nol.jpg',
-			'kategori' => 1, 
+			'kategori' => 1,
 			'video' => 'fisika_energi.mp4'
 		]);
+
+        DB::table('courses')->insert([
+            'nama_course' => "Secret to succeed in any business",
+            'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
+            'harga' => 10000,
+            'diskon' => 0,
+            'id_tutor' => 1,
+            'isPublished' => 1,
+            'foto' => 'html-nol.jpg',
+            'kategori' => 1,
+            'video' => 'fisika_energi.mp4'
+        ]);
+
+        DB::table('courses')->insert([
+            'nama_course' => "How to talk to any stranger",
+            'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
+            'harga' => 10000,
+            'diskon' => 0,
+            'id_tutor' => 1,
+            'isPublished' => 1,
+            'foto' => 'html-nol.jpg',
+            'kategori' => 1,
+            'video' => 'fisika_energi.mp4'
+        ]);
+
+        DB::table('courses')->insert([
+            'nama_course' => "How to pick up famous actress",
+            'deskripsi' => "Anda ingin menjadi PROGRAMMER BERGAJI TINGGI? Atau ingin belajar MEMBUAT WEBSITE? Berarti anda harus BELAJAR HTML sekarang juga!",
+            'harga' => 10000,
+            'diskon' => 0,
+            'id_tutor' => 1,
+            'isPublished' => 1,
+            'foto' => 'html-nol.jpg',
+            'kategori' => 1,
+            'video' => 'fisika_energi.mp4'
+        ]);
 
 
 		DB::table('tutors')->insert([
@@ -165,7 +201,7 @@ class DatabaseSeeder extends Seeder
 			'id' => 5,
 			'status' => "Pembayaran Invalid",
 		]);
-		
+
 		DB::table('status_pembayarans')->insert([
 			'id' => 6,
 			'status' => "Belum Disetujui",
