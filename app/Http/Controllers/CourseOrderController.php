@@ -34,15 +34,16 @@ class CourseOrderController extends Controller
 	{
 		$cart = new Cart;
 		$cart = $cart->showCurrentCart();
+        $course = new Course;
 		if ($cart != null) {
 			if (count($cart->getCartCourses) == 0) {
 			  return view('layouts/course-order/cart-empty');
 			} else {
-			  return view('layouts/course-order/cart', ['cart' => $cart]);
+			  return view('layouts/course-order/cart', ['cart' => $cart, 'course'=>$course]);
 			}
 		}
 		else {
-			return view('layouts/course-order/cart-empty');
+			return view('layouts/course-order/cart-empty', ['course'=>$course]);
 		}
 	}
 
