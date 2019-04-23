@@ -24,16 +24,16 @@
 								<h4>Hubungi Kami</h4>
 								<p>Jalan Kedoya Raya No.55 RT 01 RW 03</p>
 								<p>Pondok Cina, Beji, Kota Depok, Jawa Barat 16424</p>
-								
+
 								<li><a href="https://www.facebook.com/pintaar101/" target="_blank"><i class="ti-facebook"></i></a></li>
 								<li><a href="https://www.instagram.com/pintaar101/" target="_blank"><i class="ti-instagram"></i></a></li>
 								<li><a href="mailto:pintaar.bantuan@gmail.com"><i class="ti-email"></i></a></li>
 								<li><a href="tel:081360341347"><i class="ti-comments"></i></a></li>
-	                        
+
 							</ul>
-							
+
 	                    </div>
-	                    
+
 	                    <div class="col-xs-12 col-sm-6">
 	                    	<h4>Ingin menjadi pengajar di Pintaar?</h4>
 	                    	<a href="https://goo.gl/forms/1gj7XCBjVWWYXGSA2" class="btn btn-danger">Daftar Disini</a>
@@ -76,16 +76,13 @@
 		$(document).ready(function() {
 		  var showChar = 65;
 		  var ellipsestext = "...";
-		  $('#thumbnail-nama-kelas').each(function() {
+		  $('.thumbnail-nama-kelas').each(function() {
 		    var content = $(this).html();
 
 		    if(content.length > showChar) {
-
 		      var c = content.substr(0, showChar);
 		      var h = content.substr(showChar-1, content.length - showChar);
-
 		      var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span>';
-
 		      $(this).html(html);
 		    }
 
@@ -93,7 +90,7 @@
 		});
 
 	</script>
-	
+
 </html>
 
 

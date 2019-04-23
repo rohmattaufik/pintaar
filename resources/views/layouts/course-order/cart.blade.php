@@ -73,7 +73,8 @@
 
                     </form>
                 </div>
-                <br>
+                <hr>
+
                 <h3>Rekomendasi Kelas Untuk Kamu</h3>
 
                 @include('layouts.course.recommended-course')

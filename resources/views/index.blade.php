@@ -103,7 +103,7 @@
                          <div class="thumbnail">
                              <img src="{{ URL::asset('images/gambar_course/'.$list_course_code->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
-                                <h4 id="thumbnail-nama-kelas">{{$list_course_code->nama_course}}</h4>
+                                <h4 class="thumbnail-nama-kelas">{{$list_course_code->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_course_code->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_course_code->rating) }}"></p>
 
@@ -154,7 +154,7 @@
                          <div class="thumbnail">
                              <img src="{{ URL::asset('images/gambar_course/'.$list_courses_others->foto ) }}" alt="Gambar Kelas" height="120" width="500">
                              <div class="caption">
-                                <h4 id="thumbnail-nama-kelas">{{$list_courses_others->nama_course}}</h4>
+                                <h4 class="thumbnail-nama-kelas">{{$list_courses_others->nama_course}}</h4>
                                 <p><span class="ti-user"></span> {{$list_courses_others->nama}}</p>
                                 <p class="starability-result" data-rating="{{ round($list_courses_others->rating) }}"></p>
 
@@ -294,7 +294,7 @@
             </div>
             <br>
             <hr>
-            
+
         </div>
     </section>
 
@@ -360,7 +360,7 @@
                     <h4>Punya pertanyaan lain? <a href="https://wa.me/6285212221431">Tanya disini (Whatsapp)</a> </h4>
                 </div>
             </div>
-            
+
             <br>
         </div>
     </section>

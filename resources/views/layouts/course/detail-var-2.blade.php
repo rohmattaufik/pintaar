@@ -233,6 +233,7 @@
 					</div>
 				</div>
 				@endforeach
+                <hr>
 			</div>
 		</div>
 		@endif
