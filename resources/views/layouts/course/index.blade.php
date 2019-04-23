@@ -21,7 +21,7 @@
 					<div class="thumbnail">
 						<img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="Gambar Kelas" height="120" width="500">
 						<div class="caption">
-							<h4 id="thumbnail-nama-kelas">{{$list_course_with_user->nama_course}}</h4>
+							<h4 class="thumbnail-nama-kelas">{{$list_course_with_user->nama_course}}</h4>
 							<p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
 							<p class="starability-result" data-rating="{{ round($list_course_with_user->rating) }}"></p>
 
@@ -51,7 +51,7 @@
 					<div class="thumbnail">
 						<img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="Gambar Kelas" height="120" width="500">
 						<div class="caption">
-							<h4 id="thumbnail-nama-kelas">{{$list_course_with_user->nama_course}}</h4>
+							<h4 class="thumbnail-nama-kelas">{{$list_course_with_user->nama_course}}</h4>
 							<p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
 							<p class="starability-result" data-rating="{{ round($list_course_with_user->rating) }}"></p>
 
@@ -82,7 +82,7 @@
 				<div id="thumbnail-nama-kelas" class="thumbnail">
 					<img src="{{ URL::asset('images/gambar_course/'.$list_course_with_user->foto ) }}" alt="Gambar Kelas" height="120" width="500">
 					<div class="caption">
-						<h4 id="thumbnail-nama-kelas">{{$list_course_with_user->nama_course}}</h4>
+						<h4 class="thumbnail-nama-kelas">{{$list_course_with_user->nama_course}}</h4>
 						<p><span class="ti-user"></span> {{$list_course_with_user->nama}}</p>
 						<p class="starability-result" data-rating="{{ round($list_course_with_user->rating) }}"></p>
 
