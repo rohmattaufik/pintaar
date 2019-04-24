@@ -313,7 +313,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="panel">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Bagaimana cara belajarnya?</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Bagaimana metode belajar di Pintaar?</a>
                         </h4>
                         <div id="collapse1" class="panel-collapse collapse">
                             <p style="font-weight: normal;">Kamu akan belajar dengan menonton rekaman video di web Pintaar.com. Kamu dapat mengulangi video hingga paham.</p>
@@ -323,10 +323,10 @@
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="panel">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Apakah ada biaya tambahan?</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Bagaimana dengan jadwal belajarnya?</a>
                         </h4>
                         <div id="collapse2" class="panel-collapse collapse">
-                            <p style="font-weight: normal;">Tidak ada. Cukup sekali membayar harga kelas yang tercantum, kamu bisa mengakses materi selamanya.</p>
+                            <p style="font-weight: normal;">Tidak ada jadwal belajar. Kamu dapat belajar kapanpun. Kamu bisa langsung belajar setelah melakukan pembayaran.</p>
                         </div>
                     </div>
                 </div>
@@ -336,19 +336,32 @@
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="panel">
                         <h4 class="panel-title">
-                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Bagaimana jika saya ingin bertanya ke pengajar?</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Apakah ada biaya tambahan?</a>
                         </h4>
                         <div id="collapse3" class="panel-collapse collapse">
-                            <p style="font-weight: normal;">Kamu bisa bertanya ke pengajar melalui kolom diskusi dibawah materi kelas. Biasanya, pengajar juga menyediakan grup media sosial untuk diskusi.</p>
+                            <p style="font-weight: normal;">Tidak ada. Cukup sekali membayar harga kelas yang tercantum, kamu bisa mengakses materi selamanya.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="panel">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Bagaimana jika materi kelas tidak sesuai ekspektasi saya?</a>
+                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Bagaimana jika saya ingin bertanya ke pengajar?</a>
                         </h4>
                         <div id="collapse4" class="panel-collapse collapse">
+                            <p style="font-weight: normal;">Kamu bisa bertanya ke pengajar melalui kolom diskusi. Biasanya, pengajar juga menyediakan grup media sosial.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="panel">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Bagaimana jika materi kelas tidak sesuai ekspektasi saya?</a>
+                        </h4>
+                        <div id="collapse5" class="panel-collapse collapse">
                             <p style="font-weight: normal;">Kamu dapat melakukan refund (meminta uang kembali) dalam 7 hari setelah transaksi. Hubungi kontak layanan Pintaar untuk melakukan refund.</p>
                         </div>
                     </div>
