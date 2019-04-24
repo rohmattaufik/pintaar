@@ -76,14 +76,14 @@
 				@if ($course->harga == 0)
 					<div class="alert alert-danger alert-dismissible" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4>Kelas ini masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera beli dan gabung di kelas ini!</h4>
+						<h5>Kelas ini masih <strong>GRATIS SAMPAI BEBERAPA HARI KEDEPAN!</strong> Ayo segera beli dan gabung di kelas ini!</h5>
 					</div>
 				@else
 					@if($course->diskon != null and $course->diskon > 0)
 						<div class="alert alert-danger alert-dismissible" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4>Kelas ini diskon {{ $course->diskon }}% hingga 15 April 2019.</h4>
-							<h4 id="timer-diskon"></h4>
+							<h5>PROMO AKHIR BULAN! Diskon {{ $course->diskon }}% hingga 27 April 2019.</h5>
+							<h5 id="timer-diskon"></h5>
 						</div>
 					@endif
 				@endif
@@ -101,7 +101,7 @@
 
 		<div class="row">
 			<div class="col-xs-12 col-md-7">
-				<h2 id="course-name">{{ $course->nama_course }}</h2>
+				<h3 id="course-name">{{ $course->nama_course }}</h3>
 
 				<p class="starability-result" data-rating="{{ round($rating->rating) }}"></p>
 
@@ -141,7 +141,7 @@
 						<a href="{{ route('buy-course', $course->id) }}" class="btn btn-primary btn-lg">Beli Kelas Ini Gratis</a>
 					@else
 						@if($course->diskon != null and $course->diskon > 0)
-							<h4 id="sisa-hari-promo"></h4>
+							<!-- <h4 id="sisa-hari-promo"></h4> -->
 							<h4><strike>Rp {{ number_format($course->harga, 0, ',', '.') }}</strike> Rp {{ number_format((100-$course->diskon)/100*$course->harga, 0, ',', '.') }}</h4>
 							<!-- <div id="diskon">
 								<span class="label label-primary">Diskon {{ $course->diskon }}%</span>
@@ -363,7 +363,7 @@
 
 <script>
   	// Set the date we're counting down to
-  	var countDownDate = new Date("April 22, 2019 23:59:55").getTime();
+  	var countDownDate = new Date("April 27, 2019 23:59:55").getTime();
 
   	// Update the count down every 1 second
   	var x = setInterval(function() {
